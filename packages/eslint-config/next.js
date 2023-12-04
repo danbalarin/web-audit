@@ -9,6 +9,7 @@ module.exports = {
     "prettier",
     require.resolve("@vercel/style-guide/eslint/next"),
     "eslint-config-turbo",
+    "./base.js",
   ],
   globals: {
     React: true,
@@ -17,7 +18,7 @@ module.exports = {
   env: {
     node: true,
   },
-  plugins: ["only-warn"],
+  plugins: ["only-warn", "import"],
   settings: {
     "import/resolver": {
       typescript: {
@@ -25,10 +26,39 @@ module.exports = {
       },
     },
   },
+  rules: {
+    "import/no-default-export": "error",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        alphabetize: { order: "asc", caseInsensitive: true },
+        groups: [
+          ["builtin", "external"],
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+        ],
+        pathGroups: [
+          { pattern: "~/**", group: "internal" },
+          { pattern: "@repo/**", group: "internal" },
+        ],
+      },
+    ],
+  },
   ignorePatterns: [
     // Ignore dotfiles
     ".*.js",
     "node_modules/",
   ],
-  overrides: [{ files: ["*.js?(x)", "*.ts?(x)"] }],
+  overrides: [
+    { files: ["*.js?(x)", "*.ts?(x)"] },
+    {
+      files: ["src/app/**/*.{js,jsx,ts,tsx}"],
+      rules: {
+        "import/no-default-export": "off",
+      },
+    },
+  ],
 };
