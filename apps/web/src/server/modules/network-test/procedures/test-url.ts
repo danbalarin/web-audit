@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { t } from "~/server/trpc";
+import { executionTimeProcedure } from "../../../../server/procedures";
 
 const inputSchema = z.object({
   url: z.string().url(),
@@ -43,6 +43,6 @@ const testUrl = async (input: TestUrlInput): Promise<TestUrlResponse> => {
   }
 };
 
-export const procedure = t.procedure
+export const procedure = executionTimeProcedure
   .input(inputSchema)
   .query(({ input }) => testUrl(input));

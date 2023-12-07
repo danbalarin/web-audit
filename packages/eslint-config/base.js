@@ -1,9 +1,13 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
+  parserOptions: {
+    sourceType: "module",
+  },
   rules: {
     "no-unused-vars": "off",
     "newline-before-return": "warn",
     "import/no-default-export": "error",
+    "import/prefer-default-export": "off",
     "import/order": [
       "error",
       {

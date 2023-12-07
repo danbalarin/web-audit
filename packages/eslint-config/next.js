@@ -26,27 +26,6 @@ module.exports = {
       },
     },
   },
-  rules: {
-    "import/no-default-export": "error",
-    "import/order": [
-      "error",
-      {
-        "newlines-between": "always",
-        alphabetize: { order: "asc", caseInsensitive: true },
-        groups: [
-          ["builtin", "external"],
-          "internal",
-          "parent",
-          "sibling",
-          "index",
-        ],
-        pathGroups: [
-          { pattern: "~/**", group: "internal" },
-          { pattern: "@repo/**", group: "internal" },
-        ],
-      },
-    ],
-  },
   ignorePatterns: [
     // Ignore dotfiles
     ".*.js",

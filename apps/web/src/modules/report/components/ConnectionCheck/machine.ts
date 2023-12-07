@@ -86,7 +86,7 @@ export const connectionCheckMachine = createMachine(
           context.urlsToCheck.filter((v) => v !== event.output.url),
       }),
       setCheckingUrl: assign({
-        checkingUrl: ({ context }) => context.urlsToCheck[0],
+        checkingUrl: ({ context }) => context.urlsToCheck[0] ?? "",
       }),
       finishCheckingUrl: assign({
         checkedUrls: ({ context }) => [

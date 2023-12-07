@@ -20,7 +20,9 @@ export function ProjectDetailsForm() {
   const defaultValues = useNewProjectMachineSelector((state) => ({
     projectName: state.context.projectName,
     homeURL: state.context.homeURL,
-    urls: Object.keys(state.context.urlsData),
+    urls: Object.keys(state.context.urlsData).filter(
+      (u) => u !== state.context.homeURL
+    ),
   }));
   const methods = useForm<ProjectDetailsFormValues>({
     resolver: zodResolver(schema),
@@ -35,7 +37,10 @@ export function ProjectDetailsForm() {
         id={FORM_NAME}
         component="form"
         onSubmit={handleSubmit((data) =>
-          newProjectRef.send({ type: "PROJECT_DETAILS_NEXT", output: data })
+          newProjectRef.send({
+            type: "PROJECT_DETAILS_NEXT",
+            output: { ...data, urls: [data.homeURL, ...data.urls] },
+          })
         )}
         spacing={2}
       >

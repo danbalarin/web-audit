@@ -10,6 +10,7 @@ export const checkSpeed = ({ onUpdate, onComplete }: CheckSpeedOptions) => {
   const speedtest = new Fast({
     onChange: onUpdate,
     onComplete,
+    count: 3, // TODO: make this configurable
   });
   speedtest.getSpeed(controller.signal);
 

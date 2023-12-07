@@ -14,12 +14,15 @@ import {
 } from "@repo/ui";
 import { motion } from "framer-motion";
 
-type Props = {
-  status: "ok" | "error" | "loading" | "waiting";
+import { UrlTimelineState } from "../../constants";
+
+export type UrlTimelineItemProps = {
+  status: UrlTimelineState;
   url: string;
+  config: Record<UrlTimelineState, string>;
 };
 
-export function UrlTestTimelineItem({ status, url }: Props) {
+export function UrlTimelineItem({ status, url, config }: UrlTimelineItemProps) {
   const { palette } = useTheme();
 
   const color =
@@ -57,20 +60,20 @@ export function UrlTestTimelineItem({ status, url }: Props) {
             {status === "loading" && (
               <>
                 <CircularProgress size="1.5rem" />
-                Checking
+                {config[status]}
               </>
             )}
-            {status === "waiting" && <>Waiting for previous tests</>}
+            {status === "waiting" && <> {config[status]}</>}
             {status === "ok" && (
               <>
                 <CheckCircleIcon fontSize="small" />
-                Reachable
+                {config[status]}
               </>
             )}
             {status === "error" && (
               <>
                 <ReportIcon />
-                Failed to load
+                {config[status]}
               </>
             )}
           </Stack>

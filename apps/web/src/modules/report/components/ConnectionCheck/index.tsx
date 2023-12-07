@@ -10,9 +10,9 @@ import {
   useNewProjectMachineContext,
   useNewProjectMachineSelector,
 } from "../../states/newProject.machine";
+import { UrlTestTimelineItem } from "../UrlTimelineItem";
 
 import { NetworkSpeedTimelineItem } from "./components/NetworkSpeedTimelineItem";
-import { UrlTestTimelineItem } from "./components/UrlTestTimelineItem";
 import { MAX_SPEED } from "./constants";
 import { connectionCheckMachine } from "./machine";
 
@@ -37,14 +37,9 @@ const getUrlStatus = (
 };
 
 export function ConnectionCheck() {
-  const homeURL = useNewProjectMachineSelector(
-    (state) => state.context.homeURL
-  );
-  const otherUrls = useNewProjectMachineSelector((state) =>
+  const urlsToCheck = useNewProjectMachineSelector((state) =>
     Object.keys(state.context.urlsData)
   );
-
-  const urlsToCheck = [homeURL, ...otherUrls];
 
   const { speed, run: speedTest, status, isCompleted } = useSpeedTest({});
   const { run: urlTest } = useUrlTest();

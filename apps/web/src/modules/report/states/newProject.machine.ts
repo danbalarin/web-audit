@@ -36,6 +36,13 @@ type ConnectionCheckNextEvent = {
   };
 };
 
+type InitialScrapeNextEvent = {
+  type: "INITIAL_SCRAPE_CHECK_COMPLETE";
+  output: {
+    urls: { [k: string]: string };
+  };
+};
+
 type SetInitialScrapeInvokeEvent = DoneActorEvent<{
   urls: { [k: string]: string };
 }>;
@@ -58,7 +65,8 @@ type Events =
   | ProjectDetailsNextEvent
   | ConnectionCheckNextEvent
   | SetInitialScrapeInvokeEvent
-  | InitialScrapeInvokeEvent;
+  | InitialScrapeInvokeEvent
+  | InitialScrapeNextEvent;
 
 export type States =
   | "ProjectDetails"
@@ -100,27 +108,16 @@ export const newProjectMachine = createMachine(
         },
       },
       InitialScrape: {
-        invoke: {
-          src: "initialScrape",
-          id: "initialScrape",
-          onError: [
-            {
-              target: "InitialScrape",
-            },
-          ],
-          onDone: [
-            {
-              target: "InitialScrape",
-              actions: "setInitialScrape",
-            },
-          ],
-        },
         on: {
           BACK: {
             target: "ProjectDetails",
           },
+          INITIAL_SCRAPE_CHECK_COMPLETE: {
+            actions: "setInitialScrape",
+          },
           NEXT: {
             target: "Gatherers",
+            guard: "isInitialScrapeValid",
           },
         },
       },
@@ -168,6 +165,10 @@ export const newProjectMachine = createMachine(
   {
     guards: {
       isNetworkSpeedValid: ({ context }) => context.networkSpeed > 0,
+      isInitialScrapeValid: ({ context }) =>
+        Object.values(context.urlsData).every(
+          (urlData) => urlData.html !== undefined
+        ),
     },
     actions: {
       setProjectDetails: assign({
@@ -191,7 +192,7 @@ export const newProjectMachine = createMachine(
           const data = Object.entries(urls).reduce(
             (acc, [url, html]) => ({
               ...acc,
-              [url]: { ...context.urlsData, html },
+              [url]: { ...context.urlsData[url], html },
             }),
             {} as { [k: string]: UrlData }
           );

@@ -2,6 +2,7 @@ import React from "react";
 
 import { ConnectionCheck } from "../../components/ConnectionCheck";
 import { Gather } from "../../components/Gather";
+import { InitialScrape } from "../../components/InitialScrape";
 import {
   ProjectDetailsForm,
   FORM_NAME as PROJECT_DETAILS_FORM_NAME,
@@ -33,7 +34,7 @@ export const STEPS: Record<States, Step> = {
   },
   InitialScrape: {
     label: "Fetching Data",
-    component: "Fetching Data",
+    component: <InitialScrape />,
   },
   Gatherers: {
     label: "Gather Data",
