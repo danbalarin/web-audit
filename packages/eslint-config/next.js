@@ -25,6 +25,12 @@ module.exports = {
         project,
       },
     },
+    react: {
+      version: "detect",
+    },
+  },
+  rules: {
+    "no-unused-vars": ["error", { args: "none" }],
   },
   ignorePatterns: [
     // Ignore dotfiles
@@ -35,6 +41,12 @@ module.exports = {
     { files: ["*.js?(x)", "*.ts?(x)"] },
     {
       files: ["src/app/**/*.{js,jsx,ts,tsx}"],
+      rules: {
+        "import/no-default-export": "off",
+      },
+    },
+    {
+      files: ["turbo/**/*.{js,jsx,ts,tsx}"],
       rules: {
         "import/no-default-export": "off",
       },

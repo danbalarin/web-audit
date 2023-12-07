@@ -4,7 +4,6 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
-    "no-unused-vars": "off",
     "newline-before-return": "warn",
     "import/no-default-export": "error",
     "import/prefer-default-export": "off",

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export type FastOptions = {
   count?: number;
   onChange?: (options: { speed: number; requestIndex: number }) => void;

@@ -1,4 +1,4 @@
-import { Fast, Unit } from "./services/Fast";
+import { Fast } from "./services/Fast";
 
 export type CheckSpeedOptions = {
   onUpdate?: (options: { speed: number; requestIndex: number }) => void;

@@ -18,11 +18,17 @@ module.exports = {
   env: {
     node: true,
   },
+  rules: {
+    "no-unused-vars": ["error", { args: "none" }],
+  },
   settings: {
     "import/resolver": {
       typescript: {
         project,
       },
+    },
+    react: {
+      version: "detect",
     },
   },
   ignorePatterns: [

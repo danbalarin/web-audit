@@ -28,7 +28,7 @@ const getTopLevelState = (step: StateValue) => {
 };
 
 function NewProjectPageWithoutContext() {
-  const { send, getSnapshot } = useNewProjectMachineContext();
+  const { send } = useNewProjectMachineContext();
   const canGoBack = useNewProjectMachineSelector((state) =>
     state.can({ type: "BACK" })
   );
