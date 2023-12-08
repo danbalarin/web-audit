@@ -1,12 +1,20 @@
 {
-  "name": "api",
+  "name": "@repo/api",
   "version": "0.0.0",
   "private": true,
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    }
+  },
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "lint:test": "eslint --max-warnings 0 --print-config src/utils/EventEmitter.ts"
+    "lint": "eslint . --max-warnings 0"
   },
   "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
     "eslint": "^8.53.0",
     "typescript": "5.2.2"
   }
