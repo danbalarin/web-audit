@@ -2,7 +2,7 @@ import { BaseModule } from "@repo/api";
 import {
   PerformanceGatherer,
   PerformanceGathererOptions,
-} from "./PerformanceGatherer.js";
+} from "./PerformanceGatherer";
 
 export type LighthouseModuleOptions = {
   performanceOptions: PerformanceGathererOptions;

@@ -1,2 +1,2 @@
-export * from "./Module.js";
-export type { PerformanceGathererOptions } from "./PerformanceGatherer.js";
+export * from "./Module";
+export type { PerformanceGathererOptions } from "./PerformanceGatherer";

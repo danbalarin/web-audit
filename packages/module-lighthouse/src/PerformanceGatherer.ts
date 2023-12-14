@@ -1,5 +1,7 @@
 import { BaseContext, BaseGatherer, GathererError } from "@repo/api";
+// @ts-ignore
 import lighthouse, { Flags } from "lighthouse";
+// @ts-ignore
 import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
 
 export type PerformanceGathererOptions = {
@@ -23,7 +25,11 @@ export class PerformanceGatherer extends BaseGatherer {
       logLevel: "info",
       output: "json",
       onlyCategories: ["performance"],
-      gatherMode: true,
+      skipAudits: [
+        "screenshot-thumbnails",
+        "final-screenshot",
+        "full-page-screenshot",
+      ],
     };
 
     const runs = [];
@@ -31,15 +37,15 @@ export class PerformanceGatherer extends BaseGatherer {
       const page = await context.browser.newPage();
       const result = await lighthouse(context.url, options, undefined, page);
       await page.close();
-      if (!result) {
+      if (!result?.artifacts) {
         throw new GathererError(this, "Could not run lighthouse", { options });
       }
-      runs.push(result);
+      runs.push(result.artifacts);
     }
 
     try {
-      const result = computeMedianRun(runs);
-      return result;
+      // const result = computeMedianRun(runs);
+      return runs;
     } catch (error) {
       throw new GathererError(this, "Could not compute median run", { error });
     }

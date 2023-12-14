@@ -1,3 +1,4 @@
+import { router as modules } from "./modules/modules";
 import { router as networkTest } from "./modules/network-test";
 import { router as scraper } from "./modules/scraper";
 import { t } from "./trpc";
@@ -8,6 +9,7 @@ import { t } from "./trpc";
 const appRouter = t.router({
   networkTest,
   scraper,
+  modules,
 });
 
 type AppRouter = typeof appRouter;

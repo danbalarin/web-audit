@@ -2,13 +2,19 @@
   "name": "@repo/module-lighthouse",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    }
+  },
   "scripts": {
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
     "@repo/api": "*",
-    "lighthouse": "^11.3.0"
+    "lighthouse": "^11.3.0",
+    "typescript": "5.2.2"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
