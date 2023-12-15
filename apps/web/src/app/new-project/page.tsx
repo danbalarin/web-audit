@@ -1,1 +1,1 @@
-export { NewProjectPage as default } from "~/modules/report";
+export { NewProjectPage as default } from "~/features/report";

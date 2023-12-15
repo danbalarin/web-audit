@@ -8,7 +8,7 @@ import {
 } from "@repo/ui";
 import { useMemo } from "react";
 
-import { UseSpeedTestStatus } from "~/modules/report/hooks/useSpeedTest";
+import { UseSpeedTestStatus } from "~/features/report/hooks/useSpeedTest";
 
 import { NetworkSpeedGauge } from "../../../NetworkSpeedGauge";
 

@@ -1,6 +1,6 @@
-import { router as modules } from "./modules/modules";
-import { router as networkTest } from "./modules/network-test";
-import { router as scraper } from "./modules/scraper";
+import { router as modules } from "./features/modules";
+import { router as networkTest } from "./features/network-test";
+import { router as scraper } from "./features/scraper";
 import { t } from "./trpc";
 
 /**

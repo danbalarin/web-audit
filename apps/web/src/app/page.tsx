@@ -1,1 +1,1 @@
-export { HomePage as default } from "~/modules/report";
+export { HomePage as default } from "~/features/report";

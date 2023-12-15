@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { checkSpeed } from "~/modules/connection-test";
+import { checkSpeed } from "~/features/connection-test";
 
 export type UseSpeedTestStatus = "fast" | "medium" | "slow";
 

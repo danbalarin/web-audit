@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { executionTimeProcedure } from "../../../../server/procedures";
+import { executionTimeProcedure } from "../../../procedures";
 
 const inputSchema = z.object({
   url: z.string().url(),
