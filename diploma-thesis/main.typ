@@ -9,10 +9,8 @@
   keywords-en: [keywords],
   abstract-cs: [Abstrakt],
   keywords-cs: [keywords],
-  separated-abstracts: true,
+  bibliography-file: "/bibliography.bib",
 )
-
-#cite(<world_health_organization_disability_2023>)
 
 #include "chapters/introduction.typ"
 

@@ -1,4 +1,3 @@
-// https://github.com/eduardz1/UniTO-typst-template/blob/main/lib.typ
 #import "title-page.typ": title-page
 #import "abstract-keywords.typ": abstract-keywords
 #import "macros.typ": heading-like, revisit, custom-lorem
@@ -40,6 +39,8 @@
 
   separated-abstracts: false,
 
+  bibliography-file: none,
+
   body,
 ) = {
   set document(title: title, author: author)
@@ -49,7 +50,8 @@
   set page(
     paper: "a4",
 
-    margin: (right: 25mm, left: 3cm, top: 25mm, bottom: 25mm)
+    // margin: (right: 25mm, left: 3cm, top: 25mm, bottom: 25mm),
+    margin: (right: 20mm, left: 2cm, top: 25mm, bottom: 25mm)
   )
 
   set heading(numbering: "1.1.1")
@@ -79,7 +81,9 @@
     city: city,
   )
 
-  set page(footer: context [
+  set page(
+    margin: (right: 25mm, left: 3cm, top: 25mm, bottom: 25mm),
+    footer: context [
       #line(length: 100%)
       #h(1fr)
       #counter(page).display(
@@ -113,6 +117,7 @@
 
   body
 
-  bibliography("/bibliography.bib", style: "american-psychological-association")
-
+  if bibliography != none [
+    #bibliography(bibliography-file, style: "american-psychological-association")
+  ]
 }
