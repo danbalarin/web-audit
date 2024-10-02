@@ -16,8 +16,8 @@
     "@mui/icons-material": "^5.14.16"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@turbo/gen": "^1.10.12",
     "@types/eslint": "^8.44.7",
     "@types/node": "^20.5.2",

@@ -10,9 +10,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
-    "@repo/icons": "*",
-    "@repo/module-lighthouse": "*",
-    "@repo/ui": "*",
+    "@repo/icons": "workspace:*",
+    "@repo/module-lighthouse": "workspace:*",
+    "@repo/ui": "workspace:*",
     "@t3-oss/env-nextjs": "^0.7.1",
     "@tanstack/react-query": "^4.29.0",
     "@trpc/client": "^10.44.0",
@@ -22,7 +22,7 @@
     "@xstate/react": "^4.0.0-beta.11",
     "framer-motion": "^10.16.5",
     "next": "^14.0.3",
-    "puppeteer": "^21.5.2",
+    "puppeteer": "^22.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",
@@ -35,8 +35,8 @@
     "zustand": "^4.4.6"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@types/node": "^17.0.12",
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",

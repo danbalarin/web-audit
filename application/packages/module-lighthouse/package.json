@@ -12,12 +12,12 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@repo/api": "*",
+    "@repo/api": "workspace:*",
     "lighthouse": "^11.3.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*"
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
   }
 }
