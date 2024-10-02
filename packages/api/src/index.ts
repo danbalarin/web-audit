@@ -3,4 +3,8 @@ export * from "./core/Gatherer";
 export * from "./core/Module";
 export * from "./core/Storage";
 export * from "./core/ModuleProcessor";
+export * from "./types/CombineUnion";
+export * from "./types/ExtractArray";
+export * from "./types/UnionToIntersection";
+export * from "./types/DeepPartial";
 export * from "./errors/GathererError";
