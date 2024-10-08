@@ -4,7 +4,6 @@ import { env } from "~/env.mjs";
 import { ApiProvider } from "~/features/report";
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
-  console.log(env);
   return (
     <html lang="en">
       <body>

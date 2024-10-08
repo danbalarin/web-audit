@@ -14,7 +14,7 @@ import { type AppRouter } from "~/server";
 // const baseUrl = typeof window !== "undefined" ? "" : env.SITE_URL;
 
 /** A set of type-safe react-query hooks for your tRPC API. */
-export const api: CreateTRPCReact<AppRouter, unknown, null> =
+export const api: CreateTRPCReact<AppRouter, unknown> =
   createTRPCReact<AppRouter>({
     overrides: {
       useMutation: {

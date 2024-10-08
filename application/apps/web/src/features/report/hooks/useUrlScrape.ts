@@ -18,7 +18,7 @@ export const useUrlScrape = (): UseUrlScrapeResult => {
     new Promise<UseUrlScrapeCompleteResult>((res, rej) => {
       scrapeUrl({ url })
         .then(res)
-        .catch((error) => {
+        .catch((error: any) => {
           rej({ ok: false, document: "", error });
         });
     });

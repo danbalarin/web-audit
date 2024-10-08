@@ -73,7 +73,7 @@ export const useSpeedTest = ({
         if (controllerRef.current) {
           controllerRef.current.abort();
         }
-      } catch (error) {
+      } catch (_error) {
         void 0;
       }
 

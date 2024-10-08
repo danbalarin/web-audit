@@ -19,7 +19,7 @@ export const useUrlTest = (): UseUrlTestResult => {
         .then(() => {
           res({ ok: true });
         })
-        .catch((error) => {
+        .catch((error: any) => {
           rej({ ok: false, error });
         });
     });
