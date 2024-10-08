@@ -22,5 +22,8 @@
   "dependencies": {
     "ts-deepmerge": "^6.2.0",
     "uuid": "^9.0.1"
+  },
+  "peerDependencies": {
+    "puppeteer": "^22.0.0"
   }
 }

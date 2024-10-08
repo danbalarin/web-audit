@@ -6,19 +6,17 @@ import type { Options as OptionsOfCreateCache } from "@emotion/cache";
 import { useState } from "react";
 
 export type NextAppDirEmotionCacheProviderProps = {
-  /** This is the options passed to createCache() from 'import createCache from "@emotion/cache"' */
   options: Omit<OptionsOfCreateCache, "insertionPoint">;
-  /** By default <CacheProvider /> from 'import { CacheProvider } from "@emotion/react"' */
   CacheProvider?: () => React.JSX.Element | null;
   children: React.ReactNode;
 };
 
 // Adapted from https://github.com/garronej/tss-react/blob/main/src/next/appDir.tsx
-export default function NextAppDirEmotionCacheProvider(
-  props: NextAppDirEmotionCacheProviderProps
-) {
-  const { options, CacheProvider = DefaultCacheProvider, children } = props;
-
+export default function NextAppDirEmotionCacheProvider({
+  options,
+  CacheProvider: PropsCacheProvider,
+  children,
+}: NextAppDirEmotionCacheProviderProps) {
   const [registry] = useState(() => {
     const cache = createCache(options);
     cache.compat = true;
@@ -88,6 +86,8 @@ export default function NextAppDirEmotionCacheProvider(
       </>
     );
   });
+
+  const CacheProvider = PropsCacheProvider ?? DefaultCacheProvider;
 
   return <CacheProvider value={registry.cache}>{children}</CacheProvider>;
 }

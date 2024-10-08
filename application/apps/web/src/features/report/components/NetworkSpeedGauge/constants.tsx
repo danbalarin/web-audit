@@ -2,7 +2,7 @@ import {
   CheckCircle as CheckCircleIcon,
   Report as ReportIcon,
   Warning as WarningIcon,
-} from "@repo/icons";
+} from "@repo/ui/icons";
 import { CircularProgress } from "@repo/ui";
 
 export const MESSAGE_CONFIGS = {

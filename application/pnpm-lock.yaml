@@ -41,9 +41,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.3.2
         version: 3.9.0(react-hook-form@7.53.0(react@18.3.1))
-      '@repo/icons':
+      '@repo/api':
         specifier: workspace:*
-        version: link:../../packages/icons
+        version: link:../../packages/api
       '@repo/module-lighthouse':
         specifier: workspace:*
         version: link:../../packages/module-lighthouse
@@ -57,17 +57,17 @@ importers:
         specifier: ^4.29.0
         version: 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/client':
-        specifier: ^10.44.0
-        version: 10.45.2(@trpc/server@10.45.2)
+        specifier: 10.44.0
+        version: 10.44.0(@trpc/server@10.44.0)
       '@trpc/next':
-        specifier: ^10.44.1
-        version: 10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/react-query@10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@10.45.2)(next@14.2.14(@playwright/test@1.47.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 10.44.0
+        version: 10.44.0(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.44.0(@trpc/server@10.44.0))(@trpc/react-query@10.44.0(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.44.0(@trpc/server@10.44.0))(@trpc/server@10.44.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@10.44.0)(next@14.0.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/react-query':
-        specifier: ^10.44.1
-        version: 10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 10.44.0
+        version: 10.44.0(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.44.0(@trpc/server@10.44.0))(@trpc/server@10.44.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/server':
-        specifier: ^10.44.0
-        version: 10.45.2
+        specifier: 10.44.0
+        version: 10.44.0
       '@xstate/react':
         specifier: ^4.0.0-beta.11
         version: 4.1.3(@types/react@18.3.10)(react@18.3.1)(xstate@5.18.2)
@@ -75,8 +75,8 @@ importers:
         specifier: ^10.16.5
         version: 10.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next:
-        specifier: ^14.0.3
-        version: 14.2.14(@playwright/test@1.47.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 14.0.3
+        version: 14.0.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       puppeteer:
         specifier: ^22.0.0
         version: 22.15.0(typescript@5.2.2)
@@ -97,7 +97,7 @@ importers:
         version: 2.1.4
       trpc-playground:
         specifier: ^1.0.4
-        version: 1.0.4(@trpc/server@10.45.2)(@types/node@17.0.45)(typescript@5.2.2)(zod@3.23.8)
+        version: 1.0.4(@trpc/server@10.44.0)(@types/node@17.0.45)(typescript@5.2.2)(zod@3.23.8)
       typed-inject:
         specifier: ^4.0.0
         version: 4.0.0
@@ -135,6 +135,9 @@ importers:
 
   packages/api:
     dependencies:
+      puppeteer:
+        specifier: ^22.0.0
+        version: 22.15.0(typescript@5.2.2)
       ts-deepmerge:
         specifier: ^6.2.0
         version: 6.2.1
@@ -176,54 +179,14 @@ importers:
         specifier: ^9.0.0
         version: 9.1.0(eslint@8.57.1)
       eslint-config-turbo:
-        specifier: ^1.10.12
-        version: 1.13.4(eslint@8.57.1)
+        specifier: ^2.1.3
+        version: 2.1.3(eslint@8.57.1)
       eslint-plugin-only-warn:
         specifier: ^1.1.0
         version: 1.1.0
       eslint-plugin-react:
         specifier: ^7.33.2
         version: 7.37.1(eslint@8.57.1)
-      typescript:
-        specifier: ^5.2.2
-        version: 5.2.2
-
-  packages/icons:
-    dependencies:
-      '@mui/icons-material':
-        specifier: ^5.14.16
-        version: 5.16.7(@mui/material@5.16.7(@emotion/react@11.13.3(@types/react@18.3.10)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.10)(react@18.3.1))(@types/react@18.3.10)(react@18.3.1))(@types/react@18.3.10)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.10)(react@18.3.1)
-    devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      '@turbo/gen':
-        specifier: ^1.10.12
-        version: 1.13.4(@types/node@20.16.10)(typescript@5.2.2)
-      '@types/eslint':
-        specifier: ^8.44.7
-        version: 8.56.12
-      '@types/node':
-        specifier: ^20.5.2
-        version: 20.16.10
-      '@types/react':
-        specifier: ^18.2.0
-        version: 18.3.10
-      '@types/react-dom':
-        specifier: ^18.2.0
-        version: 18.3.0
-      '@types/react-gauge-chart':
-        specifier: ^0.4.3
-        version: 0.4.3
-      eslint:
-        specifier: ^8.53.0
-        version: 8.57.1
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
       typescript:
         specifier: ^5.2.2
         version: 5.2.2
@@ -251,12 +214,18 @@ importers:
 
   packages/ui:
     dependencies:
+      '@emotion/cache':
+        specifier: ^11.11.0
+        version: 11.13.1
       '@emotion/react':
         specifier: ^11.11.1
         version: 11.13.3(@types/react@18.3.10)(react@18.3.1)
       '@emotion/styled':
         specifier: ^11.11.0
         version: 11.13.0(@emotion/react@11.13.3(@types/react@18.3.10)(react@18.3.1))(@types/react@18.3.10)(react@18.3.1)
+      '@mui/icons-material':
+        specifier: ^5.14.16
+        version: 5.16.7(@mui/material@5.16.7(@emotion/react@11.13.3(@types/react@18.3.10)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.10)(react@18.3.1))(@types/react@18.3.10)(react@18.3.1))(@types/react@18.3.10)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.10)(react@18.3.1)
       '@mui/lab':
         specifier: ^5.0.0-alpha.153
         version: 5.0.0-alpha.173(@emotion/react@11.13.3(@types/react@18.3.10)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.10)(react@18.3.1))(@types/react@18.3.10)(react@18.3.1))(@mui/material@5.16.7(@emotion/react@11.13.3(@types/react@18.3.10)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.3(@types/react@18.3.10)(react@18.3.1))(@types/react@18.3.10)(react@18.3.1))(@types/react@18.3.10)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.10)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -266,9 +235,18 @@ importers:
       d3:
         specifier: ^7.8.5
         version: 7.9.0
+      framer-motion:
+        specifier: ^10.16.5
+        version: 10.18.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next:
+        specifier: ^14.0.3
+        version: 14.2.14(@playwright/test@1.47.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-gauge-chart:
         specifier: ^0.4.1
         version: 0.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-hook-form:
+        specifier: 7.48.2
+        version: 7.48.2(react@18.3.1)
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -806,16 +784,31 @@ packages:
       '@types/react':
         optional: true
 
+  '@next/env@14.0.3':
+    resolution: {integrity: sha512-7xRqh9nMvP5xrW4/+L0jgRRX+HoNRGnfJpD+5Wq6/13j3dsdzxO3BCXn7D3hMqsDb+vjZnJq+vI7+EtgrYZTeA==}
+
   '@next/env@14.2.14':
     resolution: {integrity: sha512-/0hWQfiaD5//LvGNgc8PjvyqV50vGK0cADYzaoOOGN8fxzBn3iAiaq3S0tCRnFBldq0LVveLcxCTi41ZoYgAgg==}
 
   '@next/eslint-plugin-next@14.2.14':
     resolution: {integrity: sha512-kV+OsZ56xhj0rnTn6HegyTGkoa16Mxjrpk7pjWumyB2P8JVQb8S9qtkjy/ye0GnTr4JWtWG4x/2qN40lKZ3iVQ==}
 
+  '@next/swc-darwin-arm64@14.0.3':
+    resolution: {integrity: sha512-64JbSvi3nbbcEtyitNn2LEDS/hcleAFpHdykpcnrstITFlzFgB/bW0ER5/SJJwUPj+ZPY+z3e+1jAfcczRLVGw==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+
   '@next/swc-darwin-arm64@14.2.14':
     resolution: {integrity: sha512-bsxbSAUodM1cjYeA4o6y7sp9wslvwjSkWw57t8DtC8Zig8aG8V6r+Yc05/9mDzLKcybb6EN85k1rJDnMKBd9Gw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
+    os: [darwin]
+
+  '@next/swc-darwin-x64@14.0.3':
+    resolution: {integrity: sha512-RkTf+KbAD0SgYdVn1XzqE/+sIxYGB7NLMZRn9I4Z24afrhUpVJx6L8hsRnIwxz3ERE2NFURNliPjJ2QNfnWicQ==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
     os: [darwin]
 
   '@next/swc-darwin-x64@14.2.14':
@@ -824,8 +817,20 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@next/swc-linux-arm64-gnu@14.0.3':
+    resolution: {integrity: sha512-3tBWGgz7M9RKLO6sPWC6c4pAw4geujSwQ7q7Si4d6bo0l6cLs4tmO+lnSwFp1Tm3lxwfMk0SgkJT7EdwYSJvcg==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
   '@next/swc-linux-arm64-gnu@14.2.14':
     resolution: {integrity: sha512-RMLOdA2NU4O7w1PQ3Z9ft3PxD6Htl4uB2TJpocm+4jcllHySPkFaUIFacQ3Jekcg6w+LBaFvjSPthZHiPmiAUg==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@next/swc-linux-arm64-musl@14.0.3':
+    resolution: {integrity: sha512-v0v8Kb8j8T23jvVUWZeA2D8+izWspeyeDGNaT2/mTHWp7+37fiNfL8bmBWiOmeumXkacM/AB0XOUQvEbncSnHA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -836,8 +841,20 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@next/swc-linux-x64-gnu@14.0.3':
+    resolution: {integrity: sha512-VM1aE1tJKLBwMGtyBR21yy+STfl0MapMQnNrXkxeyLs0GFv/kZqXS5Jw/TQ3TSUnbv0QPDf/X8sDXuMtSgG6eg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
   '@next/swc-linux-x64-gnu@14.2.14':
     resolution: {integrity: sha512-lbn7svjUps1kmCettV/R9oAvEW+eUI0lo0LJNFOXoQM5NGNxloAyFRNByYeZKL3+1bF5YE0h0irIJfzXBq9Y6w==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@next/swc-linux-x64-musl@14.0.3':
+    resolution: {integrity: sha512-64EnmKy18MYFL5CzLaSuUn561hbO1Gk16jM/KHznYP3iCIfF9e3yULtHaMy0D8zbHfxset9LTOv6cuYKJgcOxg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -848,16 +865,34 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@next/swc-win32-arm64-msvc@14.0.3':
+    resolution: {integrity: sha512-WRDp8QrmsL1bbGtsh5GqQ/KWulmrnMBgbnb+59qNTW1kVi1nG/2ndZLkcbs2GX7NpFLlToLRMWSQXmPzQm4tog==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+
   '@next/swc-win32-arm64-msvc@14.2.14':
     resolution: {integrity: sha512-8i0Ou5XjTLEje0oj0JiI0Xo9L/93ghFtAUYZ24jARSeTMXLUx8yFIdhS55mTExq5Tj4/dC2fJuaT4e3ySvXU1A==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
+  '@next/swc-win32-ia32-msvc@14.0.3':
+    resolution: {integrity: sha512-EKffQeqCrj+t6qFFhIFTRoqb2QwX1mU7iTOvMyLbYw3QtqTw9sMwjykyiMlZlrfm2a4fA84+/aeW+PMg1MjuTg==}
+    engines: {node: '>= 10'}
+    cpu: [ia32]
+    os: [win32]
+
   '@next/swc-win32-ia32-msvc@14.2.14':
     resolution: {integrity: sha512-2u2XcSaDEOj+96eXpyjHjtVPLhkAFw2nlaz83EPeuK4obF+HmtDJHqgR1dZB7Gb6V/d55FL26/lYVd0TwMgcOQ==}
     engines: {node: '>= 10'}
     cpu: [ia32]
+    os: [win32]
+
+  '@next/swc-win32-x64-msvc@14.0.3':
+    resolution: {integrity: sha512-ERhKPSJ1vQrPiwrs15Pjz/rvDHZmkmvbf/BjPN/UCOI++ODftT0GtasDPi0j+y6PPJi5HsXw+dpRaXUaw4vjuQ==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
     os: [win32]
 
   '@next/swc-win32-x64-msvc@14.2.14':
@@ -942,6 +977,9 @@ packages:
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
 
+  '@swc/helpers@0.5.2':
+    resolution: {integrity: sha512-E4KcWTpoLHqwPHLxidpOqQbcrZVgi0rsmmZXUle1jXmJfuIf/UWpczUJ7MZZ5tlxytgJXyp0w4PGkkeLiuIdZw==}
+
   '@swc/helpers@0.5.5':
     resolution: {integrity: sha512-KGYxvIOXcceOAbEk4bi/dVLEK9z8sZ0uBB3Il5b1rhfClSpcX0yfRO0KmTkqR2cnQDymwLB+25ZyMzICg/cm/A==}
 
@@ -989,33 +1027,34 @@ packages:
     peerDependencies:
       '@trpc/server': ^10
 
-  '@trpc/client@10.45.2':
-    resolution: {integrity: sha512-ykALM5kYWTLn1zYuUOZ2cPWlVfrXhc18HzBDyRhoPYN0jey4iQHEFSEowfnhg1RvYnrAVjNBgHNeSAXjrDbGwg==}
+  '@trpc/client@10.44.0':
+    resolution: {integrity: sha512-6PAL5rXMGTMlsKKGW9aBsij8XFBbLUbOCJ7jNVX3IripGqiQG3b/VJyTsHRWkss/oaz/sZMOn62amhfev1UVfg==}
     peerDependencies:
-      '@trpc/server': 10.45.2
+      '@trpc/server': 10.44.0
 
-  '@trpc/next@10.45.2':
-    resolution: {integrity: sha512-RSORmfC+/nXdmRY1pQ0AalsVgSzwNAFbZLYHiTvPM5QQ8wmMEHilseCYMXpu0se/TbPt9zVR6Ka2d7O6zxKkXg==}
+  '@trpc/next@10.44.0':
+    resolution: {integrity: sha512-C4eKsSWdH0rUu0a0kUl+OC8RcI7DCsl3YZgXfKdPOEzRQ/njIgWWAouETRikzeHjulVN4/yz3ekcTyibfDNpKA==}
     peerDependencies:
       '@tanstack/react-query': ^4.18.0
-      '@trpc/client': 10.45.2
-      '@trpc/react-query': 10.45.2
-      '@trpc/server': 10.45.2
+      '@trpc/client': 10.44.0
+      '@trpc/react-query': 10.44.0
+      '@trpc/server': 10.44.0
       next: '*'
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
-  '@trpc/react-query@10.45.2':
-    resolution: {integrity: sha512-BAqb9bGZIscroradlNx+Cc9522R+idY3BOSf5z0jHUtkxdMbjeGKxSSMxxu7JzoLqSIEC+LVzL3VvF8sdDWaZQ==}
+  '@trpc/react-query@10.44.0':
+    resolution: {integrity: sha512-0l9mar1kSamm/sePnHOuhX8v9LFQbgpVJ2U2s/hWnScNexBFzV03SpCjLAkXtiIapw5lkIG0QlveZXu4G86Xnw==}
     peerDependencies:
       '@tanstack/react-query': ^4.18.0
-      '@trpc/client': 10.45.2
-      '@trpc/server': 10.45.2
+      '@trpc/client': 10.44.0
+      '@trpc/server': 10.44.0
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
-  '@trpc/server@10.45.2':
-    resolution: {integrity: sha512-wOrSThNNE4HUnuhJG6PfDRp4L2009KDVxsd+2VYH8ro6o/7/jwYZ8Uu5j+VaW+mOmc8EHerHzGcdbGNQSAUPgg==}
+  '@trpc/server@10.44.0':
+    resolution: {integrity: sha512-QBq/FnjyU6a7CAl9p2dv6kApn2i8MFuPt8uVLyGr0oa2aFv31rHaX0m+ibdsviE/3fOJIC8EUOfMYOJma5uK2w==}
+    engines: {node: '>=18.0.0'}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -1912,8 +1951,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-config-turbo@1.13.4:
-    resolution: {integrity: sha512-+we4eWdZlmlEn7LnhXHCIPX/wtujbHCS7XjQM/TN09BHNEl2fZ8id4rHfdfUKIYTSKyy8U/nNyJ0DNoZj5Q8bw==}
+  eslint-config-turbo@2.1.3:
+    resolution: {integrity: sha512-smdkhd01V/e/I4EjJxaZA1kxZ1vdFCHpyryolxLtRBP0bZTrHDYh1H6NAyZ3Fy1jkhsQzXw+L+6m17ygROvNFw==}
     peerDependencies:
       eslint: '>6.6.0'
 
@@ -2029,8 +2068,8 @@ packages:
   eslint-plugin-tsdoc@0.2.17:
     resolution: {integrity: sha512-xRmVi7Zx44lOBuYqG8vzTXuL6IdGOeF9nHX17bjJ8+VE6fsxpdGem0/SBTmAwgYMKYB1WBkqRJVQ+n8GK041pA==}
 
-  eslint-plugin-turbo@1.13.4:
-    resolution: {integrity: sha512-82GfMzrewI/DJB92Bbch239GWbGx4j1zvjk1lqb06lxIlMPnVwUHVwPbAnLfyLG3JuhLv9whxGkO/q1CL18JTg==}
+  eslint-plugin-turbo@2.1.3:
+    resolution: {integrity: sha512-I9vPArzyOSYa6bm0iMCgD07MgdExc1VK2wGuVz21g4BUdj83w7mDKyCXR2rwOtCEW+wemFwgxanJ81imQZijNg==}
     peerDependencies:
       eslint: '>6.6.0'
 
@@ -2250,6 +2289,9 @@ packages:
   glob-parent@6.0.2:
     resolution: {integrity: sha512-XxwI8EOhVQgWp6iDL+3b0r86f4d6AX6zSU55HfB4ydCEuXLXc5FcYeOu+nnGftS4TEju/11rt4KJPTMgbfmv4A==}
     engines: {node: '>=10.13.0'}
+
+  glob-to-regexp@0.4.1:
+    resolution: {integrity: sha512-lkX1HJXwyMcprw/5YUZc2s7DrpAiHB21/V+E1rHUrVNokkvB6bqMzT0VfV6/86ZNabt1k14YOIaT7nDvOX3Iiw==}
 
   glob@10.3.10:
     resolution: {integrity: sha512-fa46+tv1Ak0UPK1TOy/pZrIybNNt4HCv7SDzwyfiOZkvZLEbjsZkJBPtDHVshZjbecAoAGSC20MjLDG/qr679g==}
@@ -2828,6 +2870,21 @@ packages:
     resolution: {integrity: sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==}
     engines: {node: '>= 0.4.0'}
 
+  next@14.0.3:
+    resolution: {integrity: sha512-AbYdRNfImBr3XGtvnwOxq8ekVCwbFTv/UJoLwmaX89nk9i051AEY4/HAWzU0YpaTDw8IofUpmuIlvzWF13jxIw==}
+    engines: {node: '>=18.17.0'}
+    hasBin: true
+    peerDependencies:
+      '@opentelemetry/api': ^1.1.0
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      sass:
+        optional: true
+
   next@14.2.14:
     resolution: {integrity: sha512-Q1coZG17MW0Ly5x76shJ4dkC23woLAhhnDnw+DfTc7EpZSGuWrlsZ3bZaO8t6u1Yu8FVfhkqJE+U8GC7E0GLPQ==}
     engines: {node: '>=18.17.0'}
@@ -3109,6 +3166,12 @@ packages:
       react: ^16.8.2 || ^17.0 || ^18.x
       react-dom: ^16.8.2 || ^17.0 || ^18.x
 
+  react-hook-form@7.48.2:
+    resolution: {integrity: sha512-H0T2InFQb1hX7qKtDIZmvpU1Xfn/bdahWBN1fH19gSe4bBEqTfmlr7H3XWTaVtiK4/tpPaI1F3355GPMZYge+A==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+
   react-hook-form@7.53.0:
     resolution: {integrity: sha512-M1n3HhqCww6S2hxLxciEXy2oISPnAzxY7gvwVPrtlczTM/1dDadXgUxDpHMrMTblDOcm/AXtXxHwZ3jpg1mqKQ==}
     engines: {node: '>=18.0.0'}
@@ -3120,6 +3183,11 @@ packages:
 
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
+
+  react-ssr-prepass@1.5.0:
+    resolution: {integrity: sha512-yFNHrlVEReVYKsLI5lF05tZoHveA5pGzjFbFJY/3pOqqjGOmMmqx83N4hIjN2n6E1AOa+eQEUxs3CgRnPmT0RQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
   react-transition-group@4.4.5:
     resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
@@ -3769,6 +3837,10 @@ packages:
         optional: true
       terser:
         optional: true
+
+  watchpack@2.4.0:
+    resolution: {integrity: sha512-Lcvm7MGST/4fup+ifyKi2hjyIAwcdI4HRgtvTpIUxBRhB+RFtUh8XtDOxUfctVCnhVi+QQj49i91OyvzkJl6cg==}
+    engines: {node: '>=10.13.0'}
 
   wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
@@ -4439,34 +4511,63 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.10
 
+  '@next/env@14.0.3': {}
+
   '@next/env@14.2.14': {}
 
   '@next/eslint-plugin-next@14.2.14':
     dependencies:
       glob: 10.3.10
 
+  '@next/swc-darwin-arm64@14.0.3':
+    optional: true
+
   '@next/swc-darwin-arm64@14.2.14':
+    optional: true
+
+  '@next/swc-darwin-x64@14.0.3':
     optional: true
 
   '@next/swc-darwin-x64@14.2.14':
     optional: true
 
+  '@next/swc-linux-arm64-gnu@14.0.3':
+    optional: true
+
   '@next/swc-linux-arm64-gnu@14.2.14':
+    optional: true
+
+  '@next/swc-linux-arm64-musl@14.0.3':
     optional: true
 
   '@next/swc-linux-arm64-musl@14.2.14':
     optional: true
 
+  '@next/swc-linux-x64-gnu@14.0.3':
+    optional: true
+
   '@next/swc-linux-x64-gnu@14.2.14':
+    optional: true
+
+  '@next/swc-linux-x64-musl@14.0.3':
     optional: true
 
   '@next/swc-linux-x64-musl@14.2.14':
     optional: true
 
+  '@next/swc-win32-arm64-msvc@14.0.3':
+    optional: true
+
   '@next/swc-win32-arm64-msvc@14.2.14':
     optional: true
 
+  '@next/swc-win32-ia32-msvc@14.0.3':
+    optional: true
+
   '@next/swc-win32-ia32-msvc@14.2.14':
+    optional: true
+
+  '@next/swc-win32-x64-msvc@14.0.3':
     optional: true
 
   '@next/swc-win32-x64-msvc@14.2.14':
@@ -4562,6 +4663,10 @@ snapshots:
 
   '@swc/counter@0.1.3': {}
 
+  '@swc/helpers@0.5.2':
+    dependencies:
+      tslib: 2.7.0
+
   '@swc/helpers@0.5.5':
     dependencies:
       '@swc/counter': 0.1.3
@@ -4605,36 +4710,37 @@ snapshots:
       - sugarss
       - terser
 
-  '@trpc-playground/types@1.0.0(@trpc/server@10.45.2)(typescript@5.2.2)':
+  '@trpc-playground/types@1.0.0(@trpc/server@10.44.0)(typescript@5.2.2)':
     dependencies:
-      '@trpc/server': 10.45.2
+      '@trpc/server': 10.44.0
       ts-essentials: 9.4.2(typescript@5.2.2)
     transitivePeerDependencies:
       - typescript
 
-  '@trpc/client@10.45.2(@trpc/server@10.45.2)':
+  '@trpc/client@10.44.0(@trpc/server@10.44.0)':
     dependencies:
-      '@trpc/server': 10.45.2
+      '@trpc/server': 10.44.0
 
-  '@trpc/next@10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/react-query@10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@10.45.2)(next@14.2.14(@playwright/test@1.47.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@trpc/next@10.44.0(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.44.0(@trpc/server@10.44.0))(@trpc/react-query@10.44.0(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.44.0(@trpc/server@10.44.0))(@trpc/server@10.44.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/server@10.44.0)(next@14.0.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/react-query': 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@trpc/client': 10.45.2(@trpc/server@10.45.2)
-      '@trpc/react-query': 10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@trpc/server': 10.45.2
-      next: 14.2.14(@playwright/test@1.47.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@trpc/client': 10.44.0(@trpc/server@10.44.0)
+      '@trpc/react-query': 10.44.0(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.44.0(@trpc/server@10.44.0))(@trpc/server@10.44.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@trpc/server': 10.44.0
+      next: 14.0.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-ssr-prepass: 1.5.0(react@18.3.1)
+
+  '@trpc/react-query@10.44.0(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.44.0(@trpc/server@10.44.0))(@trpc/server@10.44.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@tanstack/react-query': 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@trpc/client': 10.44.0(@trpc/server@10.44.0)
+      '@trpc/server': 10.44.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@trpc/react-query@10.45.2(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@tanstack/react-query': 4.36.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@trpc/client': 10.45.2(@trpc/server@10.45.2)
-      '@trpc/server': 10.45.2
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
-  '@trpc/server@10.45.2': {}
+  '@trpc/server@10.44.0': {}
 
   '@tsconfig/node10@1.0.11': {}
 
@@ -4709,7 +4815,7 @@ snapshots:
   '@types/glob@7.2.0':
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 20.16.10
+      '@types/node': 22.7.4
 
   '@types/inquirer@6.5.0':
     dependencies:
@@ -4759,7 +4865,7 @@ snapshots:
 
   '@types/through@0.0.33':
     dependencies:
-      '@types/node': 20.16.10
+      '@types/node': 22.7.4
 
   '@types/tinycolor2@1.4.6': {}
 
@@ -4767,7 +4873,7 @@ snapshots:
 
   '@types/yauzl@2.10.3':
     dependencies:
-      '@types/node': 20.16.10
+      '@types/node': 22.7.4
     optional: true
 
   '@typescript-eslint/eslint-plugin@6.21.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.2.2))(eslint@8.57.1)(typescript@5.2.2)':
@@ -5803,10 +5909,10 @@ snapshots:
     dependencies:
       eslint: 8.57.1
 
-  eslint-config-turbo@1.13.4(eslint@8.57.1):
+  eslint-config-turbo@2.1.3(eslint@8.57.1):
     dependencies:
       eslint: 8.57.1
-      eslint-plugin-turbo: 1.13.4(eslint@8.57.1)
+      eslint-plugin-turbo: 2.1.3(eslint@8.57.1)
 
   eslint-import-resolver-alias@1.1.2(eslint-plugin-import@2.30.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)):
     dependencies:
@@ -5961,7 +6067,7 @@ snapshots:
       '@microsoft/tsdoc': 0.14.2
       '@microsoft/tsdoc-config': 0.16.2
 
-  eslint-plugin-turbo@1.13.4(eslint@8.57.1):
+  eslint-plugin-turbo@2.1.3(eslint@8.57.1):
     dependencies:
       dotenv: 16.0.3
       eslint: 8.57.1
@@ -6244,6 +6350,8 @@ snapshots:
   glob-parent@6.0.2:
     dependencies:
       is-glob: 4.0.3
+
+  glob-to-regexp@0.4.1: {}
 
   glob@10.3.10:
     dependencies:
@@ -6839,6 +6947,31 @@ snapshots:
 
   netmask@2.0.2: {}
 
+  next@14.0.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      '@next/env': 14.0.3
+      '@swc/helpers': 0.5.2
+      busboy: 1.6.0
+      caniuse-lite: 1.0.30001666
+      postcss: 8.4.31
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      styled-jsx: 5.1.1(react@18.3.1)
+      watchpack: 2.4.0
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 14.0.3
+      '@next/swc-darwin-x64': 14.0.3
+      '@next/swc-linux-arm64-gnu': 14.0.3
+      '@next/swc-linux-arm64-musl': 14.0.3
+      '@next/swc-linux-x64-gnu': 14.0.3
+      '@next/swc-linux-x64-musl': 14.0.3
+      '@next/swc-win32-arm64-msvc': 14.0.3
+      '@next/swc-win32-ia32-msvc': 14.0.3
+      '@next/swc-win32-x64-msvc': 14.0.3
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+
   next@14.2.14(@playwright/test@1.47.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@next/env': 14.2.14
@@ -7188,6 +7321,10 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
+  react-hook-form@7.48.2(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
   react-hook-form@7.53.0(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -7195,6 +7332,10 @@ snapshots:
   react-is@16.13.1: {}
 
   react-is@18.3.1: {}
+
+  react-ssr-prepass@1.5.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
 
   react-transition-group@4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
@@ -7630,11 +7771,11 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  trpc-playground@1.0.4(@trpc/server@10.45.2)(@types/node@17.0.45)(typescript@5.2.2)(zod@3.23.8):
+  trpc-playground@1.0.4(@trpc/server@10.44.0)(@types/node@17.0.45)(typescript@5.2.2)(zod@3.23.8):
     dependencies:
       '@trpc-playground/html': 1.0.4(@types/node@17.0.45)
-      '@trpc-playground/types': 1.0.0(@trpc/server@10.45.2)(typescript@5.2.2)
-      '@trpc/server': 10.45.2
+      '@trpc-playground/types': 1.0.0(@trpc/server@10.44.0)(typescript@5.2.2)
+      '@trpc/server': 10.44.0
       lodash: 4.17.21
       uttp: 0.1.3
       zod: 3.23.8
@@ -7873,6 +8014,11 @@ snapshots:
     optionalDependencies:
       '@types/node': 17.0.45
       fsevents: 2.3.3
+
+  watchpack@2.4.0:
+    dependencies:
+      glob-to-regexp: 0.4.1
+      graceful-fs: 4.2.11
 
   wcwidth@1.0.1:
     dependencies:

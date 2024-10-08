@@ -1,5 +1,4 @@
 "use client"; // Needs to be here because of Timeline component
-// import * as icons from "@mui/icons-material";
 export * from "@mui/material";
 export {
   Timeline,
