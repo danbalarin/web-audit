@@ -8,10 +8,8 @@ import {
   TimelineDot,
   TimelineItem,
   TimelineSeparator,
-  Stack,
-  useTheme,
-  CircularProgress,
-} from "@repo/ui";
+} from "@mui/lab";
+import { CircularProgress, Stack, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 
 import { UrlTimelineState } from "../../constants";

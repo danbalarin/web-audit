@@ -1,5 +1,6 @@
 "use client";
-import { Timeline, timelineItemClasses, Stack } from "@repo/ui";
+import { Timeline, timelineItemClasses } from "@mui/lab";
+import { Stack } from "@mui/material";
 import { useMachine } from "@xstate/react";
 import React from "react";
 import { ContextFrom, assign, fromPromise } from "xstate";

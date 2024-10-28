@@ -1,7 +1,7 @@
-import { ThemeRegistry } from "@repo/ui";
 import type { Metadata } from "next";
 
 import { ApiProvider } from "~/features/report";
+import { ThemeRegistry } from "~/features/ui/components/ThemeRegistry";
 
 export const metadata: Metadata = {
   title: "Create Next App",

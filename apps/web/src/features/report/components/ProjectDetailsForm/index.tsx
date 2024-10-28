@@ -1,8 +1,11 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Stack, FormTextList, FormTextField } from "@repo/ui";
+import { Stack } from "@mui/material";
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
+
+import { FormTextField } from "~/features/ui/components/FormTextField";
+import { FormTextList } from "~/features/ui/components/FormTextList";
 
 import {
   useNewProjectMachineContext,

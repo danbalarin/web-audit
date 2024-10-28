@@ -1,4 +1,6 @@
-import { SpeedGauge, BoxProps } from "@repo/ui";
+import { BoxProps } from "@mui/material";
+
+import { SpeedGauge } from "~/features/ui/components/SpeedGauge";
 
 import { UseSpeedTestStatus } from "../../hooks/useSpeedTest";
 

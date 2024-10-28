@@ -4,8 +4,8 @@ import {
   TimelineDot,
   TimelineItem,
   TimelineSeparator,
-  useTheme,
-} from "@repo/ui";
+} from "@mui/lab";
+import { useTheme } from "@mui/material";
 import { useMemo } from "react";
 
 import { UseSpeedTestStatus } from "~/features/report/hooks/useSpeedTest";

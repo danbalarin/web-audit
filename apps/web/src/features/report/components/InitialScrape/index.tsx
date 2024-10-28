@@ -1,4 +1,5 @@
-import { Stack, Timeline, timelineItemClasses } from "@repo/ui";
+import { Timeline, timelineItemClasses } from "@mui/lab";
+import { Stack } from "@mui/material";
 import { useMachine } from "@xstate/react";
 import * as React from "react";
 import { ContextFrom, assign, fromPromise } from "xstate";

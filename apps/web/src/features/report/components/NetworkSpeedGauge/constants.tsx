@@ -3,7 +3,7 @@ import {
   Report as ReportIcon,
   Warning as WarningIcon,
 } from "@mui/icons-material";
-import { CircularProgress } from "@repo/ui";
+import { CircularProgress } from "@mui/material";
 
 export const MESSAGE_CONFIGS = {
   fast: {

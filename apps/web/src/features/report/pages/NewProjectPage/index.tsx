@@ -6,7 +6,7 @@ import {
   CardActions,
   CardContent,
   Container,
-} from "@repo/ui";
+} from "@mui/material";
 import React from "react";
 import { StateValue } from "xstate";
 
