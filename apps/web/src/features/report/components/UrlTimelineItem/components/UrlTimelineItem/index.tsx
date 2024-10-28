@@ -1,7 +1,7 @@
 import {
   CheckCircle as CheckCircleIcon,
   Report as ReportIcon,
-} from "@repo/icons";
+} from "@mui/icons-material";
 import {
   TimelineConnector,
   TimelineContent,

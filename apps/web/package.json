@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
-    "@repo/icons": "*",
+    "@mui/icons-material": "^6.1.5",
     "@repo/module-lighthouse": "*",
     "@repo/ui": "*",
     "@t3-oss/env-nextjs": "^0.7.1",
