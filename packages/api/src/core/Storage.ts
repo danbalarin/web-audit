@@ -1,4 +1,4 @@
-import { DeepPartial } from "~/types/DeepPartial";
+import { DeepPartial } from "../types/DeepPartial";
 import merge from "ts-deepmerge";
 
 export abstract class BaseStorage<TData = unknown> {
