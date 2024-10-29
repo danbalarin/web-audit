@@ -3,7 +3,7 @@ import { Browser } from "puppeteer";
 import { v4 as uuid } from "uuid";
 import z from "zod";
 
-import { baseProcedure } from "../../../procedures";
+import { baseProcedure } from "~/server/trpc/init";
 
 const inputSchema = z.object({
   url: z.string().url(),

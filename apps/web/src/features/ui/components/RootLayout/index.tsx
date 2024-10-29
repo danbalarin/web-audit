@@ -1,3 +1,5 @@
+import { TRPCProvider } from "~/server/query/client";
+
 import { font, ThemeRegistry } from "../ThemeRegistry";
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
@@ -5,7 +7,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
     <html lang="en">
       <body className={font.variable}>
         <ThemeRegistry />
-        {children}
+        <TRPCProvider>{children}</TRPCProvider>
       </body>
     </html>
   );
