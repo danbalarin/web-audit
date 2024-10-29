@@ -1,3 +1,5 @@
+import { withPigment } from "@pigment-css/nextjs-plugin";
+import { theme } from "./src/features/ui/components/ThemeRegistry/theme.mjs";
 import "./src/env.mjs";
 
 /** @type {import('next').NextConfig} */
@@ -7,4 +9,10 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+/** @type {import('@pigment-css/nextjs-plugin').PigmentOptions} */
+const pigmentConfig = {
+  transformLibraries: ["@mui/material"],
+  theme,
+};
+
+export default withPigment(nextConfig, pigmentConfig);

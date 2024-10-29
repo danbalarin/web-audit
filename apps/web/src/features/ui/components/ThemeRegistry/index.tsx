@@ -1,27 +1,19 @@
-"use client";
-import { GlobalStyles } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
+import { Roboto } from "next/font/google";
+import React from "react";
+import "@mui/material-pigment-css/styles.css";
 
-import NextAppDirEmotionCacheProvider from "./EmotionCache";
-import theme from "./theme";
+export const font = Roboto({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-family",
+});
 
-export function ThemeRegistry({ children }: { children: React.ReactNode }) {
+export function ThemeRegistry() {
   return (
-    <NextAppDirEmotionCacheProvider options={{ key: "mui" }}>
-      <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-        <GlobalStyles
-          styles={{
-            "html, body, #__next": {
-              height: "100%",
-              width: "100%",
-            },
-          }}
-        />
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </NextAppDirEmotionCacheProvider>
+    <>
+      <CssBaseline />
+    </>
   );
 }

@@ -9,7 +9,7 @@ import {
   TimelineItem,
   TimelineSeparator,
 } from "@mui/lab";
-import { CircularProgress, Stack, useTheme } from "@mui/material";
+import { CircularProgress, Stack } from "@mui/material";
 import { motion } from "framer-motion";
 
 import { UrlTimelineState } from "../../constants";
@@ -21,7 +21,7 @@ export type UrlTimelineItemProps = {
 };
 
 export function UrlTimelineItem({ status, url, config }: UrlTimelineItemProps) {
-  const { palette } = useTheme();
+  // const { palette } = useTheme();
 
   const color =
     status === "loading" || status === "waiting"
@@ -34,7 +34,9 @@ export function UrlTimelineItem({ status, url, config }: UrlTimelineItemProps) {
     <TimelineItem>
       <TimelineSeparator>
         <TimelineDot color={color} />
-        <TimelineConnector sx={{ backgroundColor: `${color}.main` }} />
+        <TimelineConnector />
+        {/* TODO: fix colors */}
+        {/* <TimelineConnector sx={{ backgroundColor: `${color}.main` }} /> */}
       </TimelineSeparator>
       <TimelineContent>
         <Stack>
@@ -43,14 +45,14 @@ export function UrlTimelineItem({ status, url, config }: UrlTimelineItemProps) {
             direction="row"
             component={motion.span}
             alignItems="center"
-            animate={{
-              color:
-                !status || status === "loading" || status === "waiting"
-                  ? undefined
-                  : status === "ok"
-                    ? palette.success.main
-                    : palette.error.main,
-            }}
+            // animate={{
+            //   color:
+            //     !status || status === "loading" || status === "waiting"
+            //       ? undefined
+            //       : status === "ok"
+            //         ? palette.success.main
+            //         : palette.error.main,
+            // }}
             gap={1}
             ml={1.5}
             mt={1.5}
