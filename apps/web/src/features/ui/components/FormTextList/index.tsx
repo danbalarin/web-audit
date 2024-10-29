@@ -32,7 +32,8 @@ export function FormTextList({ name, ...rest }: Props) {
     <Stack
       component="fieldset"
       spacing={2}
-      sx={{ borderRadius: 1, borderColor, color }}
+      // TODO: fix colors
+      // sx={{ borderRadius: 1, borderColor, color }}
       {...rest}
     >
       <legend>Tested URLs</legend>
