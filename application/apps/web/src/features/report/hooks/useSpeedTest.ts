@@ -23,7 +23,7 @@ export type UseSpeedTestResult = {
 
 const getStatus = (
   speed: number,
-  thresholds: NonNullable<UseSpeedTestOptions["thresholds"]>
+  thresholds: NonNullable<UseSpeedTestOptions["thresholds"]>,
 ) => {
   if (speed > thresholds[1]) {
     return "fast";
@@ -57,7 +57,7 @@ export const useSpeedTest = ({
         setSpeed(speed);
       }
     },
-    [setSpeed]
+    [setSpeed],
   );
 
   const onConnectionComplete = useCallback(
@@ -66,7 +66,7 @@ export const useSpeedTest = ({
       const status = getStatus(speed, thresholds);
       onComplete?.({ speed, status });
     },
-    [onComplete, thresholds]
+    [onComplete, thresholds],
   );
 
   const run = useCallback(
@@ -97,7 +97,7 @@ export const useSpeedTest = ({
           },
         });
       }),
-    [onConnectionUpdate, onConnectionComplete, thresholds]
+    [onConnectionUpdate, onConnectionComplete, thresholds],
   );
 
   useEffect(() => {
@@ -120,7 +120,7 @@ export const useSpeedTest = ({
 
   const status = useMemo(
     () => getStatus(debouncedSpeed, thresholds),
-    [debouncedSpeed, thresholds]
+    [debouncedSpeed, thresholds],
   );
 
   return {

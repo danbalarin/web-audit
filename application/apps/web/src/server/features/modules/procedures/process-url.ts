@@ -33,10 +33,10 @@ const processUrl = async ({
   try {
     const id = uuid();
     const process = async () => {
-      const data = {} as Record<string, any>;
+      const data = {} as Record<string, unknown>;
       for (const [name, module] of Object.entries(modules)) {
         console.log(`Executing module ${name}, ${id}`);
-        const onChange = (...args: any[]) => {
+        const onChange = (...args: unknown[]) => {
           console.log(`Module ${name} changed`);
           console.log(args);
         };
@@ -52,6 +52,7 @@ const processUrl = async ({
       ok: true,
       id,
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return {
       ok: false,
@@ -64,5 +65,5 @@ const processUrl = async ({
 export const procedure = baseProcedure
   .input(inputSchema)
   .query(({ input, ctx }) =>
-    processUrl({ input, browser: ctx.browser, modules: ctx.modules })
+    processUrl({ input, browser: ctx.browser, modules: ctx.modules }),
   );

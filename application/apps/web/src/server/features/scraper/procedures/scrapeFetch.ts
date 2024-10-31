@@ -15,7 +15,7 @@ type ScrapeFetchResponse = {
 };
 
 const scrapeFetch = async (
-  input: ScrapeFetchInput
+  input: ScrapeFetchInput,
 ): Promise<ScrapeFetchResponse> => {
   try {
     const response = await fetch(input.url);
@@ -24,6 +24,8 @@ const scrapeFetch = async (
       ok: response.ok,
       document: await response.text(),
     };
+    // TODO: better reusable error handling
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error(error); // TODO: proper tracking
 

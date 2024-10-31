@@ -1,6 +1,6 @@
 import { trpc } from "~/server/query/client";
 
-export type UseUrlTestOptions = {};
+export type UseUrlTestOptions = Record<string, never>;
 
 export type UseUrlTestCompleteResult = {
   ok: boolean;

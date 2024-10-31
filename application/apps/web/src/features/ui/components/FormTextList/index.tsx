@@ -7,7 +7,7 @@ import {
   Stack,
   StackProps,
 } from "@mui/material";
-import { useController, useFieldArray } from "react-hook-form";
+import { useFieldArray } from "react-hook-form";
 
 import { FormTextField } from "../FormTextField";
 
@@ -16,17 +16,17 @@ type Props = StackProps & {
 };
 
 export function FormTextList({ name, ...rest }: Props) {
-  const {
-    fieldState: { error },
-  } = useController({ name });
+  // const {
+  //   fieldState: { error },
+  // } = useController({ name });
   const { fields, append, remove } = useFieldArray({ name });
 
   const addNewRow = () => {
     append("");
   };
 
-  const color = error ? "error.main" : "rgba(255, 255, 255, 0.7);";
-  const borderColor = error ? "error.main" : "rgba(255, 255, 255, 0.23);";
+  // const color = error ? "error.main" : "rgba(255, 255, 255, 0.7);";
+  // const borderColor = error ? "error.main" : "rgba(255, 255, 255, 0.23);";
 
   return (
     <Stack

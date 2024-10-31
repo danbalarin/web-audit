@@ -17,14 +17,14 @@ type ScrapeBrowserResponse = {
 
 const scrapeBrowser = async (
   input: ScrapeBrowserInput,
-  ctx: TRPCContext
+  ctx: TRPCContext,
 ): Promise<ScrapeBrowserResponse> => {
   try {
     const page = await ctx.browser.newPage();
     await page.goto(input.url, { waitUntil: "networkidle0" });
     const data = await page.evaluate(
       // eslint-disable-next-line no-undef
-      () => document.querySelector("*")?.outerHTML
+      () => document.querySelector("*")?.outerHTML,
     );
     await page.close();
 
@@ -32,6 +32,7 @@ const scrapeBrowser = async (
       ok: !!data,
       document: data ?? "",
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error(error); // TODO: proper tracking
 

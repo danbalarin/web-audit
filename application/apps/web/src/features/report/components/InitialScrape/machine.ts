@@ -84,5 +84,5 @@ export const initialScrapeMachine = createMachine(
     guards: {
       emptyUrlsToScrape: ({ context }) => context.urlsToScrape.length === 0,
     },
-  }
+  },
 );

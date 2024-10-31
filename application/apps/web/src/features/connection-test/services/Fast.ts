@@ -39,7 +39,7 @@ export class Fast {
 
   getPreciseTargets() {
     return BINARY_DATA_SIZES.slice(0, this.count).map(
-      (size) => `${BINARY_DATA_API}?size=${size}&nocache=${Date.now()}`
+      (size) => `${BINARY_DATA_API}?size=${size}&nocache=${Date.now()}`,
     );
   }
 
@@ -51,7 +51,7 @@ export class Fast {
     const targets = this.getPreciseTargets();
     const speeds: number[] = [];
     const onProgressFunctor =
-      (index: number) => (progress: number, speed: number) => {
+      (index: number) => (_progress: number, speed: number) => {
         if (!this.onChange) {
           return;
         }
@@ -74,7 +74,7 @@ export class Fast {
       const speed = await Fast.download(
         target,
         onProgressFunctor(i),
-        abortSignal
+        abortSignal,
       );
       speeds.push(speed);
     }
@@ -88,7 +88,7 @@ export class Fast {
   static async download(
     url: string,
     onProgress?: (progress: number, speed: number) => void,
-    abortSignal?: AbortSignal
+    abortSignal?: AbortSignal,
   ) {
     const start = Date.now();
     const request = await fetch(url, { signal: abortSignal });
@@ -96,7 +96,7 @@ export class Fast {
     const contentLength = Number(request.headers.get("Content-Length"));
 
     let receivedLength = 0;
-    let chunks = [];
+    const chunks = [];
     while (reader) {
       const { done, value } = await reader.read();
 

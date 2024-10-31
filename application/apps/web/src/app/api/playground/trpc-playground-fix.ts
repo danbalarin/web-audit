@@ -100,12 +100,12 @@ const buildTrpcTsType = (router: AnyRouter, procedureTypes: ProcedureTypes) => {
   };
 
   return `type Trpc = {${buildNestedTrpcObject(
-    procedureObject
+    procedureObject,
   )}}\ndeclare var trpc: Trpc;`;
 };
 
 export const zodResolveTypes = async (
-  router: AnyRouter
+  router: AnyRouter,
 ): Promise<ResolvedRouterSchema> => {
   const { schemas, types } = getProcedureSchemas(router._def.procedures);
 
@@ -154,7 +154,7 @@ export const getProcedureSchemas = (procedures: Procedures) => {
         procedureType = `input: ${printNode(node)}`;
 
         docsType = printNode(
-          createTypeAlias(node, "input", inputParser.description)
+          createTypeAlias(node, "input", inputParser.description),
         );
       }
 
@@ -297,7 +297,7 @@ const defaultTuple = (def: ZodTupleDef) => {
 
 const defaultRecord = (_def: ZodRecordDef) => {
   return `{ ${getDefaultForDef(_def.keyType._def)}: ${getDefaultForDef(
-    _def.valueType._def
+    _def.valueType._def,
   )} }`;
 };
 
@@ -342,7 +342,7 @@ const defaultNativeEnum = (def: ZodNativeEnumDef) => {
 
 const defaultMap = (_def: ZodMapDef) => {
   return `new Map([[${getDefaultForDef(_def.keyType._def)}, ${getDefaultForDef(
-    _def.valueType._def
+    _def.valueType._def,
   )}]])`;
 };
 

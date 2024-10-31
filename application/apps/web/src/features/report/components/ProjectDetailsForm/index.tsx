@@ -24,7 +24,7 @@ export function ProjectDetailsForm() {
     projectName: state.context.projectName,
     homeURL: state.context.homeURL,
     urls: Object.keys(state.context.urlsData).filter(
-      (u) => u !== state.context.homeURL
+      (u) => u !== state.context.homeURL,
     ),
   }));
   const methods = useForm<ProjectDetailsFormValues>({
@@ -43,7 +43,7 @@ export function ProjectDetailsForm() {
           newProjectRef.send({
             type: "PROJECT_DETAILS_NEXT",
             output: { ...data, urls: [data.homeURL, ...data.urls] },
-          })
+          }),
         )}
         spacing={2}
       >

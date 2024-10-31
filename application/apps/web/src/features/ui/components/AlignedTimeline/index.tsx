@@ -1,8 +1,8 @@
-import { Timeline, timelineItemClasses, TimelineProps } from "@mui/lab";
+import { Timeline, TimelineProps } from "@mui/lab";
 
-type Props = TimelineProps & {};
+type Props = TimelineProps;
 
-export function AlignedTimeline({ sx, ...props }: Props) {
+export function AlignedTimeline({ sx: _sx, ...props }: Props) {
   return (
     <Timeline
       sx={{

@@ -2,7 +2,7 @@ import { BaseContext, BaseGatherer, GathererError } from "@repo/api";
 // @ts-ignore
 import lighthouse, { Flags } from "lighthouse";
 // @ts-ignore
-import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
+// import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
 
 export type PerformanceGathererOptions = {
   numberOfRuns: number;
@@ -10,7 +10,7 @@ export type PerformanceGathererOptions = {
 
 export class PerformanceGatherer extends BaseGatherer {
   constructor(
-    private readonly _performanceGathererOptions: PerformanceGathererOptions
+    private readonly _performanceGathererOptions: PerformanceGathererOptions,
   ) {
     super({
       description: "Performance Gatherer",

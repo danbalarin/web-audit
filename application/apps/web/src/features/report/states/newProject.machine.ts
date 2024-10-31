@@ -167,7 +167,7 @@ export const newProjectMachine = createMachine(
       isNetworkSpeedValid: ({ context }) => context.networkSpeed > 0,
       isInitialScrapeValid: ({ context }) =>
         Object.values(context.urlsData).every(
-          (urlData) => urlData.html !== undefined
+          (urlData) => urlData.html !== undefined,
         ),
     },
     actions: {
@@ -179,7 +179,7 @@ export const newProjectMachine = createMachine(
         urlsData: ({ event }) =>
           (event as ProjectDetailsNextEvent).output.urls.reduce(
             (acc, url) => ({ ...acc, [url]: {} }),
-            {} as { [k: string]: UrlData }
+            {} as { [k: string]: UrlData },
           ),
       }),
       setNetworkSpeed: assign({
@@ -194,7 +194,7 @@ export const newProjectMachine = createMachine(
               ...acc,
               [url]: { ...context.urlsData[url], html },
             }),
-            {} as { [k: string]: UrlData }
+            {} as { [k: string]: UrlData },
           );
 
           return data;
@@ -209,14 +209,14 @@ export const newProjectMachine = createMachine(
               ...acc,
               [url]: { ...context.urlsData[url], gathererOutputs: data },
             }),
-            {} as { [k: string]: UrlData }
+            {} as { [k: string]: UrlData },
           );
 
           return res;
         },
       }),
     },
-  }
+  },
 );
 
 export type NewProjectMachineType = typeof newProjectMachine;

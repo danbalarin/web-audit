@@ -31,7 +31,11 @@ module.exports = {
     },
   },
   rules: {
-    "no-unused-vars": ["error", { args: "none" }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { args: "all", argsIgnorePattern: "^_" },
+    ],
   },
   ignorePatterns: [
     // Ignore dotfiles

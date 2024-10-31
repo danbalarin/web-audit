@@ -5,7 +5,7 @@ export class EventEmitter<TEvents extends Record<string, unknown>> {
 
   on<TKey extends keyof TEvents>(
     event: TKey,
-    listener: (payload: TEvents[TKey]) => void
+    listener: (payload: TEvents[TKey]) => void,
   ) {
     if (!this._listeners[event]) {
       this._listeners[event] = [] as Array<(...args: any[]) => void>;
@@ -14,7 +14,7 @@ export class EventEmitter<TEvents extends Record<string, unknown>> {
 
     return () => {
       this._listeners[event] = this._listeners[event].filter(
-        (l) => l !== listener
+        (l) => l !== listener,
       );
     };
   }

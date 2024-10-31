@@ -20,7 +20,7 @@ import { connectionCheckMachine } from "./machine";
 
 const getUrlStatus = (
   url: string,
-  context: ContextFrom<typeof connectionCheckMachine>
+  context: ContextFrom<typeof connectionCheckMachine>,
 ) => {
   if (context.checkingUrl === url) {
     return "loading";
@@ -40,7 +40,7 @@ const getUrlStatus = (
 
 export function ConnectionCheck() {
   const urlsToCheck = useNewProjectMachineSelector((state) =>
-    Object.keys(state.context.urlsData)
+    Object.keys(state.context.urlsData),
   );
 
   const { speed, run: speedTest, status, isCompleted } = useSpeedTest({});
@@ -68,7 +68,7 @@ export function ConnectionCheck() {
           return { ...testResult, url };
         }),
       },
-    })
+    }),
   );
 
   return (
