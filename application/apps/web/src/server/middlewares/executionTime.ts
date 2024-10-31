@@ -1,6 +1,6 @@
 import { middleware } from "../trpc/init";
 
-export const executionTimeMiddleware = middleware(async ({ next, meta }) => {
+export const executionTimeMiddleware = middleware(async ({ next }) => {
   const start = Date.now();
 
   const result = await next();

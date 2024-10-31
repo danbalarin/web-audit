@@ -32,6 +32,7 @@ const scrapeBrowser = async (
       ok: !!data,
       document: data ?? "",
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error(error); // TODO: proper tracking
 

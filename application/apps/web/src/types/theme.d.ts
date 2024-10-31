@@ -257,7 +257,7 @@ interface Text {
 interface Light {
   palette: Palette;
   opacity: Opacity;
-  overlays: any[];
+  overlays: string[];
 }
 
 interface Components {}

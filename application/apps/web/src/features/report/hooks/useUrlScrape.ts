@@ -1,6 +1,6 @@
 import { trpc } from "~/server/query/client";
 
-export type UseUrlScrapeOptions = {};
+export type UseUrlScrapeOptions = Record<string, never>;
 
 export type UseUrlScrapeCompleteResult = {
   ok: boolean;

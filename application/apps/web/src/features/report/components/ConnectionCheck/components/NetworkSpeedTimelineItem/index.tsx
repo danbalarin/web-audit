@@ -1,4 +1,4 @@
-import { CircularProgress, Fade, Stack, Typography } from "@mui/material";
+import { CircularProgress, Stack, Typography } from "@mui/material";
 
 import { UseSpeedTestStatus } from "~/features/report/hooks/useSpeedTest";
 import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";

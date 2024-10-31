@@ -51,7 +51,7 @@ export class Fast {
     const targets = this.getPreciseTargets();
     const speeds: number[] = [];
     const onProgressFunctor =
-      (index: number) => (progress: number, speed: number) => {
+      (index: number) => (_progress: number, speed: number) => {
         if (!this.onChange) {
           return;
         }

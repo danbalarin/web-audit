@@ -28,6 +28,7 @@ const testUrl = async (input: TestUrlInput): Promise<TestUrlResponse> => {
       statusText: response.statusText,
       rtt: end - start,
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     const end = Date.now();
 

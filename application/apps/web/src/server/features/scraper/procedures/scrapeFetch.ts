@@ -24,6 +24,8 @@ const scrapeFetch = async (
       ok: response.ok,
       document: await response.text(),
     };
+    // TODO: better reusable error handling
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error(error); // TODO: proper tracking
 
