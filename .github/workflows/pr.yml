@@ -19,8 +19,9 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version-file: "package.json"
+          node-version-file: "application/package.json"
           cache: "yarn"
+          cache-dependency-path: '**/yarn.lock'
 
       - name: Install dependencies
         shell: bash
