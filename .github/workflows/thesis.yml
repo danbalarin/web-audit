@@ -1,5 +1,12 @@
 name: Build Thesis
-on: [push, workflow_dispatch]
+# on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'diploma-thesis/**'
+  workflow_dispatch:
 
 permissions:
   contents: write

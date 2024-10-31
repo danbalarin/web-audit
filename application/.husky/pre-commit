@@ -1,0 +1,1 @@
+cd application && yarn lint-staged
