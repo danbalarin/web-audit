@@ -30,10 +30,10 @@ const getTopLevelState = (step: StateValue) => {
 function NewProjectPageWithoutContext() {
   const { send } = useNewProjectMachineContext();
   const canGoBack = useNewProjectMachineSelector((state) =>
-    state.can({ type: "BACK" })
+    state.can({ type: "BACK" }),
   );
   const canGoNext = useNewProjectMachineSelector((state) =>
-    state.can({ type: "NEXT" })
+    state.can({ type: "NEXT" }),
   );
   const value = useNewProjectMachineSelector((state) => state.value);
 

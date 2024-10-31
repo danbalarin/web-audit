@@ -29,5 +29,5 @@ export const SpeedGauge = memo(
   NonMemoizedSpeedGauge,
   (prevProps, nextProps) =>
     prevProps.speed === nextProps.speed &&
-    prevProps.maxSpeed === nextProps.maxSpeed
+    prevProps.maxSpeed === nextProps.maxSpeed,
 );

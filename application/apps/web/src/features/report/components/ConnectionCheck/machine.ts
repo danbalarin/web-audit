@@ -99,5 +99,5 @@ export const connectionCheckMachine = createMachine(
     guards: {
       emptyUrlsToCheck: ({ context }) => context.urlsToCheck.length === 0,
     },
-  }
+  },
 );

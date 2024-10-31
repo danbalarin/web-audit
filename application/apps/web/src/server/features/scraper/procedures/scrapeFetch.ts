@@ -15,7 +15,7 @@ type ScrapeFetchResponse = {
 };
 
 const scrapeFetch = async (
-  input: ScrapeFetchInput
+  input: ScrapeFetchInput,
 ): Promise<ScrapeFetchResponse> => {
   try {
     const response = await fetch(input.url);

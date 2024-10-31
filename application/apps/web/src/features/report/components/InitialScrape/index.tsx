@@ -15,7 +15,7 @@ import { initialScrapeMachine } from "./machine";
 
 const getUrlStatus = (
   url: string,
-  context: ContextFrom<typeof initialScrapeMachine>
+  context: ContextFrom<typeof initialScrapeMachine>,
 ) => {
   if (context.scrapingUrl === url) {
     return "loading";
@@ -36,7 +36,7 @@ const getUrlStatus = (
 
 export const InitialScrape = () => {
   const urlsToCheck = useNewProjectMachineSelector((state) =>
-    Object.keys(state.context.urlsData)
+    Object.keys(state.context.urlsData),
   );
   const newProjectRef = useNewProjectMachineContext();
   const { run: urlScrape } = useUrlScrape();
@@ -61,7 +61,7 @@ export const InitialScrape = () => {
           return { ...testResult, url };
         }),
       },
-    })
+    }),
   );
 
   return (

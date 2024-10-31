@@ -21,7 +21,7 @@ export const createTRPCContext = cache(async () => {
 
   return results.reduce<CombineUnion<ExtractArray<typeof results>>>(
     (acc, curr) => ({ ...acc, ...curr }),
-    {} as any
+    {} as any,
   );
 });
 

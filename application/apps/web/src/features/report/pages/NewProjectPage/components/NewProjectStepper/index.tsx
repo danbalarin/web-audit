@@ -7,7 +7,7 @@ import { STEP_LABELS } from "../../constants";
 
 export function NewProjectStepper() {
   const activeStep = useNewProjectMachineSelector((state) =>
-    Object.keys(STEP_LABELS).findIndex((v) => state.matches(v))
+    Object.keys(STEP_LABELS).findIndex((v) => state.matches(v)),
   );
 
   return (

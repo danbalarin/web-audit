@@ -29,7 +29,7 @@ export class ModuleProcessor {
 
   public process<TContext extends BaseContext = BaseContext>(
     modules: Record<string, BaseModule>,
-    context: TContext
+    context: TContext,
   ) {
     const id = uuid();
     this.processAsync(id, modules, context);
@@ -39,13 +39,13 @@ export class ModuleProcessor {
   private async processAsync<TContext extends BaseContext = BaseContext>(
     id: string,
     modules: Record<string, BaseModule>,
-    context: TContext
+    context: TContext,
   ) {
     const moduleEntries = Object.entries(modules);
     await this.processGatherers(
       id,
       moduleEntries.map((v) => v[1]),
-      context
+      context,
     );
     // TODO: data preprocessing
   }
@@ -53,7 +53,7 @@ export class ModuleProcessor {
   private async processGatherers<TContext extends BaseContext = BaseContext>(
     id: string,
     modules: BaseModule[],
-    context: TContext
+    context: TContext,
   ) {
     this._storage.append(id, {
       meta: { currentStep: "gatherers", progress: 0 },

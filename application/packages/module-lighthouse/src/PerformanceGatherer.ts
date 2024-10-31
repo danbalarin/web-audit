@@ -10,7 +10,7 @@ export type PerformanceGathererOptions = {
 
 export class PerformanceGatherer extends BaseGatherer {
   constructor(
-    private readonly _performanceGathererOptions: PerformanceGathererOptions
+    private readonly _performanceGathererOptions: PerformanceGathererOptions,
   ) {
     super({
       description: "Performance Gatherer",

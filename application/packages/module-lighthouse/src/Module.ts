@@ -10,7 +10,7 @@ export type LighthouseModuleOptions = {
 
 export class LighthouseModule extends BaseModule {
   constructor(
-    private readonly _lighthouseModuleOptions: LighthouseModuleOptions
+    private readonly _lighthouseModuleOptions: LighthouseModuleOptions,
   ) {
     super({
       description: "Lighthouse Module",
@@ -19,7 +19,7 @@ export class LighthouseModule extends BaseModule {
       id: "lighthouse",
       gatherers: {
         performance: new PerformanceGatherer(
-          _lighthouseModuleOptions.performanceOptions
+          _lighthouseModuleOptions.performanceOptions,
         ),
       },
     });

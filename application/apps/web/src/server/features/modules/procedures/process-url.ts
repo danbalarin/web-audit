@@ -64,5 +64,5 @@ const processUrl = async ({
 export const procedure = baseProcedure
   .input(inputSchema)
   .query(({ input, ctx }) =>
-    processUrl({ input, browser: ctx.browser, modules: ctx.modules })
+    processUrl({ input, browser: ctx.browser, modules: ctx.modules }),
   );
