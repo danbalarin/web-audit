@@ -11,7 +11,7 @@ const nextConfig = {
 
 /** @type {import('@pigment-css/nextjs-plugin').PigmentOptions} */
 const pigmentConfig = {
-  transformLibraries: ["@mui/material"],
+  transformLibraries: ["@mui/material", "@mui/lab"],
   theme,
 };
 

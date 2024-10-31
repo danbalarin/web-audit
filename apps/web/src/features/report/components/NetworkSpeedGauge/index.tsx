@@ -1,12 +1,10 @@
-import { BoxProps } from "@mui/material";
-
 import { SpeedGauge } from "~/features/ui/components/SpeedGauge";
 
 import { UseSpeedTestStatus } from "../../hooks/useSpeedTest";
 
 import { MESSAGE_CONFIGS } from "./constants";
 
-type Props = Omit<BoxProps, "color"> & {
+type Props = {
   speed: number;
   maxSpeed: number;
   status?: UseSpeedTestStatus;

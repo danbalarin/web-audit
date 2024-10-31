@@ -1,9 +1,10 @@
 "use client";
-import { Timeline, timelineItemClasses } from "@mui/lab";
 import { Stack } from "@mui/material";
 import { useMachine } from "@xstate/react";
 import React from "react";
 import { ContextFrom, assign, fromPromise } from "xstate";
+
+import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
 
 import { useSpeedTest } from "../../hooks/useSpeedTest";
 import { useUrlTest } from "../../hooks/useUrlTest";
@@ -72,14 +73,7 @@ export function ConnectionCheck() {
 
   return (
     <Stack>
-      <Timeline
-        sx={{
-          [`& .${timelineItemClasses.root}::before`]: {
-            flex: 0,
-            padding: 0,
-          },
-        }}
-      >
+      <AlignedTimeline>
         <NetworkSpeedTimelineItem
           maxSpeed={MAX_SPEED}
           speed={speed}
@@ -92,7 +86,7 @@ export function ConnectionCheck() {
             status={getUrlStatus(url, state.context)}
           />
         ))}
-      </Timeline>
+      </AlignedTimeline>
     </Stack>
   );
 }

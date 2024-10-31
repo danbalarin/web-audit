@@ -8,10 +8,6 @@ export const createBrowserContext = async () => {
       browser,
     };
   } catch (error) {
-    console.error("Error creating browser context\n", error);
-
-    return {
-      browser: null,
-    };
+    throw new Error("Error creating browser context", { cause: error });
   }
 };
