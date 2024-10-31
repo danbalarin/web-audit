@@ -1,19 +1,18 @@
+import { withPigment } from "@pigment-css/nextjs-plugin";
+import { theme } from "./src/features/ui/components/ThemeRegistry/theme.mjs";
 import "./src/env.mjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@repo/ui"],
   experimental: {
-    serverComponentsExternalPackages: ["lighthouse"],
-  },
-  // Alternative to serverComponentsExternalPackages because it's broken in monorepos at this time
-  webpack: (config) => {
-    config.externals.push({
-      lighthouse: "commonjs lighthouse",
-      "puppeteer-core": "commonjs puppeteer-core",
-    });
-    return config;
+    serverComponentsExternalPackages: ["lighthouse", "lighthouse/cli"],
   },
 };
 
-export default nextConfig;
+/** @type {import('@pigment-css/nextjs-plugin').PigmentOptions} */
+const pigmentConfig = {
+  transformLibraries: ["@mui/material", "@mui/lab"],
+  theme,
+};
+
+export default withPigment(nextConfig, pigmentConfig);

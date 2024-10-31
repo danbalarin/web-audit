@@ -1,4 +1,4 @@
-import { api } from "~/lib/api";
+import { trpc } from "~/server/query/client";
 
 export type UseUrlScrapeOptions = {};
 
@@ -12,13 +12,13 @@ export type UseUrlScrapeResult = {
 };
 
 export const useUrlScrape = (): UseUrlScrapeResult => {
-  const scrapeUrl = api.useUtils().scraper.scrapeBrowser.fetch;
+  const scrapeUrl = trpc.useUtils().scraper.scrapeBrowser.fetch;
 
   const run = (url: string) =>
     new Promise<UseUrlScrapeCompleteResult>((res, rej) => {
       scrapeUrl({ url })
         .then(res)
-        .catch((error: any) => {
+        .catch((error) => {
           rej({ ok: false, document: "", error });
         });
     });

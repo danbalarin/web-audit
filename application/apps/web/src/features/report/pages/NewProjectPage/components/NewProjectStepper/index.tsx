@@ -1,5 +1,5 @@
 "use client";
-import { Step, StepLabel, Stepper } from "@repo/ui";
+import { Step, StepLabel, Stepper } from "@mui/material";
 import React from "react";
 
 import { useNewProjectMachineSelector } from "../../../../states/newProject.machine";

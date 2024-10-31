@@ -1,4 +1,4 @@
-import { api } from "~/lib/api";
+import { trpc } from "~/server/query/client";
 
 export type UseUrlTestOptions = {};
 
@@ -11,7 +11,7 @@ export type UseUrlTestResult = {
 };
 
 export const useUrlTest = (): UseUrlTestResult => {
-  const checkUrl = api.useUtils().networkTest.testUrl.fetch;
+  const checkUrl = trpc.useUtils().networkTest.testUrl.fetch;
 
   const run = (url: string) =>
     new Promise<UseUrlTestCompleteResult>((res, rej) => {
@@ -19,7 +19,7 @@ export const useUrlTest = (): UseUrlTestResult => {
         .then(() => {
           res({ ok: true });
         })
-        .catch((error: any) => {
+        .catch((error) => {
           rej({ ok: false, error });
         });
     });

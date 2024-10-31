@@ -1,6 +1,8 @@
 import { BaseContext, BaseGatherer, GathererError } from "@repo/api";
-import lighthouse, { Flags } from "lighthouse/core";
-// import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
+// @ts-ignore
+import lighthouse, { Flags } from "lighthouse";
+// @ts-ignore
+import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
 
 export type PerformanceGathererOptions = {
   numberOfRuns: number;

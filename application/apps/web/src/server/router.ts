@@ -1,12 +1,9 @@
 import { router as modules } from "./features/modules";
 import { router as networkTest } from "./features/network-test";
 import { router as scraper } from "./features/scraper";
-import { t } from "./trpc";
+import { createTRPCRouter } from "./trpc";
 
-/**
- * This is the primary router for your server.
- */
-const appRouter = t.router({
+const appRouter = createTRPCRouter({
   networkTest,
   scraper,
   modules,

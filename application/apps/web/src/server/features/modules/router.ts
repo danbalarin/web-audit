@@ -1,9 +1,7 @@
-import { t } from "~/server/trpc";
+import { createTRPCRouter } from "~/server/trpc";
 
 import { procedure as processUrlProcedure } from "./procedures/process-url";
-import { procedure as statusProcedure } from "./procedures/status";
 
-export const router = t.router({
+export const router = createTRPCRouter({
   processUrl: processUrlProcedure,
-  status: statusProcedure,
 });

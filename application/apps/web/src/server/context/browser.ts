@@ -1,9 +1,13 @@
 import puppeteer from "puppeteer";
 
 export const createBrowserContext = async () => {
-  const browser = await puppeteer.launch({ headless: "shell" });
+  try {
+    const browser = await puppeteer.launch({ headless: true });
 
-  return {
-    browser,
-  };
+    return {
+      browser,
+    };
+  } catch (error) {
+    throw new Error("Error creating browser context", { cause: error });
+  }
 };

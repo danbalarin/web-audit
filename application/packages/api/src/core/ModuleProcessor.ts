@@ -9,7 +9,7 @@ type ModuleProcessorMeta = {
   progress: number;
 };
 
-export type ModuleProcessorState = {
+type ModuleProcessorState = {
   id: string;
   meta: ModuleProcessorMeta;
   modulesData: Record<string, any>;
@@ -25,10 +25,6 @@ export class ModuleProcessor {
   private _storage: BaseStorage<ModuleProcessorState>;
   constructor(private _options: ModuleProcessorOptions) {
     this._storage = _options.storage;
-  }
-
-  public async getStatus(id: string) {
-    return (await this._storage.get(id))?.meta;
   }
 
   public process<TContext extends BaseContext = BaseContext>(

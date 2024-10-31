@@ -2,7 +2,6 @@
   "name": "@repo/module-lighthouse",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "exports": {
     ".": {
       "import": "./src/index.ts",
@@ -13,12 +12,12 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@repo/api": "workspace:*",
-    "lighthouse": "^12.2.0",
+    "@repo/api": "*",
+    "lighthouse": "^11.3.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*"
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*"
   }
 }

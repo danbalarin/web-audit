@@ -1,16 +1,7 @@
-import {
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot,
-  TimelineItem,
-  TimelineSeparator,
-  useTheme,
-} from "@repo/ui";
-import { useMemo } from "react";
+import { CircularProgress, Fade, Stack, Typography } from "@mui/material";
 
 import { UseSpeedTestStatus } from "~/features/report/hooks/useSpeedTest";
-
-import { NetworkSpeedGauge } from "../../../NetworkSpeedGauge";
+import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";
 
 type Props = {
   maxSpeed: number;
@@ -18,38 +9,22 @@ type Props = {
   status?: UseSpeedTestStatus;
 };
 
-export function NetworkSpeedTimelineItem({ maxSpeed, speed, status }: Props) {
-  const { palette } = useTheme();
-  const color = useMemo(() => {
-    switch (status) {
-      case "fast":
-        return palette.success.main;
-      case "medium":
-        return palette.warning.main;
-      case "slow":
-        return palette.error.main;
-      default:
-        return palette.text.primary;
-    }
-  }, [palette, status]);
+const STATUS_MAP = {
+  fast: "ok",
+  medium: "ok",
+  slow: "error",
+} as const;
 
+export function NetworkSpeedTimelineItem({ status }: Props) {
   return (
-    <TimelineItem>
-      <TimelineSeparator>
-        <TimelineDot sx={{ backgroundColor: color }} />
-        <TimelineConnector sx={{ backgroundColor: color }} />
-      </TimelineSeparator>
-      <TimelineContent>
-        Speed check
-        <NetworkSpeedGauge
-          maxWidth="24rem"
-          marginBottom={-1}
-          maxSpeed={maxSpeed}
-          speed={speed}
-          status={status}
-          color={color}
-        />
-      </TimelineContent>
-    </TimelineItem>
+    <StatusTimelineItem status={status ? STATUS_MAP[status] : "waiting"}>
+      <div>Speed check</div>
+      <Stack ml={1.5} mt={1.5}>
+        {status && <Typography>Speed: {status}</Typography>}
+        {!status && <CircularProgress />}
+      </Stack>
+
+      {/* <NetworkSpeedGauge maxSpeed={maxSpeed} speed={speed} /> */}
+    </StatusTimelineItem>
   );
 }

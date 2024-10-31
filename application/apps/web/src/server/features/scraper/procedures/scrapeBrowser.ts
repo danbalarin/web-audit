@@ -1,8 +1,7 @@
 import z from "zod";
 
-import { Context } from "~/server/types/Context";
-
-import { executionTimeProcedure } from "../../../procedures";
+import { TRPCContext } from "~/server/context";
+import { executionTimeProcedure } from "~/server/trpc";
 
 const inputSchema = z.object({
   url: z.string().url(),
@@ -18,7 +17,7 @@ type ScrapeBrowserResponse = {
 
 const scrapeBrowser = async (
   input: ScrapeBrowserInput,
-  ctx: Context
+  ctx: TRPCContext
 ): Promise<ScrapeBrowserResponse> => {
   try {
     const page = await ctx.browser.newPage();

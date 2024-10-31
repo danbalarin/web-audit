@@ -13,8 +13,8 @@
     "lint": "eslint . --max-warnings 0"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
     "eslint": "^8.53.0",
     "typescript": "5.2.2",
     "@types/uuid": "^9.0.7"
@@ -22,8 +22,5 @@
   "dependencies": {
     "ts-deepmerge": "^6.2.0",
     "uuid": "^9.0.1"
-  },
-  "peerDependencies": {
-    "puppeteer": "^22.0.0"
   }
 }

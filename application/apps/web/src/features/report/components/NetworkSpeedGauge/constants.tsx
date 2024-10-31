@@ -2,8 +2,8 @@ import {
   CheckCircle as CheckCircleIcon,
   Report as ReportIcon,
   Warning as WarningIcon,
-} from "@repo/ui/icons";
-import { CircularProgress } from "@repo/ui";
+} from "@mui/icons-material";
+import { CircularProgress } from "@mui/material";
 
 export const MESSAGE_CONFIGS = {
   fast: {
