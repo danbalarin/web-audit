@@ -37,11 +37,6 @@
  * ```
  */
 
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { AnyProcedure, AnyRouter } from "@trpc/server";
 import type { ResolvedRouterSchema } from "@trpc-playground/types";
 import lodash from "lodash";
