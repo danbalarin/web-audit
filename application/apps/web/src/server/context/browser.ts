@@ -2,7 +2,11 @@ import puppeteer from "puppeteer";
 
 export const createBrowserContext = async () => {
   try {
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch({
+      headless: true,
+      executablePath: process.env.CHROMIUM_PATH,
+      args: ["--no-sandbox"],
+    });
 
     return {
       browser,

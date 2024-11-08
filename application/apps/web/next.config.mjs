@@ -4,6 +4,7 @@ import "./src/env.mjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   experimental: {
     serverComponentsExternalPackages: ["lighthouse", "lighthouse/cli"],
   },
