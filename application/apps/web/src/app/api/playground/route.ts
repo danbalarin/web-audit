@@ -14,6 +14,4 @@ const handler = await fetchHandler({
   },
 });
 
-export const runtime = "edge";
-
 export { handler as GET, handler as POST };
