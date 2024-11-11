@@ -3,7 +3,7 @@ name: "PR Checks"
 on:
   pull_request:
     paths:
-      - 'application/**'
+      - "application/**"
 
 defaults:
   run:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version-file: "application/package.json"
           cache: "yarn"
-          cache-dependency-path: '**/yarn.lock'
+          cache-dependency-path: "**/yarn.lock"
 
       - name: Install dependencies
         shell: bash
@@ -30,6 +30,8 @@ jobs:
       - name: Run Lint
         run: yarn lint
 
-      # - name: Run unit tests
-      #   run: yarn test:ci
+      - name: Run Unit Tests
+        run: yarn test
 
+      - name: Check Coverage
+        run: yarn test:coverage
