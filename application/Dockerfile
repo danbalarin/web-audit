@@ -12,7 +12,7 @@ RUN apk update
 RUN apk add --no-cache libc6-compat
 # Set working directory
 WORKDIR /app
-RUN yarn global add turbo@^1
+RUN yarn global add turbo@^2.2.3
 COPY . .
  
 RUN turbo prune web --docker
@@ -30,7 +30,8 @@ COPY --from=builder /app/out/full/ .
 RUN yarn turbo run build --filter=web
  
 FROM base AS runner
-RUN npx @puppeteer/browsers install chrome@stable
+RUN apk add chromium
+ENV CHROMIUM_PATH /usr/bin/chromium
 
 WORKDIR /app
  

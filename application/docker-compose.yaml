@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  app:
+    container_name: web-audit
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - audit_network
+
+  redis:
+    container_name: web-audit-redis
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - audit_network
+
+networks:
+  audit_network:
