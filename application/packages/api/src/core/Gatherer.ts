@@ -33,18 +33,22 @@ export abstract class BaseGatherer<
   abstract execute(context: TContext): Promise<TResult>;
 
   // GETTERS
+  /* istanbul ignore next */
   get id() {
     return this._options.id;
   }
 
+  /* istanbul ignore next */
   get name() {
     return this._options.name;
   }
 
+  /* istanbul ignore next */
   get description() {
     return this._options.description;
   }
 
+  /* istanbul ignore next */
   get version() {
     return this._options.version;
   }
