@@ -4,8 +4,9 @@
     "outDir": "dist",
     "paths": {
       "~/*": ["./src/*"]
-    }
+    },
+    "allowJs": true
   },
-  "include": ["src", "turbo", "./jest.config.js"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }

@@ -57,13 +57,12 @@ export abstract class BaseModule<
         });
       });
 
-      gatherer.on("complete", (payload) => {
-        this.emit("gatherer:complete", {
-          gathererId: gatherer.id,
-          ...payload,
-        });
-      });
       results[gatherer.id] = await gatherer.execute(context);
+
+      this.emit("gatherer:complete", {
+        gathererId: gatherer.id,
+        data: results[gatherer.id],
+      });
     }
 
     return results;

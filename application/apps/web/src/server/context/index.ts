@@ -3,6 +3,7 @@ import { cache } from "react";
 
 import { createBrowserContext } from "./browser";
 import { createModulesContext } from "./modules";
+import { createStorageContext } from "./storage";
 // import { createStorageContext } from "./storage";
 
 /**
@@ -11,12 +12,12 @@ import { createModulesContext } from "./modules";
 export const createTRPCContext = cache(async () => {
   const browserContext = createBrowserContext();
   const modulesContext = createModulesContext();
-  // const storageContext = createStorageContext();
+  const storageContext = createStorageContext();
 
   const results = await Promise.all([
     browserContext,
     modulesContext,
-    // storageContext,
+    storageContext,
   ]);
 
   return results.reduce<CombineUnion<ExtractArray<typeof results>>>(

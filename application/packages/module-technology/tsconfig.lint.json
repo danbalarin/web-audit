@@ -6,6 +6,6 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["src", "turbo", "./jest.config.js"],
+  "include": ["src", "turbo"],
   "exclude": ["node_modules", "dist"]
 }
