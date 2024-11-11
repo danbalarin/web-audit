@@ -1,0 +1,3 @@
+[submodule "application/packages/module-technology/src/lib/webappanalyzer"]
+	path = application/packages/module-technology/src/lib/webappanalyzer
+	url = git@github.com:enthec/webappanalyzer.git
