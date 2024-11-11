@@ -1,9 +1,11 @@
 import { RedisStorage, ModuleProcessorState } from "@repo/api";
 
+import { env } from "~/env.mjs";
+
 export const createStorageContext = async () => {
   const storage = new RedisStorage<ModuleProcessorState>({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
+    host: env.REDIS_HOST,
+    port: env.REDIS_PORT,
   });
 
   return {
