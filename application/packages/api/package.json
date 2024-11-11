@@ -15,11 +15,12 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@types/uuid": "^9.0.7",
     "eslint": "^8.53.0",
-    "typescript": "5.2.2",
-    "@types/uuid": "^9.0.7"
+    "typescript": "5.2.2"
   },
   "dependencies": {
+    "redis": "^4.7.0",
     "ts-deepmerge": "^6.2.0",
     "uuid": "^9.0.1"
   }

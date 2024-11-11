@@ -19,7 +19,7 @@ export type GathererCompleteEventPayload<TData = unknown> = {
 
 export type GathererEvents = {
   progress: GathererProgressEventPayload;
-  complete: GathererCompleteEventPayload;
+  // complete: GathererCompleteEventPayload;
 };
 
 export abstract class BaseGatherer<

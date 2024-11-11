@@ -9,10 +9,14 @@ type ModuleProcessorMeta = {
   progress: number;
 };
 
-type ModuleProcessorState = {
+type ModuleData = {
+  gatherers: Record<string, any>;
+};
+
+export type ModuleProcessorState = {
   id: string;
   meta: ModuleProcessorMeta;
-  modulesData: Record<string, any>;
+  modules: Record<string, ModuleData>;
 };
 
 export type ModuleProcessorOptions<
@@ -41,12 +45,14 @@ export class ModuleProcessor {
     modules: Record<string, BaseModule>,
     context: TContext,
   ) {
-    const moduleEntries = Object.entries(modules);
-    await this.processGatherers(
+    // const moduleEntries = Object.entries(modules);
+    const gatherersData = await this.processGatherers(
       id,
-      moduleEntries.map((v) => v[1]),
+      Object.values(modules),
       context,
     );
+
+    return gatherersData;
     // TODO: data preprocessing
   }
 
@@ -63,7 +69,10 @@ export class ModuleProcessor {
     for (const module of modules) {
       ++i;
       const res = await module.executeGatherers(context);
-      this._storage.append(id, { meta: { progress: modules.length / i } });
+      this._storage.append(id, {
+        meta: { progress: modules.length / i },
+        modules: { [module.id]: { gatherers: res } },
+      });
       data[module.id] = res;
     }
     return data;

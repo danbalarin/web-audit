@@ -1,6 +1,10 @@
-import { BaseModule } from "@repo/api";
+import {
+  BaseModule,
+  BaseStorage,
+  ModuleProcessor,
+  ModuleProcessorState,
+} from "@repo/api";
 import { Browser } from "puppeteer";
-import { v4 as uuid } from "uuid";
 import z from "zod";
 
 import { baseProcedure } from "~/server/trpc/init";
@@ -21,32 +25,19 @@ type ProcessUrlOptions = {
   input: ProcessUrlInput;
   modules: Record<string, BaseModule>;
   browser: Browser;
+  storage: BaseStorage<ModuleProcessorState>;
 };
 
 const processUrl = async ({
   input,
   browser,
   modules,
+  storage,
 }: ProcessUrlOptions): Promise<ProcessUrlResponse> => {
-  // TODO: Use ModuleProcessor
   const { url } = input;
   try {
-    const id = uuid();
-    const process = async () => {
-      const data = {} as Record<string, unknown>;
-      for (const [name, module] of Object.entries(modules)) {
-        console.log(`Executing module ${name}, ${id}`);
-        const onChange = (...args: unknown[]) => {
-          console.log(`Module ${name} changed`);
-          console.log(args);
-        };
-        module.on("gatherer:progress", onChange);
-        const res = await module.executeGatherers({ browser, url });
-        data[name] = res;
-      }
-    };
-
-    process();
+    const processor = new ModuleProcessor({ storage });
+    const id = processor.process(modules, { browser, url });
 
     return {
       ok: true,
@@ -65,5 +56,10 @@ const processUrl = async ({
 export const procedure = baseProcedure
   .input(inputSchema)
   .query(({ input, ctx }) =>
-    processUrl({ input, browser: ctx.browser, modules: ctx.modules }),
+    processUrl({
+      input,
+      browser: ctx.browser,
+      modules: ctx.modules,
+      storage: ctx.storage,
+    }),
   );
