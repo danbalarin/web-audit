@@ -1,3 +1,4 @@
+/// <reference path="../../types/wappalyzer-core.d.ts" />
 import Wappalyzer from "wappalyzer-core";
 import Driver from "./driver.js";
 import { categories, technologies } from "./technologies";

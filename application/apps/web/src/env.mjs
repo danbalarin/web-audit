@@ -21,6 +21,10 @@ export const env = createEnv({
       .regex(/^[.a-z\d-]*[a-z\d-]+((:[\d]+)|(\.[a-z]{2,}))$/i, "Invalid domain")
       .nullish()
       .transform((url) => (url ? `https://${url}` : "http://localhost:3000")),
+
+    CHROMIUM_PATH: z.string().optional(),
+    REDIS_HOST: z.string(),
+    REDIS_PORT: z.preprocess((val) => +val, z.number().positive()),
   },
 
   /**
@@ -31,5 +35,8 @@ export const env = createEnv({
     CI: process.env.CI,
     NODE_ENV: process.env.NODE_ENV,
     SITE_URL: process.env.VERCEL_URL,
+    CHROMIUM_PATH: process.env.CHROMIUM_PATH,
+    REDIS_HOST: process.env.REDIS_HOST,
+    REDIS_PORT: process.env.REDIS_PORT,
   },
 });
