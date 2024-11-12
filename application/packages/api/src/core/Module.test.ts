@@ -1,48 +1,6 @@
 import { describe, it, expect, jest } from "@jest/globals";
-import {
-  BaseGatherer,
-  GathererOptions,
-  GathererProgressEventPayload,
-} from "./Gatherer";
-import { BaseModule, ModuleOptions } from "./Module";
-
-class TestGatherer extends BaseGatherer {
-  constructor(
-    options: Partial<GathererOptions> = {},
-    private executeCallback?: (...args: any[]) => Promise<any>,
-    private progressEmit?: GathererProgressEventPayload,
-  ) {
-    super({
-      id: "test",
-      name: "Test",
-      version: "1.0.0",
-      ...options,
-    });
-  }
-
-  async execute(...args: any[]) {
-    if (this.progressEmit) {
-      this.emit("progress", this.progressEmit);
-    }
-    if (this.executeCallback) {
-      return this.executeCallback(...args);
-    }
-    return "test";
-  }
-}
-
-class TestModule extends BaseModule {
-  constructor(options: Partial<ModuleOptions> = {}) {
-    super({
-      name: "Test",
-      description: "Test Module",
-      version: "1.0.0",
-      id: "test",
-      gatherers: [] as Record<string, any>,
-      ...options,
-    });
-  }
-}
+import { TestGatherer } from "../__tests__/fixtures/TestGatherer";
+import { TestModule } from "../__tests__/fixtures/TestModule";
 
 describe("Module", () => {
   it("should set basic info", () => {

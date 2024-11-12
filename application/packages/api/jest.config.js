@@ -4,6 +4,8 @@ module.exports = {
   transform: {
     "^.+.tsx?$": ["ts-jest", {}],
   },
+  collectCoverageFrom: ["src/**/*.ts"],
+  coveragePathIgnorePatterns: ["/src/index.ts", "/src/__tests__/"],
   coverageThreshold: {
     global: {
       branches: 90,
@@ -12,4 +14,5 @@ module.exports = {
       statements: -5,
     },
   },
+  modulePathIgnorePatterns: ["<rootDir>/src/__tests__/"],
 };
