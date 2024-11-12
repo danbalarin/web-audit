@@ -6,7 +6,7 @@
     "build": {
       "dependsOn": ["^build"],
       "outputs": [".next/**", "!.next/cache/**"],
-      "env": ["REDIS_HOST", "REDIS_PORT"]
+      "env": ["CHROMIUM_PATH", "REDIS_HOST", "REDIS_PORT"]
     },
     "lint": {
       "dependsOn": ["^lint"]
