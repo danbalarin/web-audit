@@ -20,22 +20,17 @@ describe("Module", () => {
   it("should set gatherers", () => {
     const gatherer = new TestGatherer();
     const module = new TestModule({
-      gatherers: {
-        test: gatherer,
-      },
+      gatherers: [gatherer],
     });
 
-    expect(module.gatherers).toEqual({ test: gatherer });
+    expect(module.gatherers).toStrictEqual([gatherer]);
   });
 
   it("should return correct gatherer", () => {
     const gatherer = new TestGatherer();
     const secondGatherer = new TestGatherer({ id: "second" });
     const module = new TestModule({
-      gatherers: {
-        test: gatherer,
-        second: secondGatherer,
-      },
+      gatherers: [gatherer, secondGatherer],
     });
 
     expect(module.getGatherer("test")).toBe(gatherer);
@@ -47,9 +42,7 @@ describe("Module", () => {
     const spy = jest.fn(() => Promise.resolve("result"));
     const gatherer = new TestGatherer({ id: "gatherer" }, spy);
     const module = new TestModule({
-      gatherers: {
-        gatherer,
-      },
+      gatherers: [gatherer],
     });
 
     expect(spy).not.toHaveBeenCalled();
@@ -64,9 +57,7 @@ describe("Module", () => {
     const spy = jest.fn(() => Promise.resolve("result"));
     const gatherer = new TestGatherer({ id: "gatherer" }, spy);
     const module = new TestModule({
-      gatherers: {
-        gatherer,
-      },
+      gatherers: [gatherer],
     });
 
     expect(spy).not.toHaveBeenCalled();
@@ -83,9 +74,7 @@ describe("Module", () => {
       data: "progress",
     });
     const module = new TestModule({
-      gatherers: {
-        gatherer,
-      },
+      gatherers: [gatherer],
     });
 
     const startSpy = jest.fn();

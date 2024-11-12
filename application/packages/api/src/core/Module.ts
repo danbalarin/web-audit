@@ -7,7 +7,7 @@ export type ModuleOptions = {
   name: string;
   description: string;
   version: string;
-  gatherers: Record<string, BaseGatherer>;
+  gatherers: BaseGatherer[];
 };
 
 export type ModuleGathererStartEventPayload = {
@@ -34,7 +34,7 @@ export type ModuleEvents = {
 export abstract class BaseModule<
   TContext extends BaseContext = BaseContext,
 > extends EventEmitter<ModuleEvents> {
-  private _gatherers: Record<string, BaseGatherer> = {};
+  private _gatherers: BaseGatherer[] = [];
 
   constructor(private readonly _options: ModuleOptions) {
     super();
@@ -89,7 +89,9 @@ export abstract class BaseModule<
     return this._gatherers;
   }
 
-  getGatherer<TGatherer extends BaseGatherer>(id: string): TGatherer {
-    return this._gatherers[id] as TGatherer;
+  getGatherer<TGatherer extends BaseGatherer>(
+    id: string,
+  ): TGatherer | undefined {
+    return this._gatherers.find((g) => g.id === id) as TGatherer;
   }
 }

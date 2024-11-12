@@ -17,11 +17,11 @@ export class TechnologyModule extends BaseModule {
       name: "Technology",
       version: "1.0.0",
       id: "technology",
-      gatherers: {
-        technology: new TechnologyGatherer(
+      gatherers: [
+        new TechnologyGatherer(
           _technologyModuleOptions.technologyOptions ?? {},
         ),
-      },
+      ],
     });
   }
 }

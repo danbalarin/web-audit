@@ -23,7 +23,7 @@ type ProcessUrlResponse = {
 
 type ProcessUrlOptions = {
   input: ProcessUrlInput;
-  modules: Record<string, BaseModule>;
+  modules: BaseModule[];
   browser: Browser;
   storage: BaseStorage<ModuleProcessorState>;
 };
@@ -36,8 +36,8 @@ const processUrl = async ({
 }: ProcessUrlOptions): Promise<ProcessUrlResponse> => {
   const { url } = input;
   try {
-    const processor = new ModuleProcessor({ storage });
-    const id = processor.process(modules, { browser, url });
+    const processor = new ModuleProcessor({ storage, modules });
+    const id = processor.process({ browser, url });
 
     return {
       ok: true,

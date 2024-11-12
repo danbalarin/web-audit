@@ -1,1 +1,1 @@
-# `module-lighthouse`
+# `module-technology`

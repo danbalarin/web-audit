@@ -12,7 +12,7 @@ type JobStatusInput = z.infer<typeof inputSchema>;
 type JobStatusOkResponse = {
   ok: true;
   id: string;
-  data: ModuleProcessorState;
+  data: Omit<ModuleProcessorState, "modules">;
 };
 
 type JobStatusErrorResponse = {
@@ -43,7 +43,7 @@ const jobStatus = async ({
     return {
       ok: true,
       id,
-      data,
+      data: { id: data.id, meta: data.meta },
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

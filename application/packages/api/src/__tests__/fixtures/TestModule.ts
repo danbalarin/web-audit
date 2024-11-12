@@ -7,7 +7,7 @@ export class TestModule extends BaseModule {
       description: "Test Module",
       version: "1.0.0",
       id: "test",
-      gatherers: [] as Record<string, any>,
+      gatherers: [],
       ...options,
     });
   }
