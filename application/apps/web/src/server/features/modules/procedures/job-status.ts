@@ -4,57 +4,57 @@ import z from "zod";
 import { baseProcedure } from "~/server/trpc/init";
 
 const inputSchema = z.object({
-  id: z.string(),
+	id: z.string(),
 });
 
 type JobStatusInput = z.infer<typeof inputSchema>;
 
 type JobStatusOkResponse = {
-  ok: true;
-  id: string;
-  data: Omit<ModuleProcessorState, "modules">;
+	ok: true;
+	id: string;
+	data: Omit<ModuleProcessorState, "modules">;
 };
 
 type JobStatusErrorResponse = {
-  ok: false;
-  id: string;
-  error: string;
+	ok: false;
+	id: string;
+	error: string;
 };
 
 type JobStatusResponse = JobStatusOkResponse | JobStatusErrorResponse;
 
 type JobStatusOptions = {
-  input: JobStatusInput;
-  storage: BaseStorage<ModuleProcessorState>;
+	input: JobStatusInput;
+	storage: BaseStorage<ModuleProcessorState>;
 };
 
 const jobStatus = async ({
-  input,
-  storage,
+	input,
+	storage,
 }: JobStatusOptions): Promise<JobStatusResponse> => {
-  const { id } = input;
-  try {
-    const data = await storage.get(id);
+	const { id } = input;
+	try {
+		const data = await storage.get(id);
 
-    if (!data) {
-      throw new Error("Job not found");
-    }
+		if (!data) {
+			throw new Error("Job not found");
+		}
 
-    return {
-      ok: true,
-      id,
-      data: { id: data.id, meta: data.meta },
-    };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    return {
-      ok: false,
-      id: "",
-      error: error?.message || "Unknown error",
-    };
-  }
+		return {
+			ok: true,
+			id,
+			data: { id: data.id, meta: data.meta },
+		};
+		// biome-ignore lint/suspicious/noExplicitAny: error handling
+	} catch (error: any) {
+		return {
+			ok: false,
+			id: "",
+			error: error?.message || "Unknown error",
+		};
+	}
 };
 
 export const procedure = baseProcedure
-  .input(inputSchema)
-  .query(({ input, ctx }) => jobStatus({ input, storage: ctx.storage }));
+	.input(inputSchema)
+	.query(({ input, ctx }) => jobStatus({ input, storage: ctx.storage }));

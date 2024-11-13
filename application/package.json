@@ -4,7 +4,7 @@
 	"scripts": {
 		"build": "turbo build",
 		"dev": "turbo dev",
-		"lint": "turbo lint --parallel",
+		"lint": "biome lint",
 		"test": "turbo test --parallel",
 		"test:coverage": "turbo test --parallel -- --coverage",
 		"prepare": "cd .. && husky ./application/.husky",

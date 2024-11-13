@@ -1,7 +1,7 @@
 {
 	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
 	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-	"files": { "ignoreUnknown": false, "ignore": ["coverage"] },
+	"files": { "ignoreUnknown": false, "ignore": ["coverage", ".next", "dist"] },
 	"formatter": { "enabled": true, "indentStyle": "tab" },
 	"organizeImports": { "enabled": true },
 	"linter": {
@@ -94,6 +94,19 @@
 	},
 	"overrides": [
 		{
+			"include": [
+				"next.config.mjs",
+				"commitlint.config.mjs",
+				"page.tsx",
+				"layout.tsx"
+			],
+			"linter": { "rules": { "style": { "noDefaultExport": "off" } } }
+		},
+		{
+			"include": ["src/app/api/playground/trpc-playground-fix.ts"],
+			"linter": { "enabled": false }
+		},
+		{
 			"include": ["**/types/*.d.ts"],
 			"linter": {
 				"rules": {
@@ -105,6 +118,38 @@
 		{
 			"include": ["**/*.js"],
 			"linter": { "enabled": false }
+		},
+		{
+			"include": ["*.ts", "*.tsx", "*.mts", "*.cts"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noConstAssign": "off",
+						"noGlobalObjectCalls": "off",
+						"noInvalidConstructorSuper": "off",
+						"noNewSymbol": "off",
+						"noSetterReturn": "off",
+						"noUndeclaredVariables": "off",
+						"noUnreachable": "off",
+						"noUnreachableSuper": "off"
+					},
+					"style": {
+						"noArguments": "error",
+						"noVar": "error",
+						"useConst": "error"
+					},
+					"suspicious": {
+						"noDuplicateClassMembers": "off",
+						"noDuplicateObjectKeys": "off",
+						"noDuplicateParameters": "off",
+						"noFunctionAssign": "off",
+						"noImportAssign": "off",
+						"noRedeclare": "off",
+						"noUnsafeNegation": "off",
+						"useGetterReturn": "off"
+					}
+				}
+			}
 		}
 	]
 }
