@@ -3,40 +3,40 @@ import z from "zod";
 import { executionTimeProcedure } from "~/server/trpc";
 
 const inputSchema = z.object({
-  url: z.string().url(),
+	url: z.string().url(),
 });
 
 type ScrapeFetchInput = z.infer<typeof inputSchema>;
 
 type ScrapeFetchResponse = {
-  ok: boolean;
-  document: string;
-  error?: string;
+	ok: boolean;
+	document: string;
+	error?: string;
 };
 
 const scrapeFetch = async (
-  input: ScrapeFetchInput,
+	input: ScrapeFetchInput,
 ): Promise<ScrapeFetchResponse> => {
-  try {
-    const response = await fetch(input.url);
+	try {
+		const response = await fetch(input.url);
 
-    return {
-      ok: response.ok,
-      document: await response.text(),
-    };
-    // TODO: better reusable error handling
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    console.error(error); // TODO: proper tracking
+		return {
+			ok: response.ok,
+			document: await response.text(),
+		};
+		// TODO: better reusable error handling
+		// biome-ignore lint/suspicious/noExplicitAny: error handling
+	} catch (error: any) {
+		console.error(error); // TODO: proper tracking
 
-    return {
-      ok: false,
-      document: "",
-      error: error?.message || "Unknown error",
-    };
-  }
+		return {
+			ok: false,
+			document: "",
+			error: error?.message || "Unknown error",
+		};
+	}
 };
 
 export const procedure = executionTimeProcedure
-  .input(inputSchema)
-  .query(({ input }) => scrapeFetch(input));
+	.input(inputSchema)
+	.query(({ input }) => scrapeFetch(input));
