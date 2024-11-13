@@ -6,17 +6,17 @@ import React, { useEffect } from "react";
 // import { getNewProjectFormState } from "../../states/newProjectForm.state";
 
 export function Gather() {
-  //   const { projectDetails } = getNewProjectFormState();
-  //   const runner = appInjector.resolve("audit.runner");
+	//   const { projectDetails } = getNewProjectFormState();
+	//   const runner = appInjector.resolve("audit.runner");
 
-  useEffect(() => {
-    // runner.setActiveGatherers([Gatherers.LIGHTHOUSE]);
-    // // runner.gather({
-    // //   projectName: projectDetails?.name ?? "",
-    // //   projectUrl: projectDetails?.url ?? "",
-    // //   testedUrls: projectDetails?.testedUrls ?? [],
-    // // });
-  }, []);
+	useEffect(() => {
+		// runner.setActiveGatherers([Gatherers.LIGHTHOUSE]);
+		// // runner.gather({
+		// //   projectName: projectDetails?.name ?? "",
+		// //   projectUrl: projectDetails?.url ?? "",
+		// //   testedUrls: projectDetails?.testedUrls ?? [],
+		// // });
+	}, []);
 
-  return <div>Gather</div>;
+	return <div>Gather</div>;
 }

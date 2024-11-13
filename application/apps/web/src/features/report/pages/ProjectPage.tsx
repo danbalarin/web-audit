@@ -1,13 +1,13 @@
 import React from "react";
 
 type Props = {
-  params: {
-    projectName: string;
-  };
+	params: {
+		projectName: string;
+	};
 };
 
 export function ProjectPage({ params: { projectName } }: Props) {
-  console.log("ProjectPage", projectName);
+	console.log("ProjectPage", projectName);
 
-  return <div>ProjectPage {projectName}</div>;
+	return <div>ProjectPage {projectName}</div>;
 }

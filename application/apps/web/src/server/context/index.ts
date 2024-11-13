@@ -10,20 +10,20 @@ import { createStorageContext } from "./storage";
  * @see: https://trpc.io/docs/server/context
  */
 export const createTRPCContext = cache(async () => {
-  const browserContext = createBrowserContext();
-  const modulesContext = createModulesContext();
-  const storageContext = createStorageContext();
+	const browserContext = createBrowserContext();
+	const modulesContext = createModulesContext();
+	const storageContext = createStorageContext();
 
-  const results = await Promise.all([
-    browserContext,
-    modulesContext,
-    storageContext,
-  ]);
+	const results = await Promise.all([
+		browserContext,
+		modulesContext,
+		storageContext,
+	]);
 
-  return results.reduce<CombineUnion<ExtractArray<typeof results>>>(
-    (acc, curr) => ({ ...acc, ...curr }),
-    {} as CombineUnion<ExtractArray<typeof results>>,
-  );
+	return results.reduce<CombineUnion<ExtractArray<typeof results>>>(
+		(acc, curr) => ({ ...acc, ...curr }),
+		{} as CombineUnion<ExtractArray<typeof results>>,
+	);
 });
 
 export type TRPCContext = Awaited<ReturnType<typeof createTRPCContext>>;

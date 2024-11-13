@@ -8,7 +8,8 @@ import { MemoryStorage } from "./Storage";
 // biome-ignore lint/suspicious/noExplicitAny: test plug
 const context = { browser: {} as any, url: "" };
 
-const noopFn = noopFn;
+// biome-ignore lint/suspicious/noEmptyBlockStatements: noop fn
+const noopFn = () => {};
 
 describe("ModuleProcessor", () => {
 	beforeEach(() => {
@@ -111,7 +112,7 @@ describe("ModuleProcessor", () => {
 		});
 
 		expect(appendSpy).toHaveBeenCalledWith(id, {
-			modules: { gathererId: "result" },
+			modules: { gatherers: { gathererId: "result" } },
 		});
 	});
 

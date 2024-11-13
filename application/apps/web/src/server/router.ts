@@ -4,9 +4,9 @@ import { router as scraper } from "./features/scraper";
 import { createTRPCRouter } from "./trpc";
 
 const appRouter = createTRPCRouter({
-  networkTest,
-  scraper,
-  modules,
+	networkTest,
+	scraper,
+	modules,
 });
 
 type AppRouter = typeof appRouter;
