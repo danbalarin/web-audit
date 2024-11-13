@@ -92,5 +92,19 @@
 		"formatter": { "quoteStyle": "double" },
 		"globals": ["React", "JSX"]
 	},
-	"overrides": [{ "include": ["*.js?(x)", "*.ts?(x)"] }]
+	"overrides": [
+		{
+			"include": ["**/types/*.d.ts"],
+			"linter": {
+				"rules": {
+					"suspicious": { "noExplicitAny": "off" },
+					"style": { "noDefaultExport": "off" }
+				}
+			}
+		},
+		{
+			"include": ["**/*.js"],
+			"linter": { "enabled": false }
+		}
+	]
 }
