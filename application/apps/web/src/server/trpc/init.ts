@@ -6,7 +6,7 @@ import { createTRPCContext } from "../context";
 export type Context = Awaited<ReturnType<typeof createTRPCContext>>;
 
 const t = initTRPC.context<Context>().create({
-  transformer: superjson,
+	transformer: superjson,
 });
 
 export const middleware = t.middleware;

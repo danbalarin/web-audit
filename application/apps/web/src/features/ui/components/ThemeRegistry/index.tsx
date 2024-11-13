@@ -4,16 +4,16 @@ import React from "react";
 import "@mui/material-pigment-css/styles.css";
 
 export const font = Roboto({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-family",
+	weight: ["300", "400", "500", "700"],
+	subsets: ["latin"],
+	display: "swap",
+	variable: "--font-family",
 });
 
 export function ThemeRegistry() {
-  return (
-    <>
-      <CssBaseline />
-    </>
-  );
+	return (
+		<>
+			<CssBaseline />
+		</>
+	);
 }
