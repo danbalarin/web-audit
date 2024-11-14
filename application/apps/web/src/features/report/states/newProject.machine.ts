@@ -2,7 +2,11 @@
 
 import { createActorContext } from "@xstate/react";
 import { DoneActorEvent, assign, createMachine } from "xstate";
-import { clearMachines } from "~/features/ui/utils/machineStorage";
+import {
+	clearMachines,
+	loadMachine,
+	saveMachine,
+} from "~/features/ui/utils/machineStorage";
 
 type UrlData = {
 	html?: string;
@@ -17,12 +21,12 @@ type BackEvent = {
 	type: "BACK";
 };
 
-type NextEvent = {
-	type: "NEXT";
+type CompleteEvent = {
+	type: "COMPLETE";
 };
 
-type ProjectDetailsNextEvent = {
-	type: "PROJECT_DETAILS_NEXT";
+type ProjectDetailsCompleteEvent = {
+	type: "PROJECT_DETAILS_COMPLETE";
 	output: {
 		projectName: string;
 		homeURL: string;
@@ -30,14 +34,14 @@ type ProjectDetailsNextEvent = {
 	};
 };
 
-type ConnectionCheckNextEvent = {
+type ConnectionCheckCompleteEvent = {
 	type: "CONNECTION_CHECK_COMPLETE";
 	output: {
 		networkSpeed: number;
 	};
 };
 
-type InitialScrapeNextEvent = {
+type InitialScrapeCompleteEvent = {
 	type: "INITIAL_SCRAPE_CHECK_COMPLETE";
 	output: {
 		urls: { [k: string]: string };
@@ -62,12 +66,12 @@ type SetGatherersInvokeEvent = DoneActorEvent<GatherersOutput>;
 
 type Events =
 	| BackEvent
-	| NextEvent
-	| ProjectDetailsNextEvent
-	| ConnectionCheckNextEvent
+	| CompleteEvent
+	| ProjectDetailsCompleteEvent
+	| ConnectionCheckCompleteEvent
 	| SetInitialScrapeInvokeEvent
 	| InitialScrapeInvokeEvent
-	| InitialScrapeNextEvent;
+	| InitialScrapeCompleteEvent;
 
 export type States =
 	| "ProjectDetails"
@@ -88,7 +92,7 @@ export const newProjectMachine = createMachine(
 		states: {
 			ProjectDetails: {
 				on: {
-					PROJECT_DETAILS_NEXT: {
+					PROJECT_DETAILS_COMPLETE: {
 						target: "ConnectionCheck",
 						actions: [
 							{
@@ -102,34 +106,39 @@ export const newProjectMachine = createMachine(
 				},
 			},
 			ConnectionCheck: {
+				entry: "saveMachine",
 				on: {
 					BACK: {
 						target: "ProjectDetails",
+						actions: "deleteLocalStorage",
 					},
 					CONNECTION_CHECK_COMPLETE: {
 						actions: "setNetworkSpeed",
 					},
-					NEXT: {
+					COMPLETE: {
 						target: "InitialScrape",
 						guard: "isNetworkSpeedValid",
 					},
 				},
 			},
 			InitialScrape: {
+				entry: "saveMachine",
 				on: {
 					BACK: {
 						target: "ProjectDetails",
+						actions: "deleteLocalStorage",
 					},
 					INITIAL_SCRAPE_CHECK_COMPLETE: {
 						actions: "setInitialScrape",
 					},
-					NEXT: {
+					COMPLETE: {
 						target: "Gatherers",
 						guard: "isInitialScrapeValid",
 					},
 				},
 			},
 			Gatherers: {
+				entry: "saveMachine",
 				invoke: {
 					src: "runGatherers",
 					id: "runGatherers",
@@ -149,7 +158,7 @@ export const newProjectMachine = createMachine(
 					BACK: {
 						target: "ProjectDetails",
 					},
-					NEXT: {
+					COMPLETE: {
 						target: "ProjectDetailPage",
 					},
 				},
@@ -179,23 +188,26 @@ export const newProjectMachine = createMachine(
 				),
 		},
 		actions: {
+			saveMachine: ({ self }) => {
+				saveMachine(newProjectMachine.id, self.getPersistedSnapshot());
+			},
 			deleteLocalStorage: () => {
 				clearMachines();
 			},
 			setProjectDetails: assign({
 				projectName: ({ event }) =>
-					(event as ProjectDetailsNextEvent).output.projectName,
+					(event as ProjectDetailsCompleteEvent).output.projectName,
 				homeURL: ({ event }) =>
-					(event as ProjectDetailsNextEvent).output.homeURL,
+					(event as ProjectDetailsCompleteEvent).output.homeURL,
 				urlsData: ({ event }) =>
-					(event as ProjectDetailsNextEvent).output.urls.reduce(
+					(event as ProjectDetailsCompleteEvent).output.urls.reduce(
 						(acc, url) => ({ ...acc, [url]: {} }),
 						{} as { [k: string]: UrlData },
 					),
 			}),
 			setNetworkSpeed: assign({
 				networkSpeed: ({ event }) =>
-					(event as ConnectionCheckNextEvent).output.networkSpeed,
+					(event as ConnectionCheckCompleteEvent).output.networkSpeed,
 			}),
 			setInitialScrape: assign({
 				urlsData: ({ event, context }) => {
@@ -232,7 +244,9 @@ export const newProjectMachine = createMachine(
 
 export type NewProjectMachineType = typeof newProjectMachine;
 
-const newProjectMachineContext = createActorContext(newProjectMachine);
+const newProjectMachineContext = createActorContext(newProjectMachine, {
+	snapshot: loadMachine(newProjectMachine.id),
+});
 export const NewProjectMachineProvider = newProjectMachineContext.Provider;
 export const useNewProjectMachineContext = newProjectMachineContext.useActorRef;
 export const useNewProjectMachineSelector =

@@ -4,9 +4,10 @@ import { saveMachine } from "../utils/machineStorage";
 
 export const useSaveMachine = (actor: AnyActorRef) => {
 	useEffect(() => {
-		if (actor) {
+		if (actor && typeof actor.src === "object") {
+			const src = actor?.src as { config: { id: string } };
 			return () => {
-				saveMachine(actor.id, actor.getPersistedSnapshot());
+				saveMachine(src.config?.id ?? "", actor.getPersistedSnapshot());
 			};
 		}
 	}, [actor]);
