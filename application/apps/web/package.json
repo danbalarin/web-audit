@@ -37,7 +37,7 @@
 		"throttled-queue": "^2.1.4",
 		"trpc-playground": "^1.0.4",
 		"typed-inject": "^4.0.0",
-		"xstate": "^5.0.0-beta.48",
+		"xstate": "^5.19.0",
 		"zod": "^3.22.4",
 		"zustand": "^4.4.6"
 	},
