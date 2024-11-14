@@ -7,7 +7,7 @@ import {
 	CardContent,
 	Container,
 } from "@mui/material";
-import React from "react";
+import { useEffect } from "react";
 import { StateValue } from "xstate";
 
 import {
@@ -16,6 +16,7 @@ import {
 	useNewProjectMachineSelector,
 } from "../../states/newProject.machine";
 
+import { useDebugContext } from "~/features/ui/contexts/DebugContext";
 import { NewProjectStepper } from "./components/NewProjectStepper";
 import { STEPS } from "./constants";
 
@@ -36,6 +37,13 @@ function NewProjectPageWithoutContext() {
 		state.can({ type: "NEXT" }),
 	);
 	const value = useNewProjectMachineSelector((state) => state.value);
+
+	// Debug only
+	const { appendMachine } = useDebugContext();
+	const state = useNewProjectMachineSelector((state) => state);
+	useEffect(() => {
+		appendMachine("NewProjectMachine", { data: { ...state } });
+	}, [state]);
 
 	const currentStep = getTopLevelState(value) as keyof typeof STEPS;
 
