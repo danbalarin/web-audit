@@ -6,6 +6,10 @@ export const connectionCheckMachine = createMachine(
 		id: "ConnectionCheck",
 		initial: "SpeedTest",
 		context: {
+			speedResult: {
+				speed: 0,
+				status: "",
+			},
 			checkingUrl: "",
 			urlsToCheck: [],
 			checkedUrls: [],
@@ -19,6 +23,7 @@ export const connectionCheckMachine = createMachine(
 					onDone: [
 						{
 							target: "LoadURLs",
+							actions: "saveSpeed",
 						},
 					],
 					onError: [
@@ -69,6 +74,10 @@ export const connectionCheckMachine = createMachine(
 		},
 		types: {
 			context: {} as {
+				speedResult: {
+					speed: number;
+					status: string;
+				};
 				checkingUrl: string;
 				urlsToCheck: string[];
 				checkedUrls: string[];
@@ -78,6 +87,9 @@ export const connectionCheckMachine = createMachine(
 	},
 	{
 		actions: {
+			saveSpeed: assign({
+				speedResult: ({ event }) => event.output,
+			}),
 			setError: assign({
 				error: ({ event }) => event.output,
 			}),
