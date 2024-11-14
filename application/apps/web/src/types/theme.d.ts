@@ -407,4 +407,7 @@ interface ZIndex {
 
 declare module "@mui/material-pigment-css" {
 	declare function useTheme(): Theme;
+	declare interface ThemeArgs {
+		theme: Theme;
+	}
 }
