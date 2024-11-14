@@ -1,7 +1,5 @@
-import { Timeline, timelineItemClasses } from "@mui/lab";
 import { Stack } from "@mui/material";
 import { useMachine } from "@xstate/react";
-import * as React from "react";
 import { ContextFrom, assign, fromPromise } from "xstate";
 
 import { useUrlScrape } from "../../hooks/useUrlScrape";
@@ -11,6 +9,7 @@ import {
 } from "../../states/newProject.machine";
 import { UrlScrapeTimelineItem } from "../UrlTimelineItem";
 
+import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
 import { initialScrapeMachine } from "./machine";
 
 const getUrlStatus = (
@@ -66,14 +65,7 @@ export const InitialScrape = () => {
 
 	return (
 		<Stack>
-			<Timeline
-				sx={{
-					[`& .${timelineItemClasses.root}::before`]: {
-						flex: 0,
-						padding: 0,
-					},
-				}}
-			>
+			<AlignedTimeline>
 				{urlsToCheck.map((url) => (
 					<UrlScrapeTimelineItem
 						key={url}
@@ -81,7 +73,7 @@ export const InitialScrape = () => {
 						status={getUrlStatus(url, state.context)}
 					/>
 				))}
-			</Timeline>
+			</AlignedTimeline>
 		</Stack>
 	);
 };
