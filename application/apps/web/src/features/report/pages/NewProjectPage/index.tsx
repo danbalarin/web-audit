@@ -70,7 +70,7 @@ function NewProjectPageWithoutContext() {
 				</CardContent>
 				<CardActions sx={{ justifyContent: "space-between" }}>
 					<Button disabled={!canGoBack} onClick={() => send({ type: "BACK" })}>
-						Back
+						Reset
 					</Button>
 					<Button disabled={!canGoNext && !isFormStep} {...nextButtonProps}>
 						Next

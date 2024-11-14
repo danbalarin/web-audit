@@ -2,6 +2,7 @@
 
 import { createActorContext } from "@xstate/react";
 import { DoneActorEvent, assign, createMachine } from "xstate";
+import { clearMachines } from "~/features/ui/utils/machineStorage";
 
 type UrlData = {
 	html?: string;
@@ -89,7 +90,14 @@ export const newProjectMachine = createMachine(
 				on: {
 					PROJECT_DETAILS_NEXT: {
 						target: "ConnectionCheck",
-						actions: "setProjectDetails",
+						actions: [
+							{
+								type: "deleteLocalStorage",
+							},
+							{
+								type: "setProjectDetails",
+							},
+						],
 					},
 				},
 			},
@@ -171,6 +179,9 @@ export const newProjectMachine = createMachine(
 				),
 		},
 		actions: {
+			deleteLocalStorage: () => {
+				clearMachines();
+			},
 			setProjectDetails: assign({
 				projectName: ({ event }) =>
 					(event as ProjectDetailsNextEvent).output.projectName,

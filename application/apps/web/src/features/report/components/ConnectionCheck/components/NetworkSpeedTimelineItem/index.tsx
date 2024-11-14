@@ -5,7 +5,6 @@ import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem"
 
 type Props = {
 	maxSpeed: number;
-	speed: number;
 	status?: UseSpeedTestStatus;
 };
 
@@ -21,10 +20,8 @@ export function NetworkSpeedTimelineItem({ status }: Props) {
 			<div>Speed check</div>
 			<Stack ml={1.5} mt={1.5}>
 				{status && <Typography>Speed: {status}</Typography>}
-				{!status && <CircularProgress />}
+				{!status && <CircularProgress size="1.5rem" />}
 			</Stack>
-
-			{/* <NetworkSpeedGauge maxSpeed={maxSpeed} speed={speed} /> */}
 		</StatusTimelineItem>
 	);
 }
