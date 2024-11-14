@@ -34,7 +34,7 @@ function NewProjectPageWithoutContext() {
 		state.can({ type: "BACK" }),
 	);
 	const canGoNext = useNewProjectMachineSelector((state) =>
-		state.can({ type: "NEXT" }),
+		state.can({ type: "COMPLETE" }),
 	);
 	const value = useNewProjectMachineSelector((state) => state.value);
 
@@ -51,7 +51,7 @@ function NewProjectPageWithoutContext() {
 	const isFormStep = Boolean(activeStep.formName);
 	const nextButtonProps: ButtonProps = isFormStep
 		? { type: "submit", form: activeStep.formName }
-		: { disabled: !canGoNext, onClick: () => send({ type: "NEXT" }) };
+		: { disabled: !canGoNext, onClick: () => send({ type: "COMPLETE" }) };
 
 	return (
 		<Container

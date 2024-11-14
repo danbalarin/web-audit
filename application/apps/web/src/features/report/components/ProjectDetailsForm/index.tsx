@@ -1,7 +1,6 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Stack } from "@mui/material";
-import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { FormTextField } from "~/features/ui/components/FormTextField";
@@ -41,7 +40,7 @@ export function ProjectDetailsForm() {
 				component="form"
 				onSubmit={handleSubmit((data) =>
 					newProjectRef.send({
-						type: "PROJECT_DETAILS_NEXT",
+						type: "PROJECT_DETAILS_COMPLETE",
 						output: { ...data, urls: [data.homeURL, ...data.urls] },
 					}),
 				)}
