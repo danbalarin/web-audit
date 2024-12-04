@@ -1,11 +1,9 @@
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
 
-import { createTRPCContext } from "../context";
+import type { TRPCContext } from "../context";
 
-export type Context = Awaited<ReturnType<typeof createTRPCContext>>;
-
-const t = initTRPC.context<Context>().create({
+const t = initTRPC.context<TRPCContext>().create({
 	transformer: superjson,
 });
 

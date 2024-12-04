@@ -1,7 +1,6 @@
 import type { CombineUnion, ExtractArray } from "@repo/api";
 import { cache } from "react";
 
-import { createBrowserContext } from "./browser";
 import { createModulesContext } from "./modules";
 import { createStorageContext } from "./storage";
 // import { createStorageContext } from "./storage";
@@ -10,12 +9,12 @@ import { createStorageContext } from "./storage";
  * @see: https://trpc.io/docs/server/context
  */
 export const createTRPCContext = cache(async () => {
-	const browserContext = createBrowserContext();
+	// const browserContext = createBrowserContext();
 	const modulesContext = createModulesContext();
 	const storageContext = createStorageContext();
 
 	const results = await Promise.all([
-		browserContext,
+		// browserContext,
 		modulesContext,
 		storageContext,
 	]);

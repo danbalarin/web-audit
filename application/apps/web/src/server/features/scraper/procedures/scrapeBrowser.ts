@@ -1,13 +1,10 @@
 import z from "zod";
 
-import type { TRPCContext } from "~/server/context";
-import { executionTimeProcedure } from "~/server/trpc";
+import { browserProcedure } from "~/server/trpc/procedure";
 
 const inputSchema = z.object({
 	url: z.string().url(),
 });
-
-type ScrapeBrowserInput = z.infer<typeof inputSchema>;
 
 type ScrapeBrowserResponse = {
 	ok: boolean;
@@ -15,35 +12,31 @@ type ScrapeBrowserResponse = {
 	error?: string;
 };
 
-const scrapeBrowser = async (
-	input: ScrapeBrowserInput,
-	ctx: TRPCContext,
-): Promise<ScrapeBrowserResponse> => {
-	try {
-		const page = await ctx.browser.newPage();
-		await page.goto(input.url, { waitUntil: "networkidle0" });
-		const data = await page.evaluate(
-			// eslint-disable-next-line no-undef
-			() => document.querySelector("*")?.outerHTML,
-		);
-		await page.close();
-
-		return {
-			ok: !!data,
-			document: data ?? "",
-		};
-		// biome-ignore lint/suspicious/noExplicitAny: just logging the error
-	} catch (error: any) {
-		console.error(error); // TODO: proper tracking
-
-		return {
-			ok: false,
-			document: "",
-			error: error?.message ?? "Unknown error",
-		};
-	}
-};
-
-export const procedure = executionTimeProcedure
+export const procedure = browserProcedure
 	.input(inputSchema)
-	.query(({ input, ctx }) => scrapeBrowser(input, ctx));
+	.query<ScrapeBrowserResponse>(async ({ input, ctx }) => {
+		try {
+			const page = await ctx.browser.newPage();
+			await page.goto(input.url, { waitUntil: "networkidle0" });
+			const data = await page.evaluate(
+				// eslint-disable-next-line no-undef
+				() => document.querySelector("*")?.outerHTML,
+			);
+			await page.close();
+			await ctx.browser.close();
+
+			return {
+				ok: !!data,
+				document: data ?? "",
+			};
+			// biome-ignore lint/suspicious/noExplicitAny: just logging the error
+		} catch (error: any) {
+			console.error(error); // TODO: proper tracking
+
+			return {
+				ok: false,
+				document: "",
+				error: error?.message ?? "Unknown error",
+			};
+		}
+	});

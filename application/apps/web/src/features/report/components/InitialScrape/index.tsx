@@ -75,8 +75,6 @@ export const InitialScrape = () => {
 		};
 	}, [state]);
 
-	console.log(state);
-
 	return (
 		<Stack>
 			<AlignedTimeline>
