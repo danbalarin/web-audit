@@ -39,13 +39,13 @@ export function Debug() {
 					<Typography variant="h5" sx={{ marginBottom: "0.5rem" }}>
 						XState
 					</Typography>
-					{machines.map((m) => (
-						<Accordion key={m.name}>
+					{Object.entries(machines).map(([name, m]) => (
+						<Accordion key={name}>
 							<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-								{m.name}
+								{name}
 							</AccordionSummary>
-							<StyledAccordionDetails>
-								<pre>{JSON.stringify(m.data, null, 2)}</pre>
+							<StyledAccordionDetails sx={{ overflow: "scroll" }}>
+								<pre>{JSON.stringify(m, null, 2)}</pre>
 							</StyledAccordionDetails>
 						</Accordion>
 					))}

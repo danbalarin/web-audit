@@ -3,20 +3,16 @@
 import type { PropsWithChildren } from "react";
 import { createContext, useCallback, useContext, useState } from "react";
 
-type XStateMachine = {
-	name: string;
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	data: any;
-};
+type XStateMachine = object;
 
 type DebugContextType = {
-	machines: XStateMachine[];
+	machines: Record<string, XStateMachine>;
 	appendMachine: (name: string, data: Omit<XStateMachine, "name">) => void;
 	removeMachine: (name: string) => void;
 };
 
 const DebugContext = createContext<DebugContextType>({
-	machines: [],
+	machines: {},
 	// biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
 	appendMachine: () => {},
 	// biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
@@ -24,34 +20,22 @@ const DebugContext = createContext<DebugContextType>({
 });
 
 export const DebugContextProvider = ({ children }: PropsWithChildren) => {
-	const [machines, setMachines] = useState<XStateMachine[]>([]);
+	const [machines, setMachines] = useState<Record<string, XStateMachine>>({});
 
 	const appendMachine = useCallback(
 		(name: string, data: Omit<XStateMachine, "name">) => {
-			const newMachines = JSON.parse(
-				JSON.stringify(machines),
-			) as XStateMachine[];
-			const found = newMachines.findIndex((machine) => machine.name === name);
-			if (found !== -1) {
-				newMachines[found] = { name, ...data };
-			} else {
-				newMachines.push({ name, ...data });
-			}
-			setMachines(newMachines);
+			setMachines((m) => ({ ...m, [name]: { ...(m[name] ?? {}), ...data } }));
 		},
 		[machines],
 	);
 
 	const removeMachine = useCallback(
 		(name: string) => {
-			const newMachines = JSON.parse(
-				JSON.stringify(machines),
-			) as XStateMachine[];
-			const found = newMachines.findIndex((machine) => machine.name === name);
-			if (found) {
-				newMachines.splice(found, 1);
-			}
-			setMachines(newMachines);
+			setMachines((m) => {
+				const newMachines = { ...m };
+				delete newMachines[name];
+				return newMachines;
+			});
 		},
 		[machines],
 	);

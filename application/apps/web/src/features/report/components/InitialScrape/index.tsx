@@ -9,7 +9,9 @@ import {
 } from "../../states/newProject.machine";
 import { UrlScrapeTimelineItem } from "../UrlTimelineItem";
 
+import { useEffect } from "react";
 import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
+import { useDebugContext } from "~/features/ui/contexts/DebugContext";
 import { initialScrapeMachine } from "./machine";
 
 const getUrlStatus = (
@@ -62,6 +64,18 @@ export const InitialScrape = () => {
 			},
 		}),
 	);
+
+	// Debug only
+	const { appendMachine, removeMachine } = useDebugContext();
+	useEffect(() => {
+		appendMachine("InitialScrapeMachine", { data: { ...state } });
+
+		return () => {
+			removeMachine("InitialScrapeMachine");
+		};
+	}, [state]);
+
+	console.log(state);
 
 	return (
 		<Stack>
