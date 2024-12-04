@@ -27,6 +27,12 @@ export const env = createEnv({
 		REDIS_PORT: z.preprocess((val) => +val, z.number().positive()),
 	},
 
+	client: {
+		NEXT_PUBLIC_DEBUG: z
+			.preprocess((val) => val === "true", z.boolean())
+			.default(false),
+	},
+
 	/**
 	 * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
 	 * middlewares) or client-side so we need to destruct manually.
@@ -38,5 +44,6 @@ export const env = createEnv({
 		CHROMIUM_PATH: process.env.CHROMIUM_PATH,
 		REDIS_HOST: process.env.REDIS_HOST,
 		REDIS_PORT: process.env.REDIS_PORT,
+		NEXT_PUBLIC_DEBUG: process.env.NEXT_PUBLIC_DEBUG,
 	},
 });

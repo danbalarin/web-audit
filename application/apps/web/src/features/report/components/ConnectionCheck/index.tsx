@@ -1,6 +1,5 @@
 "use client";
 import { Stack } from "@mui/material";
-import { useMachine } from "@xstate/react";
 import { ContextFrom, assign, fromPromise } from "xstate";
 
 import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
@@ -13,10 +12,7 @@ import {
 } from "../../states/newProject.machine";
 import { UrlTestTimelineItem } from "../UrlTimelineItem";
 
-import { useEffect } from "react";
-import { useDebugContext } from "~/features/ui/contexts/DebugContext";
-import { useSaveMachine } from "~/features/ui/hooks/useSaveMachine";
-import { loadMachine } from "~/features/ui/utils/machineStorage";
+import { useSavedMachine } from "~/features/ui/hooks/useSavedMachine";
 import { NetworkSpeedTimelineItem } from "./components/NetworkSpeedTimelineItem";
 import { MAX_SPEED } from "./constants";
 import { connectionCheckMachine } from "./machine";
@@ -50,7 +46,7 @@ export function ConnectionCheck() {
 	const { run: urlTest } = useUrlTest();
 	const newProjectRef = useNewProjectMachineContext();
 
-	const [state, _send, actor] = useMachine(
+	const [state] = useSavedMachine(
 		connectionCheckMachine.provide({
 			actions: {
 				loadURLs: assign({
@@ -72,19 +68,7 @@ export function ConnectionCheck() {
 				}),
 			},
 		}),
-		{ snapshot: loadMachine(connectionCheckMachine.id) },
 	);
-	useSaveMachine(actor);
-
-	// Debug only
-	const { appendMachine, removeMachine } = useDebugContext();
-	useEffect(() => {
-		appendMachine("ConnectionCheckMachine", { data: { ...state } });
-
-		return () => {
-			removeMachine("ConnectionCheckMachine");
-		};
-	}, [state]);
 
 	return (
 		<Stack>

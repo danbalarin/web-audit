@@ -1,5 +1,4 @@
 import { Stack } from "@mui/material";
-import { useMachine } from "@xstate/react";
 import { ContextFrom, assign, fromPromise } from "xstate";
 
 import { useUrlScrape } from "../../hooks/useUrlScrape";
@@ -9,9 +8,8 @@ import {
 } from "../../states/newProject.machine";
 import { UrlScrapeTimelineItem } from "../UrlTimelineItem";
 
-import { useEffect } from "react";
 import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
-import { useDebugContext } from "~/features/ui/contexts/DebugContext";
+import { useSavedMachine } from "~/features/ui/hooks/useSavedMachine";
 import { initialScrapeMachine } from "./machine";
 
 const getUrlStatus = (
@@ -42,7 +40,7 @@ export const InitialScrape = () => {
 	const newProjectRef = useNewProjectMachineContext();
 	const { run: urlScrape } = useUrlScrape();
 
-	const [state] = useMachine(
+	const [state] = useSavedMachine(
 		initialScrapeMachine.provide({
 			actions: {
 				loadURLs: assign({
@@ -64,16 +62,6 @@ export const InitialScrape = () => {
 			},
 		}),
 	);
-
-	// Debug only
-	const { appendMachine, removeMachine } = useDebugContext();
-	useEffect(() => {
-		appendMachine("InitialScrapeMachine", { data: { ...state } });
-
-		return () => {
-			removeMachine("InitialScrapeMachine");
-		};
-	}, [state]);
 
 	return (
 		<Stack>
