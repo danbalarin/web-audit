@@ -7,7 +7,6 @@ import {
 	CardContent,
 	Container,
 } from "@mui/material";
-import { useEffect } from "react";
 import { StateValue } from "xstate";
 
 import {
@@ -16,7 +15,10 @@ import {
 	useNewProjectMachineSelector,
 } from "../../states/newProject.machine";
 
-import { useDebugContext } from "~/features/ui/contexts/DebugContext";
+import {
+	useDebugMachine,
+	useSaveMachine,
+} from "~/features/ui/hooks/useSavedMachine";
 import { NewProjectStepper } from "./components/NewProjectStepper";
 import { STEPS } from "./constants";
 
@@ -29,29 +31,21 @@ const getTopLevelState = (step: StateValue) => {
 };
 
 function NewProjectPageWithoutContext() {
-	const { send } = useNewProjectMachineContext();
-	const canGoBack = useNewProjectMachineSelector((state) =>
-		state.can({ type: "BACK" }),
-	);
-	const canGoNext = useNewProjectMachineSelector((state) =>
-		state.can({ type: "COMPLETE" }),
-	);
-	const value = useNewProjectMachineSelector((state) => state.value);
-
-	// Debug only
-	const { appendMachine } = useDebugContext();
+	const actor = useNewProjectMachineContext();
 	const state = useNewProjectMachineSelector((state) => state);
-	useEffect(() => {
-		appendMachine("NewProjectMachine", { data: { ...state } });
-	}, [state]);
+	const canGoBack = state.can({ type: "BACK" });
+	const canGoNext = state.can({ type: "COMPLETE" });
 
-	const currentStep = getTopLevelState(value) as keyof typeof STEPS;
+	useDebugMachine(actor);
+	useSaveMachine(actor);
+
+	const currentStep = getTopLevelState(state.value) as keyof typeof STEPS;
 
 	const activeStep = STEPS[currentStep];
 	const isFormStep = Boolean(activeStep.formName);
 	const nextButtonProps: ButtonProps = isFormStep
 		? { type: "submit", form: activeStep.formName }
-		: { disabled: !canGoNext, onClick: () => send({ type: "COMPLETE" }) };
+		: { disabled: !canGoNext, onClick: () => actor.send({ type: "COMPLETE" }) };
 
 	return (
 		<Container
@@ -69,7 +63,10 @@ function NewProjectPageWithoutContext() {
 					{activeStep.component}
 				</CardContent>
 				<CardActions sx={{ justifyContent: "space-between" }}>
-					<Button disabled={!canGoBack} onClick={() => send({ type: "BACK" })}>
+					<Button
+						disabled={!canGoBack}
+						onClick={() => actor.send({ type: "BACK" })}
+					>
 						Reset
 					</Button>
 					<Button disabled={!canGoNext && !isFormStep} {...nextButtonProps}>

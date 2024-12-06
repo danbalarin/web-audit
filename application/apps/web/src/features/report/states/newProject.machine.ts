@@ -2,11 +2,7 @@
 
 import { createActorContext } from "@xstate/react";
 import { DoneActorEvent, assign, createMachine } from "xstate";
-import {
-	clearMachines,
-	loadMachine,
-	saveMachine,
-} from "~/features/ui/utils/machineStorage";
+import { clearMachines, loadMachine } from "~/features/ui/utils/machineStorage";
 
 type UrlData = {
 	html?: string;
@@ -106,7 +102,6 @@ export const newProjectMachine = createMachine(
 				},
 			},
 			ConnectionCheck: {
-				entry: "saveMachine",
 				on: {
 					BACK: {
 						target: "ProjectDetails",
@@ -122,7 +117,6 @@ export const newProjectMachine = createMachine(
 				},
 			},
 			InitialScrape: {
-				entry: "saveMachine",
 				on: {
 					BACK: {
 						target: "ProjectDetails",
@@ -138,7 +132,6 @@ export const newProjectMachine = createMachine(
 				},
 			},
 			Gatherers: {
-				entry: "saveMachine",
 				invoke: {
 					src: "runGatherers",
 					id: "runGatherers",
@@ -188,9 +181,6 @@ export const newProjectMachine = createMachine(
 				),
 		},
 		actions: {
-			saveMachine: ({ self }) => {
-				saveMachine(newProjectMachine.id, self.getPersistedSnapshot());
-			},
 			deleteLocalStorage: () => {
 				clearMachines();
 			},
