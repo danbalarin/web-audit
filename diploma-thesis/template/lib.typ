@@ -1,8 +1,10 @@
 #import "title-page.typ": title-page
 #import "abstract-keywords.typ": abstract-keywords
-#import "macros.typ": heading-like, revisit, custom-lorem
+#import "macros.typ": heading-like, revisit, custom-lorem, custom-table, aligned-block
 #import "outline.typ": custom-outline
 #import "headings.typ": heading-blocks
+#import "code.typ": init-code, codly-init
+#import "abbr.typ"
 
 #let template(
   title: "Thesis Title",
@@ -56,6 +58,8 @@
 
   set heading(numbering: "1.1.1")
 
+  show link: underline
+
   show heading.where(level: 1): it => {
     heading-blocks.at(1)(it)
   }
@@ -67,6 +71,27 @@
   show heading.where(level: 3): it => {
     heading-blocks.at(3)(it)
   }
+
+  show heading.where(level: 4): it => {
+    heading-blocks.at(4)(it.body)
+  }
+
+  // show table.cell: it => {
+  //   if it.x == 0 or it.y == 0 {
+  //     set text(white)
+  //     strong(it)
+  //   } else if it.body == [] {
+  //     // Replace empty cells with 'N/A'
+  //     pad(..it.inset)[_N/A_]
+  //   } else {
+  //     it
+  //   }
+  // }
+
+  abbr.make-abbrevations()
+
+  show: codly-init.with()
+  init-code()
 
   title-page(
     title: title,
@@ -91,7 +116,7 @@
       )
     ])
   
-  set align(left)
+  set align(start)
 
   if acknowledgements != none [
     #align(bottom, [
@@ -112,12 +137,14 @@
   custom-outline()
   
   
-  set par(leading: 1.2em)
+  set par(leading: 1.2em, first-line-indent: 1em, justify: true)
   set block(spacing: 1.2em)
 
   body
 
-  if bibliography != none [
+  abbr.abbr.list()
+
+  if bibliography-file != none [
     #bibliography(bibliography-file, style: "american-psychological-association")
   ]
 }

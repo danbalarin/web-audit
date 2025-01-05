@@ -22,4 +22,11 @@
       #smallcaps(it)
     ]
   },
+  (it) => {
+    block(above: 16pt, below: 9pt)[
+      #set align(left + horizon)
+      #set text(12pt, weight: "semibold") 
+      #smallcaps(it)
+    ]
+  },
 )
