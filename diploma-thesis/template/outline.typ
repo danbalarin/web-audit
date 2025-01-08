@@ -5,23 +5,34 @@
   show outline.entry: outrageous.show-entry.with(
     ..outrageous.presets.outrageous-toc,
     vspace: (none, none),
-    body-transform: (lvl, body, state-key: "outline-figure-numbering-max-width") => {
+    body-transform: (lvl, body, state-key: "outline-figure-numbering-max-width") => context {
       let number
       let text
       if(body.has("children")) {
-        (number, _, text) = body.children
+        (number, _, ..text) = body.children
       } else {
-        // number = "  "
         text = body.text
       }
       if(lvl == 1 and number != [1]) {
         v(0.1em)
       }
+
+      if(type(text) == "array") {
+        text = text.join()
+      }
+
+      let num
+      if(lvl <= 3) {
+        num = number
+      } else {
+        num = h(measure(number.fields().text).width)
+      }
       
       outrageous.align-helper(
         state-key,
         [#number],
-        (max-width, this-width) => box[#v(.4em)#h(calc.max(this-width - 6pt, 0pt))#number #text],
+        (max-width, this-width) =>
+        box[#v(.4em)#h(calc.max(this-width - 6pt, 0pt))#num #text],
         )
     },
   )

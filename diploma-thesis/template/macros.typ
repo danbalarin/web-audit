@@ -18,3 +18,23 @@
 #let custom-lorem = (number) => {
   revisit[#lorem(number)]
 }
+
+#let custom-table = () => {
+  box(
+    outset: (y: 6pt, x: 6pt),
+  )[
+    #body
+  ]
+}
+
+#let aligned-block = (body) => {
+  align(
+    center, 
+    block(
+      width: 90%,
+      above: 10pt,
+      below: 20pt,
+      body
+    )
+  )
+}
