@@ -1,1 +1,1 @@
-export { ThemeRegistry } from "./ThemeRegistry";
+export { font, ThemeRegistry } from "./ThemeRegistry";
