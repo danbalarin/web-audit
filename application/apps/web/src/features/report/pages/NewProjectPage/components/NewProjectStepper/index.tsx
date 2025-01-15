@@ -1,18 +1,15 @@
 "use client";
 import { Step, StepLabel, Stepper } from "@mui/material";
-import React from "react";
 
-import { useNewProjectMachineSelector } from "../../../../states/newProject.machine";
-import { STEP_LABELS } from "../../constants";
+import { STEPS } from "../../constants";
+import { useNewProjectState } from "../../state";
 
 export function NewProjectStepper() {
-	const activeStep = useNewProjectMachineSelector((state) =>
-		Object.keys(STEP_LABELS).findIndex((v) => state.matches(v)),
-	);
+	const activeStep = useNewProjectState((s) => s.activeStep);
 
 	return (
 		<Stepper activeStep={activeStep} alternativeLabel>
-			{Object.values(STEP_LABELS).map((label) => (
+			{Object.values(STEPS).map(({ label }) => (
 				<Step key={label}>
 					<StepLabel>{label}</StepLabel>
 				</Step>

@@ -1,43 +1,11 @@
-import React from "react";
+import { CONNECTION_CHECK_STEP } from "./components/ConnectionCheckStep/constants";
+import { GATHER_STEP } from "./components/GatherStep/constants";
+import { PROJECT_DETAILS_STEP } from "./components/ProjectDetailsStep/constants";
+import { StepView } from "./types/StepView";
+import { Step } from "./types/Steps";
 
-import { ConnectionCheck } from "../../components/ConnectionCheck";
-import { Gather } from "../../components/Gather";
-import { InitialScrape } from "../../components/InitialScrape";
-import {
-	FORM_NAME as PROJECT_DETAILS_FORM_NAME,
-	ProjectDetailsForm,
-} from "../../components/ProjectDetailsForm";
-import { States } from "../../states/newProject.machine";
-
-type Step = {
-	label: string;
-	component: React.ReactNode;
-	formName?: string;
-};
-
-export const STEP_LABELS: Record<States, string> = {
-	ProjectDetails: "Project Details",
-	ConnectionCheck: "Connection Check",
-	InitialScrape: "Fetching Data",
-	Gatherers: "Gather Data",
-};
-
-export const STEPS: Record<States, Step> = {
-	ProjectDetails: {
-		label: "Project Details",
-		component: <ProjectDetailsForm />,
-		formName: PROJECT_DETAILS_FORM_NAME,
-	},
-	ConnectionCheck: {
-		label: "Connection Check",
-		component: <ConnectionCheck />,
-	},
-	InitialScrape: {
-		label: "Fetching Data",
-		component: <InitialScrape />,
-	},
-	Gatherers: {
-		label: "Gather Data",
-		component: <Gather />,
-	},
+export const STEPS: Record<Step, StepView> = {
+	[Step.ProjectDetails]: PROJECT_DETAILS_STEP,
+	[Step.ConnectionCheck]: CONNECTION_CHECK_STEP,
+	[Step.Gatherers]: GATHER_STEP,
 };

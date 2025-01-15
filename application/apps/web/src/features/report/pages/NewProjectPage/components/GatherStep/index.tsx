@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 // import { appInjector } from "~/modules/audit";
 // import { Gatherers } from "~/modules/gatherers";
 
 // import { getNewProjectFormState } from "../../states/newProjectForm.state";
 
-export function Gather() {
+export function GatherStep() {
 	//   const { projectDetails } = getNewProjectFormState();
 	//   const runner = appInjector.resolve("audit.runner");
 

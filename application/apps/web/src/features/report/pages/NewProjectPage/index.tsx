@@ -7,45 +7,22 @@ import {
 	CardContent,
 	Container,
 } from "@mui/material";
-import { StateValue } from "xstate";
 
-import {
-	NewProjectMachineProvider,
-	useNewProjectMachineContext,
-	useNewProjectMachineSelector,
-} from "../../states/newProject.machine";
-
-import {
-	useDebugMachine,
-	useSaveMachine,
-} from "~/features/ui/hooks/useSavedMachine";
 import { NewProjectStepper } from "./components/NewProjectStepper";
 import { STEPS } from "./constants";
+import { useNewProjectState } from "./state";
 
-const getTopLevelState = (step: StateValue) => {
-	if (typeof step === "string") {
-		return step;
-	}
+export function NewProjectPage() {
+	const { activeStep, goBack, canGoBack, canGoNext, goNext } =
+		useNewProjectState();
 
-	return Object.keys(step)[0];
-};
-
-function NewProjectPageWithoutContext() {
-	const actor = useNewProjectMachineContext();
-	const state = useNewProjectMachineSelector((state) => state);
-	const canGoBack = state.can({ type: "BACK" });
-	const canGoNext = state.can({ type: "COMPLETE" });
-
-	useDebugMachine(actor);
-	useSaveMachine(actor);
-
-	const currentStep = getTopLevelState(state.value) as keyof typeof STEPS;
-
-	const activeStep = STEPS[currentStep];
-	const isFormStep = Boolean(activeStep.formName);
+	const activeStepView = STEPS[activeStep];
+	const isFormStep = Boolean(activeStepView.formName);
 	const nextButtonProps: ButtonProps = isFormStep
-		? { type: "submit", form: activeStep.formName }
-		: { disabled: !canGoNext, onClick: () => actor.send({ type: "COMPLETE" }) };
+		? { type: "submit", form: activeStepView.formName }
+		: { onClick: goNext };
+
+	const StepView = activeStepView.component;
 
 	return (
 		<Container
@@ -60,16 +37,19 @@ function NewProjectPageWithoutContext() {
 			<Card sx={{ minWidth: "32rem" }}>
 				<CardContent sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
 					<NewProjectStepper />
-					{activeStep.component}
+					<StepView
+						onNext={
+							isFormStep
+								? goNext
+								: () => useNewProjectState.setState({ stepComplete: true })
+						}
+					/>
 				</CardContent>
 				<CardActions sx={{ justifyContent: "space-between" }}>
-					<Button
-						disabled={!canGoBack}
-						onClick={() => actor.send({ type: "BACK" })}
-					>
+					<Button disabled={!canGoBack()} onClick={goBack}>
 						Reset
 					</Button>
-					<Button disabled={!canGoNext && !isFormStep} {...nextButtonProps}>
+					<Button disabled={!canGoNext() && !isFormStep} {...nextButtonProps}>
 						Next
 					</Button>
 				</CardActions>
@@ -77,9 +57,3 @@ function NewProjectPageWithoutContext() {
 		</Container>
 	);
 }
-
-export const NewProjectPage = () => (
-	<NewProjectMachineProvider>
-		<NewProjectPageWithoutContext />
-	</NewProjectMachineProvider>
-);
