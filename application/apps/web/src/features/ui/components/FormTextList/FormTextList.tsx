@@ -34,6 +34,7 @@ export function FormTextList({ name, ...rest }: Props) {
 			spacing={2}
 			// TODO: fix colors
 			// sx={{ borderRadius: 1, borderColor, color }}
+			sx={{ borderRadius: 1 }}
 			{...rest}
 		>
 			<legend>Tested URLs</legend>
@@ -43,21 +44,23 @@ export function FormTextList({ name, ...rest }: Props) {
 					name={`${name}.${i}`}
 					id={`${name}.${i}`}
 					sx={{ width: "100%" }}
-					InputProps={{
-						startAdornment: (
-							<InputAdornment position="start">{i + 1}#</InputAdornment>
-						),
-						endAdornment: (
-							<InputAdornment position="end">
-								<IconButton
-									aria-label="remove url"
-									sx={{ color: "grey" }}
-									onClick={() => remove(i)}
-								>
-									<Delete />
-								</IconButton>
-							</InputAdornment>
-						),
+					slotProps={{
+						input: {
+							startAdornment: (
+								<InputAdornment position="start">{i + 1}#</InputAdornment>
+							),
+							endAdornment: (
+								<InputAdornment position="end">
+									<IconButton
+										aria-label="remove url"
+										sx={{ color: "grey" }}
+										onClick={() => remove(i)}
+									>
+										<Delete />
+									</IconButton>
+								</InputAdornment>
+							),
+						},
 					}}
 				/>
 			))}
