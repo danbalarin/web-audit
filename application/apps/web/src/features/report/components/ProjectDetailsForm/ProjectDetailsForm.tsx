@@ -9,7 +9,6 @@ import { FormTextList } from "~/features/ui/components/FormTextList";
 import { FORM_NAME } from "./constants";
 import { ProjectDetailsFormValues, schema } from "./schema";
 
-export { FORM_NAME };
 export type { ProjectDetailsFormValues };
 
 type ProjectDetailsFormProps = {
@@ -43,3 +42,5 @@ export function ProjectDetailsForm({
 		</FormProvider>
 	);
 }
+
+ProjectDetailsForm.FORM_NAME = FORM_NAME;

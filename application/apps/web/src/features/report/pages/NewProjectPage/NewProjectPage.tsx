@@ -1,12 +1,15 @@
 "use client";
 import {
-	Accordion,
+	AccordionActions,
 	AccordionDetails,
 	AccordionSummary,
+	Button,
 	Typography,
 } from "@mui/material";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { ProjectDetailsForm } from "../../components/ProjectDetailsForm";
+import { RoundedAccordion } from "./components/RoundedAccordion";
 
 // import { STEPS } from "./constants";
 // import { useNewProjectState } from "./state";
@@ -24,19 +27,30 @@ export function NewProjectPage() {
 	// const StepView = activeStepView.component;
 
 	return (
-		<Accordion>
-			<AccordionSummary
-				expandIcon={<ExpandMoreIcon />}
-				aria-controls="panel1-content"
-				id="panel1-header"
-			>
-				<Typography component="span">Accordion 1</Typography>
-			</AccordionSummary>
-			<AccordionDetails>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-				malesuada lacus ex, sit amet blandit leo lobortis eget.
-			</AccordionDetails>
-		</Accordion>
+		<>
+			<RoundedAccordion defaultExpanded>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+					Project Details
+				</AccordionSummary>
+				<AccordionDetails>
+					<ProjectDetailsForm onSubmit={console.log} />
+				</AccordionDetails>
+				<AccordionActions>
+					<Button type="submit" form={ProjectDetailsForm.FORM_NAME}>
+						Continue
+					</Button>
+				</AccordionActions>
+			</RoundedAccordion>
+			<RoundedAccordion>
+				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
+					<Typography component="span">Accordion 1</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+					malesuada lacus ex, sit amet blandit leo lobortis eget.
+				</AccordionDetails>
+			</RoundedAccordion>
+		</>
 		// <Container
 		// 	sx={{
 		// 		display: "flex",
