@@ -8,32 +8,42 @@ import {
 } from "@mui/material";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useEffect } from "react";
+import { Loading } from "~/features/ui/components/Loading";
 import { ProjectDetailsForm } from "../../components/ProjectDetailsForm";
+import { useAuditState } from "../../states/auditState";
 import { RoundedAccordion } from "./components/RoundedAccordion";
+import { useControlledAccordion } from "./hooks/useControlledAccordion";
+import { useProjectDetailsProps } from "./hooks/useProjectDetailsProps";
+import { useNewProjectState } from "./state";
+import { Step } from "./types/Steps";
 
 // import { STEPS } from "./constants";
 // import { useNewProjectState } from "./state";
 
 export function NewProjectPage() {
-	// const { activeStep, goBack, canGoBack, canGoNext, goNext } =
-	// 	useNewProjectState();
+	const { isExpanded, expandOrCollapse, expand } = useControlledAccordion({
+		initialExpanded: [Step.ProjectDetails],
+	});
+	const { activeStep } = useNewProjectState();
+	useEffect(() => {
+		expand(activeStep);
+	}, [activeStep]);
+	const projectDetailsProps = useProjectDetailsProps();
 
-	// const activeStepView = STEPS[activeStep];
-	// const isFormStep = Boolean(activeStepView.formName);
-	// const nextButtonProps: ButtonProps = isFormStep
-	// 	? { type: "submit", form: activeStepView.formName }
-	// 	: { onClick: goNext };
-
-	// const StepView = activeStepView.component;
+	if (!useAuditState.persist.hasHydrated()) return <Loading />;
 
 	return (
 		<>
-			<RoundedAccordion defaultExpanded>
+			<RoundedAccordion
+				expanded={isExpanded(Step.ProjectDetails)}
+				onChange={() => expandOrCollapse(Step.ProjectDetails)}
+			>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					Project Details
 				</AccordionSummary>
 				<AccordionDetails>
-					<ProjectDetailsForm onSubmit={console.log} />
+					<ProjectDetailsForm {...projectDetailsProps} />
 				</AccordionDetails>
 				<AccordionActions>
 					<Button type="submit" form={ProjectDetailsForm.FORM_NAME}>
@@ -41,7 +51,11 @@ export function NewProjectPage() {
 					</Button>
 				</AccordionActions>
 			</RoundedAccordion>
-			<RoundedAccordion>
+			<RoundedAccordion
+				disabled={activeStep === Step.ProjectDetails}
+				expanded={isExpanded(Step.ConnectionCheck)}
+				onChange={() => expandOrCollapse(Step.ConnectionCheck)}
+			>
 				<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 					<Typography component="span">Accordion 1</Typography>
 				</AccordionSummary>
