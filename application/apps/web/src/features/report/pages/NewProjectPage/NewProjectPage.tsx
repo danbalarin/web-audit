@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Loading } from "~/features/ui/components/Loading";
 import { useAuditState } from "../../states/auditState";
 import { ConnectionCheckStep } from "./components/ConnectionCheckStep";
+import { ProcessStep } from "./components/ProcessStep";
 import { ProjectDetailsStep } from "./components/ProjectDetailsStep";
 import { useControlledAccordion } from "./hooks/useControlledAccordion";
 import { useNewProjectState } from "./state";
@@ -19,7 +20,7 @@ export function NewProjectPage() {
 	}, [activeStep]);
 
 	if (!useAuditState.persist.hasHydrated()) return <Loading />;
-
+	console.log(activeStep);
 	return (
 		<>
 			<ProjectDetailsStep
@@ -27,9 +28,14 @@ export function NewProjectPage() {
 				onChange={() => expandOrCollapse(Step.ProjectDetails)}
 			/>
 			<ConnectionCheckStep
-				disabled={activeStep === Step.ProjectDetails}
+				disabled={activeStep < Step.ConnectionCheck}
 				expanded={isExpanded(Step.ConnectionCheck)}
 				onChange={() => expandOrCollapse(Step.ConnectionCheck)}
+			/>
+			<ProcessStep
+				disabled={activeStep < Step.Process}
+				expanded={isExpanded(Step.Process)}
+				onChange={() => expandOrCollapse(Step.Process)}
 			/>
 		</>
 	);

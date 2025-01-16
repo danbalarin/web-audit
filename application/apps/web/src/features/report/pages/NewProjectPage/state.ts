@@ -40,7 +40,7 @@ export const useNewProjectState = create<NewProjectState>()(
 			},
 			canGoNext: () => {
 				const currentStep = get().activeStep;
-				if (currentStep === Step.Gatherers) {
+				if (currentStep === Object.keys(Step).length - 1) {
 					return false;
 				}
 				return get().stepComplete;
@@ -53,11 +53,10 @@ export const useNewProjectState = create<NewProjectState>()(
 				set({ activeStep: currentStep - 1 });
 			},
 			goNext: () => {
-				if (get().canGoNext()) {
+				if (!get().canGoNext()) {
 					return;
 				}
-				const currentStep = get().activeStep;
-				set({ activeStep: currentStep + 1, stepComplete: false });
+				set((s) => ({ activeStep: s.activeStep + 1, stepComplete: false }));
 			},
 		}),
 		{ name: "NewProjectState" },
