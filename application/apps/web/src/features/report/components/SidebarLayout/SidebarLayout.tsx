@@ -19,7 +19,7 @@ type SidebarLayoutProps = {
 
 export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 	return (
-		<>
+		<Box sx={{ display: "flex" }}>
 			<Drawer
 				variant="permanent"
 				anchor="left"
@@ -63,8 +63,10 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 					</ListItemButton>
 				</List>
 			</Drawer>
-			<main>{children}</main>
-		</>
+			<Box component="main" sx={{ flexGrow: 1, padding: 3 }}>
+				{children}
+			</Box>
+		</Box>
 	);
 };
 
