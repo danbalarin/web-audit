@@ -14,15 +14,18 @@ export type { ProjectDetailsFormValues };
 type ProjectDetailsFormProps = {
 	onSubmit: (data: ProjectDetailsFormValues) => void;
 	defaultValues?: Partial<ProjectDetailsFormValues>;
+	disabled?: boolean;
 };
 
 export function ProjectDetailsForm({
 	onSubmit,
 	defaultValues,
+	disabled,
 }: ProjectDetailsFormProps) {
 	const methods = useForm<ProjectDetailsFormValues>({
 		resolver: zodResolver(schema),
 		defaultValues: defaultValues,
+		disabled,
 	});
 
 	const { handleSubmit } = methods;
@@ -35,9 +38,17 @@ export function ProjectDetailsForm({
 				onSubmit={handleSubmit(onSubmit)}
 				spacing={2}
 			>
-				<FormTextField name="projectName" label="Project Name" />
-				<FormTextField name="homeUrl" label="Homepage URL" />
-				<FormTextList name="urls" />
+				<FormTextField
+					disabled={disabled}
+					name="projectName"
+					label="Project Name"
+				/>
+				<FormTextField
+					disabled={disabled}
+					name="homeUrl"
+					label="Homepage URL"
+				/>
+				<FormTextList disabled={disabled} name="urls" />
 			</Stack>
 		</FormProvider>
 	);

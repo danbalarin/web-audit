@@ -13,9 +13,10 @@ import { FormTextField } from "../FormTextField";
 
 type Props = StackProps & {
 	name: string;
+	disabled?: boolean;
 };
 
-export function FormTextList({ name, ...rest }: Props) {
+export function FormTextList({ name, disabled, ...rest }: Props) {
 	// const {
 	//   fieldState: { error },
 	// } = useController({ name });
@@ -44,6 +45,7 @@ export function FormTextList({ name, ...rest }: Props) {
 					name={`${name}.${i}`}
 					id={`${name}.${i}`}
 					sx={{ width: "100%" }}
+					disabled={disabled}
 					slotProps={{
 						input: {
 							startAdornment: (

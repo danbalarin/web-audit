@@ -1,8 +1,8 @@
 import { Accordion, AccordionProps } from "@mui/material";
 
-type RoundedAccordionProps = AccordionProps;
+type RoundedAccordionProps = Omit<AccordionProps, "sx">;
 
-export const RoundedAccordion = ({ sx, ...props }: RoundedAccordionProps) => {
+export const RoundedAccordion = (props: RoundedAccordionProps) => {
 	return (
 		<Accordion
 			disableGutters
@@ -13,7 +13,6 @@ export const RoundedAccordion = ({ sx, ...props }: RoundedAccordionProps) => {
 				"&:before": {
 					display: "none",
 				},
-				...sx,
 			}}
 			{...props}
 		/>
