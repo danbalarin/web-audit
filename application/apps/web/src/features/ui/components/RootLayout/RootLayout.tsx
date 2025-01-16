@@ -1,7 +1,5 @@
 import { TRPCProvider } from "~/server/query/client";
 
-import { DebugContextProvider } from "../../contexts/DebugContext";
-import { Debug } from "../Debug";
 import { ThemeRegistry, font } from "../ThemeRegistry";
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
@@ -10,10 +8,10 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
 			<body className={font.variable}>
 				<ThemeRegistry />
 				<TRPCProvider>
-					<DebugContextProvider>
-						<Debug />
-						{children}
-					</DebugContextProvider>
+					{/* <DebugContextProvider> */}
+					{/* <Debug /> */}
+					{children}
+					{/* </DebugContextProvider> */}
 				</TRPCProvider>
 			</body>
 		</html>
