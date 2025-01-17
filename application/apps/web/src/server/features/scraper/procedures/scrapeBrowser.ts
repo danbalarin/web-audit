@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { browserProcedure } from "~/server/trpc/procedure";
+import { browserProcedure } from "~/server/trpc";
 
 const inputSchema = z.object({
 	url: z.string().url(),

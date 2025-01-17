@@ -11,6 +11,6 @@ export const middleware = t.middleware;
 
 export const createTRPCRouter = t.router;
 
-export const baseProcedure = t.procedure;
+export const _baseProcedure = t.procedure;
 
 export const createCallerFactory = t.createCallerFactory;

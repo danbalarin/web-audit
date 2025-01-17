@@ -8,7 +8,6 @@ export const useCheckAllUrls = () => {
 	const urls = useAuditState((s) => s.urls);
 
 	const checkUrl = async (url: string) => {
-		console.log("checkUrl", url);
 		try {
 			useConnectionCheckState.setState({ status: `urlCheckInProgress.${url}` });
 			const result = await urlTest(url);

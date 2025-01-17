@@ -28,9 +28,9 @@ export const env = createEnv({
 	},
 
 	client: {
-		NEXT_PUBLIC_DEBUG: z
-			.preprocess((val) => val === "true", z.boolean())
-			.default(false),
+		NEXT_PUBLIC_LOG_LEVEL: z
+			.enum(["trace", "debug", "info", "warn", "error", "fatal"])
+			.default("info"),
 	},
 
 	/**
@@ -44,6 +44,6 @@ export const env = createEnv({
 		CHROMIUM_PATH: process.env.CHROMIUM_PATH,
 		REDIS_HOST: process.env.REDIS_HOST,
 		REDIS_PORT: process.env.REDIS_PORT,
-		NEXT_PUBLIC_DEBUG: process.env.NEXT_PUBLIC_DEBUG,
+		NEXT_PUBLIC_LOG_LEVEL: process.env.NEXT_PUBLIC_LOG_LEVEL,
 	},
 });

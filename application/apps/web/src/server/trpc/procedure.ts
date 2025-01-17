@@ -1,10 +1,12 @@
 import { browserMiddleware } from "../middlewares/browser";
 import { executionTimeMiddleware } from "../middlewares/executionTime";
 
-import { baseProcedure } from "./init";
+import { _baseProcedure } from "./init";
 
-export const procedure = baseProcedure;
+export const baseProcedure = _baseProcedure;
 
-export const executionTimeProcedure = procedure.use(executionTimeMiddleware);
+export const executionTimeProcedure = baseProcedure.use(
+	executionTimeMiddleware,
+);
 
-export const browserProcedure = procedure.use(browserMiddleware);
+export const browserProcedure = baseProcedure.use(browserMiddleware);
