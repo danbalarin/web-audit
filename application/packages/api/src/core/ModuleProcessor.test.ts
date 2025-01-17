@@ -11,18 +11,28 @@ const context = { browser: {} as any, url: "" };
 // biome-ignore lint/suspicious/noEmptyBlockStatements: noop fn
 const noopFn = () => {};
 
+const logger = {
+	child: () => logger,
+	debug: jest.fn(),
+	info: jest.fn(),
+	warn: jest.fn(),
+	error: jest.fn(),
+	trace: jest.fn(),
+	fatal: jest.fn(),
+};
+
 describe("ModuleProcessor", () => {
 	beforeEach(() => {
 		jest.spyOn(console, "log").mockImplementation(noopFn);
 	});
 	it("should return unique id", () => {
 		const storage = new TestStorage();
-		const processor = new ModuleProcessor({ storage, modules: [] });
+		const processor = new ModuleProcessor({ storage, modules: [], logger });
 		const id = processor.process(context);
 
 		expect(id).toBeDefined();
 
-		const processor2 = new ModuleProcessor({ storage, modules: [] });
+		const processor2 = new ModuleProcessor({ storage, modules: [], logger });
 		const id2 = processor2.process(context);
 
 		expect(id2).toBeDefined();
@@ -31,7 +41,7 @@ describe("ModuleProcessor", () => {
 
 	it("should throw error if processor is already running", () => {
 		const storage = new TestStorage();
-		const processor = new ModuleProcessor({ storage, modules: [] });
+		const processor = new ModuleProcessor({ storage, modules: [], logger });
 		processor.process(context);
 
 		expect(() => processor.process(context)).toThrow(
@@ -51,7 +61,11 @@ describe("ModuleProcessor", () => {
 		);
 		const gatherer = new TestGatherer({}, gathererSpy);
 		const module = new TestModule({ gatherers: [gatherer] });
-		const processor = new ModuleProcessor({ storage, modules: [module] });
+		const processor = new ModuleProcessor({
+			storage,
+			modules: [module],
+			logger,
+		});
 
 		expect(gathererSpy).not.toHaveBeenCalled();
 		const id = processor.process(context);
@@ -79,6 +93,7 @@ describe("ModuleProcessor", () => {
 		const processor = new ModuleProcessor({
 			storage,
 			modules: [moduleOne, moduleTwo],
+			logger,
 		});
 
 		processor.process(context);
@@ -97,7 +112,11 @@ describe("ModuleProcessor", () => {
 			Promise.resolve("result"),
 		);
 		const module = new TestModule({ gatherers: [gatherer] });
-		const processor = new ModuleProcessor({ storage, modules: [module] });
+		const processor = new ModuleProcessor({
+			storage,
+			modules: [module],
+			logger,
+		});
 
 		const id = processor.process(context);
 
@@ -127,7 +146,11 @@ describe("ModuleProcessor", () => {
 				}),
 		);
 		const module = new TestModule({ gatherers: [gatherer] });
-		const processor = new ModuleProcessor({ storage, modules: [module] });
+		const processor = new ModuleProcessor({
+			storage,
+			modules: [module],
+			logger,
+		});
 
 		const storageSpy = jest.spyOn(storage, "append");
 		processor.process(context);
@@ -168,7 +191,11 @@ describe("ModuleProcessor", () => {
 			Promise.resolve("result"),
 		);
 		const module = new TestModule({ gatherers: [gatherer] });
-		const processor = new ModuleProcessor({ storage, modules: [module] });
+		const processor = new ModuleProcessor({
+			storage,
+			modules: [module],
+			logger,
+		});
 		(
 			jest.spyOn(
 				processor as unknown as ModuleProcessor["initGatherersMeta"],
