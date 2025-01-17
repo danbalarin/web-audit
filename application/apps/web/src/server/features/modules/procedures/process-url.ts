@@ -7,7 +7,7 @@ import {
 import { Browser } from "puppeteer";
 import z from "zod";
 
-import { baseProcedure } from "~/server/trpc/init";
+import { browserProcedure } from "~/server/trpc/procedure";
 
 const inputSchema = z.object({
 	url: z.string().url(),
@@ -53,9 +53,9 @@ const processUrl = async ({
 	}
 };
 
-export const procedure = baseProcedure
+export const procedure = browserProcedure
 	.input(inputSchema)
-	.query(({ input, ctx }) =>
+	.mutation(({ input, ctx }) =>
 		processUrl({
 			input,
 			browser: ctx.browser,

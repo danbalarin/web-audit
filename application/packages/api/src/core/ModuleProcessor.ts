@@ -9,7 +9,7 @@ type Step = "ready" | "gatherers" | "dataPreprocessing" | "audits" | "done";
 
 type GatherersStatus = "complete" | "inProgress" | "waiting";
 
-type ModuleProcessorMeta = {
+export type ModuleProcessorMeta = {
 	step: Step;
 	gatherersStatus: Record<string, GatherersStatus>;
 	progress: number;
