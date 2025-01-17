@@ -6,12 +6,18 @@ import {
 	AccordionDetails,
 	AccordionProps,
 	AccordionSummary,
+	Alert,
 } from "@mui/material";
+import { useAuditState } from "~/features/report/states/auditState";
+import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
 import { RoundedAccordion } from "../RoundedAccordion";
+import { ProcessUrl } from "./parts/ProcessUrl";
 
 type ProcessStepProps = Omit<AccordionProps, "children">;
 
 export function ProcessStep(props: ProcessStepProps) {
+	const urls = useAuditState((s) => s.urls);
+	// const { run, urlsState } = useProcessUrls();
 	//   const { projectDetails } = getNewProjectFormState();
 	// const runner = appInjector.resolve("audit.runner");
 
@@ -29,7 +35,16 @@ export function ProcessStep(props: ProcessStepProps) {
 			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
 				Process Urls
 			</AccordionSummary>
-			<AccordionDetails>Processing hard</AccordionDetails>
+			<AccordionDetails>
+				<Alert severity="info">
+					Processing can take some time, please do not close this window.
+				</Alert>
+				<AlignedTimeline>
+					{Object.entries(urls).map(([url]) => (
+						<ProcessUrl url={url} key={url} />
+					))}
+				</AlignedTimeline>
+			</AccordionDetails>
 			{/* {!disabled && (
 				<AccordionActions>
 					<Button

@@ -20,7 +20,7 @@ export function NewProjectPage() {
 	}, [activeStep]);
 
 	if (!useAuditState.persist.hasHydrated()) return <Loading />;
-	console.log(activeStep);
+
 	return (
 		<>
 			<ProjectDetailsStep
