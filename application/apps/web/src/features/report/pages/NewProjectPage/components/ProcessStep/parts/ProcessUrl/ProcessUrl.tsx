@@ -29,6 +29,7 @@ export const ProcessUrl = ({ url }: ProcessUrlProps) => {
 				</Button>
 				{state.status === "loading" && (
 					<LinearProgress
+						value={100}
 						variant={
 							data?.ok && data.data.meta.progress === 1
 								? "determinate"

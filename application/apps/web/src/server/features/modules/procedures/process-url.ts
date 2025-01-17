@@ -6,8 +6,9 @@ import {
 } from "@repo/api";
 import { Browser } from "puppeteer";
 import z from "zod";
+import { moduleLogger } from "~/lib/logger";
 
-import { browserProcedure } from "~/server/trpc/procedure";
+import { browserProcedure } from "~/server/trpc";
 
 const inputSchema = z.object({
 	url: z.string().url(),
@@ -36,7 +37,11 @@ const processUrl = async ({
 }: ProcessUrlOptions): Promise<ProcessUrlResponse> => {
 	const { url } = input;
 	try {
-		const processor = new ModuleProcessor({ storage, modules });
+		const processor = new ModuleProcessor({
+			storage,
+			modules,
+			logger: moduleLogger,
+		});
 		const id = processor.process({ browser, url });
 
 		return {

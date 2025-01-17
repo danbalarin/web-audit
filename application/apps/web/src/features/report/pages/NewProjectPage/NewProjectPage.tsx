@@ -19,8 +19,8 @@ export function NewProjectPage() {
 		expand(activeStep);
 	}, [activeStep]);
 
-	if (!useAuditState.persist.hasHydrated()) return <Loading />;
-  
+	if (!useAuditState.persist?.hasHydrated()) return <Loading />;
+
 	return (
 		<>
 			<ProjectDetailsStep

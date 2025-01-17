@@ -6,7 +6,12 @@ import { theme } from "./src/features/ui/components/ThemeRegistry/theme.mjs";
 const nextConfig = {
 	output: "standalone",
 	experimental: {
-		serverComponentsExternalPackages: ["lighthouse", "lighthouse/cli"],
+		serverComponentsExternalPackages: [
+			"lighthouse",
+			"lighthouse/cli",
+			// "pino",
+			// "pino-pretty",
+		],
 	},
 };
 

@@ -1,6 +1,7 @@
 import { v4 as uuid } from "uuid";
 
 import type { DeepPartial } from "~/types/DeepPartial";
+import { Logger } from "~/types/Logger";
 import type { BaseContext } from "./Context";
 import type { BaseModule } from "./Module";
 import type { BaseStorage } from "./Storage";
@@ -30,17 +31,20 @@ export type ModuleProcessorOptions<
 > = {
 	storage: BaseStorage<TModuleProcessorState>;
 	modules: BaseModule[];
+	logger: Logger;
 };
 
 export class ModuleProcessor {
 	private _storage: BaseStorage<ModuleProcessorState>;
 	private _currentStep: Step = "ready";
 	private _modules: BaseModule[] = [];
+	private _logger: Logger;
 	private readonly _id = uuid();
 
 	constructor(private _options: ModuleProcessorOptions) {
 		this._storage = _options.storage;
 		this._modules = _options.modules;
+		this._logger = _options.logger;
 	}
 
 	public process<TContext extends BaseContext = BaseContext>(
@@ -71,7 +75,7 @@ export class ModuleProcessor {
 	private async processGatherers<TContext extends BaseContext = BaseContext>(
 		context: TContext,
 	) {
-		console.log("Processing gatherers");
+		this._logger.trace("processing gatherers");
 		this._currentStep = "gatherers";
 
 		const data = {} as Record<string, unknown>;
@@ -79,13 +83,16 @@ export class ModuleProcessor {
 		const promises = [];
 
 		for (const module of Object.values(this._modules)) {
+			const gathererLogger = this._logger.child({
+				moduleId: module.id,
+			});
 			module.on("gatherer:start", (payload) => {
-				console.log(`${module.id} => ${payload.gathererId} start`);
+				gathererLogger.trace({ gathererId: payload.gathererId }, "start");
 				this.reportProgress(payload.gathererId, "inProgress");
 			});
 
 			module.on("gatherer:complete", (payload) => {
-				console.log(`${module.id} => ${payload.gathererId} complete`);
+				gathererLogger.trace({ gathererId: payload.gathererId }, "complete");
 				this.reportProgress(payload.gathererId, "complete");
 				data[payload.gathererId] = payload.data;
 			});
@@ -95,7 +102,7 @@ export class ModuleProcessor {
 
 		await Promise.all(promises);
 
-		console.log("Gatherers complete");
+		this._logger.trace("gatherers complete");
 
 		return data;
 	}

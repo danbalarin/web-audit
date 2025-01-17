@@ -1,7 +1,6 @@
 import { BaseStorage, ModuleProcessorState } from "@repo/api";
 import z from "zod";
-
-import { baseProcedure } from "~/server/trpc/init";
+import { baseProcedure } from "~/server/trpc/procedure";
 
 const inputSchema = z.object({
 	id: z.string(),

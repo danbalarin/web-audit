@@ -1,4 +1,5 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+import { trpcLogger } from "~/lib/logger";
 
 import { appRouter, createTRPCContext } from "~/server";
 
@@ -8,6 +9,9 @@ const handler = (req: Request) => {
 		endpoint: "/api/trpc",
 		router: appRouter,
 		createContext: createTRPCContext,
+		onError: ({ error, path }) => {
+			trpcLogger.error(error, `Error in tRPC handler on path: ${path}`);
+		},
 	});
 };
 
