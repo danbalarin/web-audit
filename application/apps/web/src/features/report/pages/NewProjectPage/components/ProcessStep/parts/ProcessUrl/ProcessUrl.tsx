@@ -5,6 +5,8 @@ import {
 	LinearProgress,
 	Stack,
 } from "@mui/material";
+import { ModuleProcessorState } from "@repo/api";
+import { useAuditState } from "~/features/report/states/auditState";
 import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";
 import { useProcessUrl } from "../../hooks/useProcessUrl";
 
@@ -13,7 +15,11 @@ type ProcessUrlProps = {
 };
 
 export const ProcessUrl = ({ url }: ProcessUrlProps) => {
-	const onComplete = console.log;
+	const onComplete = (data: ModuleProcessorState) => {
+		useAuditState
+			.getState()
+			.addUrlData(url, { jobId: data.id, data: data.modules });
+	};
 	const { data, run, state } = useProcessUrl({ url, onComplete });
 
 	return (
