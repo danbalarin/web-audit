@@ -1,5 +1,6 @@
-import { ModuleProcessorMeta } from "@repo/api";
+import { ModuleProcessorState } from "@repo/api";
 import { useCallback, useEffect, useState } from "react";
+import { reactLogger } from "~/lib/logger";
 import { trpc } from "~/server/query/client";
 
 enum UrlStatus {
@@ -16,7 +17,7 @@ type UrlState = {
 
 type UseProcessUrlProps = {
 	url: string;
-	onComplete: (data: ModuleProcessorMeta) => void;
+	onComplete: (data: ModuleProcessorState) => void;
 };
 
 export const useProcessUrl = ({ url, onComplete }: UseProcessUrlProps) => {
@@ -25,21 +26,41 @@ export const useProcessUrl = ({ url, onComplete }: UseProcessUrlProps) => {
 	const [state, setState] = useState<UrlState>({
 		status: "waiting",
 	});
-	const { refetch, data } = trpc.modules.jobStatus.useQuery(
+	const { refetch: statusRefetch, data: statusData } =
+		trpc.modules.jobStatus.useQuery(
+			{ id: jobId },
+			{
+				enabled: state.status === "loading",
+				refetchInterval: state.status === "loading" ? 1000 : false,
+			},
+		);
+	const { refetch } = trpc.modules.jobResult.useQuery(
 		{ id: jobId },
-		{
-			enabled: state.status === "loading",
-			refetchInterval: state.status === "loading" ? 1000 : false,
-		},
+		{ enabled: false },
 	);
 
 	useEffect(() => {
-		if (data?.ok && data.data.meta.progress === 1) {
-			refetch({ cancelRefetch: true });
-			setState({ status: "ok" });
-			onComplete(data.data.meta);
-		}
-	}, [data]);
+		(async () => {
+			if (statusData?.ok && statusData.data.meta.progress === 1) {
+				statusRefetch({ cancelRefetch: true });
+				const resultData = await refetch();
+				if (!resultData.data?.ok) {
+					reactLogger.error("Error fetching job result", resultData.error);
+					setState({
+						status: "error",
+						error: resultData.error?.message || "Unknown error",
+					});
+					return;
+				}
+				setState({ status: "ok" });
+				onComplete({
+					id: jobId,
+					meta: statusData.data.meta,
+					modules: resultData.data.data.modules,
+				});
+			}
+		})();
+	}, [statusData]);
 
 	const run = useCallback(async () => {
 		if (state.status === "loading") {
@@ -50,7 +71,7 @@ export const useProcessUrl = ({ url, onComplete }: UseProcessUrlProps) => {
 		try {
 			const { id } = await mutateAsync({ url });
 			setJobId(id);
-			await refetch();
+			await statusRefetch();
 			// biome-ignore lint/suspicious/noExplicitAny: error handling
 		} catch (error: any) {
 			setState({
@@ -63,6 +84,6 @@ export const useProcessUrl = ({ url, onComplete }: UseProcessUrlProps) => {
 	return {
 		run,
 		state,
-		data,
+		data: statusData,
 	};
 };

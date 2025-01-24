@@ -5,6 +5,7 @@ export type UrlAuditData = {
 	isHome: boolean;
 	html?: string;
 	data?: unknown;
+	jobId?: string;
 };
 
 export type AuditState = {
