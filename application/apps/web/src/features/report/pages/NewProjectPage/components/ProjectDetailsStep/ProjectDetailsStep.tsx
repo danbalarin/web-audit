@@ -34,10 +34,16 @@ export function ProjectDetailsStep(props: ProjectDetailsStepProps) {
 		urls: restUrls,
 	} as ProjectDetailsFormValues;
 	const onSubmit = (data: ProjectDetailsFormValues) => {
-		const addUrl = useAuditState.getState().addUrl;
-		useAuditState.setState({ name: data.projectName });
-		addUrl(data.homeUrl, true);
-		data.urls.forEach((url) => addUrl(url, false));
+		useAuditState.setState({
+			name: data.projectName,
+			urls: {
+				[data.homeUrl]: { isHome: true },
+				...data.urls.reduce(
+					(acc, url) => ({ ...acc, [url]: { isHome: false } }),
+					{},
+				),
+			},
+		});
 		useNewProjectState.setState({ activeStep: Step.ConnectionCheck });
 	};
 	const disabled = activeStep !== Step.ProjectDetails;

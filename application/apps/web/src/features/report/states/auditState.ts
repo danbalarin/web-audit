@@ -11,7 +11,6 @@ export type AuditState = {
 	name: string;
 	urls: { [k: string]: UrlAuditData };
 	connectionSpeed: number;
-	addUrl: (url: string, isHome: boolean) => void;
 	addUrlData: (
 		url: string,
 		data: Partial<Omit<UrlAuditData, "isHome">>,
@@ -21,15 +20,10 @@ export type AuditState = {
 export const useAuditState = create<AuditState>()(
 	persist(
 		devtools(
-			(set, get) => ({
+			(set) => ({
 				name: "",
 				urls: {},
 				connectionSpeed: 0,
-				addUrl: (url: string, isHome: boolean) => {
-					const urls = get().urls;
-					urls[url] = { isHome };
-					set({ urls });
-				},
 				addUrlData: (
 					url: string,
 					data: Partial<Omit<UrlAuditData, "isHome">>,
