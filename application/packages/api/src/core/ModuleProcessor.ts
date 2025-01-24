@@ -58,7 +58,7 @@ export class ModuleProcessor {
 	}
 
 	private async saveState(data: DeepPartial<ModuleProcessorState>) {
-		await this._storage.append(this._id, data);
+		await this._storage.append(this._id, { id: this._id, ...data });
 	}
 
 	private async processAsync<TContext extends BaseContext = BaseContext>(
@@ -121,7 +121,7 @@ export class ModuleProcessor {
 			progress =
 				(completedGatherers.length + 1) /
 				Object.keys(meta.gatherersStatus).length;
-			console.log(`${progress * 100}%`);
+			this._logger.trace({ progress: progress * 100 }, "progress");
 		}
 
 		this.saveState({
