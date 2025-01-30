@@ -141,10 +141,13 @@
   set block(spacing: 1.2em)
 
   body
+  
+  set par(leading: 0.8em, first-line-indent: 0em, justify: false)
 
   abbr.abbr.list()
 
+  
   if bibliography-file != none [
-    #bibliography(bibliography-file, style: "american-psychological-association")
+    #bibliography(bibliography-file, style: "american-psychological-association", )
   ]
 }
