@@ -106,7 +106,10 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 				</Stack>
 			</AccordionDetails>
 			<AccordionActions>
-				<Button disabled={!stepComplete} onClick={goNext}>
+				<Button
+					disabled={!stepComplete || activeStep !== Step.ConnectionCheck}
+					onClick={goNext}
+				>
 					Continue
 				</Button>
 			</AccordionActions>
