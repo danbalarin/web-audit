@@ -56,7 +56,7 @@
     margin: (right: 20mm, left: 2cm, top: 25mm, bottom: 25mm)
   )
 
-  set heading(numbering: "1.1.1")
+  set heading(numbering: "1.1.1", supplement: [Chapter])
 
   show link: underline
 

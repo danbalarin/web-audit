@@ -1,6 +1,6 @@
 #import "../../template/lib.typ": abbr
 
-=== Internet Engineering Task Force <IETF>
+== Internet Engineering Task Force <IETF>
 
 The #abbr.l("IETF") is a premier international standards organisation responsible for the development and promotion of voluntary internet standards, particularly those of the Internet Protocol Suite (#abbr.s("TCP")/#abbr.s("IP")).
 Founded in 1986, the IETF operates as an open community of network designers, operators, vendors, and researchers dedicated to the evolution of internet architecture and the smooth operation of the Internet.
@@ -15,7 +15,7 @@ Anyone interested in the development of internet standards can participate, and 
 This openness ensures that a diverse range of perspectives contributes to the standards process, leading to more resilient and globally applicable solutions. 
 The IETF values practical engineering and holds that the best ideas are proven through implementation and real-world testing.
 
-==== Key Standards and Protocols
+=== Key Standards and Protocols
 
 //TODO source
 The Internet Engineering Task Force (IETF) has played a crucial role in developing a wide array of standards and protocols that constitute the technical bedrock of the Internet. 
@@ -54,7 +54,7 @@ Each RFC is assigned a unique number and serves as a stable reference for the ma
 The documents range from standards track specifications to informational and experimental documents, and even include historical records and humorous essays.
 
 
-==== Impact on Web Development and Internet Functionality
+=== Impact on Web Development and Internet Functionality
 
 The IETF's work has a profound effect on web development and the overall functionality of the Internet. 
 By standardising essential protocols like TCP/IP, HTTP, and DNS, the IETF enables interoperability between different systems and devices, ensuring that the Internet remains a cohesive and accessible network for users worldwide.
@@ -70,7 +70,7 @@ The continuous evolution of security protocols addresses emerging threats and vu
 
 By adhering to IETF standards, developers and engineers contribute to a stable and functional Internet, avoiding fragmentation and incompatibilities that could hinder communication and access.
 
-==== Quality Assurance and Best Practices
+=== Quality Assurance and Best Practices
 
 The standards and guidelines produced by the IETF serve as benchmarks for quality assurance in network engineering and web development.
 By following these standards, organisations can ensure that their systems are compliant with industry best practices, enhancing reliability and performance.
@@ -83,7 +83,7 @@ BCPs are instrumental in promoting consistency and excellence in Internet operat
 For example, BCP documents offer guidance on mitigating #abbr.a("DDoS") attacks, implementing anti-spam measures, and deploying IPv6. 
 By adopting these best practices, network operators and developers can reduce vulnerabilities, improve user experience, and contribute to the overall health of the Internet infrastructure.
 
-==== Influence on Policy and Governance
+=== Influence on Policy and Governance
 
 While the IETF focuses on technical standards rather than policy-making, its work inevitably intersects with issues of Internet governance and regulation. 
 The standards developed by the IETF can influence regulatory approaches to topics like data privacy, network neutrality, and cybersecurity.

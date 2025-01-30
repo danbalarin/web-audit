@@ -14,18 +14,32 @@ The chapter concludes with an exploration of the limitations and challenges inhe
 This gap analysis is instrumental in setting the stage for developing a more integrated auditing approach that combines automated and manual techniques. 
 By understanding where existing methods lack effectiveness or efficiency, we can better design solutions that provide comprehensive quality assurance for websites without requiring access to their internal codebase.
 
+#pagebreak()
+
 #include "1-Black-Box-Auditing.typ"
+
+#pagebreak()
 
 #include "2-Web-Accessibility.typ"
 
+#pagebreak()
+
 #include "3-Performance.typ"
+
+#pagebreak()
 
 #include "4-Security.typ"
 
+#pagebreak()
+
 #include "5-Search-Engine-Optimisation.typ"
+
+#pagebreak()
 
 #include "6-Usability-and-User-Experience.typ"
 
+#pagebreak()
+
 #include "7-Limitations-and-Challenges-of-Existing-Solutions.typ"
 
-#include "8-Gap-Analysis.typ"
+// #include "8-Gap-Analysis.typ"

@@ -18,10 +18,10 @@
 
 #include "abbrevations.typ"
 
-#include "chapters/1-Introduction/main.typ"
+#include "chapters/0-Introduction/main.typ"
+
+#include "chapters/1-Main-Bodies/main.typ"
 
 #include "chapters/2-Existing-Solutions/main.typ"
 
-// #include "chapters/existing-solutions.typ"
-
-#include "chapters/metrics/_index.typ"
+#include "chapters/3-Metrics/main.typ"

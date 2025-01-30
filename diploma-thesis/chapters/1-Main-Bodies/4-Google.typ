@@ -1,6 +1,6 @@
 #import "../../template/lib.typ": abbr
 
-=== Google
+== Google <google>
 
 Google is a multinational technology company that has significantly influenced the development of the World Wide Web through its search engine, advertising platforms, and a wide array of web-based services and tools. 
 Founded in 1998 by Larry Page and Sergey Brin while they were Ph.D. students at Stanford University, Google has grown to become one of the most influential entities in shaping how information is accessed, distributed, and utilised on the Internet. 
@@ -14,7 +14,7 @@ By focusing on user-centric design and leveraging advanced algorithms, Google ai
 The company's objectives extend beyond search to include advancements in cloud computing, artificial intelligence, machine learning, advertising, and mobile technologies. 
 Google invests heavily in research and development to push the boundaries of what is possible, striving to innovate and improve efficiency, accessibility, and user engagement across its product and service offerings.
 
-==== Contributions to Web Standards and Development
+=== Contributions to Web Standards and Development
 
 Google has played a pivotal role in advancing web standards and technologies, actively participating in organisations like the #link(<W3C>, "World Wide Web Consortium") and the #link(<IETF>, "Internet Engineering Task Force"). 
 By collaborating on the development of open standards, Google promotes interoperability, innovation, and a robust web ecosystem.
@@ -37,7 +37,7 @@ Furthermore, Google has contributed to the development of #abbr.pll("PWA"), whic
 PWAs leverage technologies such as service workers and manifest files to provide offline functionality, push notifications, and the ability to install web apps on devices. 
 This approach bridges the gap between web and native applications, offering improved user engagement without the need for app store distribution.
 
-==== Impact on Web Development Tools and Frameworks
+=== Impact on Web Development Tools and Frameworks
 
 To facilitate the development of high-quality web applications, Google has created numerous tools, frameworks, and resources widely adopted by developers. 
 One of the most prominent is Angular, a TypeScript-based open-source web application framework. 
@@ -52,7 +52,7 @@ The company also offers the #abbr.a("GCP"), providing scalable infrastructure an
 GCP enables developers to build, test, and deploy web applications efficiently, leveraging Google's infrastructure and suite of tools.
 Services like Google App Engine, Compute Engine, and Kubernetes Engine support various development needs, from serverless architectures to container orchestration.
 
-==== Web Performance and Optimisation Initiatives
+=== Web Performance and Optimisation Initiatives
 
 Recognising the importance of web performance in user experience, Google has initiated several projects and tools aimed at improving website speed and efficiency. 
 // TODO  source
@@ -68,7 +68,7 @@ In addition, Google promotes the use of #abbr.a("AMP"), an open-source initiativ
 AMP provides a framework for creating fast-loading mobile pages by restricting certain HTML, CSS, and JavaScript features and leveraging streamlined resources.
 This approach enhances user experience on mobile devices, reduces bounce rates, and can improve visibility in search results.
 
-==== Search Engine Optimisation and Guidelines
+=== Search Engine Optimisation and Guidelines
 
 As the operator of the world's most popular search engine, Google plays a crucial role in shaping #abbr.a("SEO") practices. 
 The company provides extensive guidelines for webmasters to help improve their site's visibility and ranking in Google Search results. 
@@ -81,7 +81,7 @@ By using Search Console, developers and site owners can optimise their sites for
 By defining best practices for SEO and providing tools for analysis and improvement, Google influences how websites are developed and maintained. 
 The emphasis on user experience, relevance, and technical excellence encourages practices that enhance accessibility and satisfaction for users.
 
-==== Web Accessibility Initiatives
+=== Web Accessibility Initiatives
 
 Google is committed to making the web accessible to everyone, including people with disabilities. 
 The company supports accessibility standards and provides resources to help developers create accessible web applications. 
@@ -93,7 +93,7 @@ Furthermore, Google contributes to accessibility by implementing features in its
 For instance, Google Docs includes features like screen reader support and voice typing, enhancing accessibility for users with visual or motor impairments. 
 By prioritising accessibility in its offerings and providing tools for developers, Google promotes inclusivity and equal access to information.
 
-==== Security and Privacy Measures
+=== Security and Privacy Measures
 
 Security and privacy are fundamental aspects of Google's approach to web development. 
 The company advocates for secure communication protocols, such as HTTPS, and provides tools to facilitate the adoption of #abbr.s("SSL")/#abbr.s("TLS") certificates. 
@@ -108,7 +108,7 @@ Additionally, Google provides developers with security tools and frameworks to h
 Services like Cloud Security Scanner for applications running on Google Cloud Platform help detect common web application vulnerabilities, including #abbr.a("XSS") and mixed content issues. 
 Google's reCAPTCHA service also helps protect websites from spam and abuse by distinguishing between human and automated access.
 
-==== Open Source Contributions
+=== Open Source Contributions
 
 Google is a strong proponent of open-source software, contributing to numerous projects that benefit the web development community. 
 // TODO source
@@ -124,7 +124,7 @@ Flutter enables developers to create expressive and flexible user interfaces wit
 
 By open-sourcing many of its projects, Google fosters collaboration and innovation within the global developer community, accelerating the advancement of web technologies and enabling shared progress.
 
-==== Influence on Mobile Web and Android
+=== Influence on Mobile Web and Android
 
 Google's influence extends significantly into the mobile web space, primarily through the Android operating system. 
 Android, an open-source platform developed by Google, powers a substantial proportion of the world's mobile devices. 

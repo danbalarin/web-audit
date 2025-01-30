@@ -1,6 +1,6 @@
 #import "../../template/lib.typ": abbr
 
-== Web Accessibility
+== Web Accessibility <accessibility>
 
 Web accessibility is an essential facet of website quality assurance, ensuring that web content is accessible to all users, including those with disabilities. 
 Numerous existing solutions have been developed to facilitate the creation and auditing of accessible websites, addressing various aspects of accessibility compliance and user experience. 
@@ -32,8 +32,9 @@ These tools provide real-time feedback on code compliance with accessibility sta
 Such integrations foster an environment where accessibility is a continuous consideration rather than an afterthought.
 
 Assistive technologies themselves are integral to the landscape of existing solutions. 
-Screen readers like JAWS, NVDA, and VoiceOver enable users with visual impairments to interact with web content through auditory feedback or braille displays. 
+Screen readers like #abbr.s("JAWS"), #abbr.s("NVDA"), and VoiceOver enable users with visual impairments to interact with web content through auditory feedback or braille displays. 
 For auditors and developers, using these assistive technologies during testing is crucial for understanding how users with disabilities experience their websites. 
 Testing with screen readers can reveal issues not detectable by automated tools, such as reading order inconsistencies, unclear link text, and mislabelled form controls.
+
 
 

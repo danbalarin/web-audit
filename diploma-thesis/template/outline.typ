@@ -33,7 +33,7 @@
         [#number],
         (max-width, this-width) =>
         box[#v(.4em)#h(calc.max(this-width - 6pt, 0pt))#num #text],
-        )
+      )
     },
   )
   

@@ -1,6 +1,6 @@
 #import "../../template/lib.typ": abbr
 
-=== Mozilla
+== Mozilla
 
 Mozilla is a globally recognised, non-profit organisation dedicated to ensuring that the Internet remains an open and accessible resource for all. 
 Founded in 1998, Mozilla emerged from the Netscape Communications Corporation with the release of the Mozilla Application Suite, which later evolved into the widely used Firefox web browser. 
@@ -15,7 +15,7 @@ The organisation aims to foster a healthy Internet ecosystem by developing open-
 By encouraging transparency and collaboration, Mozilla works to ensure that the Internet remains a platform where creativity and innovation can thrive without proprietary constraints. 
 The organisation also actively engages in policy advocacy, striving to influence Internet governance and legislation in ways that protect user rights and promote an open web.
 
-==== Contributions to Web Browsers and Technologies
+=== Contributions to Web Browsers and Technologies
 
 One of Mozilla's most significant contributions to the Internet is the development of the Firefox web browser. 
 Launched in 2004, Firefox quickly gained popularity as a fast, secure, and user-friendly alternative to dominant browsers of the time. 
@@ -30,7 +30,7 @@ In response to the increasing complexity of web applications and the need for be
 Released in 2017, Firefox Quantum represented a significant overhaul of the browser's architecture, focusing on speed, efficiency, and responsiveness. 
 By leveraging technologies like the Servo parallel browser engine and the Rust programming language, Quantum improved resource utilisation and load times, enhancing the overall user experience.
 
-==== Advocacy for Open Standards and Web Technologies
+=== Advocacy for Open Standards and Web Technologies
 
 Mozilla is a staunch advocate for open web standards and plays an active role in organisations like the #link(<W3C>, "World Wide Web Consortium") and the #link(<IETF>, "Internet Engineering Task Force"). 
 By participating in the development of specifications and protocols, Mozilla influences the direction of web technologies to promote openness, interoperability, and user empowerment.
@@ -45,7 +45,7 @@ Mozilla also pioneered the development of #abbr.a("AJAX") techniques, which revo
 AJAX enables asynchronous data retrieval without reloading entire web pages, leading to faster, more dynamic user experiences. 
 This innovation has had a lasting impact on web development, influencing modern frameworks and applications.
 
-==== Developer Tools and Resources
+=== Developer Tools and Resources
 
 Understanding the importance of empowering developers, Mozilla provides a wealth of tools and resources to facilitate web development. 
 The Firefox Developer Edition is a browser tailored for developers, offering advanced features like the Responsive Design Mode, which allows developers to test how websites look and function across different screen sizes and devices. 
@@ -60,7 +60,7 @@ By providing high-quality, up-to-date documentation, Mozilla supports developers
 In addition to documentation, Mozilla contributes to developer tools like Firefox DevTools, which includes a powerful set of in-browser tools for web development and debugging. 
 Features like the JavaScript Debugger, Network Monitor, and Performance Tools enable developers to optimise their applications and diagnose issues effectively.
 
-==== Innovations in Web Technologies
+=== Innovations in Web Technologies
 
 Mozilla continues to innovate in web technologies, exploring new paradigms to enhance performance and user experience.
 The development of the Rust programming language is a significant achievement, designed to provide memory safety without sacrificing performance.
@@ -75,7 +75,7 @@ This technology expands the capabilities of web applications, allowing for more 
 Mozilla is also involved in the development of WebXR, an API that supports #abbr.a("AR") and #abbr.a("VR") experiences in web browsers.
 By standardising how browsers handle AR and VR content, Mozilla enables developers to create immersive experiences accessible directly through the web, without the need for additional software or applications.
 
-==== Impact on Web Development and Quality Assurance
+=== Impact on Web Development and Quality Assurance
 
 Mozilla's contributions have had a lasting impact on web development practices and quality assurance. 
 By advocating for open standards and providing tools that facilitate adherence to these standards, Mozilla ensures that web applications are accessible, interoperable, and performant across different browsers and devices.

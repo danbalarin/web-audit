@@ -1,6 +1,6 @@
 #import "../../template/lib.typ": abbr
 
-=== International Organisation for Standardisation
+== International Organisation for Standardisation
 
 // TODO source
 The #abbr.l("ISO") is an independent, non-governmental international organisation that develops and publishes a wide range of proprietary, industrial, and commercial standards. 
@@ -18,7 +18,7 @@ This commitment protects consumers and businesses alike.
 In supporting innovation, ISO encourages the adoption of new technologies and best practices by providing frameworks that support research and development.
 Operating through technical committees composed of experts from relevant industries, consumer associations, academia, #abbr.pls("NGO"), and government bodies, ISO's collaborative approach ensures that its standards reflect a balance of international knowledge and experience.
 
-==== Key Standards and Specifications
+=== Key Standards and Specifications
 
 ISO has published over 23,000 international standards covering almost every industry, from technology to food safety, agriculture to healthcare. 
 In the context of web development and information technology, several key standards are particularly relevant.
@@ -47,7 +47,7 @@ Adherence to standards like ISO 8601 is therefore a critical component of web ap
 
 These standards contribute significantly to the development of reliable, secure, and user-friendly web applications and services.
 
-==== Emerging Trends and Future Directions
+=== Emerging Trends and Future Directions
 
 ISO continues to evolve its standards to address emerging technologies and challenges in the digital world. 
 In the field of cybersecurity, ISO is developing new standards and updating existing ones to tackle the increasing complexity of cyber threats and the need for robust security measures. 
