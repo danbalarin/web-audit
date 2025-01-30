@@ -13,6 +13,18 @@ const nextConfig = {
 			// "pino-pretty",
 		],
 	},
+	redirects: () => [
+		{
+			source: "/",
+			destination: "/project",
+			permanent: false,
+		},
+		{
+			source: "/project",
+			destination: "/project/new",
+			permanent: true,
+		},
+	],
 };
 
 /** @type {import('@pigment-css/nextjs-plugin').PigmentOptions} */
