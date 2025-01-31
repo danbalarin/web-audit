@@ -8,15 +8,14 @@ In the case of accessibility, the black-box approach is even better than with ac
 === Versions
 
 WCAG has undergone several iterations to address the evolving nature of web technologies and the diverse needs of users with disabilities. 
-The initial version, WCAG 1.0 @w3c_web_1999, was setting the groundwork for web accessibility by providing guidelines primarily focused on HTML-based content. 
+The initial version, WCAG 1.0 @chisholm_web_1999, was setting the groundwork for web accessibility by providing guidelines primarily focused on HTML-based content. 
 However, as web technologies advanced, there was a need for more adaptable guidelines. 
-This led to the release of WCAG 2.0 @w3c_web_2008, which offered a technology-agnostic approach based on four core principles: Perceivable, Operable, Understandable, and Robust (collectively known as the POUR principles). WCAG 2.0 aimed to be flexible enough to apply to various technologies beyond HTML.
+This led to the release of WCAG 2.0 @caldwell_web_2008, which offered a technology-agnostic approach based on four core principles: Perceivable, Operable, Understandable, and Robust (collectively known as the POUR principles). WCAG 2.0 aimed to be flexible enough to apply to various technologies beyond HTML.
 
-The #abbr.l("W3C") released WCAG 2.1 @w3c_web_2018, recognising the need to address emerging web practices and technologies. 
+The #abbr.l("W3C") released WCAG 2.1 @campbell_web_2018, recognising the need to address emerging web practices and technologies. 
 This version built upon WCAG 2.0 by adding success criteria focusing on mobile accessibility, low vision, and cognitive and learning disabilities. 
 It sought to bridge gaps that had become apparent with the increasing use of mobile devices and the recognition of a broader spectrum of accessibility challenges. 
-The most recent iteration, WCAG 2.2, was released as a W3C Recommendation in October 2023 @w3c_web_2023. 
-WCAG 2.2 introduces additional success criteria to enhance accessibility for users with cognitive or learning disabilities, users of mobile devices, and users with low vision, further refining and expanding the guidelines to keep pace with technological advancements.
+The most recent iteration, WCAG 2.2 @campbell_web_2023  introduces additional success criteria to enhance accessibility for users with cognitive or learning disabilities, users of mobile devices, and users with low vision, further refining and expanding the guidelines to keep pace with technological advancements.
 
 === Levels
 

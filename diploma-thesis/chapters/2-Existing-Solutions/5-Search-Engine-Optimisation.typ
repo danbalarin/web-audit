@@ -2,7 +2,7 @@
 
 == Search Engine Optimisation
 
-#abbr.l("SEO") is a fundamental aspect of enhancing a website's visibility and accessibility to users via search engines. 
+#abbr.l("SEO") is a fundamental aspect of enhancing a website's visibility and accessibility to users via search engines.
 Effective SEO strategies improve organic traffic, increase brand awareness, and ultimately contribute to achieving business objectives. 
 Auditing a website's SEO performance is crucial for identifying areas of improvement, ensuring compliance with search engine guidelines, and staying competitive in the digital landscape. 
 Numerous existing solutions facilitate SEO auditing without requiring access to the source code, enabling an external assessment of a website's optimisation status.
@@ -11,12 +11,14 @@ One of the primary tools for SEO auditing is Google Search Console, a free servi
 Although it requires site verification for full access, limited insights can be gleaned without source code access. 
 For instance, using the public URL Inspection tool, auditors can check whether a page is indexed, view the rendered HTML, and identify any crawl errors or indexing issues. 
 This information is vital for understanding how Google perceives a website and for diagnosing technical SEO problems that may hinder visibility.
+@palmer_seo_2022
 
 Screaming Frog SEO Spider is a widely used desktop program that functions as a website crawler, emulating the behaviour of search engine bots. 
 By crawling a website, it collects data on various SEO elements, such as title tags, meta descriptions, headings, and status codes. 
 It helps identify issues like duplicate content, broken links, missing meta tags, and improper use of directives like robots.txt and canonical tags. 
 The tool operates without needing direct access to the website's backend, making it ideal for black-box SEO auditing. 
-Its ability to analyse the site's architecture and internal linking structure provides insights into potential improvements in crawl-ability and user navigation.
+Its ability to analyse the site's architecture and internal linking structure provides insights into potential improvements in crawlability and user navigation.
+@palmer_seo_2022
 
 // Tools like Ahrefs, SEMrush, and Moz Pro offer comprehensive SEO auditing capabilities, combining site crawling with backlink analysis and keyword research.
 // These platforms have extensive databases of backlinks and keyword rankings, allowing auditors to assess a website's authority, link profile, and competitive positioning. 
