@@ -48,8 +48,6 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 	const { activeStep, goNext, stepComplete } = useNewProjectState();
 	const theme = useTheme();
 
-	// console.log(useConnectionCheckState.getState());
-
 	useEffect(() => {
 		if (activeStep !== Step.ConnectionCheck) {
 			return;

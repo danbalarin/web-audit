@@ -9,4 +9,7 @@ export const PerformanceCategory: AuditCategoryDescription = {
 	fullDescription:
 		"These encapsulate your web page's performance opportunities.",
 	metrics: [LargestContentfulPaint],
+	weights: {
+		[LargestContentfulPaint.id]: 1,
+	},
 };

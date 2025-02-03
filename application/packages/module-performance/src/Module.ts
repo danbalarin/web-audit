@@ -26,8 +26,7 @@ export class PerformanceModule extends BaseModule {
 
 		return {
 			metrics: results,
-			name: "Performance",
-			description: "Performance metrics",
+			id: "performance",
 		};
 	}
 }
