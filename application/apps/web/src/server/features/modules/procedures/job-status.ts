@@ -11,7 +11,7 @@ type JobStatusInput = z.infer<typeof inputSchema>;
 type JobStatusOkResponse = {
 	ok: true;
 	id: string;
-	data: Omit<ModuleProcessorState, "modules">;
+	data: Omit<ModuleProcessorState, "result">;
 };
 
 type JobStatusErrorResponse = {

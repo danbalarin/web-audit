@@ -1,4 +1,4 @@
-import { BaseStorage, ModuleProcessorState } from "@repo/api";
+import { AuditResult, BaseStorage, ModuleProcessorState } from "@repo/api";
 import z from "zod";
 import { baseProcedure } from "~/server/trpc/procedure";
 
@@ -11,7 +11,7 @@ type JobResultInput = z.infer<typeof inputSchema>;
 type JobResultOkResponse = {
 	ok: true;
 	id: string;
-	data: Pick<ModuleProcessorState, "modules">;
+	data: Record<string, AuditResult>;
 };
 
 type JobResultErrorResponse = {
@@ -42,7 +42,7 @@ const jobResult = async ({
 		return {
 			ok: true,
 			id,
-			data: { modules: data.modules },
+			data: data.result,
 		};
 		// biome-ignore lint/suspicious/noExplicitAny: error handling
 	} catch (error: any) {
