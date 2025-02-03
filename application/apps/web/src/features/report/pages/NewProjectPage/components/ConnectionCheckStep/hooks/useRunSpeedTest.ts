@@ -8,10 +8,18 @@ export const useRunSpeedTest = () => {
 		try {
 			useConnectionCheckState.setState({ status: "speedCheckInProgress" });
 			const result = await speedTest();
-			useConnectionCheckState.setState({
-				status: "speedCheckComplete",
-				speed: result,
-			});
+			if (result.status === "slow") {
+				useConnectionCheckState.setState({
+					status: "error",
+					error: "Your connection speed is too slow to run this test.",
+					speed: result,
+				});
+			} else {
+				useConnectionCheckState.setState({
+					status: "speedCheckComplete",
+					speed: result,
+				});
+			}
 		} catch (error) {
 			useConnectionCheckState.setState({
 				status: "error",

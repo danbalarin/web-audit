@@ -19,7 +19,6 @@ import { useNewProjectState } from "../../state";
 import { Step } from "../../types/Steps";
 import { RoundedAccordion } from "../RoundedAccordion";
 import { NetworkSpeedTimelineItem } from "./components/NetworkSpeedTimelineItem";
-import { MAX_SPEED } from "./constants";
 import { useCheckAllUrls } from "./hooks/useCheckAllUrls";
 import { useRunSpeedTest } from "./hooks/useRunSpeedTest";
 import { useConnectionCheckState } from "./state";
@@ -48,6 +47,8 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 	const { runSpeedTest } = useRunSpeedTest();
 	const { activeStep, goNext, stepComplete } = useNewProjectState();
 	const theme = useTheme();
+
+	// console.log(useConnectionCheckState.getState());
 
 	useEffect(() => {
 		if (activeStep !== Step.ConnectionCheck) {
@@ -91,10 +92,7 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 			>
 				<Stack>
 					<AlignedTimeline>
-						<NetworkSpeedTimelineItem
-							maxSpeed={MAX_SPEED}
-							status={speed?.status}
-						/>
+						<NetworkSpeedTimelineItem status={speed?.status} />
 						{urls.map((url) => (
 							<UrlTestTimelineItem
 								key={url}

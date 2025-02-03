@@ -8,12 +8,15 @@ import {
 import { useTheme } from "@mui/material-pigment-css";
 import React, { useMemo } from "react";
 
-type Props = {
+export type StatusTimelineItemProps = {
 	status: "ok" | "error" | "loading" | "waiting";
 	children: React.ReactNode;
 };
 
-export function StatusTimelineItem({ status, children }: Props) {
+export function StatusTimelineItem({
+	status,
+	children,
+}: StatusTimelineItemProps) {
 	const { palette } = useTheme();
 
 	const color = useMemo(() => {

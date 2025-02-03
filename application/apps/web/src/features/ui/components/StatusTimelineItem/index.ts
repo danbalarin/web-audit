@@ -1,1 +1,4 @@
-export { StatusTimelineItem } from "./StatusTimelineItem";
+export {
+	StatusTimelineItem,
+	type StatusTimelineItemProps,
+} from "./StatusTimelineItem";

@@ -71,7 +71,7 @@ export const useSpeedTest = ({
 
 	const run = useCallback(
 		() =>
-			new Promise<UseSpeedTestCompleteResult>((res, rej) => {
+			new Promise<UseSpeedTestCompleteResult>((res) => {
 				try {
 					if (controllerRef.current) {
 						controllerRef.current.abort();
@@ -82,19 +82,15 @@ export const useSpeedTest = ({
 
 				const onCompletePromise = ({ speed }: { speed: number }) => {
 					const status = getStatus(speed, thresholds);
-					if (status === "slow") {
-						rej({ speed, status });
-					} else {
-						res({ speed, status });
-					}
+					res({ speed, status });
 				};
-
 				controllerRef.current = checkSpeed({
 					onUpdate: onConnectionUpdate,
 					onComplete: (props) => {
 						onConnectionComplete(props);
 						onCompletePromise(props);
 					},
+					minSpeed: thresholds[0],
 				});
 			}),
 		[onConnectionUpdate, onConnectionComplete, thresholds],

@@ -1,22 +1,18 @@
 import { CircularProgress, Stack, Typography } from "@mui/material";
-
 import { UseSpeedTestStatus } from "~/features/report/hooks/useSpeedTest";
+
 import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";
 
 type Props = {
-	maxSpeed: number;
 	status?: UseSpeedTestStatus;
 };
 
-const STATUS_MAP = {
-	fast: "ok",
-	medium: "ok",
-	slow: "error",
-} as const;
-
 export function NetworkSpeedTimelineItem({ status }: Props) {
+	const timelineStatus =
+		status === undefined ? "waiting" : status === "slow" ? "error" : "ok";
+
 	return (
-		<StatusTimelineItem status={status ? STATUS_MAP[status] : "waiting"}>
+		<StatusTimelineItem status={timelineStatus}>
 			<div>Speed check</div>
 			<Stack ml={1.5} mt={1.5}>
 				{status && <Typography>Speed: {status}</Typography>}
