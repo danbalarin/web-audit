@@ -1,10 +1,18 @@
-/* eslint-disable no-unused-vars */
+import { anySignal } from "any-signal";
+
 export type FastOptions = {
 	count?: number;
 	onChange?: (options: { speed: number; requestIndex: number }) => void;
 	onComplete?: (options: { speed: number }) => void;
 	unit?: Unit;
+
+	/**
+	 * Minimum speed in MBps to consider the test as successful
+	 */
+	minSpeed?: number;
 };
+
+const MIN_TIMEOUT = 2000;
 
 export enum Unit {
 	Bps = 1,
@@ -30,11 +38,13 @@ export class Fast {
 	private onComplete: FastOptions["onComplete"];
 	private unit = Unit.MBps;
 	private count = 5;
+	private minSpeed = 0;
 	constructor(options: FastOptions) {
 		this.onChange = options.onChange;
 		this.onComplete = options.onComplete;
 		this.unit = options.unit || this.unit;
 		this.count = options.count || this.count;
+		this.minSpeed = (options.minSpeed || this.minSpeed) * Unit.MBps;
 	}
 
 	getPreciseTargets() {
@@ -68,14 +78,23 @@ export class Fast {
 				break;
 			}
 			const target = targets[i];
-			if (!target) {
+			const targetSize = BINARY_DATA_SIZES[i];
+			if (!target || !targetSize) {
 				break;
 			}
+			const combinedSignal = anySignal([
+				abortSignal,
+				AbortSignal.timeout(
+					Math.max((targetSize / this.minSpeed) * 1000, MIN_TIMEOUT),
+				),
+			]);
+
 			const speed = await Fast.download(
 				target,
 				onProgressFunctor(i),
-				abortSignal,
+				combinedSignal,
 			);
+			combinedSignal.clear();
 			speeds.push(speed);
 		}
 
