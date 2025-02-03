@@ -1,4 +1,5 @@
-import { AuditResult, BaseStorage, ModuleProcessorState } from "@repo/api";
+import { BaseStorage, ModuleProcessorState } from "@repo/api";
+import { type AuditResult } from "@repo/api/types";
 import z from "zod";
 import { baseProcedure } from "~/server/trpc/procedure";
 
