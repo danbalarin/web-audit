@@ -1,71 +1,66 @@
+import { AuditCategoryResult, AuditResult } from "~/types/AuditResult";
+import { BaseContext } from "../types/Context";
 import { EventEmitter } from "../utils/EventEmitter";
-import { BaseContext } from "./Context";
-import { BaseGatherer } from "./Gatherer";
 
 export type ModuleOptions = {
 	id: string;
 	name: string;
 	description: string;
 	version: string;
-	gatherers: BaseGatherer[];
 };
 
-export type ModuleGathererStartEventPayload = {
-	gathererId: string;
-};
-
-export type ModuleGathererCompleteEventPayload<TData = unknown> = {
-	gathererId: string;
-	data: TData;
-};
-
-export type ModuleGathererProgressEventPayload<TData = unknown> = {
+export type ModuleProgressEventPayload = {
+	/**
+	 * Progress percentage on a scale of 0 to 1
+	 */
 	progress: number;
-	gathererId: string;
-	data: TData;
+};
+
+export type ModuleProgressErrorEventPayload = {
+	error: Error;
+};
+
+export type ModuleProgressCompleteEventPayload = {
+	data: AuditCategoryResult;
 };
 
 export type ModuleEvents = {
-	"gatherer:start": ModuleGathererStartEventPayload;
-	"gatherer:complete": ModuleGathererCompleteEventPayload;
-	"gatherer:progress": ModuleGathererProgressEventPayload;
+	progress: ModuleProgressEventPayload;
+	error: ModuleProgressErrorEventPayload;
+	complete: ModuleProgressCompleteEventPayload;
 };
 
 export abstract class BaseModule<
 	TContext extends BaseContext = BaseContext,
 > extends EventEmitter<ModuleEvents> {
-	private _gatherers: BaseGatherer[] = [];
+	private _progress = 0;
 
 	constructor(private readonly _options: ModuleOptions) {
 		super();
-		this._gatherers = _options.gatherers;
 	}
 
-	async executeGatherers(context: TContext) {
-		const gatherers = Object.values(this._gatherers);
-		const results = {} as Record<string, unknown>;
+	protected abstract _execute(context: TContext): Promise<AuditResult>;
 
-		for (const gatherer of gatherers) {
-			this.emit("gatherer:start", {
-				gathererId: gatherer.id,
+	async execute(context: TContext) {
+		this.emit("progress", {
+			progress: this._progress,
+		});
+		try {
+			const result = await this._execute(context);
+			this.emit("complete", {
+				data: result,
 			});
-
-			gatherer.on("progress", (payload) => {
-				this.emit("gatherer:progress", {
-					gathererId: gatherer.id,
-					...payload,
-				});
+			return result;
+		} catch (error) {
+			const sentError =
+				error instanceof Error
+					? error
+					: new Error("Unknown error", { cause: error });
+			this.emit("error", {
+				error: sentError,
 			});
-
-			results[gatherer.id] = await gatherer.execute(context);
-
-			this.emit("gatherer:complete", {
-				gathererId: gatherer.id,
-				data: results[gatherer.id],
-			});
+			throw error;
 		}
-
-		return results;
 	}
 
 	// GETTERS
@@ -83,15 +78,5 @@ export abstract class BaseModule<
 
 	get version() {
 		return this._options.version;
-	}
-
-	get gatherers() {
-		return this._gatherers;
-	}
-
-	getGatherer<TGatherer extends BaseGatherer>(
-		id: string,
-	): TGatherer | undefined {
-		return this._gatherers.find((g) => g.id === id) as TGatherer;
 	}
 }

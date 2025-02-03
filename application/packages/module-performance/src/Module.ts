@@ -1,11 +1,8 @@
-import { BaseModule } from "@repo/api";
-import {
-	PerformanceGatherer,
-	PerformanceGathererOptions,
-} from "./PerformanceGatherer";
+import { AuditCategoryResult, BaseContext, BaseModule } from "@repo/api";
+import { LighthouseRunner, LighthouseRunnerOptions } from "./LighthouseRunner";
 
 export type PerformanceModuleOptions = {
-	performanceOptions: PerformanceGathererOptions;
+	lighthouseRunnerOptions: LighthouseRunnerOptions;
 };
 
 export class PerformanceModule extends BaseModule {
@@ -17,9 +14,20 @@ export class PerformanceModule extends BaseModule {
 			name: "Performance",
 			version: "1.0.0",
 			id: "performance",
-			gatherers: [
-				new PerformanceGatherer(_performanceModuleOptions.performanceOptions),
-			],
 		});
+	}
+
+	protected async _execute(context: BaseContext): Promise<AuditCategoryResult> {
+		const runner = new LighthouseRunner(
+			this._performanceModuleOptions.lighthouseRunnerOptions,
+		);
+
+		const results = await runner.run(context);
+
+		return {
+			metrics: results,
+			name: "Performance",
+			description: "Performance metrics",
+		};
 	}
 }

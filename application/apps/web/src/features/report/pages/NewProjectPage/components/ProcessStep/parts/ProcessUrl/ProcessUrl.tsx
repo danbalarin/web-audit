@@ -29,7 +29,7 @@ export const ProcessUrl = ({
 	const handleCompletion = (data: ModuleProcessorState) => {
 		useAuditState
 			.getState()
-			.addUrlData(url, { jobId: data.id, data: data.modules });
+			.addUrlData(url, { jobId: data.id, data: data.result });
 		onComplete?.();
 	};
 	const { data, run, state } = useProcessUrl({
@@ -69,7 +69,7 @@ export const ProcessUrl = ({
 					<LinearProgress
 						value={100}
 						variant={
-							data?.ok && data.data.meta.progress === 1
+							data?.ok && data.data?.meta?.progress === 1
 								? "determinate"
 								: "query"
 						}

@@ -1,9 +1,12 @@
+import createMDX from "@next/mdx";
 import { withPigment } from "@pigment-css/nextjs-plugin";
+
 import "./src/env.mjs";
 import { theme } from "./src/features/ui/components/ThemeRegistry/theme.mjs";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 	output: "standalone",
 	experimental: {
 		serverComponentsExternalPackages: [
@@ -33,4 +36,8 @@ const pigmentConfig = {
 	theme,
 };
 
-export default withPigment(nextConfig, pigmentConfig);
+const withMDX = createMDX({
+	// Add markdown plugins here, as desired
+});
+
+export default withMDX(withPigment(nextConfig, pigmentConfig));

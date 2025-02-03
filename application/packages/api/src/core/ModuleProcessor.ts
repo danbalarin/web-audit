@@ -1,29 +1,23 @@
 import { v4 as uuid } from "uuid";
 
+import { AuditResult } from "~/types/AuditResult";
 import type { DeepPartial } from "~/types/DeepPartial";
 import { Logger } from "~/types/Logger";
-import type { BaseContext } from "./Context";
+import type { BaseContext } from "../types/Context";
 import type { BaseModule } from "./Module";
 import type { BaseStorage } from "./Storage";
 
-type Step = "ready" | "gatherers" | "dataPreprocessing" | "audits" | "done";
-
-type GatherersStatus = "complete" | "inProgress" | "waiting";
+type Step = "ready" | "processing" | "done";
 
 export type ModuleProcessorMeta = {
 	step: Step;
-	gatherersStatus: Record<string, GatherersStatus>;
 	progress: number;
-};
-
-type ModuleData = {
-	gatherers: Record<string, unknown>;
 };
 
 export type ModuleProcessorState = {
 	id: string;
 	meta: ModuleProcessorMeta;
-	modules: Record<string, ModuleData>;
+	result: AuditResult;
 };
 
 export type ModuleProcessorOptions<
@@ -61,92 +55,68 @@ export class ModuleProcessor {
 		await this._storage.append(this._id, { id: this._id, ...data });
 	}
 
-	private async processAsync<TContext extends BaseContext = BaseContext>(
-		context: TContext,
-	) {
-		const gatherersData = await this.processGatherers(context);
-
-		this.saveState({ modules: { gatherers: gatherersData } });
-
-		return gatherersData;
-		// TODO: data preprocessing
+	private async progress(progress: number) {
+		await this.saveState({
+			meta: {
+				step: this._currentStep,
+				progress,
+			},
+		});
 	}
 
-	private async processGatherers<TContext extends BaseContext = BaseContext>(
+	private async processAsync<TContext extends BaseContext = BaseContext>(
 		context: TContext,
-	) {
-		this._logger.trace("processing gatherers");
-		this._currentStep = "gatherers";
+	): Promise<AuditResult> {
+		this._logger.trace("processing modules");
+		this._currentStep = "processing";
 
-		const data = {} as Record<string, unknown>;
-		await this.initGatherersMeta();
+		await this.progress(0);
+
+		const result: AuditResult = {
+			categories: [],
+			runId: this._id,
+			url: context.url,
+		};
+		let completed = 0;
 		const promises = [];
-
 		for (const module of Object.values(this._modules)) {
-			const gathererLogger = this._logger.child({
+			const moduleLogger = this._logger.child({
 				moduleId: module.id,
 			});
-			module.on("gatherer:start", (payload) => {
-				gathererLogger.trace({ gathererId: payload.gathererId }, "start");
-				this.reportProgress(payload.gathererId, "inProgress");
+			module.on("progress", (payload) => {
+				moduleLogger.trace({ progress: payload.progress }, "progress");
+				this.progress(
+					completed / this._modules.length +
+						payload.progress / this._modules.length,
+				);
 			});
 
-			module.on("gatherer:complete", (payload) => {
-				gathererLogger.trace({ gathererId: payload.gathererId }, "complete");
-				this.reportProgress(payload.gathererId, "complete");
-				data[payload.gathererId] = payload.data;
+			module.on("error", (payload) => {
+				moduleLogger.error({ error: payload.error }, "error");
 			});
 
-			promises.push(module.executeGatherers(context));
+			module.on("complete", (payload) => {
+				moduleLogger.trace("complete");
+				completed++;
+				this.progress(completed / this._modules.length);
+				result.categories.push(payload.data);
+			});
+
+			promises.push(module.execute(context));
 		}
 
 		await Promise.all(promises);
 
-		this._logger.trace("gatherers complete");
-
-		return data;
-	}
-
-	private async reportProgress(id: string, status: GatherersStatus) {
-		const { meta } = (await this._storage.get(this._id)) ?? {};
-		if (meta === undefined) {
-			return;
-		}
-
-		let progress = meta.progress;
-		if (status === "complete") {
-			const completedGatherers = Object.values(meta.gatherersStatus).filter(
-				(status) => status === "complete",
-			);
-			progress =
-				(completedGatherers.length + 1) /
-				Object.keys(meta.gatherersStatus).length;
-			this._logger.trace({ progress: progress * 100 }, "progress");
-		}
+		this._currentStep = "done";
 
 		this.saveState({
+			result,
 			meta: {
+				progress: 1,
 				step: this._currentStep,
-				progress,
-				gatherersStatus: { [id]: status },
 			},
 		});
-	}
 
-	private async initGatherersMeta() {
-		const initialGatherersMeta: ModuleProcessorMeta["gatherersStatus"] = {};
-		for (const module of this._modules) {
-			for (const gatherer of module.gatherers) {
-				initialGatherersMeta[gatherer.id] = "waiting";
-			}
-		}
-
-		await this.saveState({
-			meta: {
-				step: this._currentStep,
-				progress: 0,
-				gatherersStatus: initialGatherersMeta,
-			},
-		});
+		return result;
 	}
 }
