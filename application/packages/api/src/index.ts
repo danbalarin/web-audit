@@ -9,3 +9,4 @@ export * from "./types/DeepPartial";
 export * from "./types/ExtractArray";
 export * from "./types/Logger";
 export * from "./types/UnionToIntersection";
+export * from "./utils/MetricComparators";

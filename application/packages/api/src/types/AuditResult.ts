@@ -1,4 +1,6 @@
-export type AuditMetricDescription = {
+export type AuditMetricDescription<
+	TVal extends number | string = number | string,
+> = {
 	/**
 	 * The ID of the metric
 	 *
@@ -31,21 +33,36 @@ export type AuditMetricDescription = {
 	 * @example "ms"
 	 */
 	unit: string;
-};
 
-export type AuditMetricResult = {
 	/**
-	 * The ID of the metric
+	 * Compares two values of the metric
 	 *
-	 * @example "largest-contentful-paint"
+	 * @returns -1 if a is worse than b, 0 if a roughly equals b, 1 if a is better than b
 	 */
-	id: string;
+	compare(a: TVal, b: TVal): number;
 
 	/**
-	 * The value of the metric
+	 * Ranks the value of the metric
+	 *
+	 * @returns "fail" if the value is bad, "average" if the value is average, "good" if the value is good
 	 */
-	value: number | string;
+	rank(a: TVal): "fail" | "average" | "good";
 };
+
+export type AuditMetricResult<TVal extends number | string = number | string> =
+	{
+		/**
+		 * The ID of the metric
+		 *
+		 * @example "largest-contentful-paint"
+		 */
+		id: string;
+
+		/**
+		 * The value of the metric
+		 */
+		value: TVal;
+	};
 
 export type AuditCategoryDescription = {
 	/**
@@ -76,6 +93,11 @@ export type AuditCategoryDescription = {
 	 * The metrics of the category
 	 */
 	metrics: AuditMetricDescription[];
+
+	/**
+	 * Weights of the metrics
+	 */
+	weights: Record<string, number>;
 };
 
 export type AuditCategoryResult = {
