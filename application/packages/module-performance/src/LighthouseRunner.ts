@@ -1,4 +1,5 @@
-import { AuditMetricResult, BaseContext, BaseRunner } from "@repo/api";
+import { BaseRunner } from "@repo/api";
+import { type AuditMetricResult, type BaseContext } from "@repo/api/types";
 // @ts-ignore
 import lighthouse, { type Flags, type Result } from "lighthouse";
 // @ts-ignore

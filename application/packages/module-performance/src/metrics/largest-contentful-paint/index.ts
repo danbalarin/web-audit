@@ -1,8 +1,5 @@
-"use client";
-import {
-	AuditMetricDescription,
-	createMetricCompareLowerIsBetter,
-} from "@repo/api";
+import { type AuditMetricDescription } from "@repo/api/types";
+import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import description from "./description.mdx";
 
 export const LargestContentfulPaint: AuditMetricDescription<number> = {

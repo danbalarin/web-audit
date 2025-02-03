@@ -6,6 +6,10 @@
 		".": {
 			"import": "./src/index.ts",
 			"require": "./src/index.ts"
+		},
+		"./metrics": {
+			"import": "./src/metrics/index.ts",
+			"require": "./src/metrics/index.ts"
 		}
 	},
 	"scripts": {

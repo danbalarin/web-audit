@@ -5,8 +5,16 @@
 	"sideEffects": false,
 	"exports": {
 		".": {
-			"import": "./src/index.ts",
-			"require": "./src/index.ts"
+			"import": "./src/core/index.ts",
+			"require": "./src/core/index.ts"
+		},
+		"./types": {
+			"import": "./src/types/index.ts",
+			"require": "./src/types/index.ts"
+		},
+		"./utils": {
+			"import": "./src/utils/index.ts",
+			"require": "./src/utils/index.ts"
 		}
 	},
 	"scripts": {

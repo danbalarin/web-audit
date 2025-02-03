@@ -1,4 +1,5 @@
-import { AuditCategoryResult, BaseContext, BaseModule } from "@repo/api";
+import { BaseModule } from "@repo/api";
+import { type AuditCategoryResult, type BaseContext } from "@repo/api/types";
 import { LighthouseRunner, LighthouseRunnerOptions } from "./LighthouseRunner";
 
 export type PerformanceModuleOptions = {
