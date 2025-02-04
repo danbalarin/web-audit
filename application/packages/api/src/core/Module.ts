@@ -1,4 +1,4 @@
-import { AuditCategoryResult, AuditResult } from "~/types/AuditResult";
+import type { AuditCategoryResult } from "../types/AuditResult";
 import { BaseContext } from "../types/Context";
 import { EventEmitter } from "../utils/EventEmitter";
 
@@ -39,7 +39,7 @@ export abstract class BaseModule<
 		super();
 	}
 
-	protected abstract _execute(context: TContext): Promise<AuditResult>;
+	protected abstract _execute(context: TContext): Promise<AuditCategoryResult>;
 
 	async execute(context: TContext) {
 		this.emit("progress", {

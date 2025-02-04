@@ -1,4 +1,5 @@
-type LogFn = (...args: unknown[]) => void;
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+type LogFn = (...args: any[]) => void;
 
 export type Logger = {
 	fatal: LogFn;

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 export type UrlAuditData = {
-	isHome: boolean;
+	isHome?: boolean;
 	html?: string;
 	data?: unknown;
 	jobId?: string;

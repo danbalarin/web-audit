@@ -12,7 +12,7 @@ type JobResultInput = z.infer<typeof inputSchema>;
 type JobResultOkResponse = {
 	ok: true;
 	id: string;
-	data: Record<string, AuditResult>;
+	data: AuditResult;
 };
 
 type JobResultErrorResponse = {

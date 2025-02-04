@@ -9,6 +9,7 @@ const nextConfig = {
 	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 	output: "standalone",
 	experimental: {
+		mdxRs: true,
 		serverComponentsExternalPackages: [
 			"lighthouse",
 			"lighthouse/cli",

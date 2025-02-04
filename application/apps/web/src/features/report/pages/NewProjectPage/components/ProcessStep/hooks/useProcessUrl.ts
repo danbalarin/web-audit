@@ -56,7 +56,7 @@ export const useProcessUrl = ({ url, onComplete }: UseProcessUrlProps) => {
 				onComplete({
 					id: jobId,
 					meta: statusData.data.meta,
-					modules: resultData.data.data.modules,
+					result: resultData.data.data,
 				});
 			}
 		})();
