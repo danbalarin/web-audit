@@ -1,0 +1,1 @@
+export { KnowledgeLink } from "./KnowledgeLink";

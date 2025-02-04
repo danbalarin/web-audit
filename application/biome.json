@@ -101,7 +101,9 @@
 				"next.config.mjs",
 				"commitlint.config.mjs",
 				"page.tsx",
-				"layout.tsx"
+				"page.ts",
+				"layout.tsx",
+				"layout.ts"
 			],
 			"linter": { "rules": { "style": { "noDefaultExport": "off" } } }
 		},

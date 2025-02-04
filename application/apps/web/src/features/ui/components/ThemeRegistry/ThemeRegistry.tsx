@@ -1,7 +1,7 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import { Roboto } from "next/font/google";
-import React from "react";
 import "@mui/material-pigment-css/styles.css";
+import CssBaseline from "@mui/material/CssBaseline";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
+import { Roboto } from "next/font/google";
 
 export const font = Roboto({
 	weight: ["300", "400", "500", "700"],
@@ -13,6 +13,7 @@ export const font = Roboto({
 export function ThemeRegistry() {
 	return (
 		<>
+			<InitColorSchemeScript attribute="class" />
 			<CssBaseline />
 		</>
 	);
