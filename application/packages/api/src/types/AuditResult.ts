@@ -1,3 +1,5 @@
+import type { ElementType } from "react";
+
 export type AuditMetricDescription<
 	TVal extends number | string = number | string,
 > = {
@@ -20,12 +22,12 @@ export type AuditMetricDescription<
 	 *
 	 * @example "The Largest Contentful Paint (LCP) metric reports the render time of the largest content element visible within the viewport."
 	 */
-	shortDescription: string;
+	description: string;
 
 	/**
 	 * The description of the metric in MDX
 	 */
-	fullDescription: unknown;
+	document: ElementType;
 
 	/**
 	 * The unit of the metric
@@ -82,12 +84,12 @@ export type AuditCategoryDescription = {
 	 *
 	 * @example "These encapsulate your web page's performance opportunities."
 	 */
-	shortDescription: string;
+	description: string;
 
 	/**
 	 * The description of the category in MDX
 	 */
-	fullDescription: unknown;
+	document: ElementType;
 
 	/**
 	 * The metrics of the category

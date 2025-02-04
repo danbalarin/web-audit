@@ -1,4 +1,6 @@
+"use client";
 import InfoIcon from "@mui/icons-material/Info";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import {
 	Box,
@@ -10,14 +12,18 @@ import {
 	ListItemText,
 	ListSubheader,
 } from "@mui/material";
-
+import { usePathname } from "next/navigation";
 import React from "react";
+
+import { KNOWLEDGE_BASE_ROUTES } from "~/features/knowledge-base/config/routes";
 
 type SidebarLayoutProps = {
 	children: React.ReactNode;
 };
 
 export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
+	const activePath = usePathname();
+
 	return (
 		<Box sx={{ display: "flex" }}>
 			<Drawer
@@ -55,6 +61,16 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 				<Box sx={{ flexGrow: 1 }} />
 				<Divider />
 				<List disablePadding sx={{ justifySelf: "flex-end" }}>
+					<ListItemButton
+						component="a"
+						href={KNOWLEDGE_BASE_ROUTES.BASE}
+						selected={activePath.includes(KNOWLEDGE_BASE_ROUTES.BASE)}
+					>
+						<ListItemIcon>
+							<MenuBookIcon />
+						</ListItemIcon>
+						<ListItemText primary={"Knowledge Base"} />
+					</ListItemButton>
 					<ListItemButton>
 						<ListItemIcon>
 							<InfoIcon />
@@ -63,7 +79,7 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 					</ListItemButton>
 				</List>
 			</Drawer>
-			<Box component="main" sx={{ flexGrow: 1, padding: 3 }}>
+			<Box component="main" sx={{ flexGrow: 1, minHeight: "100%" }}>
 				{children}
 			</Box>
 		</Box>
