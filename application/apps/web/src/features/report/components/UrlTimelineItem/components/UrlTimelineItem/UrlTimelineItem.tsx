@@ -1,5 +1,4 @@
 import { CircularProgress, Stack } from "@mui/material";
-import { motion } from "framer-motion";
 
 import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";
 
@@ -16,14 +15,7 @@ export function UrlTimelineItem({ status, url, config }: UrlTimelineItemProps) {
 		<StatusTimelineItem status={status}>
 			<Stack>
 				{url} check
-				<Stack
-					direction="row"
-					component={motion.span}
-					alignItems="center"
-					gap={1}
-					ml={1.5}
-					mt={1.5}
-				>
+				<Stack direction="row" alignItems="center" gap={1} ml={1.5} mt={1.5}>
 					{status === "loading" ? (
 						<>
 							<CircularProgress size="1.5rem" />

@@ -18,6 +18,7 @@
 		"@mui/lab": "^6.0.0-beta.13",
 		"@mui/material": "^6.4.2",
 		"@mui/material-pigment-css": "^6.4.2",
+		"@next/bundle-analyzer": "^15.1.6",
 		"@next/mdx": "^15.1.6",
 		"@repo/module-performance": "*",
 		"@repo/module-technology": "*",
