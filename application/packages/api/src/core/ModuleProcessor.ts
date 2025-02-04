@@ -1,9 +1,9 @@
 import { v4 as uuid } from "uuid";
 
-import { AuditResult } from "~/types/AuditResult";
-import type { DeepPartial } from "~/types/DeepPartial";
-import { Logger } from "~/types/Logger";
+import type { AuditResult } from "../types/AuditResult";
 import type { BaseContext } from "../types/Context";
+import type { DeepPartial } from "../types/DeepPartial";
+import { Logger } from "../types/Logger";
 import type { BaseModule } from "./Module";
 import type { BaseStorage } from "./Storage";
 

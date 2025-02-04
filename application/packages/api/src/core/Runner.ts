@@ -1,4 +1,4 @@
-import { AuditMetricResult } from "~/types/AuditResult";
+import type { AuditMetricResult } from "../types/AuditResult";
 import { BaseContext } from "../types/Context";
 
 export abstract class BaseRunner<

@@ -19,15 +19,15 @@ export const KnowledgeBaseLayout = ({ children }: KnowledgeBaseLayoutProps) => {
 			<Box component="nav" sx={{ width: "15em", flexShrink: 0 }}>
 				<List
 					disablePadding
-					sx={(theme) => ({
+					sx={{
 						width: "15em",
 						flexShrink: 0,
 						height: "100%",
 						position: "fixed",
 						flex: "0 0 auto",
 						borderRight: `1px solid`,
-						borderColor: theme?.palette.divider,
-					})}
+						borderColor: "var(--mui-palette-divider)",
+					}}
 				>
 					{categories.map((c) => (
 						<Fragment key={c.id}>
