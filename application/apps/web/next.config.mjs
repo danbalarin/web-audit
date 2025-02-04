@@ -1,3 +1,4 @@
+import createBundleAnalyzer from "@next/bundle-analyzer";
 import createMDX from "@next/mdx";
 import { withPigment } from "@pigment-css/nextjs-plugin";
 
@@ -8,14 +9,9 @@ import { theme } from "./src/features/ui/components/ThemeRegistry/theme.mjs";
 const nextConfig = {
 	pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 	output: "standalone",
+	serverExternalPackages: ["lighthouse", "lighthouse/cli"],
 	experimental: {
 		mdxRs: true,
-		serverComponentsExternalPackages: [
-			"lighthouse",
-			"lighthouse/cli",
-			// "pino",
-			// "pino-pretty",
-		],
 	},
 	redirects: () => [
 		{
@@ -37,8 +33,12 @@ const pigmentConfig = {
 	theme,
 };
 
-const withMDX = createMDX({
-	// Add markdown plugins here, as desired
+const withMDX = createMDX({});
+
+const withBundleAnalyzer = createBundleAnalyzer({
+	enabled: process.env.ANALYZE === "true",
 });
 
-export default withMDX(withPigment(nextConfig, pigmentConfig));
+export default withBundleAnalyzer(
+	withMDX(withPigment(nextConfig, pigmentConfig)),
+);

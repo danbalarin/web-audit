@@ -1,9 +1,11 @@
-type Props = {
-	params: {
-		projectName: string;
-	};
+type ProjectPageParams = Promise<{
+	projectId: string;
+}>;
+
+type ProjectPageProps = {
+	params: ProjectPageParams;
 };
 
-export function ProjectPage({ params: { projectName } }: Props) {
-	return <div>ProjectPage {projectName}</div>;
+export async function ProjectPage({ params }: ProjectPageProps) {
+	return <div>ProjectPage {(await params).projectId}</div>;
 }
