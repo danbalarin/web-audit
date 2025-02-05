@@ -9,9 +9,9 @@ import {
 	ProjectDetailsForm,
 	ProjectDetailsFormValues,
 } from "~/features/report/components/ProjectDetailsForm";
+import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { useNewProjectState } from "../../states/useNewProjectState";
 import { Step } from "../../types/Steps";
-import { RoundedAccordion } from "../RoundedAccordion";
 
 type ProjectDetailsStepProps = Omit<AccordionProps, "children">;
 

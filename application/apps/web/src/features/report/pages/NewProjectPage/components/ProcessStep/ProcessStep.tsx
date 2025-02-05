@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
+import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { useNewProjectState } from "../../states/useNewProjectState";
-import { RoundedAccordion } from "../RoundedAccordion";
 import { ProcessUrl } from "./parts/ProcessUrl";
 
 type ProcessStepProps = Omit<AccordionProps, "children"> & { urls: string[] };
