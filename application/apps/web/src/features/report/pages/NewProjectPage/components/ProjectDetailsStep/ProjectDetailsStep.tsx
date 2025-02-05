@@ -4,6 +4,7 @@ import {
 	AccordionProps,
 	AccordionSummary,
 	Button,
+	Typography,
 } from "@mui/material";
 import {
 	ProjectDetailsForm,
@@ -32,7 +33,9 @@ export function ProjectDetailsStep(props: ProjectDetailsStepProps) {
 
 	return (
 		<RoundedAccordion {...props}>
-			<AccordionSummary>Project Details</AccordionSummary>
+			<AccordionSummary>
+				<Typography component="span">Project Details</Typography>
+			</AccordionSummary>
 			<AccordionDetails>
 				<ProjectDetailsForm onSubmit={onSubmit} disabled={disabled} />
 			</AccordionDetails>
