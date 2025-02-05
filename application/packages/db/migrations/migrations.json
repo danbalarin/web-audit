@@ -1,0 +1,10 @@
+[
+	{
+		"sql": [
+			"CREATE TABLE IF NOT EXISTS \"audits\" (\n\t\"id\" serial PRIMARY KEY NOT NULL,\n\t\"created_at\" timestamp DEFAULT now()\n);\n"
+		],
+		"bps": true,
+		"folderMillis": 1738683205094,
+		"hash": "9f16291f4a7be3c199cc5a292f5d49d506f2ed53ed171416727f5e1e2da22b25"
+	}
+]

@@ -103,7 +103,8 @@
 				"page.tsx",
 				"page.ts",
 				"layout.tsx",
-				"layout.ts"
+				"layout.ts",
+				"drizzle.config.ts"
 			],
 			"linter": { "rules": { "style": { "noDefaultExport": "off" } } }
 		},

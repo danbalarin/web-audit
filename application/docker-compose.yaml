@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   app:
     container_name: web-audit
@@ -23,6 +21,38 @@ services:
       - 6379:6379
     networks:
       - audit_network
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: electric
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - 54321:5432
+    volumes:
+      - audit_data:/var/lib/postgresql/data
+    command:
+      - -c
+      - listen_addresses=*
+      - -c
+      - wal_level=logical
+    networks:
+      - audit_network
+
+  electric:
+    image: electricsql/electric
+    environment:
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/electric?sslmode=disable
+    ports:
+      - "3001:3000"
+    depends_on:
+      - postgres
+    networks:
+      - audit_network
+
+volumes:
+  audit_data:
 
 networks:
   audit_network:
