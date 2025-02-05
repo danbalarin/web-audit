@@ -14,11 +14,11 @@ import { useRouter } from "next/navigation";
 import { UrlTestTimelineItem } from "~/features/report/components/UrlTimelineItem";
 import { REPORT_ROUTES } from "~/features/report/config/routes";
 import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
+import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";
 import { useCreateProject } from "../../hooks/useCreateProject";
 import { useNewProjectState } from "../../states/useNewProjectState";
 import { Step } from "../../types/Steps";
-import { RoundedAccordion } from "../RoundedAccordion";
 import { useCheckUrls } from "./hooks/useCheckUrls";
 import { useConnectionCheckState } from "./states/useConnectionCheckState";
 
