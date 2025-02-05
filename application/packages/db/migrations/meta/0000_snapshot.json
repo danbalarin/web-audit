@@ -1,5 +1,5 @@
 {
-	"id": "acaa7a7d-005a-4dfb-be7f-be0d8f114c6f",
+	"id": "37437ee6-5bfc-42e7-a45e-95931b336fc6",
 	"prevId": "00000000-0000-0000-0000-000000000000",
 	"version": "7",
 	"dialect": "postgresql",
@@ -10,16 +10,165 @@
 			"columns": {
 				"id": {
 					"name": "id",
-					"type": "serial",
+					"type": "uuid",
 					"primaryKey": true,
-					"notNull": true
+					"notNull": true,
+					"default": "gen_random_uuid()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
 				},
 				"created_at": {
 					"name": "created_at",
 					"type": "timestamp",
 					"primaryKey": false,
-					"notNull": false,
+					"notNull": true,
 					"default": "now()"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"project_id": {
+					"name": "project_id",
+					"type": "uuid",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"url": {
+					"name": "url",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"audits_project_id_projects_id_fk": {
+					"name": "audits_project_id_projects_id_fk",
+					"tableFrom": "audits",
+					"tableTo": "projects",
+					"columnsFrom": ["project_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {}
+		},
+		"public.metrics": {
+			"name": "metrics",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "uuid",
+					"primaryKey": true,
+					"notNull": true,
+					"default": "gen_random_uuid()"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"audit_id": {
+					"name": "audit_id",
+					"type": "uuid",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"metric": {
+					"name": "metric",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"category": {
+					"name": "category",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"url": {
+					"name": "url",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				}
+			},
+			"indexes": {},
+			"foreignKeys": {
+				"metrics_audit_id_audits_id_fk": {
+					"name": "metrics_audit_id_audits_id_fk",
+					"tableFrom": "metrics",
+					"tableTo": "audits",
+					"columnsFrom": ["audit_id"],
+					"columnsTo": ["id"],
+					"onDelete": "cascade",
+					"onUpdate": "no action"
+				}
+			},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {}
+		},
+		"public.projects": {
+			"name": "projects",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "uuid",
+					"primaryKey": true,
+					"notNull": true,
+					"default": "gen_random_uuid()"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "now()"
+				},
+				"deleted_at": {
+					"name": "deleted_at",
+					"type": "timestamp",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"home_url": {
+					"name": "home_url",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"urls": {
+					"name": "urls",
+					"type": "varchar[]",
+					"primaryKey": false,
+					"notNull": true
 				}
 			},
 			"indexes": {},

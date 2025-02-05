@@ -1,10 +1,14 @@
 [
 	{
 		"sql": [
-			"CREATE TABLE IF NOT EXISTS \"audits\" (\n\t\"id\" serial PRIMARY KEY NOT NULL,\n\t\"created_at\" timestamp DEFAULT now()\n);\n"
+			"CREATE TABLE IF NOT EXISTS \"audits\" (\n\t\"id\" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,\n\t\"updated_at\" timestamp DEFAULT now() NOT NULL,\n\t\"created_at\" timestamp DEFAULT now() NOT NULL,\n\t\"deleted_at\" timestamp,\n\t\"project_id\" uuid NOT NULL,\n\t\"url\" varchar NOT NULL\n);\n",
+			"\nCREATE TABLE IF NOT EXISTS \"metrics\" (\n\t\"id\" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,\n\t\"created_at\" timestamp DEFAULT now() NOT NULL,\n\t\"audit_id\" uuid NOT NULL,\n\t\"metric\" varchar NOT NULL,\n\t\"category\" varchar NOT NULL,\n\t\"url\" varchar NOT NULL\n);\n",
+			"\nCREATE TABLE IF NOT EXISTS \"projects\" (\n\t\"id\" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,\n\t\"updated_at\" timestamp DEFAULT now() NOT NULL,\n\t\"created_at\" timestamp DEFAULT now() NOT NULL,\n\t\"deleted_at\" timestamp,\n\t\"name\" varchar NOT NULL,\n\t\"home_url\" varchar NOT NULL,\n\t\"urls\" varchar[] NOT NULL\n);\n",
+			"\nDO $$ BEGIN\n ALTER TABLE \"audits\" ADD CONSTRAINT \"audits_project_id_projects_id_fk\" FOREIGN KEY (\"project_id\") REFERENCES \"public\".\"projects\"(\"id\") ON DELETE cascade ON UPDATE no action;\nEXCEPTION\n WHEN duplicate_object THEN null;\nEND $$;\n",
+			"\nDO $$ BEGIN\n ALTER TABLE \"metrics\" ADD CONSTRAINT \"metrics_audit_id_audits_id_fk\" FOREIGN KEY (\"audit_id\") REFERENCES \"public\".\"audits\"(\"id\") ON DELETE cascade ON UPDATE no action;\nEXCEPTION\n WHEN duplicate_object THEN null;\nEND $$;\n"
 		],
 		"bps": true,
-		"folderMillis": 1738683205094,
-		"hash": "9f16291f4a7be3c199cc5a292f5d49d506f2ed53ed171416727f5e1e2da22b25"
+		"folderMillis": 1738774479790,
+		"hash": "2e23e14f1b6029321ef3f08ea8641852011e57837a6bd67907d95085fd6106ab"
 	}
 ]
