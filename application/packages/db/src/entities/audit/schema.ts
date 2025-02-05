@@ -1,7 +1,13 @@
-import { sql } from "drizzle-orm";
-import * as p from "drizzle-orm/pg-core";
+import { pgTable, uuid, varchar } from "drizzle-orm/pg-core";
+import { projects } from "../project/schema";
+import { id } from "../utils/id";
+import { timestamps } from "../utils/timestamps";
 
-export const audits = p.pgTable("audits", {
-	id: p.serial("id").primaryKey(),
-	created_at: p.timestamp("created_at").default(sql`now()`),
+export const audits = pgTable("audits", {
+	...id,
+	...timestamps,
+	project_id: uuid("project_id")
+		.references(() => projects.id, { onDelete: "cascade" })
+		.notNull(),
+	url: varchar("url").notNull(),
 });
