@@ -10,7 +10,7 @@ const findAll = async ({
 	projectService,
 }: FindAllOptions): Promise<Project[]> => {
 	try {
-		const data = await projectService.getAll();
+		const data = await projectService.findAll();
 
 		if (!data) {
 			throw new Error("Failed to get projects");

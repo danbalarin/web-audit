@@ -1,28 +1,33 @@
-import { eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { schema } from "../../schema";
-import { projects } from "./schema";
-
-type CreateProjectPayload = {
-	name: string;
-	homeUrl: string;
-	urls: string[];
-};
+import { ProjectRepository } from "./repository";
 
 export class ProjectService {
-	constructor(private readonly client: NodePgDatabase<typeof schema>) {}
-
-	async create(payload: CreateProjectPayload) {
-		return await this.client.insert(projects).values(payload).returning();
+	private readonly repository: ProjectRepository;
+	constructor(client: NodePgDatabase<typeof schema>) {
+		this.repository = new ProjectRepository(client);
 	}
 
-	async getAll() {
-		return await this.client.query.projects.findMany({
-			columns: { deletedAt: false },
-		});
+	async create(payload: Parameters<ProjectRepository["create"]>[0]) {
+		return await this.repository.create(payload);
 	}
 
-	async getById(id: string) {
-		return await this.client.select().from(projects).where(eq(projects.id, id));
+	async findById(id: string) {
+		return await this.repository.findById(id);
+	}
+
+	async findAll() {
+		return await this.repository.findAll();
+	}
+
+	async update(
+		id: string,
+		payload: Parameters<ProjectRepository["update"]>[1],
+	) {
+		return await this.repository.update(id, payload);
+	}
+
+	async delete(id: string) {
+		return await this.repository.delete(id);
 	}
 }
