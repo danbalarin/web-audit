@@ -11,16 +11,14 @@ import {
 	Button,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useAuditState } from "~/features/report/states/auditState";
 import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
-import { useNewProjectState } from "../../state";
+import { useNewProjectState } from "../../states/useNewProjectState";
 import { RoundedAccordion } from "../RoundedAccordion";
 import { ProcessUrl } from "./parts/ProcessUrl";
 
-type ProcessStepProps = Omit<AccordionProps, "children">;
+type ProcessStepProps = Omit<AccordionProps, "children"> & { urls: string[] };
 
-export function ProcessStep(props: ProcessStepProps) {
-	const urls = useAuditState((s) => s.urls);
+export function ProcessStep({ urls, ...props }: ProcessStepProps) {
 	const [isRunning, setIsRunning] = useState(false);
 	const [waitingUrls, setWaitingUrls] = useState<string[]>(Object.keys(urls));
 	const createOnComplete = (url: string) => () => {

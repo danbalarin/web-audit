@@ -1,3 +1,5 @@
+import { ErrorMessage } from "~/features/ui/components/ErrorMessage";
+
 type ProjectPageParams = Promise<{
 	projectId: string;
 }>;
@@ -7,5 +9,6 @@ type ProjectPageProps = {
 };
 
 export async function ProjectPage({ params }: ProjectPageProps) {
-	return <div>ProjectPage {(await params).projectId}</div>;
+	const id = (await params).projectId;
+	return <ErrorMessage title="Not Found" subtitle={`id:${id} `} />;
 }

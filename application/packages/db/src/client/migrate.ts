@@ -1,8 +1,9 @@
 import { PgDialect } from "drizzle-orm/pg-core";
 import { PgliteDatabase } from "drizzle-orm/pglite";
 import migrations from "../../migrations/migrations.json";
+import { schema } from "../schema";
 
-export async function migrate(db: PgliteDatabase) {
+export async function migrate(db: PgliteDatabase<typeof schema>) {
 	//prevent multiple schema migrations to be run
 	let isLocalDBSchemaSynced = false;
 

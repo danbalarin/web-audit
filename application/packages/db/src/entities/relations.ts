@@ -9,7 +9,7 @@ export const projectsRelations = relations(projects, ({ many }) => ({
 
 export const auditsRelations = relations(audits, ({ one, many }) => ({
 	project: one(projects, {
-		fields: [audits.project_id],
+		fields: [audits.projectId],
 		references: [projects.id],
 	}),
 	metrics: many(metrics),
@@ -17,7 +17,7 @@ export const auditsRelations = relations(audits, ({ one, many }) => ({
 
 export const metricsRelations = relations(metrics, ({ one }) => ({
 	audit: one(audits, {
-		fields: [metrics.audit_id],
+		fields: [metrics.auditId],
 		references: [audits.id],
 	}),
 }));

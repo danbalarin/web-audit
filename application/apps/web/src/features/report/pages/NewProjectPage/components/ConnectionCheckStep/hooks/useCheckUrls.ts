@@ -1,11 +1,9 @@
+import { TRPCClientError } from "@trpc/client";
 import { useUrlTest } from "~/features/report/hooks/useUrlTest";
-import { useAuditState } from "~/features/report/states/auditState";
-import { useConnectionCheckState } from "../state";
+import { useConnectionCheckState } from "../states/useConnectionCheckState";
 
-export const useCheckAllUrls = () => {
+export const useCheckUrls = (urls: string[]) => {
 	const { run: urlTest } = useUrlTest();
-
-	const urls = useAuditState((s) => s.urls);
 
 	const checkUrl = async (url: string) => {
 		try {
@@ -13,10 +11,13 @@ export const useCheckAllUrls = () => {
 			const result = await urlTest(url);
 			useConnectionCheckState.getState().checkUrlResult(url, result.ok);
 		} catch (error) {
-			useConnectionCheckState.setState({
-				status: "error",
-				error: `URL test failed: ${error}`,
-			});
+			console.log(error);
+			if (error instanceof TRPCClientError) {
+				useConnectionCheckState.setState({
+					status: "error",
+					error: `URL test failed: ${error.message}`,
+				});
+			}
 		}
 	};
 
