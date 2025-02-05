@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { ModuleProcessorState } from "@repo/api";
 import { useEffect } from "react";
-import { useAuditState } from "~/features/report/states/auditState";
 import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";
 import { useProcessUrl } from "../../hooks/useProcessUrl";
 
@@ -27,10 +26,7 @@ export const ProcessUrl = ({
 	disabled,
 }: ProcessUrlProps) => {
 	const handleCompletion = (data: ModuleProcessorState) => {
-		useAuditState
-			.getState()
-			.addUrlData(url, { jobId: data.id, data: data.result });
-		onComplete?.();
+		console.log(data);
 	};
 	const { data, run, state } = useProcessUrl({
 		url,

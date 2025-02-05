@@ -1,36 +1,42 @@
 "use client";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
-	AccordionActions,
 	AccordionDetails,
 	AccordionProps,
 	AccordionSummary,
-	Button,
+	Alert,
 	Stack,
 } from "@mui/material";
 import { useTheme } from "@mui/material-pigment-css";
 import { useEffect, useMemo } from "react";
 import { useShallow } from "zustand/react/shallow";
 
+import { useRouter } from "next/navigation";
 import { UrlTestTimelineItem } from "~/features/report/components/UrlTimelineItem";
-import { useAuditState } from "~/features/report/states/auditState";
+import { REPORT_ROUTES } from "~/features/report/config/routes";
 import { AlignedTimeline } from "~/features/ui/components/AlignedTimeline";
-import { useNewProjectState } from "../../state";
+import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";
+import { useCreateProject } from "../../hooks/useCreateProject";
+import { useNewProjectState } from "../../states/useNewProjectState";
 import { Step } from "../../types/Steps";
 import { RoundedAccordion } from "../RoundedAccordion";
-import { NetworkSpeedTimelineItem } from "./components/NetworkSpeedTimelineItem";
-import { useCheckAllUrls } from "./hooks/useCheckAllUrls";
-import { useRunSpeedTest } from "./hooks/useRunSpeedTest";
-import { useConnectionCheckState } from "./state";
+import { useCheckUrls } from "./hooks/useCheckUrls";
+import { useConnectionCheckState } from "./states/useConnectionCheckState";
 
 type ConnectionCheckStepProps = Omit<AccordionProps, "children">;
 
 export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
-	const { urlsData } = useAuditState(useShallow((s) => ({ urlsData: s.urls })));
-	const { status, speed, urlsOk } = useConnectionCheckState(
-		useShallow((s) => ({ status: s.status, speed: s.speed, urlsOk: s.urlsOk })),
+	const { push } = useRouter();
+	const { mutateAsync, isPending, isSuccess } = useCreateProject({
+		onSuccess: (data) => {
+			useNewProjectState.getState().clear();
+			push(REPORT_ROUTES.PROJECT(data.id));
+		},
+	});
+
+	const { status, urlsOk, error } = useConnectionCheckState(
+		useShallow((s) => ({ status: s.status, urlsOk: s.urlsOk, error: s.error })),
 	);
-	const urls = useMemo(() => Object.keys(urlsData), [urlsData]);
+
 	const getUrlStatus = (url: string) => {
 		if (status.includes(url)) {
 			return "loading";
@@ -43,9 +49,12 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 		return "waiting";
 	};
 
-	const { checkAllUrls } = useCheckAllUrls();
-	const { runSpeedTest } = useRunSpeedTest();
-	const { activeStep, goNext, stepComplete } = useNewProjectState();
+	const { activeStep, project } = useNewProjectState();
+	const urls = useMemo(
+		() => [project?.homeUrl, ...(project?.urls ?? [])],
+		[project],
+	);
+	const { checkAllUrls } = useCheckUrls(urls);
 	const theme = useTheme();
 
 	useEffect(() => {
@@ -54,18 +63,15 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 		}
 		switch (status) {
 			case "idle":
-				runSpeedTest();
-				break;
-			case "speedCheckComplete":
 				checkAllUrls();
 				break;
 			case "urlCheckComplete": {
 				const state = useConnectionCheckState.getState();
 				const noError = !state.error;
-				const speedOk = state.speed?.status !== "slow";
 				const allUrlsOk = Object.values(state.checkUrlResult).every((ok) => ok);
-				if (noError && speedOk && allUrlsOk) {
-					useNewProjectState.setState({ stepComplete: true });
+				if (noError && allUrlsOk) {
+					const data = useNewProjectState.getState();
+					mutateAsync(data.project);
 				}
 				break;
 			}
@@ -79,9 +85,7 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 
 	return (
 		<RoundedAccordion {...props}>
-			<AccordionSummary expandIcon={<ExpandMoreIcon />}>
-				Connection Check
-			</AccordionSummary>
+			<AccordionSummary>Connection Check</AccordionSummary>
 			<AccordionDetails
 				sx={{ borderRadius: 1, color: "var(--form-text-list-color)" }}
 				style={{
@@ -89,8 +93,8 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 				}}
 			>
 				<Stack>
+					{error && <Alert severity="error">{error}</Alert>}
 					<AlignedTimeline>
-						<NetworkSpeedTimelineItem status={speed?.status} />
 						{urls.map((url) => (
 							<UrlTestTimelineItem
 								key={url}
@@ -98,17 +102,23 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 								status={getUrlStatus(url)}
 							/>
 						))}
+						<StatusTimelineItem status={isPending ? "loading" : "waiting"}>
+							Project creation
+							<Stack
+								direction="row"
+								alignItems="center"
+								gap={1}
+								ml={1.5}
+								mt={1.5}
+							>
+								{!isPending && !isSuccess && "Waiting for connection check"}
+								{isSuccess && "Project created, redirecting..."}
+								{isPending && "Creating project"}
+							</Stack>
+						</StatusTimelineItem>
 					</AlignedTimeline>
 				</Stack>
 			</AccordionDetails>
-			<AccordionActions>
-				<Button
-					disabled={!stepComplete || activeStep !== Step.ConnectionCheck}
-					onClick={goNext}
-				>
-					Continue
-				</Button>
-			</AccordionActions>
 		</RoundedAccordion>
 	);
 }

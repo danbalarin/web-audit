@@ -1,4 +1,5 @@
-export { createDb } from "./pglite/createDb";
-export { createPGlite } from "./pglite/createPGlite";
-export { migrate } from "./pglite/migrate";
-export { schema } from "./schema";
+export { DbWorkerProvider } from "./client/DbWorkerProvider";
+export { ProjectService } from "./entities/project/service";
+export { db } from "./server/db";
+
+export type { Project } from "./entities/project/schema";

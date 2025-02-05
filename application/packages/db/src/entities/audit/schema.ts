@@ -6,7 +6,7 @@ import { timestamps } from "../utils/timestamps";
 export const audits = pgTable("audits", {
 	...id,
 	...timestamps,
-	project_id: uuid("project_id")
+	projectId: uuid("project_id")
 		.references(() => projects.id, { onDelete: "cascade" })
 		.notNull(),
 	url: varchar("url").notNull(),

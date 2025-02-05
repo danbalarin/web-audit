@@ -13,9 +13,12 @@ import {
 	ListSubheader,
 } from "@mui/material";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 
 import { KNOWLEDGE_BASE_ROUTES } from "~/features/knowledge-base/config/routes";
+import { Loading } from "~/features/ui/components/Loading";
+import { REPORT_ROUTES } from "../../config/routes";
+import { ProjectList } from "../ProjectList";
 
 type SidebarLayoutProps = {
 	children: React.ReactNode;
@@ -44,7 +47,7 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 				}}
 			>
 				<List disablePadding>
-					<ListItemButton component="a" href="/project/new">
+					<ListItemButton component="a" href={REPORT_ROUTES.NEW_PROJECT}>
 						<ListItemIcon>
 							<NoteAddIcon />
 						</ListItemIcon>
@@ -54,9 +57,9 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 				<Divider />
 				<ListSubheader>Projects</ListSubheader>
 				<List disablePadding>
-					<ListItemButton>
-						<ListItemText primary={"Project #1"} />
-					</ListItemButton>
+					<Suspense fallback={<Loading />}>
+						<ProjectList />
+					</Suspense>
 				</List>
 				<Box sx={{ flexGrow: 1 }} />
 				<Divider />

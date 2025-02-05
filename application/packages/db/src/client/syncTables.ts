@@ -11,6 +11,14 @@ const tablesToSync: TablesToSync = [
 		table: "audits",
 		primaryKey: ["id"],
 	},
+	{
+		table: "metrics",
+		primaryKey: ["id"],
+	},
+	{
+		table: "projects",
+		primaryKey: ["id"],
+	},
 ];
 
 export async function syncTables(pg: PGliteInterface, electricBaseUrl: string) {

@@ -1,9 +1,8 @@
-import { createTheme } from "@mui/material";
+import { extendTheme } from "@mui/material";
 
-export const theme = createTheme({
+export const theme = extendTheme({
 	cssVariables: true,
 	typography: {
-		fontFamily: "var(--font-family)",
 		h1: {
 			fontSize: "4rem",
 		},

@@ -1,32 +1,20 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { Step } from "./types/Steps";
-
-// type ConnectionSpeed = {
-// 	speed: number;
-// };
-
-// const useConnectionSpeed = create<ConnectionSpeed>()((set) => ({
-// 	speed: 0,
-// }));
-
-// type InitialScrape = {
-// 	urls: { [k: string]: string };
-// 	setUrlData: (url: string, data: string) => void;
-// };
-
-// const useInitialScrape = create<InitialScrape>()((set) => ({
-// 	urls: {},
-// 	setUrlData: (url: string, data: string) => set({ urls: { [url]: data } }),
-// }));
+import { Step } from "../types/Steps";
 
 type NewProjectState = {
+	project: {
+		name: string;
+		homeUrl: string;
+		urls: string[];
+	};
 	activeStep: Step;
 	stepComplete: boolean;
 	canGoBack: () => boolean;
 	canGoNext: () => boolean;
 	goBack: () => void;
 	goNext: () => void;
+	clear: () => void;
 };
 
 export const useNewProjectState = create<NewProjectState>()(
@@ -57,6 +45,13 @@ export const useNewProjectState = create<NewProjectState>()(
 					return;
 				}
 				set((s) => ({ activeStep: s.activeStep + 1, stepComplete: false }));
+			},
+			clear: () => {
+				set({
+					activeStep: Step.ProjectDetails,
+					stepComplete: false,
+					project: undefined,
+				});
 			},
 		}),
 		{ name: "NewProjectState" },

@@ -1,3 +1,4 @@
+import { InferSelectModel } from "drizzle-orm";
 import { pgTable, varchar } from "drizzle-orm/pg-core";
 import { id } from "../utils/id";
 import { timestamps } from "../utils/timestamps";
@@ -9,3 +10,5 @@ export const projects = pgTable("projects", {
 	homeUrl: varchar("home_url").notNull(),
 	urls: varchar("urls").array().notNull(),
 });
+
+export type Project = Omit<InferSelectModel<typeof projects>, "deletedAt">;
