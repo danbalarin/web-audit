@@ -1,0 +1,10 @@
+{
+	"extends": "@repo/typescript-config/base.json",
+	"compilerOptions": {
+		"outDir": "./dist",
+		"module": "esnext",
+		"moduleResolution": "bundler"
+	},
+	"include": ["./src/worker.ts"],
+	"exclude": ["node_modules", "dist"]
+}

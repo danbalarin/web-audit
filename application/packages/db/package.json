@@ -1,0 +1,31 @@
+{
+	"name": "@repo/db",
+	"version": "0.0.0",
+	"private": true,
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"import": "./src/index.ts",
+			"require": "./src/index.ts"
+		}
+	},
+	"scripts": {
+		"lint": "biome lint --error-on-warnings",
+		"test": "jest",
+		"db:generate": "drizzle-kit generate && node ./tools/compile-migrations.mjs",
+		"db:migrate": "drizzle-kit migrate"
+	},
+	"dependencies": {
+		"@electric-sql/pglite": "^0.2.16",
+		"drizzle-orm": "^0.33.0",
+		"drizzle-zod": "^0.5.1",
+		"pg": "^8.13.0"
+	},
+	"devDependencies": {
+		"@repo/typescript-config": "*",
+		"@types/node": "^22.7.4",
+		"@types/pg": "^8.11.11",
+		"drizzle-kit": "^0.24.2",
+		"typescript": "^5.6.2"
+	}
+}

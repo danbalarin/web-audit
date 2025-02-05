@@ -1,5 +1,6 @@
 import { TRPCProvider } from "~/server/query/client";
 
+import { DbWorkerProvider } from "../DbWorkerProvider";
 import { ThemeRegistry, font } from "../ThemeRegistry";
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
@@ -10,7 +11,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
 				<TRPCProvider>
 					{/* <DebugContextProvider> */}
 					{/* <Debug /> */}
-					{children}
+					<DbWorkerProvider>{children}</DbWorkerProvider>
 					{/* </DebugContextProvider> */}
 				</TRPCProvider>
 			</body>

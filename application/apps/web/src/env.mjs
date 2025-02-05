@@ -31,6 +31,7 @@ export const env = createEnv({
 		NEXT_PUBLIC_LOG_LEVEL: z
 			.enum(["trace", "debug", "info", "warn", "error", "fatal"])
 			.default("info"),
+		NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL: z.string(),
 	},
 
 	/**
@@ -45,5 +46,7 @@ export const env = createEnv({
 		REDIS_HOST: process.env.REDIS_HOST,
 		REDIS_PORT: process.env.REDIS_PORT,
 		NEXT_PUBLIC_LOG_LEVEL: process.env.NEXT_PUBLIC_LOG_LEVEL,
+		NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL:
+			process.env.NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL,
 	},
 });
