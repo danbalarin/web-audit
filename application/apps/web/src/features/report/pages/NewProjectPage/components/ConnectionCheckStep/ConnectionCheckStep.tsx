@@ -5,6 +5,7 @@ import {
 	AccordionSummary,
 	Alert,
 	Stack,
+	Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material-pigment-css";
 import { useEffect, useMemo } from "react";
@@ -85,7 +86,9 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 
 	return (
 		<RoundedAccordion {...props}>
-			<AccordionSummary>Connection Check</AccordionSummary>
+			<AccordionSummary>
+				<Typography component="span">Connection Check</Typography>
+			</AccordionSummary>
 			<AccordionDetails
 				sx={{ borderRadius: 1, color: "var(--form-text-list-color)" }}
 				style={{
