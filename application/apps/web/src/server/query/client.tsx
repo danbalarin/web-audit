@@ -54,7 +54,7 @@ export function TRPCProvider(
 			links: [
 				loggerLink({
 					console: {
-						log: (message, args) => trpcLogger.info(args, message),
+						log: (message, args) => trpcLogger.debug(args, message),
 						error: (message, args) => trpcLogger.error(args, message),
 					},
 					colorMode: "none",
