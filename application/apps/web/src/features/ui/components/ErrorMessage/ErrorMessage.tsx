@@ -25,4 +25,11 @@ export const ErrorMessage = ({ title, subtitle }: ErrorMessageProps) => {
 	);
 };
 
+ErrorMessage["NOT_FOUND"] = ({ resource }: { resource?: string }) => (
+	<ErrorMessage
+		title="Not Found"
+		subtitle={`The ${resource ?? "requested resource"} was not found`}
+	/>
+);
+
 ErrorMessage.displayName = "ErrorMessage";

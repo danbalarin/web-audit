@@ -1,3 +1,5 @@
+"use client";
+
 import { Box, ListItemButton, ListItemText } from "@mui/material";
 import { trpc } from "~/server/query/client";
 import { REPORT_ROUTES } from "../../config/routes";

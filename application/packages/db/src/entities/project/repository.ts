@@ -63,10 +63,12 @@ export class ProjectRepository {
 	}
 
 	async delete(id: string) {
-		return await this.client
-			.update(projects)
-			.set({ deletedAt: new Date() })
-			.where(eq(projects.id, id))
-			.returning();
+		return (
+			await this.client
+				.update(projects)
+				.set({ deletedAt: new Date() })
+				.where(eq(projects.id, id))
+				.returning()
+		)[0];
 	}
 }

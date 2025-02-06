@@ -55,6 +55,7 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 		() => [project?.homeUrl, ...(project?.urls ?? [])],
 		[project],
 	);
+
 	const { checkAllUrls } = useCheckUrls(urls);
 	const theme = useTheme();
 
@@ -69,7 +70,9 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 			case "urlCheckComplete": {
 				const state = useConnectionCheckState.getState();
 				const noError = !state.error;
-				const allUrlsOk = Object.values(state.checkUrlResult).every((ok) => ok);
+				const allUrlsOk =
+					Object.values(state.urlsOk).every((ok) => ok) &&
+					Object.values(state.urlsOk).length === urls.length;
 				if (noError && allUrlsOk) {
 					const data = useNewProjectState.getState();
 					mutateAsync(data.project);

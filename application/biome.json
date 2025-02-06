@@ -104,6 +104,8 @@
 				"page.ts",
 				"layout.tsx",
 				"layout.ts",
+				"error.tsx",
+				"error.ts",
 				"drizzle.config.ts"
 			],
 			"linter": { "rules": { "style": { "noDefaultExport": "off" } } }
