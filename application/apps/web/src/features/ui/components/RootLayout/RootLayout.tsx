@@ -3,6 +3,7 @@ import { TRPCProvider } from "~/server/query/client";
 
 import { env } from "~/env.mjs";
 import { ThemeRegistry, font } from "../ThemeRegistry";
+import { ToolpadProviders } from "../ToolpadProviders";
 
 export function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
@@ -17,7 +18,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
 					{/* <DbWorkerProvider
 						electricSqlBaseUrl={env.NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL}
 					> */}
-					{children}
+					<ToolpadProviders>{children}</ToolpadProviders>
 					{/* </DbWorkerProvider> */}
 				</TRPCProvider>
 			</body>

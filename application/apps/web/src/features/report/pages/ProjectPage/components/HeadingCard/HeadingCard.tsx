@@ -7,13 +7,15 @@ import { useState } from "react";
 import { ConfirmationDialog } from "~/features/ui/components/ConfirmationDialog";
 
 import { trpc } from "~/server/query/client";
+import { RunAuditModal } from "../RunAuditModal";
 
 type HeadingCardProps = {
 	id: string;
 };
 
 export const HeadingCard = ({ id }: HeadingCardProps) => {
-	const [open, setOpen] = useState(false);
+	const [deleteOpen, setDeleteOpen] = useState(false);
+	const [runAuditOpen, setRunAuditOpen] = useState(false);
 	const [project] = trpc.projects.findById.useSuspenseQuery({ id });
 	const { mutateAsync } = trpc.projects.delete.useMutation();
 
@@ -25,14 +27,18 @@ export const HeadingCard = ({ id }: HeadingCardProps) => {
 				action={
 					<>
 						<Tooltip title="Run Audit">
-							<IconButton aria-label="run audit" color="primary">
+							<IconButton
+								aria-label="run audit"
+								color="primary"
+								onClick={() => setRunAuditOpen(true)}
+							>
 								<PlayArrowIcon />
 							</IconButton>
 						</Tooltip>
 						<IconButton
 							aria-label="delete"
 							onClick={() => {
-								setOpen(true);
+								setDeleteOpen(true);
 								// void trpc.projects.updateById.prefetch({ id });
 							}}
 							color="error"
@@ -42,15 +48,20 @@ export const HeadingCard = ({ id }: HeadingCardProps) => {
 					</>
 				}
 			/>
+			<RunAuditModal
+				projectId={id}
+				open={runAuditOpen}
+				onClose={() => setRunAuditOpen(false)}
+			/>
 			<ConfirmationDialog
 				title="Delete Project"
 				content="Are you sure you want to delete this project?"
 				accentColor="error"
-				open={open}
-				onClose={() => setOpen(false)}
+				open={deleteOpen}
+				onClose={() => setDeleteOpen(false)}
 				onConfirm={async () => {
 					await mutateAsync({ id });
-					setOpen(false);
+					setDeleteOpen(false);
 				}}
 			/>
 		</Card>
