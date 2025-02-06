@@ -16,9 +16,8 @@ import { usePathname } from "next/navigation";
 import React, { Suspense } from "react";
 
 import { KNOWLEDGE_BASE_ROUTES } from "~/features/knowledge-base/config/routes";
-import { Loading } from "~/features/ui/components/Loading";
 import { REPORT_ROUTES } from "../../config/routes";
-import { ProjectList } from "../ProjectList";
+import { ProjectList, ProjectListSkeleton } from "../ProjectList";
 
 type SidebarLayoutProps = {
 	children: React.ReactNode;
@@ -57,7 +56,7 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 				<Divider />
 				<ListSubheader>Projects</ListSubheader>
 				<List disablePadding>
-					<Suspense fallback={<Loading />}>
+					<Suspense fallback={<ProjectListSkeleton />}>
 						<ProjectList />
 					</Suspense>
 				</List>

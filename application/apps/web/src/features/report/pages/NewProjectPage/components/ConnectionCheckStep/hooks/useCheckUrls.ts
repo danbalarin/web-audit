@@ -1,4 +1,3 @@
-import { TRPCClientError } from "@trpc/client";
 import { useUrlTest } from "~/features/report/hooks/useUrlTest";
 import { useConnectionCheckState } from "../states/useConnectionCheckState";
 
@@ -10,20 +9,22 @@ export const useCheckUrls = (urls: string[]) => {
 			useConnectionCheckState.setState({ status: `urlCheckInProgress.${url}` });
 			const result = await urlTest(url);
 			useConnectionCheckState.getState().checkUrlResult(url, result.ok);
-		} catch (error) {
-			console.log(error);
-			if (error instanceof TRPCClientError) {
-				useConnectionCheckState.setState({
-					status: "error",
-					error: `URL test failed: ${error.message}`,
-				});
-			}
+			// biome-ignore lint/suspicious/noExplicitAny: error handling
+		} catch (error: any) {
+			useConnectionCheckState.setState({
+				status: "error",
+				error: `URL test failed: ${error?.message}`,
+			});
+			useConnectionCheckState.getState().checkUrlResult(url, false);
 		}
 	};
 
 	const checkAllUrls = async () => {
-		for (const url in urls) {
+		for (const url of urls) {
 			await checkUrl(url);
+			if (useConnectionCheckState.getState().error) {
+				return;
+			}
 		}
 		useConnectionCheckState.setState({ status: "urlCheckComplete" });
 	};
