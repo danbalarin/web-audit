@@ -28,6 +28,7 @@ export const env = createEnv({
 	},
 
 	client: {
+		NEXT_PUBLIC_DEBUG: z.boolean({ coerce: true }).default(false),
 		NEXT_PUBLIC_LOG_LEVEL: z
 			.enum(["trace", "debug", "info", "warn", "error", "fatal"])
 			.default("info"),
@@ -48,5 +49,6 @@ export const env = createEnv({
 		NEXT_PUBLIC_LOG_LEVEL: process.env.NEXT_PUBLIC_LOG_LEVEL,
 		NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL:
 			process.env.NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL,
+		NEXT_PUBLIC_DEBUG: process.env.NEXT_PUBLIC_DEBUG,
 	},
 });
