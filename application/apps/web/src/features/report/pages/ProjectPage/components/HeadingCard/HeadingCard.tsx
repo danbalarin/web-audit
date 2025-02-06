@@ -1,7 +1,7 @@
 "use client";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import { Card, CardHeader, IconButton } from "@mui/material";
+import { Card, CardHeader, IconButton, Tooltip } from "@mui/material";
 import { format } from "date-fns";
 import { useState } from "react";
 import { ConfirmationDialog } from "~/features/ui/components/ConfirmationDialog";
@@ -24,9 +24,11 @@ export const HeadingCard = ({ id }: HeadingCardProps) => {
 				subheader={`Last updated on ${format(project.updatedAt, "PPP")}`}
 				action={
 					<>
-						<IconButton aria-label="run audit" color="primary">
-							<PlayArrowIcon />
-						</IconButton>
+						<Tooltip title="Run Audit">
+							<IconButton aria-label="run audit" color="primary">
+								<PlayArrowIcon />
+							</IconButton>
+						</Tooltip>
 						<IconButton
 							aria-label="delete"
 							onClick={() => {
