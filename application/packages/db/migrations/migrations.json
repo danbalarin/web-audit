@@ -23,5 +23,15 @@
 		"bps": true,
 		"folderMillis": 1738858974448,
 		"hash": "8e0c9f84ae680465703aa08361e61da4bbe7f1778bd7bf7dd16efc3820412006"
+	},
+	{
+		"sql": [
+			"ALTER TABLE \"jobs\" ADD COLUMN \"progress\" integer DEFAULT 0 NOT NULL;",
+			"\nALTER TABLE \"jobs\" ADD COLUMN \"error\" json;",
+			"\nALTER TABLE \"jobs\" ADD COLUMN \"module_statuses\" json DEFAULT '{}'::json NOT NULL;"
+		],
+		"bps": true,
+		"folderMillis": 1738876689943,
+		"hash": "ccf6ebbbedac4b7a0fa409b9ad4f20d97013b3931fcd186077b9f07fe7fc7ed9"
 	}
 ]

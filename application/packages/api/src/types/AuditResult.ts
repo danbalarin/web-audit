@@ -118,9 +118,9 @@ export type AuditCategoryResult = {
 
 export type AuditResult = {
 	/**
-	 * ID under which the audit can be found in Redis
+	 * The ID of the job
 	 */
-	runId: string;
+	jobId: string;
 
 	/**
 	 * The URL that was audited

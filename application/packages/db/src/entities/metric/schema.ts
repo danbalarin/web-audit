@@ -1,3 +1,4 @@
+import { InferSelectModel } from "drizzle-orm";
 import { pgTable, uuid, varchar } from "drizzle-orm/pg-core";
 import { audits } from "../audit/schema";
 import { id } from "../utils/id";
@@ -13,3 +14,5 @@ export const metrics = pgTable("metrics", {
 	category: varchar("category").notNull(),
 	value: varchar("url").notNull(),
 });
+
+export type Metric = InferSelectModel<typeof metrics>;

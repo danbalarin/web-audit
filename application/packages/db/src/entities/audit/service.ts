@@ -1,20 +1,20 @@
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { schema } from "../../schema";
-import { ProjectRepository } from "../project/repository";
+import { JobRepository } from "../job/repository";
 import { AuditRepository } from "./repository";
 
 export class AuditService {
 	private readonly repository: AuditRepository;
-	private readonly projectRepository: ProjectRepository;
+	private readonly jobRepository: JobRepository;
 
 	constructor(client: NodePgDatabase<typeof schema>) {
 		this.repository = new AuditRepository(client);
-		this.projectRepository = new ProjectRepository(client);
+		this.jobRepository = new JobRepository(client);
 	}
 
 	async create(payload: Parameters<AuditRepository["create"]>[0]) {
-		if (!(await this.projectRepository.findById(payload.projectId))) {
-			throw new Error("Project not found");
+		if (!(await this.jobRepository.findById(payload.jobId))) {
+			throw new Error("Job not found");
 		}
 		return await this.repository.create(payload);
 	}

@@ -1,13 +1,11 @@
-import { v4 as uuid } from "uuid";
+import { AuditService, Job, JobService, MetricService } from "@repo/db";
 
 import type { AuditResult } from "../types/AuditResult";
 import type { BaseContext } from "../types/Context";
-import type { DeepPartial } from "../types/DeepPartial";
 import { Logger } from "../types/Logger";
 import type { BaseModule } from "./Module";
-import type { BaseStorage } from "./Storage";
 
-type Step = "ready" | "processing" | "done";
+type Step = "ready" | "processing" | "saving" | "done";
 
 export type ModuleProcessorMeta = {
 	step: Step;
@@ -20,53 +18,97 @@ export type ModuleProcessorState = {
 	result: AuditResult;
 };
 
-export type ModuleProcessorOptions<
-	TModuleProcessorState extends ModuleProcessorState = ModuleProcessorState,
-> = {
-	storage: BaseStorage<TModuleProcessorState>;
+export type ModuleProcessorOptions = {
+	jobService: JobService;
+	metricService: MetricService;
+	auditService: AuditService;
 	modules: BaseModule[];
 	logger: Logger;
+	projectId: string;
 };
 
 export class ModuleProcessor {
-	private _storage: BaseStorage<ModuleProcessorState>;
+	private _auditService: AuditService;
+	private _metricService: MetricService;
+	private _jobService: JobService;
 	private _currentStep: Step = "ready";
 	private _modules: BaseModule[] = [];
 	private _logger: Logger;
-	private readonly _id = uuid();
+	private _projectId: string;
+	private _job: Job | undefined = undefined;
 
-	constructor(private _options: ModuleProcessorOptions) {
-		this._storage = _options.storage;
-		this._modules = _options.modules;
-		this._logger = _options.logger;
+	constructor(options: ModuleProcessorOptions) {
+		this._jobService = options.jobService;
+		this._auditService = options.auditService;
+		this._metricService = options.metricService;
+		this._modules = options.modules;
+		this._logger = options.logger;
+		this._projectId = options.projectId;
 	}
 
-	public process<TContext extends BaseContext = BaseContext>(
+	private async progress(progress: number) {
+		if (!this._job) {
+			return;
+		}
+		await this._jobService.setProgress(this._job.id, progress);
+	}
+
+	public async process<TContext extends BaseContext = BaseContext>(
 		context: TContext,
 	) {
 		if (this._currentStep !== "ready") {
 			throw new Error("Processor is already running");
 		}
+		this._job = await this._jobService.create({ projectId: this._projectId });
+		if (!this._job) {
+			throw new Error("Failed to create job");
+		}
 		this.processAsync(context);
-		return this._id;
+		return this._job.id;
 	}
 
-	private async saveState(data: DeepPartial<ModuleProcessorState>) {
-		await this._storage.append(this._id, { id: this._id, ...data });
-	}
+	private async saveAuditResult(result: AuditResult) {
+		this._currentStep = "saving";
 
-	private async progress(progress: number) {
-		await this.saveState({
-			meta: {
-				step: this._currentStep,
-				progress,
-			},
+		if (!this._job) {
+			throw new Error("Job not found");
+		}
+		const audit = await this._auditService.create({
+			jobId: this._job?.id,
+			url: result.url,
 		});
+
+		if (!audit) {
+			throw new Error("Failed to create audit");
+		}
+
+		const promises = [];
+
+		for (const category of result.categories) {
+			for (const metric of category.metrics) {
+				promises.push(
+					this._metricService.create({
+						auditId: audit.id,
+						category: category.id,
+						metric: metric.id,
+						value: `${metric.value}`,
+					}),
+				);
+			}
+		}
+
+		await Promise.all(promises);
+
+		return audit.id;
 	}
 
 	private async processAsync<TContext extends BaseContext = BaseContext>(
 		context: TContext,
-	): Promise<AuditResult> {
+	): Promise<string> {
+		if (!this._job) {
+			throw new Error("Job not found");
+		}
+
 		this._logger.trace("processing modules");
 		this._currentStep = "processing";
 
@@ -74,9 +116,10 @@ export class ModuleProcessor {
 
 		const result: AuditResult = {
 			categories: [],
-			runId: this._id,
+			jobId: this._job?.id,
 			url: context.url,
 		};
+
 		let completed = 0;
 		const promises = [];
 		for (const module of Object.values(this._modules)) {
@@ -107,16 +150,12 @@ export class ModuleProcessor {
 
 		await Promise.all(promises);
 
+		const auditId = await this.saveAuditResult(result);
+
 		this._currentStep = "done";
 
-		this.saveState({
-			result,
-			meta: {
-				progress: 1,
-				step: this._currentStep,
-			},
-		});
+		this.progress(1);
 
-		return result;
+		return auditId;
 	}
 }

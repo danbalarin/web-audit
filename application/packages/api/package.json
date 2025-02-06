@@ -32,6 +32,7 @@
 		"typescript": "5.2.2"
 	},
 	"dependencies": {
+		"@repo/db": "*",
 		"redis": "^4.7.0",
 		"ts-deepmerge": "^6.2.0",
 		"uuid": "^9.0.1"

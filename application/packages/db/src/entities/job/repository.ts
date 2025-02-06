@@ -26,10 +26,12 @@ export class JobRepository {
 			"id" | "createdAt" | "updatedAt" | "deletedAt"
 		>,
 	) {
-		return await this.client
-			.insert(jobs)
-			.values(this.sanitizePayload(payload))
-			.returning();
+		return (
+			await this.client
+				.insert(jobs)
+				.values(this.sanitizePayload(payload))
+				.returning()
+		)[0];
 	}
 
 	async findById(id: string) {

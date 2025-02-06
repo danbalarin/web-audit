@@ -26,23 +26,25 @@ export class AuditRepository {
 			"id" | "createdAt" | "updatedAt" | "deletedAt"
 		>,
 	) {
-		return await this.client
-			.insert(audits)
-			.values(this.sanitizePayload(payload))
-			.returning();
+		return (
+			await this.client
+				.insert(audits)
+				.values(this.sanitizePayload(payload))
+				.returning()
+		)[0];
 	}
 
 	async findById(id: string) {
 		return await this.client.query.audits.findFirst({
 			where: and(eq(audits.id, id), isNull(audits.deletedAt)),
-			with: { metrics: true, project: true },
+			with: { metrics: true, job: true },
 		});
 	}
 
 	async findAll() {
 		return await this.client.query.audits.findMany({
 			where: isNull(audits.deletedAt),
-			with: { metrics: true, project: true },
+			with: { metrics: true, job: true },
 		});
 	}
 
