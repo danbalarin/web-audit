@@ -35,14 +35,13 @@ export class ProjectRepository {
 	async findById(id: string) {
 		return await this.client.query.projects.findFirst({
 			where: and(eq(projects.id, id), isNull(projects.deletedAt)),
-			with: { audits: { with: { metrics: true } } },
+			with: { jobs: { with: { audits: { with: { metrics: true } } } } },
 		});
 	}
 
 	async findAll() {
 		return await this.client.query.projects.findMany({
 			where: isNull(projects.deletedAt),
-			with: { audits: { with: { metrics: true } } },
 		});
 	}
 

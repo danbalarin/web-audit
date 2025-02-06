@@ -101,9 +101,9 @@ export function ConnectionCheckStep(props: ConnectionCheckStepProps) {
 				<Stack>
 					{error && <Alert severity="error">{error}</Alert>}
 					<AlignedTimeline>
-						{urls.map((url) => (
+						{urls.map((url, index) => (
 							<UrlTestTimelineItem
-								key={url}
+								key={url ?? index}
 								url={url}
 								status={getUrlStatus(url)}
 							/>

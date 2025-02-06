@@ -1,70 +1,61 @@
-import {
-	BaseModule,
-	BaseStorage,
-	ModuleProcessor,
-	ModuleProcessorState,
-} from "@repo/api";
+import { BaseModule, ModuleProcessor } from "@repo/api";
+import { AuditService, JobService, MetricService } from "@repo/db";
 import { Browser } from "puppeteer";
 import z from "zod";
 import { moduleLogger } from "~/lib/logger";
+import { dbMiddleware } from "~/server/middlewares/database";
 
 import { browserProcedure } from "~/server/trpc";
 
 const inputSchema = z.object({
+	projectId: z.string(),
 	url: z.string().url(),
 });
 
 type ProcessUrlInput = z.infer<typeof inputSchema>;
 
-type ProcessUrlResponse = {
-	ok: boolean;
-	id: string;
-	error?: string;
-};
-
 type ProcessUrlOptions = {
 	input: ProcessUrlInput;
 	modules: BaseModule[];
 	browser: Browser;
-	storage: BaseStorage<ModuleProcessorState>;
+	jobService: JobService;
+	metricService: MetricService;
+	auditService: AuditService;
 };
 
 const processUrl = async ({
 	input,
 	browser,
 	modules,
-	storage,
-}: ProcessUrlOptions): Promise<ProcessUrlResponse> => {
+	jobService,
+	metricService,
+	auditService,
+}: ProcessUrlOptions) => {
 	const { url } = input;
-	try {
-		const processor = new ModuleProcessor({
-			storage,
-			modules,
-			logger: moduleLogger,
-		});
-		const id = processor.process({ browser, url });
+	const processor = new ModuleProcessor({
+		modules,
+		logger: moduleLogger,
+		jobService,
+		metricService,
+		auditService,
+		projectId: input.projectId,
+	});
 
-		return {
-			ok: true,
-			id,
-		};
-		// biome-ignore lint/suspicious/noExplicitAny: error handling
-	} catch (error: any) {
-		return {
-			ok: false,
-			id: "",
-			error: error?.message || "Unknown error",
-		};
-	}
+	const id = await processor.process({ browser, url });
+
+	return id;
 };
 
 export const procedure = browserProcedure
+	.use(dbMiddleware)
 	.input(inputSchema)
 	.mutation(({ input, ctx }) =>
 		processUrl({
 			input,
 			browser: ctx.browser,
 			modules: ctx.modules,
-			storage: ctx.storage,
+			jobService: ctx.jobService,
+			metricService: ctx.metricService,
+			auditService: ctx.auditService,
 		}),
 	);

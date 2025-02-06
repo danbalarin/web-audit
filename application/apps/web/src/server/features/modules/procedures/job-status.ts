@@ -1,6 +1,7 @@
-import { BaseStorage, ModuleProcessorState } from "@repo/api";
+import { JobService } from "@repo/db";
+import { TRPCError } from "@trpc/server";
 import z from "zod";
-import { baseProcedure } from "~/server/trpc/procedure";
+import { dbProcedure } from "~/server/trpc/procedure";
 
 const inputSchema = z.object({
 	id: z.string(),
@@ -8,52 +9,29 @@ const inputSchema = z.object({
 
 type JobStatusInput = z.infer<typeof inputSchema>;
 
-type JobStatusOkResponse = {
-	ok: true;
-	id: string;
-	data: Omit<ModuleProcessorState, "result">;
-};
-
-type JobStatusErrorResponse = {
-	ok: false;
-	id: string;
-	error: string;
-};
-
-type JobStatusResponse = JobStatusOkResponse | JobStatusErrorResponse;
-
 type JobStatusOptions = {
 	input: JobStatusInput;
-	storage: BaseStorage<ModuleProcessorState>;
+	jobService: JobService;
 };
 
-const jobStatus = async ({
-	input,
-	storage,
-}: JobStatusOptions): Promise<JobStatusResponse> => {
+const jobStatus = async ({ input, jobService }: JobStatusOptions) => {
 	const { id } = input;
-	try {
-		const data = await storage.get(id);
+	const data = await jobService.findById(id);
 
-		if (!data) {
-			throw new Error("Job not found");
-		}
-
-		return {
-			ok: true,
-			id,
-			data: { id: data.id, meta: data.meta },
-		};
-		// biome-ignore lint/suspicious/noExplicitAny: error handling
-	} catch (error: any) {
-		return {
-			ok: false,
-			id: "",
-			error: error?.message || "Unknown error",
-		};
+	if (!data) {
+		throw new TRPCError({
+			code: "NOT_FOUND",
+			message: "Job not found",
+		});
 	}
+
+	return {
+		id: data.id,
+		progress: data.progress,
+		moduleStatuses: data.moduleStatuses,
+	};
 };
 
-export const procedure = baseProcedure
+export const procedure = dbProcedure
 	.input(inputSchema)
-	.query(({ input, ctx }) => jobStatus({ input, storage: ctx.storage }));
+	.query(({ input, ctx }) => jobStatus({ input, jobService: ctx.jobService }));
