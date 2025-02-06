@@ -1,13 +1,13 @@
 import { pgTable, uuid, varchar } from "drizzle-orm/pg-core";
-import { projects } from "../project/schema";
+import { jobs } from "../job/schema";
 import { id } from "../utils/id";
 import { timestamps } from "../utils/timestamps";
 
 export const audits = pgTable("audits", {
 	...id,
 	...timestamps,
-	projectId: uuid("project_id")
-		.references(() => projects.id, { onDelete: "cascade" })
+	jobId: uuid("job_id")
+		.references(() => jobs.id, { onDelete: "cascade" })
 		.notNull(),
 	url: varchar("url").notNull(),
 });
