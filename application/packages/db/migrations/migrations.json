@@ -10,5 +10,18 @@
 		"bps": true,
 		"folderMillis": 1738774479790,
 		"hash": "2e23e14f1b6029321ef3f08ea8641852011e57837a6bd67907d95085fd6106ab"
+	},
+	{
+		"sql": [
+			"CREATE TABLE IF NOT EXISTS \"jobs\" (\n\t\"id\" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,\n\t\"updated_at\" timestamp DEFAULT now() NOT NULL,\n\t\"created_at\" timestamp DEFAULT now() NOT NULL,\n\t\"deleted_at\" timestamp,\n\t\"project_id\" uuid NOT NULL\n);\n",
+			"\nALTER TABLE \"audits\" DROP CONSTRAINT \"audits_project_id_projects_id_fk\";\n",
+			"\nALTER TABLE \"audits\" ADD COLUMN \"job_id\" uuid NOT NULL;",
+			"\nDO $$ BEGIN\n ALTER TABLE \"jobs\" ADD CONSTRAINT \"jobs_project_id_projects_id_fk\" FOREIGN KEY (\"project_id\") REFERENCES \"public\".\"projects\"(\"id\") ON DELETE cascade ON UPDATE no action;\nEXCEPTION\n WHEN duplicate_object THEN null;\nEND $$;\n",
+			"\nDO $$ BEGIN\n ALTER TABLE \"audits\" ADD CONSTRAINT \"audits_job_id_jobs_id_fk\" FOREIGN KEY (\"job_id\") REFERENCES \"public\".\"jobs\"(\"id\") ON DELETE cascade ON UPDATE no action;\nEXCEPTION\n WHEN duplicate_object THEN null;\nEND $$;\n",
+			"\nALTER TABLE \"audits\" DROP COLUMN IF EXISTS \"project_id\";"
+		],
+		"bps": true,
+		"folderMillis": 1738858974448,
+		"hash": "8e0c9f84ae680465703aa08361e61da4bbe7f1778bd7bf7dd16efc3820412006"
 	}
 ]
