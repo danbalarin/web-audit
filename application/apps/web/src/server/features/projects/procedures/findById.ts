@@ -1,4 +1,4 @@
-import { Project, ProjectService } from "@repo/db";
+import { ProjectService } from "@repo/db";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { errorHandler } from "~/server/error/errorHandler";
@@ -13,10 +13,7 @@ type FindAllOptions = {
 	projectService: ProjectService;
 };
 
-const findById = async ({
-	input: { id },
-	projectService,
-}: FindAllOptions): Promise<Project> => {
+const findById = async ({ input: { id }, projectService }: FindAllOptions) => {
 	return errorHandler(async () => {
 		const data = await projectService.findById(id);
 		if (!data) {
