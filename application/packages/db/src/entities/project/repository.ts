@@ -1,6 +1,8 @@
-import { InferInsertModel, and, eq, isNull } from "drizzle-orm";
+import { InferInsertModel, and, eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { schema } from "../../schema";
+import { orderByCreatedAt } from "../utils/orderByCreatedAt";
+import { whereSoftDelete } from "../utils/whereSoftDelete";
 import { projects } from "./schema";
 
 export class ProjectRepository {
@@ -34,14 +36,28 @@ export class ProjectRepository {
 
 	async findById(id: string) {
 		return await this.client.query.projects.findFirst({
-			where: and(eq(projects.id, id), isNull(projects.deletedAt)),
-			with: { jobs: { with: { audits: { with: { metrics: true } } } } },
+			where: and(eq(projects.id, id), whereSoftDelete(projects)),
+			orderBy: orderByCreatedAt,
+			with: {
+				jobs: {
+					with: {
+						audits: {
+							with: { metrics: true },
+							where: whereSoftDelete,
+							orderBy: orderByCreatedAt,
+						},
+					},
+					where: whereSoftDelete,
+					orderBy: orderByCreatedAt,
+				},
+			},
 		});
 	}
 
 	async findAll() {
 		return await this.client.query.projects.findMany({
-			where: isNull(projects.deletedAt),
+			where: whereSoftDelete,
+			orderBy: orderByCreatedAt,
 		});
 	}
 

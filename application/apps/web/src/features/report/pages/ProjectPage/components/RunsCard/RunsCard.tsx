@@ -3,6 +3,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import { useState } from "react";
 import { JobsTable } from "~/features/report/components/JobsTable";
+import { useDeleteAudit } from "~/features/report/hooks/useDeleteAudit";
 
 import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { useDialogContext } from "~/features/ui/contexts/DialogContext";
@@ -15,6 +16,7 @@ type RunsCardProps = {
 export const RunsCard = ({ projectId }: RunsCardProps) => {
 	const [project] = trpc.projects.findById.useSuspenseQuery({ id: projectId });
 	const [selectedAudits, setSelectedAudits] = useState<string[]>([]);
+	const { mutateAsync: deleteAudit } = useDeleteAudit();
 	const { confirm } = useDialogContext();
 
 	return (
@@ -43,13 +45,17 @@ export const RunsCard = ({ projectId }: RunsCardProps) => {
 				<JobsTable
 					jobs={project.jobs}
 					onSelectedChange={setSelectedAudits}
-					onDelete={() =>
+					onDelete={(id) =>
 						confirm("Are you sure you want to delete this audit?", {
 							cancelText: "Cancel",
 							okText: "Delete",
 							severity: "error",
 							title: "Delete audit",
-							onClose: console.log,
+							onClose: (result) => {
+								if (result === "ok") {
+									deleteAudit({ id });
+								}
+							},
 						})
 					}
 				/>

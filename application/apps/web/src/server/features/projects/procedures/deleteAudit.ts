@@ -1,4 +1,4 @@
-import { ProjectService } from "@repo/db";
+import { AuditService } from "@repo/db";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { dbProcedure } from "~/server/trpc/procedure";
@@ -9,19 +9,16 @@ const inputSchema = z.object({
 
 type DeleteOptions = {
 	input: z.infer<typeof inputSchema>;
-	projectService: ProjectService;
+	auditService: AuditService;
 };
 
-const deleteProject = async ({
-	input: { id },
-	projectService,
-}: DeleteOptions) => {
-	const data = await projectService.delete(id);
+const deleteAudit = async ({ input: { id }, auditService }: DeleteOptions) => {
+	const data = await auditService.delete(id);
 
 	if (!data) {
 		throw new TRPCError({
 			code: "NOT_FOUND",
-			message: "Project not found",
+			message: "Audit not found",
 		});
 	}
 
@@ -31,5 +28,5 @@ const deleteProject = async ({
 export const procedure = dbProcedure
 	.input(inputSchema)
 	.mutation(({ input, ctx }) =>
-		deleteProject({ input, projectService: ctx.projectService }),
+		deleteAudit({ input, auditService: ctx.auditService }),
 	);

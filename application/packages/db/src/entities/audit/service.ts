@@ -1,15 +1,18 @@
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { schema } from "../../schema";
 import { JobRepository } from "../job/repository";
+import { ProjectRepository } from "../project/repository";
 import { AuditRepository } from "./repository";
 
 export class AuditService {
 	private readonly repository: AuditRepository;
 	private readonly jobRepository: JobRepository;
+	private readonly projectRepository: ProjectRepository;
 
 	constructor(client: NodePgDatabase<typeof schema>) {
 		this.repository = new AuditRepository(client);
 		this.jobRepository = new JobRepository(client);
+		this.projectRepository = new ProjectRepository(client);
 	}
 
 	async create(payload: Parameters<AuditRepository["create"]>[0]) {
@@ -32,6 +35,19 @@ export class AuditService {
 	}
 
 	async delete(id: string) {
-		return await this.repository.delete(id);
+		const deletedAudit = await this.repository.delete(id);
+		if (!deletedAudit) {
+			throw new Error("Audit not found");
+		}
+
+		const job = (await this.jobRepository.findById(deletedAudit.jobId))!;
+		const projectId = job.project.id;
+		if (job?.audits.length === 0) {
+			await this.jobRepository.delete(deletedAudit.jobId);
+		}
+
+		const project = await this.projectRepository.findById(projectId);
+
+		return { ...deletedAudit, project };
 	}
 }

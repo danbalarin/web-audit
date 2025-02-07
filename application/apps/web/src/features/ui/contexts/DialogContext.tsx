@@ -26,7 +26,7 @@ const DialogContext = createContext<DialogContextType>({
 type CommonDialogOptions = {
 	title?: string;
 	severity?: "error" | "info" | "success" | "warning";
-	onClose?: (result: "ok" | "cancel") => void;
+	onClose?: (result: "ok" | "cancel") => void | Promise<void>;
 };
 
 type ConfirmOptions = CommonDialogOptions & {
@@ -43,6 +43,7 @@ type DialogOptions = ConfirmOptions | AlertOptions;
 export const DialogContextProvider = ({ children }: PropsWithChildren) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [message, setMessage] = useState("");
+	const [isLoading, setIsLoading] = useState<"ok" | "cancel">();
 	const [dialogOptions, setDialogOptions] = useState<DialogOptions>({});
 
 	const close = useCallback(() => {
@@ -58,10 +59,12 @@ export const DialogContextProvider = ({ children }: PropsWithChildren) => {
 	}, []);
 
 	const onClose = useCallback(
-		(result: "ok" | "cancel") => {
+		async (result: "ok" | "cancel") => {
+			setIsLoading(result);
 			if (dialogOptions?.onClose) {
-				dialogOptions.onClose(result);
+				await dialogOptions.onClose(result);
 			}
+			setIsLoading(undefined);
 			close();
 		},
 		[dialogOptions, close],
@@ -80,11 +83,20 @@ export const DialogContextProvider = ({ children }: PropsWithChildren) => {
 				<DialogContent>{message}</DialogContent>
 				<DialogActions>
 					{"cancelText" in dialogOptions && (
-						<Button onClick={() => onClose("cancel")}>
+						<Button
+							onClick={() => onClose("cancel")}
+							disabled={isLoading === "ok"}
+							loading={isLoading === "cancel"}
+						>
 							{dialogOptions.cancelText}
 						</Button>
 					)}
-					<Button onClick={() => onClose("ok")} color={dialogOptions.severity}>
+					<Button
+						onClick={() => onClose("ok")}
+						color={dialogOptions.severity}
+						disabled={isLoading === "cancel"}
+						loading={isLoading === "ok"}
+					>
 						{dialogOptions.okText || "Ok"}
 					</Button>
 				</DialogActions>
