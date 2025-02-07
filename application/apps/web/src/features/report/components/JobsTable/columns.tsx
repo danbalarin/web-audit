@@ -1,7 +1,8 @@
 import { CompareArrows } from "@mui/icons-material";
 import { Checkbox, Icon } from "@mui/material";
 import { ColumnDef } from "@tanstack/react-table";
-import { AuditResultCell } from "./parts/AuditResultCell";
+import { AuditDateCell } from "../AuditDateCell";
+import { AuditResultCell } from "../AuditResultCell";
 import { JobsTableData } from "./types/JobsTableData";
 
 const COLUMN_SIZE = 128;
@@ -11,7 +12,7 @@ export const columns: ColumnDef<JobsTableData>[] = [
 		header: "Date",
 		accessorKey: "createdAt",
 		size: COLUMN_SIZE,
-		cell: (info) => info.getValue<Date>().toLocaleDateString(),
+		cell: (info) => <AuditDateCell value={info.getValue<Date>()} />,
 	},
 	{
 		header: "URL",
