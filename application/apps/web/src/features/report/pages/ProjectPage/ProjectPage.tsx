@@ -1,6 +1,8 @@
+import { Stack } from "@mui/material";
 import { Suspense } from "react";
 import { trpc } from "~/server/query/server";
 import { HeadingCard, HeadingCardSkeleton } from "./components/HeadingCard";
+import { RunsCard, RunsCardSkeleton } from "./components/RunsCard";
 
 type ProjectPageParams = Promise<{
 	projectId: string;
@@ -15,9 +17,14 @@ export async function ProjectPage({ params }: ProjectPageProps) {
 	void trpc.projects.findById.prefetch({ id });
 	return (
 		<>
-			<Suspense fallback={<HeadingCardSkeleton />}>
-				<HeadingCard id={id} />
-			</Suspense>
+			<Stack spacing={2}>
+				<Suspense fallback={<HeadingCardSkeleton />}>
+					<HeadingCard id={id} />
+				</Suspense>
+				<Suspense fallback={<RunsCardSkeleton />}>
+					<RunsCard projectId={id} />
+				</Suspense>
+			</Stack>
 		</>
 	);
 }
