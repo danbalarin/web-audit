@@ -21,6 +21,7 @@ import { JobsTableData } from "./types/JobsTableData";
 
 const transformData = (
 	jobs: RouterOutputs["projects"]["findById"]["jobs"],
+	onDelete?: (auditId: string) => void,
 ): JobsTableData[] =>
 	jobs
 		.map((job) =>
@@ -34,6 +35,7 @@ const transformData = (
 				security: Math.round(Math.random() * 100),
 				seo: Math.round(Math.random() * 100),
 				ui: Math.round(Math.random() * 100),
+				onDelete: onDelete ? () => onDelete(audit.id) : undefined,
 			})),
 		)
 		.flat();
@@ -43,11 +45,16 @@ const grouping = ["createdAt"];
 type JobsTableProps = {
 	jobs: RouterOutputs["projects"]["findById"]["jobs"];
 	onSelectedChange?: Dispatch<string[]>;
+	onDelete?: (auditId: string) => void;
 };
 
-export const JobsTable = ({ jobs, onSelectedChange }: JobsTableProps) => {
+export const JobsTable = ({
+	jobs,
+	onSelectedChange,
+	onDelete,
+}: JobsTableProps) => {
 	const [rowSelection, setRowSelection] = useState({});
-	const data = useMemo(() => transformData(jobs), [jobs]);
+	const data = useMemo(() => transformData(jobs, onDelete), [jobs, onDelete]);
 	const table = useReactTable({
 		data,
 		columns,
