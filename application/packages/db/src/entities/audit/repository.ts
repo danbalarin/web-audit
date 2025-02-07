@@ -1,6 +1,7 @@
-import { InferInsertModel, and, eq, isNull } from "drizzle-orm";
+import { InferInsertModel, and, eq } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { schema } from "../../schema";
+import { whereSoftDelete } from "../utils/whereSoftDelete";
 import { audits } from "./schema";
 
 export class AuditRepository {
@@ -36,14 +37,14 @@ export class AuditRepository {
 
 	async findById(id: string) {
 		return await this.client.query.audits.findFirst({
-			where: and(eq(audits.id, id), isNull(audits.deletedAt)),
+			where: and(eq(audits.id, id), whereSoftDelete(audits)),
 			with: { metrics: true, job: true },
 		});
 	}
 
 	async findAll() {
 		return await this.client.query.audits.findMany({
-			where: isNull(audits.deletedAt),
+			where: whereSoftDelete,
 			with: { metrics: true, job: true },
 		});
 	}
@@ -65,10 +66,12 @@ export class AuditRepository {
 	}
 
 	async delete(id: string) {
-		return await this.client
-			.update(audits)
-			.set({ deletedAt: new Date() })
-			.where(eq(audits.id, id))
-			.returning();
+		return (
+			await this.client
+				.update(audits)
+				.set({ deletedAt: new Date() })
+				.where(eq(audits.id, id))
+				.returning()
+		)[0];
 	}
 }

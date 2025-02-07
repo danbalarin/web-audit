@@ -1,6 +1,8 @@
 import { InferInsertModel, and, eq, isNull } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
 import { schema } from "../../schema";
+import { orderByCreatedAt } from "../utils/orderByCreatedAt";
+import { whereSoftDelete } from "../utils/whereSoftDelete";
 import { jobs } from "./schema";
 
 export class JobRepository {
@@ -37,14 +39,20 @@ export class JobRepository {
 	async findById(id: string) {
 		return await this.client.query.jobs.findFirst({
 			where: and(eq(jobs.id, id), isNull(jobs.deletedAt)),
-			with: { audits: true, project: true },
+			with: {
+				audits: {
+					where: whereSoftDelete,
+					orderBy: orderByCreatedAt,
+				},
+				project: true,
+			},
 		});
 	}
 
 	async findAll() {
 		return await this.client.query.jobs.findMany({
 			where: isNull(jobs.deletedAt),
-			with: { audits: true, project: true },
+			with: { audits: { where: whereSoftDelete }, project: true },
 		});
 	}
 
