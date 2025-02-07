@@ -1,5 +1,5 @@
-import { CompareArrows } from "@mui/icons-material";
-import { Checkbox, Icon } from "@mui/material";
+import { CompareArrows, Delete } from "@mui/icons-material";
+import { Checkbox, Icon, IconButton } from "@mui/material";
 import { ColumnDef } from "@tanstack/react-table";
 import { AuditDateCell } from "../AuditDateCell";
 import { AuditResultCell } from "../AuditResultCell";
@@ -104,5 +104,25 @@ export const columns: ColumnDef<JobsTableData>[] = [
 					onChange={row.getToggleSelectedHandler()}
 				/>
 			),
+	},
+	{
+		id: "delete",
+		size: 42,
+		maxSize: 42,
+		minSize: 42,
+		meta: {
+			style: {
+				textAlign: "center",
+			},
+		},
+		cell: ({ row }) => (
+			<IconButton
+				onClick={row.original.onDelete}
+				color="error"
+				disabled={!row.original.onDelete}
+			>
+				<Delete />
+			</IconButton>
+		),
 	},
 ];

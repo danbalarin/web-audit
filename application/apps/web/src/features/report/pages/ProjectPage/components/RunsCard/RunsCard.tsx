@@ -38,7 +38,11 @@ export const RunsCard = ({ projectId }: RunsCardProps) => {
 				</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
-				<JobsTable jobs={project.jobs} onSelectedChange={setSelectedAudits} />
+				<JobsTable
+					jobs={project.jobs}
+					onSelectedChange={setSelectedAudits}
+					onDelete={console.log}
+				/>
 			</AccordionDetails>
 		</RoundedAccordion>
 	);

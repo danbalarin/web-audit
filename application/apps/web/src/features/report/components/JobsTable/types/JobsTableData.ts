@@ -8,4 +8,5 @@ export type JobsTableData = {
 	security: number;
 	seo: number;
 	ui: number;
+	onDelete?: () => void;
 };
