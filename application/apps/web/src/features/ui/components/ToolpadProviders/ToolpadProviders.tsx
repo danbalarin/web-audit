@@ -1,5 +1,4 @@
 "use client";
-import { DialogsProvider } from "@toolpad/core/useDialogs";
 import { NotificationsProvider } from "@toolpad/core/useNotifications";
 import React from "react";
 
@@ -8,11 +7,7 @@ type ToolpadProvidersProps = {
 };
 
 export const ToolpadProviders = ({ children }: ToolpadProvidersProps) => {
-	return (
-		<DialogsProvider>
-			<NotificationsProvider>{children}</NotificationsProvider>
-		</DialogsProvider>
-	);
+	return <NotificationsProvider>{children}</NotificationsProvider>;
 };
 
 ToolpadProviders.displayName = "ToolpadProviders";

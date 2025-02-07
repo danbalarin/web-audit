@@ -5,6 +5,7 @@ import { useState } from "react";
 import { JobsTable } from "~/features/report/components/JobsTable";
 
 import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
+import { useDialogContext } from "~/features/ui/contexts/DialogContext";
 import { trpc } from "~/server/query/client";
 
 type RunsCardProps = {
@@ -14,6 +15,7 @@ type RunsCardProps = {
 export const RunsCard = ({ projectId }: RunsCardProps) => {
 	const [project] = trpc.projects.findById.useSuspenseQuery({ id: projectId });
 	const [selectedAudits, setSelectedAudits] = useState<string[]>([]);
+	const { confirm } = useDialogContext();
 
 	return (
 		<RoundedAccordion defaultExpanded>
@@ -41,7 +43,15 @@ export const RunsCard = ({ projectId }: RunsCardProps) => {
 				<JobsTable
 					jobs={project.jobs}
 					onSelectedChange={setSelectedAudits}
-					onDelete={console.log}
+					onDelete={() =>
+						confirm("Are you sure you want to delete this audit?", {
+							cancelText: "Cancel",
+							okText: "Delete",
+							severity: "error",
+							title: "Delete audit",
+							onClose: console.log,
+						})
+					}
 				/>
 			</AccordionDetails>
 		</RoundedAccordion>
