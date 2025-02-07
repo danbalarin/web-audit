@@ -24,7 +24,7 @@ type SidebarLayoutProps = {
 };
 
 export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
-	const activePath = usePathname();
+	const pathname = usePathname();
 
 	return (
 		<Box sx={{ display: "flex" }}>
@@ -46,7 +46,11 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 				}}
 			>
 				<List disablePadding>
-					<ListItemButton component="a" href={REPORT_ROUTES.NEW_PROJECT}>
+					<ListItemButton
+						component="a"
+						href={REPORT_ROUTES.NEW_PROJECT}
+						selected={pathname.includes(REPORT_ROUTES.NEW_PROJECT)}
+					>
 						<ListItemIcon>
 							<NoteAddIcon />
 						</ListItemIcon>
@@ -66,7 +70,7 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 					<ListItemButton
 						component="a"
 						href={KNOWLEDGE_BASE_ROUTES.BASE}
-						selected={activePath.includes(KNOWLEDGE_BASE_ROUTES.BASE)}
+						selected={pathname.includes(KNOWLEDGE_BASE_ROUTES.BASE)}
 					>
 						<ListItemIcon>
 							<MenuBookIcon />
