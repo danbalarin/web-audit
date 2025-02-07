@@ -1,10 +1,12 @@
 "use client";
 
 import { Box, ListItemButton, ListItemText } from "@mui/material";
+import { usePathname } from "next/navigation";
 import { trpc } from "~/server/query/client";
 import { REPORT_ROUTES } from "../../config/routes";
 
 export const ProjectList = () => {
+	const pathname = usePathname();
 	const [projects] = trpc.projects.findAll.useSuspenseQuery();
 
 	if (projects.length === 0) {
@@ -14,7 +16,12 @@ export const ProjectList = () => {
 	}
 
 	return projects.map((p) => (
-		<ListItemButton key={p.id} component="a" href={REPORT_ROUTES.PROJECT(p.id)}>
+		<ListItemButton
+			key={p.id}
+			component="a"
+			href={REPORT_ROUTES.PROJECT(p.id)}
+			selected={pathname.includes(p.id)}
+		>
 			<ListItemText primary={p.name} secondary={p.homeUrl} />
 		</ListItemButton>
 	));
