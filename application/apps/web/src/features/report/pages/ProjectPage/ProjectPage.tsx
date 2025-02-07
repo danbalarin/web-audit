@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 import { Suspense } from "react";
 import { trpc } from "~/server/query/server";
 import { HeadingCard, HeadingCardSkeleton } from "./components/HeadingCard";
@@ -24,6 +24,7 @@ export async function ProjectPage({ params }: ProjectPageProps) {
 				<Suspense fallback={<RunsCardSkeleton />}>
 					<RunsCard projectId={id} />
 				</Suspense>
+				<Divider />
 			</Stack>
 		</>
 	);

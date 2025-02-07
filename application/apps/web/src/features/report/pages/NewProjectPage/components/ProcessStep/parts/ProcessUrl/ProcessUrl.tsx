@@ -1,16 +1,16 @@
-import {
-	Alert,
-	AlertTitle,
-	Box,
-	Button,
-	LinearProgress,
-	Stack,
-	Tooltip,
-} from "@mui/material";
-import { ModuleProcessorState } from "@repo/api";
-import { useEffect } from "react";
+// import {
+// 	Alert,
+// 	AlertTitle,
+// 	Box,
+// 	Button,
+// 	LinearProgress,
+// 	Stack,
+// 	Tooltip,
+// } from "@mui/material";
+// import { ModuleProcessorState } from "@repo/api";
+// import { useEffect } from "react";
 import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";
-import { useProcessUrl } from "../../hooks/useProcessUrl";
+// import { useProcessUrl } from "../../hooks/useProcessUrl";
 
 type ProcessUrlProps = {
 	url: string;
@@ -21,29 +21,31 @@ type ProcessUrlProps = {
 
 export const ProcessUrl = ({
 	url,
-	onComplete,
-	onStart,
-	disabled,
+	// onComplete,
+	// onStart,
+	// disabled,
 }: ProcessUrlProps) => {
-	const handleCompletion = (data: ModuleProcessorState) => {
-		console.log(data);
-	};
-	const { data, run, state } = useProcessUrl({
-		url,
-		onComplete: handleCompletion,
-	});
+	// const handleCompletion = (data: ModuleProcessorState) => {
+	// 	console.log(data);
+	// };
+	// const { data, run, state } = useProcessUrl({
+	// 	url,
+	// 	onComplete: handleCompletion,
+	// });
 
-	useEffect(() => {
-		if (state.status === "ok" || state.status === "error") {
-			onComplete?.();
-		} else if (state.status === "loading") {
-			onStart?.();
-		}
-	}, [state.status]);
+	// useEffect(() => {
+	// 	if (state.status === "ok" || state.status === "error") {
+	// 		onComplete?.();
+	// 	} else if (state.status === "loading") {
+	// 		onStart?.();
+	// 	}
+	// }, [state.status]);
 
 	return (
-		<StatusTimelineItem key={url} status={state.status}>
-			<Stack gap={2}>
+		<StatusTimelineItem key={url} status="ok">
+			hello
+			{/* <StatusTimelineItem key={url} status={state.status}> */}
+			{/* <Stack gap={2}>
 				{url}
 				<Tooltip
 					title={
@@ -77,7 +79,7 @@ export const ProcessUrl = ({
 						{state.error}
 					</Alert>
 				)}
-			</Stack>
+			</Stack> */}
 		</StatusTimelineItem>
 	);
 };

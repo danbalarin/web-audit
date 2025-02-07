@@ -118,6 +118,7 @@
 			"include": ["**/types/*.d.ts"],
 			"linter": {
 				"rules": {
+					"correctness": { "noUnusedVariables": "off" },
 					"suspicious": { "noExplicitAny": "off" },
 					"style": { "noDefaultExport": "off" }
 				}
