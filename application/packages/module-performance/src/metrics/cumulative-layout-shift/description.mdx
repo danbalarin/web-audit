@@ -1,0 +1,22 @@
+## Cumulative Layout Shift (CLS)
+
+Cumulative Layout Shift (CLS) is a metric that measures the visual stability of a webpage by quantifying unexpected layout shifts that occur during its loading phase. 
+When elements on a page move from their initial positions as new content loads, it can disrupt the user's experience, especially if they're interacting with the page at the time. 
+Such shifts can be caused by late-loading images, videos, or asynchronously executed JavaScript that alters the Document Object Model (DOM) after the initial render.
+
+Browsers typically begin rendering a webpage before all resources are fully loaded. 
+As additional files arrive—like images without specified dimensions or dynamically injected content—the browser recalculates the layout to accommodate these elements. 
+This recalculation can cause visible shifts in the content, moving text, buttons, or images unexpectedly and potentially leading to user frustration.
+
+CLS is calculated by summing the individual layout shift scores across session windows, which are periods where layout shifts occur within a short timeframe. 
+Each layout shift score is determined by multiplying the impact fraction (the area of the viewport affected by the shift) by the distance fraction (how far elements have moved relative to the viewport). 
+The CLS score represents the total of these scores, focusing on the session window with the most significant shifting.
+
+In terms of values, a good CLS score is one that is less than or equal to 0.1. 
+This indicates that the page maintains visual stability, providing a smooth experience for users. 
+A CLS score between 0.1 and 0.25 suggests that improvements are needed, as users may notice some unexpected shifts. 
+A score above 0.25 is considered poor, reflecting significant layout instability that can negatively impact user engagement and satisfaction.
+
+Reducing CLS involves strategies such as reserving space for dynamic content by setting explicit dimensions for images and media, preloading key resources, and optimizing the loading order of scripts to prevent late execution that could cause shifts. 
+By addressing these issues, developers can enhance the visual stability of their websites, leading to a better user experience and potentially improved performance metrics across the board.
+

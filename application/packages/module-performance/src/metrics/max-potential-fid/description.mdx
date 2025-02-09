@@ -1,0 +1,15 @@
+## Max Potential First Input Delay (Max Potential FID)
+
+Max Potential First Input Delay (Max Potential FID) is a performance metric that measures the longest task in a webpage's load process that could delay user interaction.
+It represents the maximum amount of time a user might have to wait for the browser to respond to their first interaction, such as clicking a button or tapping a link.
+By identifying the longest period during which the main thread is busy and cannot respond to user inputs, Max Potential FID provides insight into the worst-case responsiveness scenario for a page.
+
+A low Max Potential FID value indicates that the page is likely to respond quickly to user interactions, as there are no long tasks blocking the main thread.
+This leads to a smoother and more responsive user experience.
+Generally, a Max Potential FID of less than 100 milliseconds is considered good and suggests that users will perceive the page as responsive.
+Values between 100 and 300 milliseconds are acceptable but may indicate some room for improvement.
+A value exceeding 300 milliseconds is considered poor, suggesting that users may experience noticeable delays when trying to interact with the page.
+
+High Max Potential FID values typically result from long-running JavaScript tasks or heavy computational work on the main thread during the page load.
+To improve this metric, developers can focus on optimizing and deferring non-critical JavaScript, breaking up long tasks into smaller, asynchronous chunks, and minimizing render-blocking resources.
+By reducing the length of tasks that monopolize the main thread, the page becomes more responsive, enhancing the overall user experience.

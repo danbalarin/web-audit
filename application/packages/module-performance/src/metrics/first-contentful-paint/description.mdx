@@ -1,0 +1,25 @@
+## First Contentful Paint (FCP)
+
+First Contentful Paint (FCP) is a critical metric in web performance that measures the time from when a user navigates to a page until the browser renders the first piece of content from the Document Object Model (DOM).
+This content could be text, images, SVGs, or non-white `<canvas>` elements.
+FCP is significant because it represents the point at which users first perceive that the page is loading, moving them away from a blank screen and providing initial feedback that their request is being processed.
+
+FCP is considered an important milestone in the loading process because it directly impacts user experience.
+Before FCP occurs, users may feel that the site is unresponsive or slow, which can lead to frustration or abandonment.
+By optimizing for a quicker FCP, websites can enhance user engagement, reduce bounce rates, and potentially increase conversions.
+This makes FCP a valuable Key Performance Indicator (KPI) for businesses aiming to improve site performance and user satisfaction.
+
+In terms of benchmarks, Google Developer guidelines suggest that an FCP under 1.8 seconds is considered fast, while an FCP over 3 seconds is deemed slow.
+According to the HTTP Archive, the median FCP for mobile websites is approximately 3.8 seconds, and for desktop websites, it's around 2.3 seconds.
+Therefore, aiming for an FCP below 1.8 seconds can place a website among the faster-loading sites and contribute to a better user experience.
+
+Improving FCP involves optimizing the critical rendering path, which is the sequence of steps the browser takes to convert HTML, CSS, and JavaScript into pixels on the screen.
+Developers and designers can enhance FCP by carefully managing how files are loaded.
+This might include reducing render-blocking resources, optimizing CSS code, deferring non-critical JavaScript, and prioritizing the loading of visible content.
+Monitoring FCP alongside other metrics like [Time to First Byte (TTFB)](performance:time-to-first-byte) can help identify whether delays are due to server response times or rendering issues on the client side.
+
+FCP is closely related to other metrics such as First Paint and Start Render.
+While First Paint measures the time when the browser first renders anything that isn't white space (which could be a background color change), FCP specifically measures when the first piece of content is painted.
+Start Render is similar but can only be measured in synthetic testing environments and detects when any visible element appears on the page.
+FCP, on the other hand, can be measured for real-world users, providing valuable insights into the actual user experience.
+

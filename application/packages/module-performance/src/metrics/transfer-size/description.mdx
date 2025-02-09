@@ -1,0 +1,40 @@
+## Transfer Size (TTFB)
+
+Transfer Size is a crucial metric in web performance that represents the total number of bytes transferred from the server to the browser when loading a webpage.
+It encompasses all the resources required for a page, including HTML, CSS, JavaScript, images, fonts, and other assets.
+A larger Transfer Size can delay how quickly a page is displayed to visitors because it takes more time for the browser to download all the necessary data, especially on slower network connections.
+
+Monitoring Transfer Size provides valuable insights into how a webpage changes over time.
+An increase in Transfer Size might indicate the addition of new features, images, or scripts that could affect load times.
+Regularly checking this metric helps identify significant changes that need investigation to understand their impact on website speed.
+For instance, a sudden spike in Transfer Size may necessitate reviewing recently added content or code optimizations.
+
+Reducing Transfer Size can be achieved through various optimization techniques.
+Compression is one method, where files are sent in a compressed format from the server to the browser, reducing the amount of data transferred without altering the original code.
+Another effective method is minification, which involves making the original code files smaller by removing unnecessary characters, white spaces, and comments.
+Minification not only reduces the Transfer Size but also the actual size of the resource.
+For example, minifying JavaScript code can significantly decrease its size:
+
+Before minification:
+
+```javascript
+function applyDiscount(originalPrice, discountRate) {
+  const discountedPrice = originalPrice * (1 - discountRate);
+  return discountedPrice;
+}
+```
+
+After minification:
+
+```javascript
+function applyDiscount(a,b){return a*(1-b)}
+```
+
+While it's generally beneficial to reduce Transfer Size to improve load times, there are instances where a larger Transfer Size is acceptable or even necessary.
+Modern websites often include rich functionality and interactive features that rely on extensive JavaScript and CSS code.
+Simplifying these elements to reduce Transfer Size might negatively affect the user experience, potentially deterring visitors from engaging fully with the site.
+Therefore, it's important to balance optimization efforts with the overall user experience and business goals.
+
+Regarding benchmarks for Transfer Size, data from the HTTP Archive's Page Weight Report indicates that the median Transfer Size at the 75th percentile is approximately 2.2 MB for mobile devices and 2.4 MB for desktop.
+While there isn't a strict "good" or "bad" value for Transfer Size due to varying website complexities, keeping the Transfer Size as low as possible without compromising essential functionality is a best practice.
+Regular monitoring allows teams to detect increases in Transfer Size and make informed decisions about optimizations or necessary trade-offs.
