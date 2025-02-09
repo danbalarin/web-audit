@@ -1,5 +1,5 @@
 "use client";
-import { Delete } from "@mui/icons-material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
 	Box,
 	Button,
@@ -69,7 +69,7 @@ export function FormTextList({ name, disabled, ...rest }: Props) {
 										disabled={disabled}
 										onClick={() => remove(i)}
 									>
-										<Delete />
+										<DeleteIcon />
 									</IconButton>
 								</InputAdornment>
 							),

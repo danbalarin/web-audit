@@ -1,4 +1,5 @@
-import { CompareArrows, Delete } from "@mui/icons-material";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Checkbox, Icon, IconButton } from "@mui/material";
 import { ColumnDef } from "@tanstack/react-table";
 import { AuditDateCell } from "../AuditDateCell";
@@ -92,7 +93,7 @@ export const columns: ColumnDef<JobsTableData>[] = [
 		},
 		header: () => (
 			<Icon>
-				<CompareArrows />
+				<CompareArrowsIcon />
 			</Icon>
 		),
 		cell: ({ row }) =>
@@ -121,7 +122,7 @@ export const columns: ColumnDef<JobsTableData>[] = [
 				color="error"
 				disabled={!row.original.onDelete}
 			>
-				<Delete />
+				<DeleteIcon />
 			</IconButton>
 		),
 	},

@@ -1,4 +1,3 @@
-export { DbWorkerProvider } from "./client/DbWorkerProvider";
 export { AuditService } from "./entities/audit/service";
 export { JobService } from "./entities/job/service";
 export { MetricService } from "./entities/metric/service";
