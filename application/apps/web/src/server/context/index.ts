@@ -2,21 +2,14 @@ import type { CombineUnion, ExtractArray } from "@repo/api/types";
 import { cache } from "react";
 
 import { createModulesContext } from "./modules";
-import { createStorageContext } from "./storage";
 
 /**
  * @see: https://trpc.io/docs/server/context
  */
 export const createTRPCContext = cache(async () => {
-	// const browserContext = createBrowserContext();
 	const modulesContext = createModulesContext();
-	const storageContext = createStorageContext();
 
-	const results = await Promise.all([
-		// browserContext,
-		modulesContext,
-		storageContext,
-	]);
+	const results = await Promise.all([modulesContext]);
 
 	return results.reduce<CombineUnion<ExtractArray<typeof results>>>(
 		(acc, curr) => ({ ...acc, ...curr }),

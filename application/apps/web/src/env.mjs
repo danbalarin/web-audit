@@ -23,8 +23,6 @@ export const env = createEnv({
 			.transform((url) => (url ? `https://${url}` : "http://localhost:3000")),
 
 		CHROMIUM_PATH: z.string().optional(),
-		REDIS_HOST: z.string(),
-		REDIS_PORT: z.preprocess((val) => +val, z.number().positive()),
 	},
 
 	client: {
@@ -44,8 +42,6 @@ export const env = createEnv({
 		NODE_ENV: process.env.NODE_ENV,
 		SITE_URL: process.env.VERCEL_URL,
 		CHROMIUM_PATH: process.env.CHROMIUM_PATH,
-		REDIS_HOST: process.env.REDIS_HOST,
-		REDIS_PORT: process.env.REDIS_PORT,
 		NEXT_PUBLIC_LOG_LEVEL: process.env.NEXT_PUBLIC_LOG_LEVEL,
 		NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL:
 			process.env.NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL,
