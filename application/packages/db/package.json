@@ -16,9 +16,6 @@
 		"db:migrate": "drizzle-kit migrate"
 	},
 	"dependencies": {
-		"@electric-sql/pglite": "^0.2.16",
-		"@electric-sql/pglite-react": "^0.2.16",
-		"@electric-sql/pglite-sync": "^0.2.18",
 		"deepmerge": "^4.3.1",
 		"drizzle-orm": "^0.33.0",
 		"drizzle-zod": "^0.5.1",

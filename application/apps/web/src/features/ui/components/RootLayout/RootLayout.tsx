@@ -16,13 +16,9 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
 						<ReactQueryDevtools initialIsOpen={false} />
 					)}
 
-					{/* <DbWorkerProvider
-						electricSqlBaseUrl={env.NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL}
-					> */}
 					<DialogContextProvider>
 						<ToolpadProviders>{children}</ToolpadProviders>
 					</DialogContextProvider>
-					{/* </DbWorkerProvider> */}
 				</TRPCProvider>
 			</body>
 		</html>
