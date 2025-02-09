@@ -49,6 +49,13 @@ export type AuditMetricDescription<
 	 * @returns "fail" if the value is bad, "average" if the value is average, "good" if the value is good
 	 */
 	rank(a: TVal): "fail" | "average" | "good";
+
+	/**
+	 * Scores the value of the metric
+	 *
+	 * @returns a score between 0 and 100
+	 */
+	score(a: TVal): number;
 };
 
 export type AuditMetricResult<TVal extends number | string = number | string> =

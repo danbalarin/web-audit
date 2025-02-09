@@ -1,0 +1,15 @@
+## Time to First Byte (TTFB)
+
+Time to First Byte (TTFB) is a crucial performance metric that measures the duration between a user's request for a web page and the moment the first byte of data is received by the browser.
+This metric encompasses several stages of the initial connection process, including the DNS lookup, the TCP connection, the TLS/SSL negotiation, and the server's processing time to build and send the response.
+Essentially, TTFB reflects how quickly a server responds to a request, providing insight into the efficiency of both the network and the server's backend processing.
+
+A good TTFB value is typically under 200 milliseconds.
+Values between 200 and 600 milliseconds are considered acceptable, while TTFB exceeding 600 milliseconds is generally seen as poor.
+High TTFB values can indicate issues in the initial connection stages, such as slow server processing, inefficient backend code, or network latency.
+These delays can negatively impact the overall user experience, as they may cause noticeable lags before any content begins to load in the browser.
+
+Optimizing TTFB often involves addressing factors that contribute to delays in the initial connection process.
+This can include optimizing server-side code to reduce processing time, implementing effective caching strategies for dynamic content, and choosing a faster hosting provider or utilizing a Content Delivery Network (CDN) to reduce latency.
+Additionally, minimizing redirects and optimizing database queries can significantly improve TTFB by reducing the time the server takes to prepare the response.
+

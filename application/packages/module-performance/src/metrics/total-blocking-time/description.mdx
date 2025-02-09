@@ -1,0 +1,18 @@
+## Total Blocking Time (TBT)
+
+Total Blocking Time (TBT) is a crucial web performance metric that measures the total amount of time during which the main thread of the browser is blocked and unable to respond to user interactions.
+Specifically, TBT quantifies the sum of all time periods between the [First Contentful Paint (FCP)](performance:first-contentful-paint) and the [Time to Interactive (TTI)](performance:time-to-interactive) where tasks exceed 50 milliseconds in duration.
+These tasks are known as "long tasks," and their blocking time is calculated as any time beyond the initial 50 milliseconds of each task.
+
+The main thread in a browser is responsible for executing scripts, rendering layouts, and handling user interactions.
+Since it operates on a single thread, it can only process one task at a time.
+When the main thread is occupied with long tasks, it cannot promptly respond to user inputs like clicks, taps, or scrolls.
+This leads to a sluggish user experience, where the website feels unresponsive or laggy.
+
+To calculate TBT, each long task's blocking time is identified and then summed up.
+For example, if there are two long tasks—one with a total duration of 200 milliseconds (150 milliseconds of blocking time) and another with 250 milliseconds (200 milliseconds of blocking time)—the TBT would be the sum of the blocking times: 150 ms + 200 ms = 350 ms.
+
+A lower TBT indicates that the main thread is not heavily blocked and can quickly respond to user interactions. 
+Generally, a TBT of less than 200 milliseconds is considered good. 
+Websites achieving this benchmark are likely to provide a smooth and responsive user experience.
+TBT values exceeding 600 milliseconds are considered poor and can lead to noticeable delays and frustration for users interacting with the website.

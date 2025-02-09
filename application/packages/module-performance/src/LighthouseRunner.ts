@@ -36,8 +36,32 @@ export class LighthouseRunner extends BaseRunner<Result> {
 
 		return [
 			{
-				id: "largest-contentful-paint",
-				value: audits["largest-contentful-paint"].numericValue ?? -1,
+				id: "time-to-first-byte",
+				value: audits["server-response-time"].numericValue ?? -1,
+			},
+			{
+				id: "first-contentful-paint",
+				value: audits["first-contentful-paint"].numericValue ?? -1,
+			},
+			{
+				id: "transfer-size",
+				value: audits["total-byte-weight"].numericValue ?? -1,
+			},
+			{
+				id: "total-blocking-time",
+				value: audits["total-blocking-time"].numericValue ?? -1,
+			},
+			{
+				id: "cumulative-layout-shift",
+				value: audits["cumulative-layout-shift"].numericValue ?? -1,
+			},
+			{
+				id: "speed-index",
+				value: audits["speed-index"].numericValue ?? -1,
+			},
+			{
+				id: "max-potential-fid",
+				value: audits["max-potential-fid"].numericValue ?? -1,
 			},
 		];
 	}
@@ -53,14 +77,13 @@ export class LighthouseRunner extends BaseRunner<Result> {
 			output: "json",
 			onlyCategories: ["performance"],
 			onlyAudits: [
+				"server-response-time",
 				"first-contentful-paint",
-				"largest-contentful-paint",
-				"first-meaningful-paint",
-				"speed-index",
+				"total-byte-weight",
 				"total-blocking-time",
-				"max-potential-fid",
 				"cumulative-layout-shift",
-				"interaction-to-next-paint",
+				"speed-index",
+				"max-potential-fid",
 			],
 		} satisfies Flags;
 

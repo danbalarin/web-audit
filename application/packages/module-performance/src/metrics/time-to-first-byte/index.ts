@@ -3,18 +3,18 @@ import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import { getLighthouseScoring } from "~/utils/getLighthouseScoring";
 import document from "./description.mdx";
 
-const P10 = 2500;
-const MEDIAN = 4000;
+const P10 = 800;
+const MEDIAN = 1800;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const LargestContentfulPaint: AuditMetricDescription<number> = {
-	id: "largest-contentful-paint",
-	name: "Largest Contentful Paint",
+export const TimeToFirstByte: AuditMetricDescription<number> = {
+	id: "time-to-first-byte",
+	name: "Time to First Byte",
 	description:
-		"The Largest Contentful Paint (LCP) metric reports the render time of the largest content element visible within the viewport.",
+		"Time to First Byte (TTFB) measures the time between a user's web page request and the moment the browser receives the first byte of data from the server.",
 	document,
 	unit: "ms",
-	compare: createMetricCompareLowerIsBetter(100),
+	compare: createMetricCompareLowerIsBetter(10),
 	...lighthouseScoring,
 };
