@@ -1,16 +1,22 @@
-import type { AuditCategoryResult } from "@repo/api/types";
-import { categories } from "~/features/knowledge-base/config/categories";
+import type {
+	AuditCategoryDescription,
+	AuditMetricResult,
+} from "@repo/api/types";
 
 type AuditCategoryDetailProps = {
-	data: AuditCategoryResult[];
+	category: AuditCategoryDescription;
+	data: AuditMetricResult[];
 };
 
-export const AuditCategoryDetail = ({ data }: AuditCategoryDetailProps) => {
-	if (!data[0]?.id) {
-		return null;
-	}
-	const category = categories.find((c) => c.id === data[0]?.id);
-	return <div>{category?.name}</div>;
+export const AuditCategoryDetail = ({
+	category,
+	data,
+}: AuditCategoryDetailProps) => {
+	return (
+		<div>
+			{category.name}: {data.length}
+		</div>
+	);
 };
 
 AuditCategoryDetail.displayName = "AuditCategoryDetail";

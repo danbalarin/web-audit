@@ -1,21 +1,14 @@
 import { AuditService, Job, JobService, MetricService } from "@repo/db";
 
-import type { AuditResult } from "../types/AuditResult";
 import type { BaseContext } from "../types/Context";
 import { Logger } from "../types/Logger";
-import type { BaseModule } from "./Module";
+import type { BaseModule, ModuleResult } from "./Module";
 
 type Step = "ready" | "processing" | "saving" | "done";
 
-export type ModuleProcessorMeta = {
-	step: Step;
-	progress: number;
-};
-
-export type ModuleProcessorState = {
-	id: string;
-	meta: ModuleProcessorMeta;
-	result: AuditResult;
+export type ModuleProcessorResult = {
+	url: string;
+	categories: ModuleResult[];
 };
 
 export type ModuleProcessorOptions = {
@@ -67,7 +60,7 @@ export class ModuleProcessor {
 		return this._job.id;
 	}
 
-	private async saveAuditResult(result: AuditResult) {
+	private async saveAuditResult(result: ModuleProcessorResult) {
 		this._currentStep = "saving";
 
 		if (!this._job) {
@@ -114,9 +107,8 @@ export class ModuleProcessor {
 
 		await this.progress(0);
 
-		const result: AuditResult = {
+		const result: ModuleProcessorResult = {
 			categories: [],
-			jobId: this._job?.id,
 			url: context.url,
 		};
 

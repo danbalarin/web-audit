@@ -1,5 +1,5 @@
 import { BaseModule } from "@repo/api";
-import { type AuditCategoryResult, type BaseContext } from "@repo/api/types";
+import { type BaseContext } from "@repo/api/types";
 import { LighthouseRunner, LighthouseRunnerOptions } from "./LighthouseRunner";
 
 export type PerformanceModuleOptions = {
@@ -18,7 +18,7 @@ export class PerformanceModule extends BaseModule {
 		});
 	}
 
-	protected async _execute(context: BaseContext): Promise<AuditCategoryResult> {
+	protected async _execute(context: BaseContext) {
 		const runner = new LighthouseRunner(
 			this._performanceModuleOptions.lighthouseRunnerOptions,
 		);
