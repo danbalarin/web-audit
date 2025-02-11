@@ -108,34 +108,3 @@ export type AuditCategoryDescription = {
 	 */
 	weights: Record<string, number>;
 };
-
-export type AuditCategoryResult = {
-	/**
-	 * The ID of the category
-	 *
-	 * @example "performance"
-	 */
-	id: string;
-
-	/**
-	 * The metrics of the category
-	 */
-	metrics: AuditMetricResult[];
-};
-
-export type AuditResult = {
-	/**
-	 * The ID of the job
-	 */
-	jobId: string;
-
-	/**
-	 * The URL that was audited
-	 */
-	url: string;
-
-	/**
-	 * The categories of the audit
-	 */
-	categories: AuditCategoryResult[];
-};

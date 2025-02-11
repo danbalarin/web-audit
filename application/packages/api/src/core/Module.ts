@@ -1,4 +1,4 @@
-import type { AuditCategoryResult } from "../types/AuditResult";
+import type { AuditMetricResult } from "../types/AuditResult";
 import { BaseContext } from "../types/Context";
 import { EventEmitter } from "../utils/EventEmitter";
 
@@ -7,6 +7,11 @@ export type ModuleOptions = {
 	name: string;
 	description: string;
 	version: string;
+};
+
+export type ModuleResult = {
+	id: string;
+	metrics: AuditMetricResult[];
 };
 
 export type ModuleProgressEventPayload = {
@@ -21,7 +26,7 @@ export type ModuleProgressErrorEventPayload = {
 };
 
 export type ModuleProgressCompleteEventPayload = {
-	data: AuditCategoryResult;
+	data: ModuleResult;
 };
 
 export type ModuleEvents = {
@@ -39,7 +44,7 @@ export abstract class BaseModule<
 		super();
 	}
 
-	protected abstract _execute(context: TContext): Promise<AuditCategoryResult>;
+	protected abstract _execute(context: TContext): Promise<ModuleResult>;
 
 	async execute(context: TContext) {
 		this.emit("progress", {
