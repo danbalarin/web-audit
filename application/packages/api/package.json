@@ -37,7 +37,6 @@
 	},
 	"dependencies": {
 		"@repo/db": "*",
-		"@repo/module-performance": "*",
 		"ts-deepmerge": "^6.2.0",
 		"uuid": "^9.0.1"
 	}
