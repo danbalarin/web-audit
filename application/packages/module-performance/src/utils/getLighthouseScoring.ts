@@ -1,5 +1,5 @@
 import { AuditMetricDescription } from "@repo/api/types";
-import { erf } from "mathjs";
+import { erf } from "./erf";
 
 const getLogNormal = (median: number, p10: number) => {
 	const mu = Math.log(median);
