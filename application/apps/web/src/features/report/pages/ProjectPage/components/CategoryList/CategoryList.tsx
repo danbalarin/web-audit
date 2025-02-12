@@ -1,9 +1,7 @@
 "use client";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { AccordionDetails, AccordionSummary, Typography } from "@mui/material";
-import { AuditCategoryDetail } from "~/features/report/components/AuditCategoryDetail";
-import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
+import { categories } from "~/features/knowledge-base/config/categories";
 import { trpc } from "~/server/query/client";
+import { CategoryCard } from "../CategoryCard";
 
 type CategoryListProps = {
 	projectId: string;
@@ -12,21 +10,7 @@ type CategoryListProps = {
 export const CategoryList = ({ projectId }: CategoryListProps) => {
 	const [_project] = trpc.projects.findById.useSuspenseQuery({ id: projectId });
 
-	return (
-		<RoundedAccordion defaultExpanded>
-			<AccordionSummary
-				sx={{ boxSizing: "border-box", position: "relative" }}
-				expandIcon={<ExpandMoreIcon />}
-			>
-				<Typography sx={{ width: "33%", flexShrink: 0 }} component="span">
-					Performance
-				</Typography>
-			</AccordionSummary>
-			<AccordionDetails>
-				<AuditCategoryDetail data={[]} />
-			</AccordionDetails>
-		</RoundedAccordion>
-	);
+	return categories.map((cat) => <CategoryCard category={cat} key={cat.id} />);
 };
 
 CategoryList.displayName = "CategoryList";
