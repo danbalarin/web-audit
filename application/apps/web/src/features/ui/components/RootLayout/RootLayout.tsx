@@ -1,7 +1,9 @@
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { TRPCProvider } from "~/server/query/client";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import { env } from "~/env.mjs";
+import { TRPCProvider } from "~/server/query/client";
+
 import { DialogContextProvider } from "../../contexts/DialogContext";
 import { ThemeRegistry, font } from "../ThemeRegistry";
 import { ToolpadProviders } from "../ToolpadProviders";
@@ -16,9 +18,11 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
 						<ReactQueryDevtools initialIsOpen={false} />
 					)}
 
-					<DialogContextProvider>
-						<ToolpadProviders>{children}</ToolpadProviders>
-					</DialogContextProvider>
+					<NuqsAdapter>
+						<DialogContextProvider>
+							<ToolpadProviders>{children}</ToolpadProviders>
+						</DialogContextProvider>
+					</NuqsAdapter>
 				</TRPCProvider>
 			</body>
 		</html>

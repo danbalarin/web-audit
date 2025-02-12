@@ -5,9 +5,11 @@ import {
 	getGroupedRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import { Dispatch, useEffect, useMemo, useState } from "react";
+import { Dispatch, useMemo } from "react";
+
 import { Table } from "~/features/ui/components/Table";
 import { RouterOutputs } from "~/server/query/client";
+
 import { columns } from "./columns";
 import { JobsTableData } from "./types/JobsTableData";
 
@@ -36,17 +38,30 @@ const grouping = ["createdAt"];
 
 type JobsTableProps = {
 	jobs: RouterOutputs["projects"]["findById"]["jobs"];
+	selected: string[];
 	onSelectedChange?: Dispatch<string[]>;
 	onDelete?: (auditId: string) => void;
 };
 
 export const JobsTable = ({
 	jobs,
+	selected,
 	onSelectedChange,
 	onDelete,
 }: JobsTableProps) => {
-	const [rowSelection, setRowSelection] = useState({});
 	const data = useMemo(() => transformData(jobs, onDelete), [jobs, onDelete]);
+	const rowSelection = useMemo(
+		() => selected.reduce((acc, s) => ({ ...acc, [s]: true }), {}),
+		[selected],
+	);
+	const onRowSelectionChange = (
+		updater: (old: Record<string, boolean>) => Record<string, boolean>,
+	) => {
+		if (onSelectedChange) {
+			const newRowSelection = Object.keys(updater(rowSelection));
+			onSelectedChange(newRowSelection);
+		}
+	};
 	const table = useReactTable({
 		data,
 		columns,
@@ -55,22 +70,15 @@ export const JobsTable = ({
 			rowSelection,
 			expanded: true,
 		},
+		// @ts-ignore
+		onRowSelectionChange,
 		enableRowSelection: (row) => row.subRows.length === 0,
-		onRowSelectionChange: setRowSelection,
 		getExpandedRowModel: getExpandedRowModel(),
 		getGroupedRowModel: getGroupedRowModel(),
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
+		getRowId: (row) => row.auditId,
 	});
-
-	useEffect(() => {
-		if (onSelectedChange) {
-			const auditIds = Object.keys(rowSelection)
-				.map((index) => data[+index]?.auditId)
-				.filter(Boolean) as string[];
-			onSelectedChange(auditIds);
-		}
-	}, [rowSelection]);
 
 	return <Table table={table} />;
 };

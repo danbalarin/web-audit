@@ -1,13 +1,14 @@
 "use client";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AccordionDetails, AccordionSummary, Typography } from "@mui/material";
-import { useState } from "react";
+import { useQueryState } from "nuqs";
+
 import { JobsTable } from "~/features/report/components/JobsTable";
 import { useDeleteAudit } from "~/features/report/hooks/useDeleteAudit";
-
 import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { useDialogContext } from "~/features/ui/contexts/DialogContext";
 import { trpc } from "~/server/query/client";
+import { AUDIT_SEARCH_PARAMS, auditsSearchParams } from "../../searchParams";
 
 type RunsCardProps = {
 	projectId: string;
@@ -15,7 +16,10 @@ type RunsCardProps = {
 
 export const RunsCard = ({ projectId }: RunsCardProps) => {
 	const [project] = trpc.projects.findById.useSuspenseQuery({ id: projectId });
-	const [selectedAudits, setSelectedAudits] = useState<string[]>([]);
+	const [selectedAudits, setSelectedAudits] = useQueryState(
+		AUDIT_SEARCH_PARAMS,
+		auditsSearchParams[AUDIT_SEARCH_PARAMS],
+	);
 	const { mutateAsync: deleteAudit } = useDeleteAudit();
 	const { confirm } = useDialogContext();
 
@@ -44,6 +48,7 @@ export const RunsCard = ({ projectId }: RunsCardProps) => {
 			<AccordionDetails>
 				<JobsTable
 					jobs={project.jobs}
+					selected={selectedAudits}
 					onSelectedChange={setSelectedAudits}
 					onDelete={(id) =>
 						confirm("Are you sure you want to delete this audit?", {
