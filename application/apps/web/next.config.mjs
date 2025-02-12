@@ -30,6 +30,12 @@ const nextConfig = {
 /** @type {import('@pigment-css/nextjs-plugin').PigmentOptions} */
 const pigmentConfig = {
 	transformLibraries: ["@mui/material", "@mui/lab"],
+	asyncResolve: (what) => {
+		if (what.includes("nuqs")) {
+			return import.meta.resolve(what).replace("file://", "");
+		}
+		return null;
+	},
 	theme,
 };
 
