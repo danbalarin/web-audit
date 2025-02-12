@@ -1,4 +1,4 @@
-import { AuditMetricDescription } from "@repo/api/types";
+import { MetricDescription } from "@repo/api/types";
 import { erf } from "./erf";
 
 const getLogNormal = (median: number, p10: number) => {
@@ -11,7 +11,7 @@ const getLogNormal = (median: number, p10: number) => {
 export const getLighthouseScoring = (
 	median: number,
 	p10: number,
-): Pick<AuditMetricDescription<number>, "rank" | "score"> => {
+): Pick<MetricDescription<number>, "rank" | "score"> => {
 	const logNormal = getLogNormal(median, p10);
 
 	return {

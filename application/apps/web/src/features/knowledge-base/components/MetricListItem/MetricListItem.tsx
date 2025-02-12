@@ -1,10 +1,10 @@
 import { ListItemButton, ListItemText } from "@mui/material";
-import { type AuditMetricDescription } from "@repo/api/types";
+import { type MetricDescription } from "@repo/api/types";
 import { KNOWLEDGE_BASE_ROUTES } from "../../config/routes";
 
 type MetricListItemProps = {
 	categoryId: string;
-	metric: AuditMetricDescription;
+	metric: MetricDescription;
 	selected?: boolean;
 };
 
