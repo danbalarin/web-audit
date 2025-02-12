@@ -1,4 +1,5 @@
 export * from "./AuditResult";
+export * from "./CategoryDescription";
 export * from "./CombineUnion";
 export * from "./Context";
 export * from "./DeepPartial";

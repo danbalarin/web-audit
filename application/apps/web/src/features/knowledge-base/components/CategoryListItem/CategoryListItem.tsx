@@ -1,11 +1,11 @@
 import SpeedIcon from "@mui/icons-material/Speed";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { AuditCategoryDescription } from "@repo/api/types";
+import { CategoryDescription } from "@repo/api/types";
 import React from "react";
 import { KNOWLEDGE_BASE_ROUTES } from "../../config/routes";
 
 type CategoryListItemProps = {
-	category: AuditCategoryDescription;
+	category: CategoryDescription;
 	selected?: boolean;
 };
 

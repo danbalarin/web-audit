@@ -1,10 +1,7 @@
-import type {
-	AuditCategoryDescription,
-	AuditMetricResult,
-} from "@repo/api/types";
+import type { AuditMetricResult, CategoryDescription } from "@repo/api/types";
 
 type AuditCategoryDetailProps = {
-	category: AuditCategoryDescription;
+	category: CategoryDescription;
 	data: AuditMetricResult[];
 };
 
