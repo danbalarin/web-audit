@@ -1,3 +1,4 @@
+export * from "./CalculatedScore";
 export * from "./CategoryDescription";
 export * from "./CombineUnion";
 export * from "./Context";
