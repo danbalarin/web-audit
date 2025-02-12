@@ -1,4 +1,4 @@
-import { type AuditCategoryDescription } from "@repo/api/types";
+import { type CategoryDescription } from "@repo/api/types";
 import { CumulativeLayoutShift } from "./cumulative-layout-shift";
 import document from "./description.mdx";
 import { FirstContentfulPaint } from "./first-contentful-paint";
@@ -9,7 +9,7 @@ import { TimeToFirstByte } from "./time-to-first-byte";
 import { TotalBlockingTime } from "./total-blocking-time";
 import { TransferSize } from "./transfer-size";
 
-export const PerformanceCategory: AuditCategoryDescription = {
+export const PerformanceCategory: CategoryDescription = {
 	id: "performance",
 	name: "Performance",
 	description: "These encapsulate your web page's performance opportunities.",

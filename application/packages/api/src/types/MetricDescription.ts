@@ -5,7 +5,7 @@ export type MetricDescription<TVal extends number | string = number | string> =
 		/**
 		 * The ID of the metric
 		 *
-		 * @example "largest-contentful-paint"
+		 * @example "performance.largest-contentful-paint"
 		 */
 		id: string;
 
