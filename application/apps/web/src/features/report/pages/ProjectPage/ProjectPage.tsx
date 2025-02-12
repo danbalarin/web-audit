@@ -1,6 +1,7 @@
 import { Divider, Stack } from "@mui/material";
 import { Suspense } from "react";
 import { trpc } from "~/server/query/server";
+import { CategoryList } from "./components/CategoryList";
 import { HeadingCard, HeadingCardSkeleton } from "./components/HeadingCard";
 import { RunsCard, RunsCardSkeleton } from "./components/RunsCard";
 
@@ -25,6 +26,7 @@ export async function ProjectPage({ params }: ProjectPageProps) {
 					<RunsCard projectId={id} />
 				</Suspense>
 				<Divider />
+				<CategoryList projectId={id} />
 			</Stack>
 		</>
 	);
