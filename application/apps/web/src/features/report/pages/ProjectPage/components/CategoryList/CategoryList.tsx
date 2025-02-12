@@ -1,10 +1,10 @@
 "use client";
 import { useQueryState } from "nuqs";
 
-import { categories } from "~/features/knowledge-base/config/categories";
 import { trpc } from "~/server/query/client";
 
 import { useMemo } from "react";
+import { categoriesMap } from "~/features/report/config/metrics";
 import { AUDIT_SEARCH_PARAMS, auditsSearchParams } from "../../searchParams";
 import { CategoryCard } from "../CategoryCard";
 
@@ -25,7 +25,9 @@ export const CategoryList = ({ projectId }: CategoryListProps) => {
 				.filter((a) => selectedAudits.includes(a.id)),
 		[project.jobs, selectedAudits],
 	);
-	return categories.map((cat) => <CategoryCard category={cat} key={cat.id} />);
+	return Object.values(categoriesMap).map((cat) => (
+		<CategoryCard category={cat} key={cat.id} />
+	));
 };
 
 CategoryList.displayName = "CategoryList";

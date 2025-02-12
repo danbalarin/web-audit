@@ -1,5 +1,5 @@
 import { Link, Tooltip } from "@mui/material";
-import { categories } from "../../config/categories";
+import { categoriesMap } from "~/features/report/config/metrics";
 import { KNOWLEDGE_BASE_ROUTES } from "../../config/routes";
 
 type KnowledgeLinkProps = {
@@ -13,7 +13,7 @@ export const KnowledgeLink = ({
 	metricId,
 	children,
 }: KnowledgeLinkProps) => {
-	const category = categories.find((c) => c.id === categoryId);
+	const category = categoriesMap[categoryId];
 	const metric = category?.metrics.find((m) => m.id === metricId);
 
 	const tooltip = metric?.description || category?.description;

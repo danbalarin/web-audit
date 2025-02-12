@@ -2,8 +2,10 @@
 import { Box, List } from "@mui/material";
 import { useParams } from "next/navigation";
 import React, { Fragment } from "react";
+
+import { categoriesMap } from "~/features/report/config/metrics";
 import { PaddedLayout } from "~/features/ui/components/PaddedLayout";
-import { categories } from "../../config/categories";
+
 import { CategoryListItem } from "../CategoryListItem";
 import { MetricListItem } from "../MetricListItem";
 
@@ -29,7 +31,7 @@ export const KnowledgeBaseLayout = ({ children }: KnowledgeBaseLayoutProps) => {
 						borderColor: "var(--mui-palette-divider)",
 					}}
 				>
-					{categories.map((c) => (
+					{Object.values(categoriesMap).map((c) => (
 						<Fragment key={c.id}>
 							<CategoryListItem category={c} selected={c.id === category} />
 							<List dense disablePadding>
