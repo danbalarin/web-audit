@@ -31,4 +31,13 @@ export const PerformanceCategory: CategoryDescription = {
 		[TotalBlockingTime.id]: 0.3,
 		[CumulativeLayoutShift.id]: 0.25,
 	},
+	rank: (value) => {
+		if (value > 90) {
+			return "good";
+		}
+		if (value > 50) {
+			return "average";
+		}
+		return "fail";
+	},
 };

@@ -1,87 +1,71 @@
 import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Checkbox, Icon, IconButton } from "@mui/material";
-import { ColumnDef } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import { AuditDateCell } from "../AuditDateCell";
 import { AuditResultCell } from "../AuditResultCell";
 import { JobsTableData } from "./types/JobsTableData";
 
 const COLUMN_SIZE = 128;
 
-export const columns: ColumnDef<JobsTableData>[] = [
-	{
+const columnHelper = createColumnHelper<JobsTableData>();
+
+const statusMap = {
+	good: "success",
+	average: "warning",
+	fail: "error",
+} as const;
+
+export const columns = [
+	columnHelper.accessor("createdAt", {
 		header: "Date",
-		accessorKey: "createdAt",
 		size: COLUMN_SIZE,
-		cell: (info) => <AuditDateCell value={info.getValue<Date>()} />,
-	},
-	{
+		cell: (info) => <AuditDateCell value={info.getValue()} />,
+	}),
+	columnHelper.accessor("url", {
 		header: "URL",
-		accessorKey: "url",
-		size: 280,
+		size: COLUMN_SIZE,
 		cell: (info) => info.getValue(),
-	},
-	{
+	}),
+	columnHelper.accessor("performance", {
 		header: "Performance",
-		accessorKey: "performance",
 		size: COLUMN_SIZE,
 		cell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
+			<AuditResultCell
+				value={getValue().score}
+				status={statusMap[getValue().rank]}
+			/>
 		),
-		aggregationFn: "mean",
-		aggregatedCell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
-		),
-	},
-	{
+	}),
+	columnHelper.accessor("accessibility", {
 		header: "Accessibility",
-		accessorKey: "accessibility",
 		size: COLUMN_SIZE,
 		cell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
+			<AuditResultCell value={getValue()} status="success" />
 		),
-		aggregationFn: "mean",
-		aggregatedCell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
-		),
-	},
-	{
+	}),
+	columnHelper.accessor("security", {
 		header: "Security",
-		accessorKey: "security",
 		size: COLUMN_SIZE,
 		cell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
+			<AuditResultCell value={getValue()} status="success" />
 		),
-		aggregationFn: "mean",
-		aggregatedCell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
-		),
-	},
-	{
+	}),
+	columnHelper.accessor("seo", {
 		header: "SEO",
-		accessorKey: "seo",
 		size: COLUMN_SIZE,
 		cell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
+			<AuditResultCell value={getValue()} status="success" />
 		),
-		aggregationFn: "mean",
-		aggregatedCell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
-		),
-	},
-	{
+	}),
+	columnHelper.accessor("ui", {
 		header: "UI/UX",
-		accessorKey: "ui",
 		size: COLUMN_SIZE,
 		cell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
+			<AuditResultCell value={getValue()} status="success" />
 		),
-		aggregationFn: "mean",
-		aggregatedCell: ({ getValue }) => (
-			<AuditResultCell value={getValue<number>()} status="success" />
-		),
-	},
-	{
+	}),
+	columnHelper.display({
 		id: "selection",
 		size: 42,
 		maxSize: 42,
@@ -105,8 +89,8 @@ export const columns: ColumnDef<JobsTableData>[] = [
 					onChange={row.getToggleSelectedHandler()}
 				/>
 			),
-	},
-	{
+	}),
+	columnHelper.display({
 		id: "delete",
 		size: 42,
 		maxSize: 42,
@@ -125,5 +109,5 @@ export const columns: ColumnDef<JobsTableData>[] = [
 				<DeleteIcon />
 			</IconButton>
 		),
-	},
+	}),
 ];

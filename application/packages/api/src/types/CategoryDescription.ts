@@ -35,4 +35,11 @@ export type CategoryDescription = {
 	 * Weights of the metrics
 	 */
 	weights: Record<string, number>;
+
+	/**
+	 * Rank the category
+	 *
+	 * @returns "fail" if the value is bad, "average" if the value is average, "good" if the value is good
+	 */
+	rank: (value: number) => "fail" | "average" | "good";
 };
