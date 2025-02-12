@@ -1,7 +1,7 @@
-import { AuditMetricResult } from "../types";
+import { MetricResult } from "../types";
 
 export const calculateCategoryScore = (
-	metrics: AuditMetricResult[],
+	metrics: MetricResult[],
 	weights: Record<string, number>,
 ) => {
 	let score = 0;
@@ -17,11 +17,9 @@ export const calculateCategoryScore = (
 	return score;
 };
 
-export const splitMetricsByCategory = (metrics: AuditMetricResult[]) => {
-	const categories: Record<
-		string,
-		{ id: string; metrics: AuditMetricResult[] }
-	> = {};
+export const splitMetricsByCategory = (metrics: MetricResult[]) => {
+	const categories: Record<string, { id: string; metrics: MetricResult[] }> =
+		{};
 	for (const metric of metrics) {
 		if (!categories[metric.id]) {
 			categories[metric.id] = { id: metric.id, metrics: [metric] };

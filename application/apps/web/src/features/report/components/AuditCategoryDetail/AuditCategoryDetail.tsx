@@ -1,8 +1,8 @@
-import type { AuditMetricResult, CategoryDescription } from "@repo/api/types";
+import type { CategoryDescription, MetricResult } from "@repo/api/types";
 
 type AuditCategoryDetailProps = {
 	category: CategoryDescription;
-	data: AuditMetricResult[];
+	data: MetricResult[];
 };
 
 export const AuditCategoryDetail = ({
