@@ -32,7 +32,7 @@
 				"noInvalidConstructorSuper": "error",
 				"noNewSymbol": "error",
 				"noNonoctalDecimalEscape": "error",
-				"noPrecisionLoss": "error",
+				"noPrecisionLoss": "warn",
 				"noSelfAssign": "error",
 				"noSetterReturn": "error",
 				"noSwitchDeclarations": "error",

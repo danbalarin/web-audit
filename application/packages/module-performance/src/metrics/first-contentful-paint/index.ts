@@ -1,6 +1,6 @@
 import { type AuditMetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
-import { getLighthouseScoring } from "~/utils/getLighthouseScoring";
+import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
 import document from "./description.mdx";
 
 // https://httparchive.org/reports/loading-speed#fcp
