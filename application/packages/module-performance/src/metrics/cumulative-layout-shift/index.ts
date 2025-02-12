@@ -1,4 +1,4 @@
-import { type AuditMetricDescription } from "@repo/api/types";
+import { type MetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
 import document from "./description.mdx";
@@ -8,7 +8,7 @@ const MEDIAN = 0.25;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const CumulativeLayoutShift: AuditMetricDescription<number> = {
+export const CumulativeLayoutShift: MetricDescription<number> = {
 	id: "cumulative-layout-shift",
 	name: "Time to First Byte",
 	description:

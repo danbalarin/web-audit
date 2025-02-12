@@ -1,4 +1,4 @@
-import { type AuditMetricDescription } from "@repo/api/types";
+import { type MetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
 import document from "./description.mdx";
@@ -8,7 +8,7 @@ const P10 = 200;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const TotalBlockingTime: AuditMetricDescription<number> = {
+export const TotalBlockingTime: MetricDescription<number> = {
 	id: "total-blocking-time",
 	name: "Total Blocking Time",
 	description:

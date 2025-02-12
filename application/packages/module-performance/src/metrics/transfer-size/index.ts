@@ -1,4 +1,4 @@
-import { type AuditMetricDescription } from "@repo/api/types";
+import { type MetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
 import document from "./description.mdx";
@@ -9,7 +9,7 @@ const P10 = 600;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const TransferSize: AuditMetricDescription<number> = {
+export const TransferSize: MetricDescription<number> = {
 	id: "transfer-size",
 	name: "Transfer Size",
 	description:

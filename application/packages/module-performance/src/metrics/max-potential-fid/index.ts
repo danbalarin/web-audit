@@ -1,4 +1,4 @@
-import { type AuditMetricDescription } from "@repo/api/types";
+import { type MetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
 import document from "./description.mdx";
@@ -8,7 +8,7 @@ const MEDIAN = 250;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const MaxPotentialFID: AuditMetricDescription<number> = {
+export const MaxPotentialFID: MetricDescription<number> = {
 	id: "max-potential-fid",
 	name: "Max Potential First Input Delay",
 	description:
