@@ -1,5 +1,5 @@
 import { BaseRunner } from "@repo/api";
-import { type AuditMetricResult, type BaseContext } from "@repo/api/types";
+import { type BaseContext, type MetricResult } from "@repo/api/types";
 // @ts-ignore
 import lighthouse, { type Flags, type Result } from "lighthouse";
 // @ts-ignore
@@ -28,7 +28,7 @@ export class LighthouseRunner extends BaseRunner<Result> {
 		);
 	}
 
-	async transform(_result: Result): Promise<AuditMetricResult[]> {
+	async transform(_result: Result): Promise<MetricResult[]> {
 		const audits = _result.audits as Record<
 			LighthousePerformanceAudits,
 			Result["audits"][keyof Result["audits"]]
@@ -66,7 +66,7 @@ export class LighthouseRunner extends BaseRunner<Result> {
 		];
 	}
 
-	async run(context: BaseContext): Promise<AuditMetricResult[]> {
+	async run(context: BaseContext): Promise<MetricResult[]> {
 		const res = await this.runRaw(context);
 
 		return this.transform(res);

@@ -1,4 +1,4 @@
-import type { AuditMetricResult } from "../types/AuditResult";
+import type { MetricResult } from "../types/AuditResult";
 import { BaseContext } from "../types/Context";
 import { EventEmitter } from "../utils/EventEmitter";
 
@@ -11,7 +11,7 @@ export type ModuleOptions = {
 
 export type ModuleResult = {
 	id: string;
-	metrics: AuditMetricResult[];
+	metrics: MetricResult[];
 };
 
 export type ModuleProgressEventPayload = {
