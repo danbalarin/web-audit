@@ -2,14 +2,12 @@ import { MetricDescription } from "@repo/api/types";
 import { Metric } from "@repo/db";
 import { PerformanceCategory } from "@repo/module-performance/metrics";
 
-export const categories = [PerformanceCategory];
-
 export const categoriesMap = {
 	[PerformanceCategory.id]: PerformanceCategory,
-};
+} as const;
 
 export const scoreCategory = (metrics: Metric[], categoryId: string) => {
-	const category = categoriesMap[categoryId];
+	const category = categoriesMap[categoryId as keyof typeof categoriesMap];
 	if (!category) {
 		throw new Error(`Category with id ${categoryId} not found`);
 	}

@@ -1,12 +1,18 @@
 import { Typography } from "@mui/material";
 
 type AuditResultCellProps = {
-	value: number;
-	status: "success" | "warning" | "error";
+	getValue: () => { score: number; rank: "good" | "average" | "fail" };
 };
 
-export const AuditResultCell = ({ status, value }: AuditResultCellProps) => {
-	return <Typography color={status}>{Math.round(value)}%</Typography>;
+const statusMap = {
+	good: "success",
+	average: "warning",
+	fail: "error",
+} as const;
+
+export const AuditResultCell = ({ getValue }: AuditResultCellProps) => {
+	const { score, rank } = getValue();
+	return <Typography color={statusMap[rank]}>{Math.round(score)}%</Typography>;
 };
 
 AuditResultCell.displayName = "AuditResultCell";

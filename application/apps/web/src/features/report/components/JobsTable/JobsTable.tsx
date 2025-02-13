@@ -11,7 +11,7 @@ import { Dispatch, useMemo } from "react";
 import { Table } from "~/features/ui/components/Table";
 import { RouterOutputs } from "~/server/query/client";
 
-import { scoreCategory } from "../../config/metrics";
+import { categoriesMap, scoreCategory } from "../../config/metrics";
 import { columns } from "./columns";
 import { JobsTableData } from "./types/JobsTableData";
 
@@ -27,10 +27,13 @@ const transformData = (
 				auditId: audit.id,
 				url: audit.url,
 				performance: scoreCategory(audit.metrics, PerformanceCategory.id),
-				accessibility: 69,
-				security: 69,
-				seo: 69,
-				ui: 69,
+				...Object.values(categoriesMap).reduce(
+					(acc, cat) => ({
+						...acc,
+						[cat.id]: scoreCategory(audit.metrics, cat.id),
+					}),
+					{},
+				),
 				onDelete: onDelete ? () => onDelete(audit.id) : undefined,
 			})),
 		)

@@ -1,13 +1,13 @@
 import { ElementType } from "react";
 import { MetricDescription } from "./MetricDescription";
 
-export type CategoryDescription = {
+export type CategoryDescription<TId extends string = string> = {
 	/**
 	 * The ID of the category
 	 *
 	 * @example "performance"
 	 */
-	id: string;
+	id: TId;
 
 	/**
 	 * The name of the category
