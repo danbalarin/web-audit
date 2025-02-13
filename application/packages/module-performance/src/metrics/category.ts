@@ -9,7 +9,7 @@ import { TimeToFirstByte } from "./time-to-first-byte";
 import { TotalBlockingTime } from "./total-blocking-time";
 import { TransferSize } from "./transfer-size";
 
-export const PerformanceCategory: CategoryDescription = {
+export const PerformanceCategory: CategoryDescription<"performance"> = {
 	id: "performance",
 	name: "Performance",
 	description: "These encapsulate your web page's performance opportunities.",

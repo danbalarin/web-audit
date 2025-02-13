@@ -2,6 +2,7 @@ import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Checkbox, Icon, IconButton } from "@mui/material";
 import { createColumnHelper } from "@tanstack/react-table";
+import { categoriesMap } from "../../config/metrics";
 import { AuditDateCell } from "../AuditDateCell";
 import { AuditResultCell } from "../AuditResultCell";
 import { JobsTableData } from "./types/JobsTableData";
@@ -10,12 +11,16 @@ const COLUMN_SIZE = 128;
 
 const columnHelper = createColumnHelper<JobsTableData>();
 
-const statusMap = {
-	good: "success",
-	average: "warning",
-	fail: "error",
-} as const;
-
+console.log(
+	Object.values(categoriesMap).map((category) =>
+		columnHelper.accessor(category.id, {
+			id: category.id,
+			header: category.name,
+			size: COLUMN_SIZE,
+			cell: AuditResultCell,
+		}),
+	),
+);
 export const columns = [
 	columnHelper.accessor("createdAt", {
 		header: "Date",
@@ -27,44 +32,14 @@ export const columns = [
 		size: COLUMN_SIZE,
 		cell: (info) => info.getValue(),
 	}),
-	columnHelper.accessor("performance", {
-		header: "Performance",
-		size: COLUMN_SIZE,
-		cell: ({ getValue }) => (
-			<AuditResultCell
-				value={getValue().score}
-				status={statusMap[getValue().rank]}
-			/>
-		),
-	}),
-	columnHelper.accessor("accessibility", {
-		header: "Accessibility",
-		size: COLUMN_SIZE,
-		cell: ({ getValue }) => (
-			<AuditResultCell value={getValue()} status="success" />
-		),
-	}),
-	columnHelper.accessor("security", {
-		header: "Security",
-		size: COLUMN_SIZE,
-		cell: ({ getValue }) => (
-			<AuditResultCell value={getValue()} status="success" />
-		),
-	}),
-	columnHelper.accessor("seo", {
-		header: "SEO",
-		size: COLUMN_SIZE,
-		cell: ({ getValue }) => (
-			<AuditResultCell value={getValue()} status="success" />
-		),
-	}),
-	columnHelper.accessor("ui", {
-		header: "UI/UX",
-		size: COLUMN_SIZE,
-		cell: ({ getValue }) => (
-			<AuditResultCell value={getValue()} status="success" />
-		),
-	}),
+	...Object.values(categoriesMap).map((category) =>
+		columnHelper.accessor(category.id, {
+			id: category.id,
+			header: category.name,
+			size: COLUMN_SIZE,
+			cell: AuditResultCell,
+		}),
+	),
 	columnHelper.display({
 		id: "selection",
 		size: 42,
