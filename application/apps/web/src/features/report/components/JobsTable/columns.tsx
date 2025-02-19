@@ -11,16 +11,6 @@ const COLUMN_SIZE = 128;
 
 const columnHelper = createColumnHelper<JobsTableData>();
 
-console.log(
-	Object.values(categoriesMap).map((category) =>
-		columnHelper.accessor(category.id, {
-			id: category.id,
-			header: category.name,
-			size: COLUMN_SIZE,
-			cell: AuditResultCell,
-		}),
-	),
-);
 export const columns = [
 	columnHelper.accessor("createdAt", {
 		header: "Date",

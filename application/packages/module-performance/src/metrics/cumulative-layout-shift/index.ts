@@ -10,7 +10,7 @@ const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
 export const CumulativeLayoutShift: MetricDescription<number> = {
 	id: "cumulative-layout-shift",
-	name: "Time to First Byte",
+	name: "Cumulative Layout Shift",
 	description:
 		"Cumulative Layout Shift (CLS) is a metric that measures the visual stability of a webpage by calculating the total of unexpected layout shifts occurring during a user's session.",
 	document,

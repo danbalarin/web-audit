@@ -14,18 +14,21 @@ export const getLighthouseScoring = (
 ): Pick<MetricDescription<number>, "rank" | "score"> => {
 	const logNormal = getLogNormal(median, p10);
 
+	const score = (value: number) => logNormal(value) * 100;
+	const rank = (value: number) => {
+		if (score(value) >= p10) {
+			return "good";
+		}
+
+		if (score(value) >= median) {
+			return "average";
+		}
+
+		return "fail";
+	};
+
 	return {
-		rank: (value) => {
-			if (value >= p10) {
-				return "good";
-			}
-
-			if (value >= median) {
-				return "average";
-			}
-
-			return "fail";
-		},
-		score: (value) => logNormal(value) * 100,
+		rank,
+		score,
 	};
 };
