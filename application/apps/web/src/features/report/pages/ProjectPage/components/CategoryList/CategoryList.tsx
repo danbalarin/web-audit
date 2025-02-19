@@ -1,10 +1,13 @@
 "use client";
 import { useQueryState } from "nuqs";
+import { useMemo } from "react";
 
+import {
+	categoriesMap,
+	scoreAndSplitMetrics,
+} from "~/features/report/config/metrics";
 import { trpc } from "~/server/query/client";
 
-import { useMemo } from "react";
-import { categoriesMap } from "~/features/report/config/metrics";
 import { AUDIT_SEARCH_PARAMS, auditsSearchParams } from "../../searchParams";
 import { CategoryCard } from "../CategoryCard";
 
@@ -18,15 +21,25 @@ export const CategoryList = ({ projectId }: CategoryListProps) => {
 		AUDIT_SEARCH_PARAMS,
 		auditsSearchParams[AUDIT_SEARCH_PARAMS],
 	);
-	const _audits = useMemo(
+	const audits = useMemo(
 		() =>
 			project.jobs
 				.flatMap((job) => job.audits)
 				.filter((a) => selectedAudits.includes(a.id)),
 		[project.jobs, selectedAudits],
 	);
+
+	const data = useMemo(
+		() =>
+			audits.map((audit) => ({
+				...audit,
+				...scoreAndSplitMetrics(audit.metrics),
+			})),
+		[audits],
+	);
+
 	return Object.values(categoriesMap).map((cat) => (
-		<CategoryCard category={cat} key={cat.id} />
+		<CategoryCard category={cat} key={cat.id} data={data} />
 	));
 };
 

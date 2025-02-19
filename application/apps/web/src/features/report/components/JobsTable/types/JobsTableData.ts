@@ -1,7 +1,7 @@
-import { categoriesMap } from "~/features/report/config/metrics";
+import { CategoryKeys } from "~/features/report/config/metrics";
 
 export type JobsTableData = {
-	[key in keyof typeof categoriesMap]: {
+	[key in CategoryKeys]: {
 		score: number;
 		rank: "good" | "average" | "fail";
 	};

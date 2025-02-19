@@ -1,4 +1,8 @@
-import { MetricDescription } from "@repo/api/types";
+import {
+	CalculatedScore,
+	CategoryDescription,
+	MetricDescription,
+} from "@repo/api/types";
 import { Metric } from "@repo/db";
 import { PerformanceCategory } from "@repo/module-performance/metrics";
 
@@ -6,8 +10,24 @@ export const categoriesMap = {
 	[PerformanceCategory.id]: PerformanceCategory,
 } as const;
 
-export const scoreCategory = (metrics: Metric[], categoryId: string) => {
-	const category = categoriesMap[categoryId as keyof typeof categoriesMap];
+export type CategoryKeys = keyof typeof categoriesMap;
+
+export type MetricKeys = keyof typeof metricsMap;
+
+export const getMetricCategory = (metricId: string) => {
+	for (const category of Object.values(categoriesMap)) {
+		if (category.metrics.find((m) => m.id === metricId)) {
+			return category;
+		}
+	}
+	return null;
+};
+
+export const scoreCategory = (
+	metrics: Metric[],
+	categoryId: string,
+): CalculatedScore<object> => {
+	const category = categoriesMap[categoryId as CategoryKeys];
 	if (!category) {
 		throw new Error(`Category with id ${categoryId} not found`);
 	}
@@ -36,7 +56,7 @@ export const metricsMap = {
 	),
 };
 
-export const scoreMetric = (value: Metric) => {
+export const scoreMetric = (value: Metric): CalculatedScore<object> => {
 	const metricDescription = metricsMap[value.metric];
 	if (!metricDescription) {
 		throw new Error(`Metric with id ${value.metric} not found`);
@@ -45,4 +65,22 @@ export const scoreMetric = (value: Metric) => {
 		score: metricDescription.score(value.value),
 		rank: metricDescription.rank(value.value),
 	};
+};
+
+export const scoreAndSplitMetrics = (metrics: Metric[]) => {
+	const categoryScores = Object.entries(categoriesMap).reduce(
+		(acc, [id, category]) => ({
+			...acc,
+			[id]: { ...category, ...scoreCategory(metrics, id) },
+		}),
+		{} as Record<CategoryKeys, CalculatedScore<CategoryDescription>>,
+	);
+	const metricScores = metrics.reduce(
+		(acc, metric) => ({
+			...acc,
+			[metric.metric]: { ...metric, ...scoreMetric(metric) },
+		}),
+		{} as Record<CategoryKeys, CalculatedScore<Metric>>,
+	);
+	return { categoryScores, metricScores };
 };

@@ -23,7 +23,11 @@ export function Table<TData>({ table }: TableProps<TData>) {
 			colSizes[`--col-${header.column.id}-size`] = header.column.getSize();
 		}
 		return colSizes;
-	}, [table.getState().columnSizingInfo, table.getState().columnSizing]);
+	}, [
+		table.getState().columnSizingInfo,
+		table.getState().columnSizing,
+		table.getAllColumns().length,
+	]);
 
 	return (
 		<TableContainer>
