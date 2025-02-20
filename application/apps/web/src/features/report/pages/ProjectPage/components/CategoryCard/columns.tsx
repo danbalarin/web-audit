@@ -2,13 +2,9 @@ import { createColumnHelper } from "@tanstack/react-table";
 
 import { CalculatedScore, MetricDescription } from "@repo/api/types";
 import { Audit, Metric } from "@repo/db";
+import { MetricDifferenceCell } from "~/features/report/components/MetricDifferenceCell";
 import { MetricNameCell } from "~/features/report/components/MetricNameCell";
 import { MetricResultCell } from "~/features/report/components/MetricResultCell";
-
-// export type CategoryDetailTableData<TKeys extends string = string> = Record<
-// 	MetricKeys,
-// 	Record<TKeys, CalculatedScore<MetricDescription>>
-// >;
 
 export type CategoryDetailTableData = MetricDescription & {
 	data: Record<string, CalculatedScore<Metric>>;
@@ -29,7 +25,6 @@ export const createColumns = (
 			columnHelper.accessor(`data.${audit.id}`, {
 				id: audit.id,
 				header: audit.url,
-				size: 128,
 				cell: (info) => (
 					<MetricResultCell
 						description={info.row.original}
@@ -38,5 +33,17 @@ export const createColumns = (
 				),
 			}),
 		),
-	];
+		audits.length >= 2 &&
+			columnHelper.display({
+				id: "comparison",
+				header: "Diff",
+				size: 128,
+				cell: (info) => {
+					const metrics = Object.values(info.row.original.data).sort(
+						(a, b) => a.createdAt.getTime() - b.createdAt.getTime(),
+					);
+					return <MetricDifferenceCell data={[metrics[0]!, metrics.at(-1)!]} />;
+				},
+			}),
+	].filter((col) => !!col);
 };
