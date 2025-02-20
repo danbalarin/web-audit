@@ -1,3 +1,4 @@
+import { Memory } from "@repo/api/metrics";
 import { type MetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
@@ -15,7 +16,7 @@ export const TransferSize: MetricDescription<number> = {
 	description:
 		"Transfer Size measures the total bytes transferred from the server to the browser for all the requested files when loading a webpage.",
 	document,
-	unit: "b",
+	unit: Memory.BYTE,
 	compare: createMetricCompareLowerIsBetter(150),
 	...lighthouseScoring,
 };
