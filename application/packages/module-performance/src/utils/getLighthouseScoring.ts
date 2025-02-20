@@ -15,12 +15,13 @@ export const getLighthouseScoring = (
 	const logNormal = getLogNormal(median, p10);
 
 	const score = (value: number) => logNormal(value) * 100;
+
 	const rank = (value: number) => {
-		if (score(value) >= p10) {
+		if (score(value) >= 90) {
 			return "good";
 		}
 
-		if (score(value) >= median) {
+		if (score(value) >= 50) {
 			return "average";
 		}
 

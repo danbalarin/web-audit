@@ -1,3 +1,4 @@
+import { Time } from "@repo/api/metrics";
 import { type MetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
@@ -14,7 +15,7 @@ export const LargestContentfulPaint: MetricDescription<number> = {
 	description:
 		"The Largest Contentful Paint (LCP) metric reports the render time of the largest content element visible within the viewport.",
 	document,
-	unit: "ms",
+	unit: Time.MILLISECOND,
 	compare: createMetricCompareLowerIsBetter(100),
 	...lighthouseScoring,
 };
