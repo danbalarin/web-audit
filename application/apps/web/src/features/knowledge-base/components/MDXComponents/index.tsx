@@ -15,7 +15,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		p: (props) => (
 			<Typography
 				variant="body1"
-				sx={{ my: 2 }}
+				sx={{ my: 2, textAlign: "justify", textJustify: "inter-word" }}
 				{...(props as TypographyProps)}
 			/>
 		),
