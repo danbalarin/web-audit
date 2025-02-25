@@ -2,6 +2,7 @@ import { BaseRunner } from "@repo/api";
 import { type BaseContext, type MetricResult } from "@repo/api/types";
 // @ts-ignore
 import lighthouse, { type Flags, type Result } from "lighthouse";
+import desktopConfig from "lighthouse/core/config/desktop-config";
 // @ts-ignore
 import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
 
@@ -90,8 +91,15 @@ export class LighthouseRunner extends BaseRunner<Result> {
 		const runs = [];
 		for (let i = 0; i < this._options.numberOfRuns; i++) {
 			const page = await context.browser.newPage();
-			const result = await lighthouse(context.url, options, undefined, page);
-			await page.close();
+			const result = await lighthouse(
+				context.url,
+				options,
+				desktopConfig,
+				page,
+			);
+			if (!page.isClosed()) {
+				await page.close();
+			}
 			if (!result?.artifacts) {
 				//TODO
 				throw new Error("Could not run lighthouse", { cause: "No artifacts" });
