@@ -1,4 +1,5 @@
 "use client";
+import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import { useQueryState } from "nuqs";
 import { useMemo } from "react";
 
@@ -8,6 +9,7 @@ import {
 } from "~/features/report/config/metrics";
 import { trpc } from "~/server/query/client";
 
+import { Card, Typography } from "@mui/material";
 import { AUDIT_SEARCH_PARAMS, auditsSearchParams } from "../../searchParams";
 import { CategoryCard } from "../CategoryCard";
 
@@ -37,6 +39,23 @@ export const CategoryList = ({ projectId }: CategoryListProps) => {
 			})),
 		[audits],
 	);
+
+	if (!data.length) {
+		return (
+			<Card sx={{ p: 2 }}>
+				<Typography variant="body1">
+					To see details please select audits in the table above using the
+					checkbox under the{" "}
+					<CompareArrowsIcon
+						fontSize="medium"
+						color="primary"
+						sx={{ verticalAlign: "text-bottom" }}
+					/>{" "}
+					icon.
+				</Typography>
+			</Card>
+		);
+	}
 
 	return Object.values(categoriesMap).map((cat) => (
 		<CategoryCard category={cat} key={cat.id} data={data} />
