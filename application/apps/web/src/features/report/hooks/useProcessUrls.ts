@@ -26,9 +26,11 @@ type RunOptions = {
 // TODO use RxJS
 const useProcessUrl = () => {
 	const [id, setId] = useState<string | null>(null);
+	const projectIdRef = useRef<string | undefined>(undefined);
 	const progressRef = useRef<OnProgress>();
 	const doneRef = useRef<OnDone>();
 	const errorRef = useRef<OnError>();
+	const trpcUtils = trpc.useUtils();
 	const { data, error } = trpc.modules.jobStatus.useQuery(
 		{ id: id ?? "" },
 		{
@@ -45,6 +47,7 @@ const useProcessUrl = () => {
 
 	const runUrl = useCallback(
 		async ({ url, projectId, onDone, onProgress, onError }: RunUrlOptions) => {
+			projectIdRef.current = projectId;
 			const id = await mutateAsync({ url, projectId });
 			progressRef.current = onProgress;
 			doneRef.current = onDone;
@@ -65,6 +68,7 @@ const useProcessUrl = () => {
 
 		if (doneRef.current && data?.progress === 1) {
 			doneRef.current();
+			trpcUtils.projects.findById.invalidate({ id: projectIdRef.current });
 		}
 	}, [data]);
 
@@ -79,7 +83,11 @@ const useProcessUrl = () => {
 	};
 };
 
-export const useProcessUrls = () => {
+type UseProcessUrlsProps = {
+	onDone: () => void;
+};
+
+export const useProcessUrls = ({ onDone }: UseProcessUrlsProps) => {
 	const [isRunning, setIsRunning] = useState(false);
 	const [auditsStatus, setAuditsStatus] = useState<Record<string, AuditStatus>>(
 		{},
@@ -124,6 +132,7 @@ export const useProcessUrls = () => {
 		}
 
 		setIsRunning(false);
+		onDone();
 	}, []);
 
 	const overallProgress =
