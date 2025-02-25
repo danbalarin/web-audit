@@ -31,7 +31,7 @@ export const RunAuditModal = ({
 	const [selected, setSelected] = React.useState<string[]>([]);
 	const urls = useMemo(() => [project.homeUrl, ...project.urls], [project]);
 	const notification = useNotifications();
-	const { run, progress, isRunning } = useProcessUrls();
+	const { run, progress, isRunning } = useProcessUrls({ onDone: onClose });
 
 	const handleClose = () => {
 		if (isRunning) {
@@ -82,7 +82,10 @@ export const RunAuditModal = ({
 					))}
 				</List>
 				{isRunning && (
-					<LinearProgress variant="determinate" value={progress * 100} />
+					<LinearProgress
+						variant={progress === 0 ? "indeterminate" : "determinate"}
+						value={progress * 100}
+					/>
 				)}
 			</DialogContent>
 			<DialogActions>
