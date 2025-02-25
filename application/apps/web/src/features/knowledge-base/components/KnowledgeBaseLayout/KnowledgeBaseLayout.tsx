@@ -17,7 +17,7 @@ export const KnowledgeBaseLayout = ({ children }: KnowledgeBaseLayoutProps) => {
 	const { category, metric } = useParams();
 
 	return (
-		<Box sx={{ display: "flex" }}>
+		<Box sx={{ display: "grid", gridTemplateColumns: "auto 1fr" }}>
 			<Box component="nav" sx={{ width: "15em", flexShrink: 0 }}>
 				<List
 					disablePadding
@@ -48,7 +48,9 @@ export const KnowledgeBaseLayout = ({ children }: KnowledgeBaseLayoutProps) => {
 					))}
 				</List>
 			</Box>
-			<PaddedLayout>{children}</PaddedLayout>
+			<PaddedLayout maxWidth="52rem" justifySelf="center">
+				{children}
+			</PaddedLayout>
 		</Box>
 	);
 };
