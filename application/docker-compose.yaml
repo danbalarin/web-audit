@@ -4,18 +4,24 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - DB_NAME=${DB_NAME}
+        - DB_USER=${DB_USER}
+        - DB_PASSWORD=${DB_PASSWORD}
     restart: always
     ports:
       - 3000:3000
     networks:
       - audit_network
+    depends_on:
+      - postgres
 
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: electric
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - 5432:5432
     volumes:
@@ -25,17 +31,6 @@ services:
       - listen_addresses=*
       - -c
       - wal_level=logical
-    networks:
-      - audit_network
-
-  electric:
-    image: electricsql/electric
-    environment:
-      DATABASE_URL: postgresql://postgres:password@postgres:5432/electric?sslmode=disable
-    ports:
-      - "3001:3000"
-    depends_on:
-      - postgres
     networks:
       - audit_network
 

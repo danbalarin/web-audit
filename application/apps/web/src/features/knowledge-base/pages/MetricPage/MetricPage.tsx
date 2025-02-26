@@ -1,5 +1,8 @@
 import { Metadata } from "next";
-import { categoriesMap } from "~/features/report/config/metrics";
+import {
+	type CategoryKeys,
+	categoriesMap,
+} from "~/features/report/config/metrics";
 
 type MetricPageParams = Promise<{
 	category: string;
@@ -23,7 +26,7 @@ export const generateMetadata = async ({
 	params,
 }: MetricPageProps): Promise<Metadata> => {
 	const { category: categoryId, metric: metricId } = await params;
-	const metric = categoriesMap[categoryId]?.metrics.find(
+	const metric = categoriesMap[categoryId as CategoryKeys]?.metrics.find(
 		(m) => m.id === metricId,
 	);
 	return {
@@ -34,7 +37,7 @@ export const generateMetadata = async ({
 
 export const MetricPage = async ({ params }: MetricPageProps) => {
 	const { category: categoryId, metric: metricId } = await params;
-	const metric = categoriesMap[categoryId]?.metrics.find(
+	const metric = categoriesMap[categoryId as CategoryKeys]?.metrics.find(
 		(m) => m.id === metricId,
 	);
 

@@ -1,5 +1,8 @@
 import { Metadata } from "next";
-import { categoriesMap } from "~/features/report/config/metrics";
+import {
+	type CategoryKeys,
+	categoriesMap,
+} from "~/features/report/config/metrics";
 
 type CategoryPageParams = Promise<{
 	category: string;
@@ -13,7 +16,7 @@ export const generateMetadata = async ({
 	params,
 }: CategoryPageProps): Promise<Metadata> => {
 	const { category: categoryId } = await params;
-	const category = categoriesMap[categoryId];
+	const category = categoriesMap[categoryId as CategoryKeys];
 	return {
 		title: `Knowledge Base - ${category?.name}`,
 		description: category?.description,
@@ -22,7 +25,7 @@ export const generateMetadata = async ({
 
 export const CategoryPage = async ({ params }: CategoryPageProps) => {
 	const { category: categoryId } = await params;
-	const category = categoriesMap[categoryId];
+	const category = categoriesMap[categoryId as CategoryKeys];
 
 	if (!category) {
 		return <p>Category not found</p>;

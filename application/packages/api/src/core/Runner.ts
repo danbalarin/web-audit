@@ -1,5 +1,5 @@
-import type { MetricResult } from "../types/AuditResult";
 import { BaseContext } from "../types/Context";
+import type { MetricResult } from "../types/MetricResult";
 
 export abstract class BaseRunner<
 	TResult = unknown,

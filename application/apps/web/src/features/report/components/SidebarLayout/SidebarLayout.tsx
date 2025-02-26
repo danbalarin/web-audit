@@ -12,12 +12,18 @@ import {
 	ListItemText,
 	ListSubheader,
 } from "@mui/material";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import React, { Suspense } from "react";
 
 import { KNOWLEDGE_BASE_ROUTES } from "~/features/knowledge-base/config/routes";
 import { REPORT_ROUTES } from "../../config/routes";
-import { ProjectList, ProjectListSkeleton } from "../ProjectList";
+import { ProjectListSkeleton } from "../ProjectList/ProjectList.Skeleton";
+
+const ProjectList = dynamic(
+	() => import("../ProjectList").then((mod) => mod.ProjectList),
+	{ ssr: false },
+);
 
 type SidebarLayoutProps = {
 	children: React.ReactNode;

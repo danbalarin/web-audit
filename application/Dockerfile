@@ -1,6 +1,13 @@
 FROM node:20-alpine AS base
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
+ARG DB_USER
+ENV DB_USER=${DB_USER}
+ARG DB_PASSWORD
+ENV DB_PASSWORD=${DB_PASSWORD}
+ARG DB_NAME
+ENV DB_NAME=${DB_NAME}
+
 ARG TURBO_TEAM
 ENV TURBO_TEAM=$TURBO_TEAM
  
@@ -27,7 +34,7 @@ RUN yarn install
  
 # Build the project
 COPY --from=builder /app/out/full/ .
-RUN yarn turbo run build --filter=web
+RUN export NODE_OPTIONS=--max_old_space_size=4096 && yarn turbo run build --filter=web
  
 FROM base AS runner
 RUN apk add chromium
@@ -44,7 +51,10 @@ USER nextjs
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=installer --chown=nextjs:nodejs /app/packages/db ./packages/db
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/run.sh .
+RUN chmod +x run.sh
 # COPY --from=installer --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
 
 EXPOSE 3000
-CMD node apps/web/server.js
+CMD sh run.sh

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Link } from "@mui/material";
-import { categoriesMap } from "~/features/report/config/metrics";
+import { CategoryKeys, categoriesMap } from "~/features/report/config/metrics";
 import { KnowledgeLink } from "../KnowledgeLink";
 
 type LinkProps = {
@@ -41,9 +41,12 @@ const getCategoryAndMetric = (href: string) => {
 	const regex = /category:([a-zA-Z0-9-]+)(,metric:([a-zA-Z0-9-]+))?/;
 	const match = href.match(regex);
 	if (match) {
-		const categoryId = match[1];
+		const categoryId = match[1] as CategoryKeys | undefined;
 		const metricId = match[3];
-		const category = categoriesMap[categoryId ?? ""];
+		if (!categoryId) {
+			return { category: null, metric: null };
+		}
+		const category = categoriesMap[categoryId];
 		const metric = category?.metrics.find((m) => m.id === metricId);
 		return { category, metric };
 	}

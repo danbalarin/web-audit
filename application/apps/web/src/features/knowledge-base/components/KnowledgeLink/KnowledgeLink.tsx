@@ -1,9 +1,9 @@
 import { Link, Tooltip } from "@mui/material";
-import { categoriesMap } from "~/features/report/config/metrics";
+import { CategoryKeys, categoriesMap } from "~/features/report/config/metrics";
 import { KNOWLEDGE_BASE_ROUTES } from "../../config/routes";
 
 type KnowledgeLinkProps = {
-	categoryId: string;
+	categoryId: CategoryKeys;
 	metricId?: string;
 	children?: React.ReactNode;
 };

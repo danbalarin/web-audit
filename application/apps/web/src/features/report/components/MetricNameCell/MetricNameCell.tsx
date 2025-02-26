@@ -8,8 +8,13 @@ type MetricNameCellProps = {
 export const MetricNameCell = ({ id }: MetricNameCellProps) => {
 	const category = getMetricCategory(id);
 	const metricDescription = metricsMap[id];
+
+	if (!category) {
+		return id;
+	}
+
 	return (
-		<KnowledgeLink categoryId={category?.id ?? ""} metricId={id}>
+		<KnowledgeLink categoryId={category.id} metricId={id}>
 			{metricDescription?.name}
 		</KnowledgeLink>
 	);

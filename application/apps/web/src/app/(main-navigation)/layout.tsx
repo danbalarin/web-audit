@@ -6,8 +6,8 @@ export const metadata: Metadata = {
 	title: "Audit projects",
 };
 
-export default ({ children }: { children: React.ReactNode }) => {
-	void trpc.projects.findAll.prefetch();
+export default async ({ children }: { children: React.ReactNode }) => {
+	await trpc.projects.findAll.prefetch();
 
 	return (
 		<HydrateClient>
