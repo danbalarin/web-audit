@@ -7,9 +7,10 @@ They are the primary interface for communication, commerce, and information diss
 However, the effectiveness and reliability of a website are contingent upon adherence to established standards and best practices.
 Therefore, website auditing plays a crucial role in ensuring that websites meet these standards, enhancing user experience, accessibility, and overall performance.
 
-Website auditing encompasses a comprehensive evaluation of various aspects of a website, including its design, functionality, performance, security, and compliance with industry standards.
-This process is essential for identifying areas of improvement and ensuring that the website aligns with the goals and objectives of the organisation.
-The standards and guidelines for website development are established by several authoritative bodies, each contributing to different facets of web development.
+This thesis addresses the need for an effective solution to audit websites comprehensively without access to their source code or internal systems.
+In the analysis part of the thesis, we'll go through the main bodies that influence website quality assurance, areas that need to be considered, as well as existing solutions and potentially missing metrics vital for quality assurance. 
+In the implementation part, we'll set up and implement the application that will combine automated and manual auditing techniques.
+It will cover metrics discovered in the analysis part of the thesis.
 
-This thesis addresses the need for an effective solution to audit websites comprehensively without the access to their source code or internal systems.
-By developing a web application that combines automated and manual auditing techniques, this work aims to bridge the gap in current website auditing practices and offer a simplified approach to quality assurance.
+The primary output of the thesis is the application that can run audits automatically, support users with doing manual audits, re-run and compare audit results and display the results in an easy and understandable way.
+Secondary output is this text supplementing and explaining decisions made while developing the app as well as a detailed description of the metrics used to identify shortcomings in website quality.

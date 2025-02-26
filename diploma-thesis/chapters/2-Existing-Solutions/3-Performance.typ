@@ -23,20 +23,19 @@ WebPageTest generates rich visualisations, including waterfall charts and filmst
 This level of detail helps pinpoint bottlenecks such as uncompressed assets, inefficient server responses, or third-party scripts that delay rendering.
 @edgar_speed_2024
 
-
 GTmetrix combines performance analysis with actionable recommendations derived from Google PageSpeed and YSlow rulesets. 
 By providing a holistic overview of a website's performance, GTmetrix identifies key issues affecting speed and offers prioritised suggestions for optimisation. 
 It also allows for tracking performance over time through monitoring and alerts, enabling developers to observe the impact of changes and detect regressions promptly.
 @edgar_speed_2024
 
-Browser-integrated developer tools, such as those in Google Chrome, Mozilla Firefox, and Safari, are indispensable for real-time performance auditing.
-The Network panel in these tools displays all network requests, their sizes, and timings, helping identify assets that take the longest to load or block rendering. The Performance panel allows developers to record and analyse the runtime performance of web applications, revealing scripting, rendering, and painting activities. 
-By examining these profiles, developers can detect inefficient code, memory leaks, or excessive reflows that degrade performance.
+Synthetic Monitoring tools like Catchpoint and Uptrends offer controlled testing environments for more specialised auditing. 
+They simulate user interactions from various geographic locations, devices, and network conditions, providing consistent benchmarks for performance. 
+These services can monitor specific transactions or user flows, detecting issues like slow database responses or API latency that might not be apparent in standard page load tests.
 
-For server-side performance auditing, #abbr.a("APM") solutions like New Relic, Dynatrace, and AppDynamics provide deep insights into backend operations. 
-These tools monitor application behaviour, resource utilisation, database queries, and external service calls. 
-By tracing transactions end-to-end, APM tools uncover server-side bottlenecks impacting response times and overall user experience. 
-They offer detailed analytics and alerting mechanisms, ensuring performance issues are proactively identified and addressed.
+// For server-side performance auditing, #abbr.a("APM") solutions like New Relic, Dynatrace, and AppDynamics provide deep insights into backend operations. 
+// These tools monitor application behaviour, resource utilisation, database queries, and external service calls. 
+// By tracing transactions end-to-end, APM tools uncover server-side bottlenecks impacting response times and overall user experience. 
+// They offer detailed analytics and alerting mechanisms, ensuring performance issues are proactively identified and addressed.
 
 // Not Related
 // #abbr.l("RUM") complements synthetic testing by collecting performance data from actual users in real time. 
@@ -53,10 +52,6 @@ Advanced performance auditing also involves profiling at the code level.
 Tools like Webpack Bundle Analyzer assess the size and composition of JavaScript bundles, helping developers identify unnecessary code bloat or opportunities for code splitting. 
 Similarly, Coverage features in browser developer tools highlight unused JavaScript and CSS, suggesting areas where code can be trimmed to reduce load times.
 
-Synthetic Monitoring tools like Catchpoint and Uptrends offer controlled testing environments for more specialised auditing. 
-They simulate user interactions from various geographic locations, devices, and network conditions, providing consistent benchmarks for performance. 
-These services can monitor specific transactions or user flows, detecting issues like slow database responses or API latency that might not be apparent in standard page load tests.
-
 Moreover, automated testing frameworks like Selenium and Puppeteer can be extended for performance auditing by scripting user interactions and measuring performance metrics during these flows. 
 These tools enable customised testing scenarios that reflect actual user behaviour, providing insights into performance during complex transactions or multi-step processes.
 
@@ -66,5 +61,4 @@ It compares current performance metrics against established baselines or budgets
 This integration ensures that performance remains a gate in the deployment process, maintaining high standards over time.
 
 Finally, staying informed about emerging standards and technologies is crucial for effective performance auditing. 
-The adoption of protocols like HTTP/2 or HTTP/3, which leverages new protocol QUIC~(#cite(<iyengar_quic_2021>, form: "year")), which offer performance enhancements through features like multiplexing, improved congestion control or reducing number of handshakes can be assessed using tools like Blackfire.io and Wireshark. 
-Auditing whether a website is leveraging these protocols effectively can reveal opportunities for improvements at the network level.
+The adoption of protocols like HTTP/2 or HTTP/3, which leverages new protocol QUIC~(#cite(<iyengar_quic_2021>, form: "year")), which offer performance enhancements through features like multiplexing, improved congestion control or reducing number of handshakes.

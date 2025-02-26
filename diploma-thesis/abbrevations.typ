@@ -8,7 +8,7 @@
   ("APM", "Application Performance Monitoring"),
   ("AR", "Augmented Reality"),
   ("WAI-ARIA", "Accessible Rich Internet Applications"),
-  // ("ARIA", "Accessible Rich Internet Applications"),
+  ("ARIA", "Accessible Rich Internet Applications"),
   ("BCP", "Best Current Practice"),
   ("CAPTCHA", "Completely Automated Public Turing test to tell Computers and Humans Apart"),
   ("CD", "Continuous Deployment"),

@@ -16,7 +16,6 @@ This information is vital for understanding how Google perceives a website and f
 Screaming Frog SEO Spider is a widely used desktop program that functions as a website crawler, emulating the behaviour of search engine bots. 
 By crawling a website, it collects data on various SEO elements, such as title tags, meta descriptions, headings, and status codes. 
 It helps identify issues like duplicate content, broken links, missing meta tags, and improper use of directives like robots.txt and canonical tags. 
-The tool operates without needing direct access to the website's backend, making it ideal for black-box SEO auditing. 
 Its ability to analyse the site's architecture and internal linking structure provides insights into potential improvements in crawlability and user navigation.
 @palmer_seo_2022
 
@@ -31,6 +30,3 @@ Errors in these files can prevent pages from being indexed or crawled, severely 
 These tools fetch and analyse the files directly from the website, requiring no source code access.
 
 Accessibility, usability and performance, while often considered separately, intersect with SEO. Websites that are accessible and user-friendly and fast tend to have better engagement metrics and may be favoured by search algorithms prioritising user experience. Existing solutions for those areas can be found in @accessibility, @performance and @ui-ux.
-
-Legal and ethical considerations must be observed during SEO auditing. Respecting robots.txt directives and not engaging in unauthorised data scraping is important to avoid legal issues. 
-Ethical SEO audits focus on improving website performance and compliance rather than exploiting loopholes or employing manipulative tactics.

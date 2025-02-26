@@ -16,5 +16,5 @@ By analysing how the website aligns with these heuristics, auditors can uncover 
 This method does not require source code access, as it focuses on the user interface and interaction patterns observable during typical use.
 @stephanidis_universal_2007
 
-Unfortunately, although there are plenty of areas to consider and many tools that help improve the websites, like session recordings, heat maps, first click analysis, AB testing, etc., none are automatable through some API.
+Unfortunately, although there are plenty of areas to consider and many tools that help improve the websites, like session recordings, heat maps, first click analysis, AB testing, etc., none are automatable through API.
 Some services provide testers that will check the website, but it's still manual work.

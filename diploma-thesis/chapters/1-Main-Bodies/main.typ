@@ -22,9 +22,9 @@ The following sections delve deeper into each of these organisations, exploring 
 
 #include "1-W3C.typ"
 
-#pagebreak()
+// #pagebreak()
 
-#include "2-ISO.typ"
+// #include "2-ISO.typ"
 
 #pagebreak()
 

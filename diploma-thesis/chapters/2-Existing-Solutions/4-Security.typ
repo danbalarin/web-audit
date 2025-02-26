@@ -2,7 +2,6 @@
 
 == Security
 
-Website security remains a critical concern in today's interconnected digital environment, where vulnerabilities can lead to significant data breaches, financial losses, and erosion of user trust. 
 Conducting security audits without access to source code is essential for evaluating the resilience of web applications as perceived by external attackers. 
 This approach simulates real-world attack scenarios, providing valuable insights into potential weaknesses. 
 Numerous existing solutions facilitate such auditing, enabling security professionals to assess and enhance the security posture of web applications without needing internal access.
@@ -24,11 +23,12 @@ Assessing the security of #abbr.l("TLS") configurations is crucial for protectin
 They evaluate certificate validity, protocol support, cipher suite strength, and configuration issues like susceptibility to known vulnerabilities (e.g., Heartbleed, POODLE). 
 Ensuring proper encryption practices prevents man-in-the-middle attacks and eavesdropping, safeguarding sensitive user data.
 
-In addition to these tools, the application of established methodologies enhances the effectiveness of black-box security audits. 
-The OWASP Testing Guide provides a comprehensive framework for testing web applications, outlining techniques and considerations for assessing various types of vulnerabilities. 
-Following such guidelines ensures that audits are systematic, thorough, and standardised.
-@botwright_cyber_2023
+// In addition to these tools, the application of established methodologies enhances the effectiveness of black-box security audits. 
+// The OWASP Testing Guide provides a comprehensive framework for testing web applications, outlining techniques and considerations for assessing various types of vulnerabilities. 
+// Following such guidelines ensures that audits are systematic, thorough, and standardised.
+// @botwright_cyber_2023
 
-In the area of security, there is more to cover, like network enumeration tools, application scanners, fuzzing tools, penetration testing frameworks, reconnaissance etc. but these tools require a lot of knowledge and can't be well automated for all different scenarios.
-Also legal and ethical considerations are paramount in black-box security auditing. 
+In the area of security, there is more to cover, like network enumeration tools, application scanners, fuzzing tools, penetration testing frameworks, reconnaissance etc. 
+Still, these tools require a lot of knowledge and can't be well automated for different scenarios.
+Also, legal and ethical considerations are paramount in black-box security auditing. 
 Auditors must obtain proper authorisation before conducting tests to avoid legal repercussions and ensure compliance with local laws.

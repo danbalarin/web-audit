@@ -3,23 +3,14 @@
 == Mozilla
 
 Mozilla is a globally recognised, non-profit organisation dedicated to ensuring that the Internet remains an open and accessible resource for all. 
-Founded in 1998, Mozilla emerged from the Netscape Communications Corporation with the release of the Mozilla Application Suite, which later evolved into the widely used Firefox web browser. 
-The organisation's commitment to promoting choice and innovation on the Internet has significantly influenced web development practices, browser technologies, and the advancement of open standards.
-
 Mozilla's mission is to promote openness, innovation, and opportunity on the Internet. 
 Guided by the principles outlined in the Mozilla Manifesto, the organisation believes that the Internet should be a global public resource that is open and accessible to everyone. 
 Mozilla advocates for an Internet that enriches the lives of individual users, where security and privacy are fundamental, and individuals have the power to shape their own online experiences.
-
-The organisation aims to foster a healthy Internet ecosystem by developing open-source products, technologies, and programs that empower users and developers. 
-By encouraging transparency and collaboration, Mozilla ensures that the Internet remains a platform where creativity and innovation can thrive without proprietary constraints. 
-The organisation also actively engages in policy advocacy, striving to influence Internet governance and legislation in ways that protect user rights and promote an open web.
 @noauthor_mozilla_2025
-
-=== Contributions to Web Browsers and Technologies
 
 One of Mozilla's most significant contributions to the Internet is the development of the Firefox web browser. 
 Launched in 2004, Firefox quickly gained popularity as a fast, secure, and user-friendly alternative to dominant browsers of the time. 
-Firefox championed features like tabbed browsing, integrated search, and pop-up blocking, setting new standards for browser functionality and user experience.
+Firefox championed features like tabbed browsing, integrated search, and pop-up blocking, setting new browser functionality and user experience standards.
 
 Firefox is built on the Gecko layout engine, an open-source rendering engine developed by Mozilla. 
 Gecko is responsible for interpreting web content, including #abbr.s("HTML"), #abbr.s("CSS"), and JavaScript, and rendering it on the user's screen. 
@@ -30,53 +21,14 @@ Released in 2017, Firefox Quantum represented a significant overhaul of the brow
 By leveraging technologies like the Servo parallel browser engine and the Rust programming language, Quantum improved resource utilisation and load times, enhancing the overall user experience.
 @mayo_introducing_2017
 
-=== Advocacy for Open Standards and Web Technologies
+Mozilla is also the creator and maintainer of HTTP Observatory, a free, open-source service and library that tests websites for security headers.
+This service can easily pinpoint the most basic security problems, like vulnerability to #abbr.a("CSRF") or #abbr.s("HTTPS") downgrade attack.
 
-Mozilla is a staunch advocate for open web standards and plays an active role in organisations like the #link(<W3C>, "World Wide Web Consortium") and the #link(<IETF>, "Internet Engineering Task Force"). 
-By participating in the development of specifications and protocols, Mozilla influences the direction of web technologies to promote openness, interoperability, and user empowerment.
-
-The organisation has been instrumental in the advancement of technologies such as HTML5, CSS3, and JavaScript, contributing to their development and implementation.
-Mozilla's developers collaborate with the broader community to test and refine these standards, ensuring they meet the needs of users and developers alike. 
-By implementing support for new standards in Firefox, Mozilla encourages their adoption and facilitates the creation of rich, interactive web applications.
-
-Mozilla also pioneered the development of #abbr.a("AJAX") techniques, which revolutionised how web applications communicate with servers. 
-AJAX enables asynchronous data retrieval without reloading entire web pages, leading to faster, more dynamic user experiences. 
-This innovation has had a lasting impact on web development, influencing modern frameworks and applications.
-
-=== Developer Tools and Resources
-
-Understanding the importance of empowering developers, Mozilla provides a wealth of tools and resources to facilitate web development. 
-The Firefox Developer Edition is a browser tailored for developers, offering advanced features like the Responsive Design Mode, which allows developers to test how websites look and function across different screen sizes and devices. 
-It includes comprehensive debugging tools for HTML, CSS, and JavaScript, providing insights into performance, accessibility, and security.
-
-Mozilla also maintains the #abbr.s("MDN") Web Docs, one of the most comprehensive and authoritative resources for web development documentation. 
+#abbr.s("MDN") Web Docs, one of the most comprehensive and authoritative resources for web development documentation, is also maintained by Mozilla. 
 MDN Web Docs offers detailed guides, references, and tutorials on web technologies, including HTML, CSS, JavaScript, and web #abbr.pls("API"). 
 By providing high-quality, up-to-date documentation, Mozilla supports developers worldwide in building standards-compliant and innovative web applications.
-
-In addition to documentation, Mozilla contributes to developer tools like Firefox DevTools, which includes a powerful set of in-browser tools for web development and debugging. 
-Features like the JavaScript Debugger, Network Monitor, and Performance Tools enable developers to optimise their applications and diagnose issues effectively.
-
-=== Innovations in Web Technologies
-
-Mozilla continues to innovate in web technologies, exploring new paradigms to enhance performance and user experience.
-The development of the Rust programming language is a significant achievement, designed to provide memory safety without sacrificing performance.
-Rust has gained widespread adoption beyond Mozilla due to its ability to prevent common programming errors that lead to security vulnerabilities.
 
 Another notable project is #abbr.a("Wasm"), a low-level bytecode that allows developers to run high-performance applications in web browsers.
 Mozilla has been a key player in the development of WebAssembly, enabling languages like C, C++, and Rust to be compiled to the web platform.
 This technology expands the capabilities of web applications, allowing for more complex and compute-intensive tasks to be performed efficiently within the browser.
 @w3c_webassembly_working_group_webassembly_2017 
-
-Mozilla also develops WebXR, an API that supports #abbr.a("AR") and #abbr.a("VR") experience in web browsers.
-By standardising how browsers handle AR and VR content, Mozilla enables developers to create immersive experiences accessible directly through the web without the need for additional software or applications.
-
-=== Impact on Web Development and Quality Assurance
-
-Mozilla's contributions have had a lasting impact on web development practices and quality assurance. 
-By advocating for open standards and providing tools that facilitate adherence to these standards, Mozilla ensures that web applications are accessible, interoperable, and performant across different browsers and devices.
-
-The organisation's emphasis on security and privacy has influenced industry practices, leading to broader encryption adoption and better user data protection. 
-Developers are encouraged to implement security best practices, partly due to the tools and education provided by Mozilla.
-
-Through resources like MDN Web Docs, Mozilla elevates the overall quality of web development by providing authoritative and accessible information. 
-This resource helps developers stay informed about the latest standards, techniques, and best practices, ultimately leading to higher-quality websites and applications.
