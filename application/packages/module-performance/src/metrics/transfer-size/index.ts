@@ -5,8 +5,8 @@ import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
 import document from "./description.mdx";
 
 // https://httparchive.org/reports/state-of-the-web#bytesTotal
-const MEDIAN = 2600;
-const P10 = 600;
+const MEDIAN = 2600 * 1024;
+const P10 = 600 * 1024;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 

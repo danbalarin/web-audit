@@ -18,7 +18,7 @@ export const MetricResultCell = ({
 	data,
 	description,
 }: MetricResultCellProps) => {
-	if (!data) {
+	if (!data || data.value === "-1") {
 		return (
 			<Tooltip
 				title="No data were retrieved for this metric"

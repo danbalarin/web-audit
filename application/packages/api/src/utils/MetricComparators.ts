@@ -1,15 +1,27 @@
 export const createMetricCompareLowerIsBetter =
-	(delta?: number) => (oldVal: number, newVal: number) => {
-		if (Math.abs(oldVal - newVal) < (delta || 0)) {
+	(delta?: number) => (oldVal: number | string, newVal: number | string) => {
+		const castedOldVal = +oldVal;
+		const castedNewVal = +newVal;
+		if (Math.abs(castedOldVal - castedNewVal) < (delta || 0)) {
 			return 0;
 		}
-		return oldVal > newVal ? 1 : oldVal < newVal ? -1 : 0;
+		return castedOldVal > castedNewVal
+			? 1
+			: castedOldVal < castedNewVal
+				? -1
+				: 0;
 	};
 
 export const createMetricCompareHigherIsBetter =
-	(delta?: number) => (oldVal: number, newVal: number) => {
-		if (Math.abs(oldVal - newVal) < (delta || 0)) {
+	(delta?: number) => (oldVal: number | string, newVal: number | string) => {
+		const castedOldVal = +oldVal;
+		const castedNewVal = +newVal;
+		if (Math.abs(castedOldVal - castedNewVal) < (delta || 0)) {
 			return 0;
 		}
-		return oldVal < newVal ? 1 : oldVal > newVal ? -1 : 0;
+		return castedOldVal < castedNewVal
+			? 1
+			: castedOldVal > castedNewVal
+				? -1
+				: 0;
 	};
