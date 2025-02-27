@@ -1,8 +1,9 @@
 {
 	"name": "@repo/module-performance",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"private": true,
 	"sideEffects": false,
+	"description": "Module for performance metrics",
 	"exports": {
 		".": {
 			"import": "./src/index.ts",
