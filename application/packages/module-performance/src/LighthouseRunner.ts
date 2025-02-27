@@ -1,8 +1,6 @@
-import { BaseRunner } from "@repo/api";
+import { BaseRunner, spawnChild } from "@repo/api";
 import { type BaseContext, type MetricResult } from "@repo/api/types";
-// @ts-ignore
-import lighthouse, { type Flags, type Result } from "lighthouse";
-import desktopConfig from "lighthouse/core/config/desktop-config";
+import { Result } from "lighthouse";
 // @ts-ignore
 import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
 
@@ -14,9 +12,6 @@ export type LighthouseRunnerOptions = {
 	 */
 	numberOfRuns?: number;
 };
-
-type PerformanceResult = Result & { requests: string[] };
-
 export class LighthouseRunner extends BaseRunner<Result> {
 	private readonly _options: Required<LighthouseRunnerOptions>;
 
@@ -31,7 +26,7 @@ export class LighthouseRunner extends BaseRunner<Result> {
 		);
 	}
 
-	async transform(result: PerformanceResult): Promise<MetricResult[]> {
+	async transform(result: Result): Promise<MetricResult[]> {
 		const audits = result.audits as Record<
 			LighthousePerformanceAudits,
 			Result["audits"][keyof Result["audits"]]
@@ -70,10 +65,6 @@ export class LighthouseRunner extends BaseRunner<Result> {
 				id: "max-potential-fid",
 				value: audits["max-potential-fid"].numericValue ?? -1,
 			},
-			{
-				id: "total-requests",
-				value: result.requests.length,
-			},
 		];
 	}
 
@@ -83,55 +74,28 @@ export class LighthouseRunner extends BaseRunner<Result> {
 		return this.transform(res);
 	}
 
-	async runRaw(context: BaseContext): Promise<PerformanceResult> {
-		const options = {
-			output: "json",
-			onlyCategories: ["performance"],
-			onlyAudits: [
-				"server-response-time",
-				"first-contentful-paint",
-				"total-byte-weight",
-				"total-blocking-time",
-				"cumulative-layout-shift",
-				"speed-index",
-				"max-potential-fid",
-			],
-		} satisfies Flags;
-
+	async runRaw(context: BaseContext): Promise<Result> {
 		const runs = { lhr: [] as Result[], requests: [] as string[][] };
 		for (let i = 0; i < this._options.numberOfRuns; i++) {
 			const requests = [] as string[];
-			const browser = await context.createBrowser();
-
-			const page = await browser.newPage();
-			page.on("request", (req) => {
-				requests.push(req.url());
-			});
-			const result = await lighthouse(
+			const result = await spawnChild<Result>("lighthouse", [
 				context.url,
-				options,
-				desktopConfig,
-				page,
-			);
+				"--preset=desktop",
+				"--quiet",
+				"--output=json",
+				'--chrome-flags="--headless"',
+				"--only-categories=performance",
+				"--only-audits=server-response-time,first-contentful-paint,total-byte-weight,total-blocking-time,cumulative-layout-shift,speed-index,max-potential-fid",
+			]);
 
-			await browser.close();
-			if (!result?.artifacts) {
-				throw new Error("Could not run lighthouse", { cause: "No artifacts" });
-			}
-			runs.lhr.push(result.lhr);
+			runs.lhr.push(result);
 			runs.requests.push(requests);
 		}
 
 		try {
 			const result: Result = computeMedianRun(runs.lhr);
-			const medianRequests = runs.requests
-				.map((a, i) => ({ run: i, requests: a }))
-				.sort((a, b) => a.requests.length - b.requests.length)[
-				Math.floor(runs.requests.length / 2)
-			]?.requests;
-			return { ...result, requests: medianRequests ?? runs.requests[0] ?? [] };
+			return result;
 		} catch (error) {
-			return { ...(runs.lhr[0] as Result), requests: runs.requests[0] ?? [] };
 			throw new Error("Could not compute median run", { cause: error });
 		}
 	}

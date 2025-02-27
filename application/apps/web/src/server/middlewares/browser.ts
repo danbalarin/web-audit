@@ -6,10 +6,20 @@ export const browserMiddleware = middleware(async ({ next, ctx }) => {
 	try {
 		const createBrowser = async () =>
 			await puppeteer.launch({
-				// headless: "new",
+				headless: true,
 				executablePath: env.CHROMIUM_PATH,
 				defaultViewport: null,
-				args: ["--no-sandbox"],
+				args: [
+					"--disable-gpu",
+					"--disable-dev-shm-usage",
+					"--disable-setuid-sandbox",
+					"--no-first-run",
+					"--no-sandbox",
+					"--no-zygote",
+					"--deterministic-fetch",
+					"--disable-features=IsolateOrigins",
+					"--disable-site-isolation-trials",
+				],
 				ignoreDefaultArgs: ["--enable-automation"],
 			});
 

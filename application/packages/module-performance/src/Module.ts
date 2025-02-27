@@ -1,6 +1,7 @@
 import { BaseModule } from "@repo/api";
-import { type BaseContext } from "@repo/api/types";
+import { type BaseContext, MetricResult } from "@repo/api/types";
 import { LighthouseRunner, LighthouseRunnerOptions } from "./LighthouseRunner";
+import { PuppeteerRunner } from "./PuppeteerRunner";
 
 export type PerformanceModuleOptions = {
 	lighthouseRunnerOptions: LighthouseRunnerOptions;
@@ -19,14 +20,33 @@ export class PerformanceModule extends BaseModule {
 	}
 
 	protected async _execute(context: BaseContext) {
-		const runner = new LighthouseRunner(
+		const lighthouseRunner = new LighthouseRunner(
 			this._performanceModuleOptions.lighthouseRunnerOptions,
 		);
 
-		const results = await runner.run(context);
+		const puppeteerRunner = new PuppeteerRunner({});
+
+		const res = [] as MetricResult[];
+		try {
+			const lighthouse = await lighthouseRunner.run(context);
+			res.push(...lighthouse);
+		} catch (e) {
+			// TODO logger
+			console.error("Error running lighthouse", e);
+		}
+
+		this.emit("progress", { progress: 0.5 });
+
+		try {
+			const puppeteer = await puppeteerRunner.run(context);
+			res.push(...puppeteer);
+		} catch (e) {
+			// TODO logger
+			console.error("Error running puppeteer", e);
+		}
 
 		return {
-			metrics: results,
+			metrics: res,
 			id: "performance",
 		};
 	}

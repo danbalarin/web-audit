@@ -8,6 +8,10 @@
 			"outputs": [".next/**", "!.next/cache/**"],
 			"env": ["CHROMIUM_PATH"]
 		},
+		"start": {
+			"dependsOn": ["^start"],
+			"env": ["CHROMIUM_PATH"]
+		},
 		"lint": {
 			"dependsOn": ["^lint"]
 		},
