@@ -18,6 +18,7 @@ services:
 
   postgres:
     image: postgres:16-alpine
+    restart: always
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}

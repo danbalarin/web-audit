@@ -90,18 +90,18 @@ export class LighthouseRunner extends BaseRunner<Result> {
 
 		const runs = [];
 		for (let i = 0; i < this._options.numberOfRuns; i++) {
-			const page = await context.browser.newPage();
+			const browser = await context.createBrowser();
+
+			const page = await browser.newPage();
 			const result = await lighthouse(
 				context.url,
 				options,
 				desktopConfig,
 				page,
 			);
-			if (!page.isClosed()) {
-				await page.close();
-			}
+
+			await browser.close();
 			if (!result?.artifacts) {
-				//TODO
 				throw new Error("Could not run lighthouse", { cause: "No artifacts" });
 			}
 			runs.push(result.lhr);
@@ -111,7 +111,6 @@ export class LighthouseRunner extends BaseRunner<Result> {
 			const result: Result = computeMedianRun(runs);
 			return result;
 		} catch (error) {
-			//TODO
 			throw new Error("Could not compute median run", { cause: error });
 		}
 	}

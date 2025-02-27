@@ -2,8 +2,8 @@
 	"name": "web-audit-monorepo",
 	"private": true,
 	"scripts": {
-		"build": "turbo build",
-		"dev": "turbo dev",
+		"build": "export NODE_OPTIONS=--max_old_space_size=8192 && turbo build",
+		"dev": "export NODE_OPTIONS=--max_old_space_size=8192 && turbo dev",
 		"lint": "biome lint",
 		"test": "turbo test --parallel",
 		"test:coverage": "turbo test --parallel -- --coverage",

@@ -1,6 +1,6 @@
 import type { Browser } from "puppeteer";
 
 export type BaseContext = {
-	browser: Browser;
+	createBrowser: () => Promise<Browser>;
 	url: string;
 };

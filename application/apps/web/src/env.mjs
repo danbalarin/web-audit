@@ -23,6 +23,11 @@ export const env = createEnv({
 			.transform((url) => (url ? `https://${url}` : "http://localhost:3000")),
 
 		CHROMIUM_PATH: z.string().optional(),
+		DB_USER: z.string(),
+		DB_PASSWORD: z.string(),
+		DB_NAME: z.string(),
+		DB_HOST: z.string().optional().default("localhost"),
+		DB_PORT: z.number().optional().default(5432),
 	},
 
 	client: {
@@ -46,5 +51,10 @@ export const env = createEnv({
 		NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL:
 			process.env.NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL,
 		NEXT_PUBLIC_DEBUG: process.env.NEXT_PUBLIC_DEBUG,
+		DB_USER: process.env.DB_USER,
+		DB_PASSWORD: process.env.DB_PASSWORD,
+		DB_NAME: process.env.DB_NAME,
+		DB_HOST: process.env.DB_HOST,
+		DB_PORT: process.env.DB_PORT,
 	},
 });

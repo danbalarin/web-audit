@@ -3,12 +3,15 @@ import {
 	JobService,
 	MetricService,
 	ProjectService,
-	db,
+	createDb,
 } from "@repo/db";
+import { env } from "~/env.mjs";
 import { middleware } from "../trpc/init";
 
 export const dbMiddleware = middleware(async ({ next, ctx }) => {
 	try {
+		const connectionString = `postgres://${env.DB_USER}:${env.DB_PASSWORD}@${env.DB_HOST}:${env.DB_PORT}/${env.DB_NAME}`;
+		const db = createDb(connectionString);
 		return next({
 			ctx: {
 				...ctx,

@@ -17,7 +17,7 @@ type ProcessUrlInput = z.infer<typeof inputSchema>;
 type ProcessUrlOptions = {
 	input: ProcessUrlInput;
 	modules: BaseModule[];
-	browser: Browser;
+	createBrowser: () => Promise<Browser>;
 	jobService: JobService;
 	metricService: MetricService;
 	auditService: AuditService;
@@ -25,7 +25,7 @@ type ProcessUrlOptions = {
 
 const processUrl = async ({
 	input,
-	browser,
+	createBrowser,
 	modules,
 	jobService,
 	metricService,
@@ -41,7 +41,7 @@ const processUrl = async ({
 		projectId: input.projectId,
 	});
 
-	const id = await processor.process({ browser, url });
+	const id = await processor.process({ createBrowser, url });
 
 	return id;
 };
@@ -52,7 +52,7 @@ export const procedure = browserProcedure
 	.mutation(({ input, ctx }) =>
 		processUrl({
 			input,
-			browser: ctx.browser,
+			createBrowser: ctx.createBrowser,
 			modules: ctx.modules,
 			jobService: ctx.jobService,
 			metricService: ctx.metricService,
