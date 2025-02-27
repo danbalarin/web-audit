@@ -3,6 +3,8 @@ import { type BaseContext, MetricResult } from "@repo/api/types";
 import { LighthouseRunner, LighthouseRunnerOptions } from "./LighthouseRunner";
 import { PuppeteerRunner } from "./PuppeteerRunner";
 
+import pkg from "../package.json";
+
 export type PerformanceModuleOptions = {
 	lighthouseRunnerOptions: LighthouseRunnerOptions;
 };
@@ -12,9 +14,9 @@ export class PerformanceModule extends BaseModule {
 		private readonly _performanceModuleOptions: PerformanceModuleOptions,
 	) {
 		super({
-			description: "Performance Module",
+			description: pkg.description,
 			name: "Performance",
-			version: "1.0.0",
+			version: pkg.version,
 			id: "performance",
 		});
 	}
