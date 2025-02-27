@@ -1,0 +1,1 @@
+ALTER TABLE "jobs" ALTER COLUMN "progress" SET DATA TYPE real;

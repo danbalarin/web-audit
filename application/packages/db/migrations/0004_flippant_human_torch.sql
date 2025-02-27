@@ -1,0 +1,1 @@
+ALTER TABLE "metrics" RENAME COLUMN "url" TO "value";

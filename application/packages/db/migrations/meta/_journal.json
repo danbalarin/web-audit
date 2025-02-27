@@ -22,6 +22,20 @@
 			"when": 1738876689943,
 			"tag": "0002_sharp_photon",
 			"breakpoints": true
+		},
+		{
+			"idx": 3,
+			"version": "7",
+			"when": 1740670832912,
+			"tag": "0003_first_gauntlet",
+			"breakpoints": true
+		},
+		{
+			"idx": 4,
+			"version": "7",
+			"when": 1740670889539,
+			"tag": "0004_flippant_human_torch",
+			"breakpoints": true
 		}
 	]
 }

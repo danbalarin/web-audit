@@ -33,5 +33,19 @@
 		"bps": true,
 		"folderMillis": 1738876689943,
 		"hash": "ccf6ebbbedac4b7a0fa409b9ad4f20d97013b3931fcd186077b9f07fe7fc7ed9"
+	},
+	{
+		"sql": [
+			"ALTER TABLE \"jobs\" ALTER COLUMN \"progress\" SET DATA TYPE real;"
+		],
+		"bps": true,
+		"folderMillis": 1740670832912,
+		"hash": "56b50016e5d96c2208a57077b7067c2676a0c042d98952866a04c395f5d7dc64"
+	},
+	{
+		"sql": ["ALTER TABLE \"metrics\" RENAME COLUMN \"url\" TO \"value\";"],
+		"bps": true,
+		"folderMillis": 1740670889539,
+		"hash": "6e6ba596039453dc0d971f5045045740aa7fb5af235603c625baccee385276f7"
 	}
 ]
