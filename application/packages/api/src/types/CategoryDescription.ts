@@ -1,4 +1,3 @@
-import { ElementType } from "react";
 import { MetricDescription } from "./MetricDescription";
 
 export type CategoryDescription<TId extends string = string> = {
@@ -20,11 +19,6 @@ export type CategoryDescription<TId extends string = string> = {
 	 * @example "These encapsulate your web page's performance opportunities."
 	 */
 	description: string;
-
-	/**
-	 * The description of the category in MDX
-	 */
-	document: ElementType;
 
 	/**
 	 * The metrics of the category

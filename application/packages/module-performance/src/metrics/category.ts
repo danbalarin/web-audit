@@ -1,6 +1,5 @@
 import { type CategoryDescription } from "@repo/api/types";
 import { CumulativeLayoutShift } from "./cumulative-layout-shift";
-import document from "./description.mdx";
 import { FirstContentfulPaint } from "./first-contentful-paint";
 import { LargestContentfulPaint } from "./largest-contentful-paint";
 import { MaxPotentialFID } from "./max-potential-fid";
@@ -14,7 +13,6 @@ export const PerformanceCategory: CategoryDescription<"performance"> = {
 	id: "performance",
 	name: "Performance",
 	description: "These encapsulate your web page's performance opportunities.",
-	document,
 	metrics: [
 		CumulativeLayoutShift,
 		FirstContentfulPaint,

@@ -1,5 +1,3 @@
-import { ElementType } from "react";
-
 export type MetricDescription<TVal extends number | string = number | string> =
 	{
 		/**
@@ -22,11 +20,6 @@ export type MetricDescription<TVal extends number | string = number | string> =
 		 * @example "The Largest Contentful Paint (LCP) metric reports the render time of the largest content element visible within the viewport."
 		 */
 		description: string;
-
-		/**
-		 * The description of the metric in MDX
-		 */
-		document: ElementType;
 
 		/**
 		 * The unit of the metric

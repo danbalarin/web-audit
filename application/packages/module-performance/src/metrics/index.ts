@@ -1,3 +1,2 @@
-export { LargestContentfulPaint } from "./largest-contentful-paint";
-
 export { PerformanceCategory } from "./category";
+export { PerformanceCategoryDocuments, PerformanceDocument } from "./documents";

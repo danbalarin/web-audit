@@ -3,6 +3,7 @@ import {
 	type CategoryKeys,
 	categoriesMap,
 } from "~/features/report/config/metrics";
+import { categoryDocuments } from "../../config/documents";
 
 type CategoryPageParams = Promise<{
 	category: string;
@@ -25,7 +26,7 @@ export const generateMetadata = async ({
 
 export const CategoryPage = async ({ params }: CategoryPageProps) => {
 	const { category: categoryId } = await params;
-	const category = categoriesMap[categoryId as CategoryKeys];
+	const category = categoryDocuments[categoryId as CategoryKeys];
 
 	if (!category) {
 		return <p>Category not found</p>;

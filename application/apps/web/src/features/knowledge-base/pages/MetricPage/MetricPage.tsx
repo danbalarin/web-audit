@@ -3,6 +3,7 @@ import {
 	type CategoryKeys,
 	categoriesMap,
 } from "~/features/report/config/metrics";
+import { categoryDocuments } from "../../config/documents";
 
 type MetricPageParams = Promise<{
 	category: string;
@@ -37,15 +38,13 @@ export const generateMetadata = async ({
 
 export const MetricPage = async ({ params }: MetricPageProps) => {
 	const { category: categoryId, metric: metricId } = await params;
-	const metric = categoriesMap[categoryId as CategoryKeys]?.metrics.find(
-		(m) => m.id === metricId,
-	);
+	const Document =
+		categoryDocuments[categoryId as CategoryKeys].metrics?.[metricId];
 
-	if (!metric) {
+	if (!Document) {
 		return <p>Post not found</p>;
 	}
 
-	const Document = metric.document;
 	return <Document />;
 };
 
