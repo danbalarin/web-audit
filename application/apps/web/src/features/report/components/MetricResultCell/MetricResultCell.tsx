@@ -3,9 +3,10 @@ import DangerousIcon from "@mui/icons-material/Dangerous";
 import WarningIcon from "@mui/icons-material/Warning";
 import { Typography } from "@mui/material";
 
-import { Time } from "@repo/api/metrics";
+import { Memory, Time } from "@repo/api/metrics";
 import { CalculatedScore, MetricDescription } from "@repo/api/types";
 import { Metric } from "@repo/db";
+import { MemoryMetricResultCell } from "./parts/MemoryMetricResultCell";
 import { TimeMetricResultCell } from "./parts/TimeMetricResultCell";
 
 type MetricResultCellProps = {
@@ -21,8 +22,20 @@ export const MetricResultCell = ({
 		return null;
 	}
 	let component;
-	if (description.unit === Time.MILLISECOND) {
-		component = <TimeMetricResultCell value={+data.value} />;
+	switch (description.unit) {
+		case Time.MILLISECOND:
+		case Time.SECOND:
+		case Time.MINUTE:
+			component = <TimeMetricResultCell value={+data.value} />;
+			break;
+		case Memory.BYTE:
+		case Memory.KILOBYTE:
+		case Memory.MEGABYTE:
+		case Memory.GIGABYTE:
+			component = <MemoryMetricResultCell value={+data.value} />;
+			break;
+		default:
+			component = <Typography>{data.value}</Typography>;
 	}
 
 	const color =

@@ -13,5 +13,5 @@ export const convertMemory = (
 	if (nextUnit === -1 || memory < 1024) {
 		return { memory, unit };
 	}
-	return convertMemory(memory / 1024, Object.values(Memory)[nextUnit]);
+	return convertMemory(memory / 1024, Object.values(Memory)[nextUnit + 1]);
 };
