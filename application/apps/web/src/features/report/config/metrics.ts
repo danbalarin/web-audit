@@ -59,7 +59,7 @@ export const metricsMap = {
 export const scoreMetric = (value: Metric): CalculatedScore<object> => {
 	const metricDescription = metricsMap[value.metric];
 	if (!metricDescription) {
-		throw new Error(`Metric with id ${value.metric} not found`);
+		return { score: -1, rank: "fail" };
 	}
 	return {
 		score: metricDescription.score(value.value),

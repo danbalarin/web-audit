@@ -15,6 +15,8 @@ export type LighthouseRunnerOptions = {
 	numberOfRuns?: number;
 };
 
+type PerformanceResult = Result & { requests: string[] };
+
 export class LighthouseRunner extends BaseRunner<Result> {
 	private readonly _options: Required<LighthouseRunnerOptions>;
 
@@ -29,8 +31,8 @@ export class LighthouseRunner extends BaseRunner<Result> {
 		);
 	}
 
-	async transform(_result: Result): Promise<MetricResult[]> {
-		const audits = _result.audits as Record<
+	async transform(result: PerformanceResult): Promise<MetricResult[]> {
+		const audits = result.audits as Record<
 			LighthousePerformanceAudits,
 			Result["audits"][keyof Result["audits"]]
 		>;
@@ -64,6 +66,10 @@ export class LighthouseRunner extends BaseRunner<Result> {
 				id: "max-potential-fid",
 				value: audits["max-potential-fid"].numericValue ?? -1,
 			},
+			{
+				id: "total-requests",
+				value: result.requests.length,
+			},
 		];
 	}
 
@@ -73,7 +79,7 @@ export class LighthouseRunner extends BaseRunner<Result> {
 		return this.transform(res);
 	}
 
-	async runRaw(context: BaseContext): Promise<Result> {
+	async runRaw(context: BaseContext): Promise<PerformanceResult> {
 		const options = {
 			output: "json",
 			onlyCategories: ["performance"],
@@ -88,11 +94,15 @@ export class LighthouseRunner extends BaseRunner<Result> {
 			],
 		} satisfies Flags;
 
-		const runs = [];
+		const runs = { lhr: [] as Result[], requests: [] as string[][] };
 		for (let i = 0; i < this._options.numberOfRuns; i++) {
+			const requests = [] as string[];
 			const browser = await context.createBrowser();
 
 			const page = await browser.newPage();
+			page.on("request", (req) => {
+				requests.push(req.url());
+			});
 			const result = await lighthouse(
 				context.url,
 				options,
@@ -104,12 +114,18 @@ export class LighthouseRunner extends BaseRunner<Result> {
 			if (!result?.artifacts) {
 				throw new Error("Could not run lighthouse", { cause: "No artifacts" });
 			}
-			runs.push(result.lhr);
+			runs.lhr.push(result.lhr);
+			runs.requests.push(requests);
 		}
 
 		try {
-			const result: Result = computeMedianRun(runs);
-			return result;
+			const result: Result = computeMedianRun(runs.lhr);
+			const medianRequests = runs.requests
+				.map((a, i) => ({ run: i, requests: a }))
+				.sort((a, b) => a.requests.length - b.requests.length)[
+				Math.floor(runs.requests.length / 2)
+			]?.requests;
+			return { ...result, requests: medianRequests ?? runs.requests[0] ?? [] };
 		} catch (error) {
 			throw new Error("Could not compute median run", { cause: error });
 		}

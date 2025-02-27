@@ -32,6 +32,7 @@ const transformData = (data: AuditWithScores[]) => {
 			if (!existing) {
 				const metricDescription = metricsMap[metric];
 				if (!metricDescription) {
+					console.log("metric", metric);
 					continue;
 				}
 				res.push({

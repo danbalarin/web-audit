@@ -7,6 +7,7 @@ import { MaxPotentialFID } from "./max-potential-fid";
 import { SpeedIndex } from "./speed-index";
 import { TimeToFirstByte } from "./time-to-first-byte";
 import { TotalBlockingTime } from "./total-blocking-time";
+import { TotalRequests } from "./total-requests";
 import { TransferSize } from "./transfer-size";
 
 export const PerformanceCategory: CategoryDescription<"performance"> = {
@@ -23,6 +24,7 @@ export const PerformanceCategory: CategoryDescription<"performance"> = {
 		TimeToFirstByte,
 		TotalBlockingTime,
 		TransferSize,
+		TotalRequests,
 	],
 	weights: {
 		[FirstContentfulPaint.id]: 0.1,
