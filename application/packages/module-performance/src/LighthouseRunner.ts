@@ -47,6 +47,10 @@ export class LighthouseRunner extends BaseRunner<Result> {
 				value: audits["first-contentful-paint"].numericValue ?? -1,
 			},
 			{
+				id: "largest-contentful-paint",
+				value: audits["largest-contentful-paint"].numericValue ?? -1,
+			},
+			{
 				id: "transfer-size",
 				value: audits["total-byte-weight"].numericValue ?? -1,
 			},
@@ -127,6 +131,7 @@ export class LighthouseRunner extends BaseRunner<Result> {
 			]?.requests;
 			return { ...result, requests: medianRequests ?? runs.requests[0] ?? [] };
 		} catch (error) {
+			return { ...(runs.lhr[0] as Result), requests: runs.requests[0] ?? [] };
 			throw new Error("Could not compute median run", { cause: error });
 		}
 	}
