@@ -30,9 +30,9 @@ export const createColumns = (
 					return (
 						<MetricResultCell
 							unit={info.row.original.unit}
-							rank={data.rank}
-							score={data.score}
-							value={data.value}
+							rank={data?.rank ?? -1}
+							score={data?.score}
+							value={data?.value ?? "-1"}
 						/>
 					);
 				},
@@ -47,7 +47,13 @@ export const createColumns = (
 					const metrics = Object.values(info.row.original.data).sort(
 						(a, b) => a.createdAt.getTime() - b.createdAt.getTime(),
 					);
-					return <MetricDifferenceCell data={[metrics[0]!, metrics.at(-1)!]} />;
+					return (
+						<MetricDifferenceCell
+							data={
+								metrics.length >= 2 ? [metrics[0]!, metrics.at(-1)!] : undefined
+							}
+						/>
+					);
 				},
 			}),
 	].filter((col) => !!col);

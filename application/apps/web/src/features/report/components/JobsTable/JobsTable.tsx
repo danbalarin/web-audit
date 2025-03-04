@@ -66,7 +66,10 @@ export const JobsTable = ({
 	) => {
 		if (onSelectedChange) {
 			const newRowSelection = Object.keys(updater(rowSelection));
-			onSelectedChange(newRowSelection);
+			const strippedSelection = newRowSelection.filter(
+				(id) => data.findIndex((d) => d.auditId === id) !== -1,
+			);
+			onSelectedChange(strippedSelection);
 		}
 	};
 	const table = useReactTable({
