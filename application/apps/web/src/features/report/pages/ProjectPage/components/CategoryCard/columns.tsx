@@ -25,12 +25,17 @@ export const createColumns = (
 			columnHelper.accessor(`data.${audit.id}`, {
 				id: audit.id,
 				header: audit.url,
-				cell: (info) => (
-					<MetricResultCell
-						description={info.row.original}
-						data={info.getValue()}
-					/>
-				),
+				cell: (info) => {
+					const data = info.getValue();
+					return (
+						<MetricResultCell
+							unit={info.row.original.unit}
+							rank={data.rank}
+							score={data.score}
+							value={data.value}
+						/>
+					);
+				},
 			}),
 		),
 		audits.length >= 2 &&

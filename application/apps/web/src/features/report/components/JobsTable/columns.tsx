@@ -4,7 +4,7 @@ import { Checkbox, Icon, IconButton } from "@mui/material";
 import { createColumnHelper } from "@tanstack/react-table";
 import { categoriesMap } from "../../config/metrics";
 import { AuditDateCell } from "../AuditDateCell";
-import { AuditResultCell } from "../AuditResultCell";
+import { MetricResultCell } from "../MetricResultCell";
 import { JobsTableData } from "./types/JobsTableData";
 
 const COLUMN_SIZE = 128;
@@ -27,7 +27,16 @@ export const columns = [
 			id: category.id,
 			header: category.name,
 			size: COLUMN_SIZE,
-			cell: AuditResultCell,
+			cell: (info) => {
+				const data = info.getValue();
+				return (
+					<MetricResultCell
+						unit={data.scoreUnit}
+						rank={data.rank}
+						value={data.score}
+					/>
+				);
+			},
 		}),
 	),
 	columnHelper.display({

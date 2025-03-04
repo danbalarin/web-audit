@@ -34,7 +34,7 @@ export const CategoryList = ({ projectId }: CategoryListProps) => {
 	const data = useMemo(
 		() =>
 			audits.map((audit) => ({
-				...audit,
+				auditId: audit.id,
 				...scoreAndSplitMetrics(audit.metrics),
 			})),
 		[audits],
@@ -58,7 +58,12 @@ export const CategoryList = ({ projectId }: CategoryListProps) => {
 	}
 
 	return Object.values(categoriesMap).map((cat) => (
-		<CategoryCard category={cat} key={cat.id} data={data} />
+		<CategoryCard
+			category={cat}
+			key={cat.id}
+			metricScores={data}
+			audits={audits}
+		/>
 	));
 };
 

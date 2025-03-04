@@ -13,36 +13,39 @@ import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { Table } from "~/features/ui/components/Table";
 import { CategoryDetailTableData, createColumns } from "./columns";
 
-type AuditWithScores = Audit & {
-	categoryScores: Record<CategoryKeys, CalculatedScore<CategoryDescription>>;
-	metricScores: Record<MetricKeys, CalculatedScore<Metric>>;
+type AuditWithScores = {
+	auditId: Audit["id"];
+	metricScores: Record<
+		CategoryKeys,
+		Record<MetricKeys, CalculatedScore<Metric>>
+	>;
 };
 
 type CategoryCardProps = {
-	category: CategoryDescription;
-	data: AuditWithScores[];
+	category: CategoryDescription<CategoryKeys>;
+	audits: Audit[];
+	metricScores: AuditWithScores[];
 };
 
-const transformData = (data: AuditWithScores[]) => {
+const transformData = (data: AuditWithScores[], category: CategoryKeys) => {
 	const res = [] as CategoryDetailTableData[];
 
 	for (const audit of data) {
-		for (const metric in audit.metricScores) {
+		for (const metric in audit.metricScores[category]) {
 			const existing = res.find((r) => r.id === metric);
 			if (!existing) {
 				const metricDescription = metricsMap[metric];
 				if (!metricDescription) {
-					console.log("metric", metric);
 					continue;
 				}
 				res.push({
 					...metricDescription,
 					data: {
-						[audit.id]: audit.metricScores[metric]!,
+						[audit.auditId]: audit.metricScores[category][metric]!,
 					},
 				});
 			} else {
-				existing.data[audit.id] = audit.metricScores[metric]!;
+				existing.data[audit.auditId] = audit.metricScores[category][metric]!;
 			}
 		}
 	}
@@ -50,15 +53,23 @@ const transformData = (data: AuditWithScores[]) => {
 	return res.sort((a, b) => a.id.localeCompare(b.id));
 };
 
-export const CategoryCard = ({ data, category }: CategoryCardProps) => {
-	const columns = useMemo(() => createColumns(data), [data]);
-	const transformedData = useMemo(() => transformData(data), [data]);
+export const CategoryCard = ({
+	metricScores,
+	audits,
+	category,
+}: CategoryCardProps) => {
+	const columns = useMemo(() => createColumns(audits), [metricScores]);
+	const transformedData = useMemo(
+		() => transformData(metricScores, category.id),
+		[metricScores],
+	);
 	const table = useReactTable({
 		data: transformedData,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getRowId: (row) => row.id,
 	});
+
 	return (
 		<RoundedAccordion defaultExpanded>
 			<AccordionSummary

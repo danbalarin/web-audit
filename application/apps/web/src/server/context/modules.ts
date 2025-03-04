@@ -1,3 +1,4 @@
+import { AccessibilityModule } from "@repo/module-accessibility";
 import { PerformanceModule } from "@repo/module-performance";
 
 export const createModulesContext = async () => {
@@ -5,9 +6,11 @@ export const createModulesContext = async () => {
 		lighthouseRunnerOptions: { numberOfRuns: 1 },
 	});
 
+	const AccessibilityModuleInstance = new AccessibilityModule({});
+
 	// const TechnologyModuleInstance = new TechnologyModule({});
 
 	return {
-		modules: [PerformanceModuleInstance],
+		modules: [PerformanceModuleInstance, AccessibilityModuleInstance],
 	};
 };

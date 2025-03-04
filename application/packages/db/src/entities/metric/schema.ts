@@ -1,5 +1,5 @@
 import { InferSelectModel } from "drizzle-orm";
-import { pgTable, uuid, varchar } from "drizzle-orm/pg-core";
+import { jsonb, pgTable, uuid, varchar } from "drizzle-orm/pg-core";
 import { audits } from "../audit/schema";
 import { id } from "../utils/id";
 import { timestamps } from "../utils/timestamps";
@@ -13,6 +13,7 @@ export const metrics = pgTable("metrics", {
 	metric: varchar("metric").notNull(),
 	category: varchar("category").notNull(),
 	value: varchar("value").notNull(),
+	additionalData: jsonb("additional_data"),
 });
 
 export type Metric = InferSelectModel<typeof metrics>;

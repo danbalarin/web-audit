@@ -11,6 +11,7 @@ import { Dispatch, useMemo } from "react";
 import { Table } from "~/features/ui/components/Table";
 import { RouterOutputs } from "~/server/query/client";
 
+import { AccessibilityCategory } from "@repo/module-accessibility/metrics";
 import { categoriesMap, scoreCategory } from "../../config/metrics";
 import { columns } from "./columns";
 import { JobsTableData } from "./types/JobsTableData";
@@ -27,6 +28,7 @@ const transformData = (
 				auditId: audit.id,
 				url: audit.url,
 				performance: scoreCategory(audit.metrics, PerformanceCategory.id),
+				accessibility: scoreCategory(audit.metrics, AccessibilityCategory.id),
 				...Object.values(categoriesMap).reduce(
 					(acc, cat) => ({
 						...acc,

@@ -1,3 +1,4 @@
+import { Arbitrary } from "@repo/api/metrics";
 import { type CategoryDescription } from "@repo/api/types";
 import { CumulativeLayoutShift } from "./cumulative-layout-shift";
 import { FirstContentfulPaint } from "./first-contentful-paint";
@@ -9,33 +10,50 @@ import { TotalBlockingTime } from "./total-blocking-time";
 import { TotalRequests } from "./total-requests";
 import { TransferSize } from "./transfer-size";
 
+const weights = {
+	[FirstContentfulPaint.id]: 0.1,
+	[SpeedIndex.id]: 0.1,
+	[LargestContentfulPaint.id]: 0.25,
+	[TotalBlockingTime.id]: 0.3,
+	[CumulativeLayoutShift.id]: 0.25,
+};
+
+const metrics = [
+	CumulativeLayoutShift,
+	FirstContentfulPaint,
+	LargestContentfulPaint,
+	MaxPotentialFID,
+	SpeedIndex,
+	TimeToFirstByte,
+	TotalBlockingTime,
+	TransferSize,
+	TotalRequests,
+];
+
 export const PerformanceCategory: CategoryDescription<"performance"> = {
 	id: "performance",
 	name: "Performance",
 	description: "These encapsulate your web page's performance opportunities.",
-	metrics: [
-		CumulativeLayoutShift,
-		FirstContentfulPaint,
-		LargestContentfulPaint,
-		MaxPotentialFID,
-		SpeedIndex,
-		TimeToFirstByte,
-		TotalBlockingTime,
-		TransferSize,
-		TotalRequests,
-	],
-	weights: {
-		[FirstContentfulPaint.id]: 0.1,
-		[SpeedIndex.id]: 0.1,
-		[LargestContentfulPaint.id]: 0.25,
-		[TotalBlockingTime.id]: 0.3,
-		[CumulativeLayoutShift.id]: 0.25,
+	metrics,
+	scoreUnit: Arbitrary.PERCENTAGE,
+	score: (metricsData) => {
+		let score = 0;
+		for (const metricName in weights) {
+			const metric = metricsData.find((m) => m.metric === metricName);
+			const metricDescription = metrics.find((m) => m.id === metric?.metric);
+			if (!metric || !metricDescription) {
+				continue;
+			}
+			score += metricDescription.score(+metric.value) * weights[metricName]!;
+		}
+
+		return score / 100;
 	},
 	rank: (value) => {
-		if (value > 90) {
+		if (+value > 0.9) {
 			return "good";
 		}
-		if (value > 50) {
+		if (+value > 0.5) {
 			return "average";
 		}
 		return "fail";

@@ -1,3 +1,4 @@
+import { Arbitrary } from "@repo/api/metrics";
 import { type MetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
@@ -12,7 +13,7 @@ export const TotalRequests: MetricDescription<number> = {
 	name: "Total Requests",
 	description:
 		"The total number of requests made by the page. A high number of requests can slow down page load time.",
-	unit: "",
+	unit: Arbitrary.NUMBER,
 	compare: createMetricCompareLowerIsBetter(2),
 	...lighthouseScoring,
 };

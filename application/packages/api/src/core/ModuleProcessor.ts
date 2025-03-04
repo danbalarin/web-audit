@@ -85,6 +85,7 @@ export class ModuleProcessor {
 						category: category.id,
 						metric: metric.id,
 						value: `${metric.value}`,
+						additionalData: metric.additionalData,
 					}),
 				);
 			}

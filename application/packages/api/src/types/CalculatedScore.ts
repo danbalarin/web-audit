@@ -1,5 +1,4 @@
 export type CalculatedScore<T> = T & {
-	score: number;
-
+	score: string | number;
 	rank: "fail" | "average" | "good";
 };

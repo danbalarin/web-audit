@@ -47,5 +47,11 @@
 		"bps": true,
 		"folderMillis": 1740670889539,
 		"hash": "6e6ba596039453dc0d971f5045045740aa7fb5af235603c625baccee385276f7"
+	},
+	{
+		"sql": ["ALTER TABLE \"metrics\" ADD COLUMN \"additional_data\" jsonb;"],
+		"bps": true,
+		"folderMillis": 1740762498415,
+		"hash": "79708f464a3c325f666a4a4739ce354afc8fc87a378413b086b78c202fa6eae0"
 	}
 ]

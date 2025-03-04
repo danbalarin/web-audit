@@ -1,3 +1,4 @@
+import { Arbitrary } from "@repo/api/metrics";
 import { type MetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
 import { getLighthouseScoring } from "../../utils/getLighthouseScoring";
@@ -12,7 +13,7 @@ export const CumulativeLayoutShift: MetricDescription<number> = {
 	name: "Cumulative Layout Shift",
 	description:
 		"Cumulative Layout Shift (CLS) is a metric that measures the visual stability of a webpage by calculating the total of unexpected layout shifts occurring during a user's session.",
-	unit: "",
+	unit: Arbitrary.NUMBER,
 	compare: createMetricCompareLowerIsBetter(0),
 	...lighthouseScoring,
 };

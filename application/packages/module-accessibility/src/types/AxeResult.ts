@@ -1,0 +1,6 @@
+export enum AxeResult {
+	PASS,
+	INAPPLICABLE,
+	INCOMPLETE,
+	VIOLATION,
+}

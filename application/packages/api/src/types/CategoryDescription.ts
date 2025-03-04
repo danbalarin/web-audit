@@ -1,6 +1,12 @@
+import { Metric } from "@repo/db";
+import { MetricUnit } from "../metrics";
 import { MetricDescription } from "./MetricDescription";
 
-export type CategoryDescription<TId extends string = string> = {
+export type CategoryDescription<
+	TId extends string = string,
+	TMetricVal extends string | number = string | number,
+	TMetricMeta extends object = object,
+> = {
 	/**
 	 * The ID of the category
 	 *
@@ -23,17 +29,16 @@ export type CategoryDescription<TId extends string = string> = {
 	/**
 	 * The metrics of the category
 	 */
-	metrics: MetricDescription[];
-
-	/**
-	 * Weights of the metrics
-	 */
-	weights: Record<string, number>;
+	metrics: MetricDescription<TMetricVal, TMetricMeta>[];
 
 	/**
 	 * Rank the category
 	 *
 	 * @returns "fail" if the value is bad, "average" if the value is average, "good" if the value is good
 	 */
-	rank: (value: number) => "fail" | "average" | "good";
+	rank: (value: string | number) => "fail" | "average" | "good";
+
+	score: (metrics: Metric[]) => string | number;
+
+	scoreUnit: MetricUnit;
 };
