@@ -1,20 +1,24 @@
 import { type CategoryDescription } from "@repo/api/types";
 
 import { Arbitrary } from "@repo/api/metrics";
+import { ACT } from "./act";
+import { BEST_PRACTICE } from "./best-practice";
 import { WCAG2A } from "./wcag2a";
 import { WCAG2AA } from "./wcag2aa";
 import { WCAG2AAA } from "./wcag2aaa";
+import { WCAG21A } from "./wcag21a";
 import { WCAG21AA } from "./wcag21aa";
+import { WCAG22AA } from "./wcag22aa";
 
 const metrics = [
 	WCAG2A,
 	WCAG2AA,
 	WCAG2AAA,
-	// WCAG21A,
+	WCAG21A,
 	WCAG21AA,
-	// WCAG22AA,
-	// ACT,
-	// BEST_PRACTICE,
+	WCAG22AA,
+	ACT,
+	BEST_PRACTICE,
 ];
 
 export const AccessibilityCategory: CategoryDescription<"accessibility"> = {
