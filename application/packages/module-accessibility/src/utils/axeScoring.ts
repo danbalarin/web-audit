@@ -1,5 +1,4 @@
 import { MetricDescription } from "@repo/api/types";
-import { AxeResult } from "../types/AxeResult";
 
 export const axeScoring = {
 	score: (value: number) => {
@@ -15,4 +14,4 @@ export const axeScoring = {
 		}
 		return "fail";
 	},
-} as Pick<MetricDescription<AxeResult>, "rank" | "score">;
+} as Pick<MetricDescription<number>, "rank" | "score">;

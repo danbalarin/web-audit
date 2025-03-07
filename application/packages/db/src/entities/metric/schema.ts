@@ -13,7 +13,7 @@ export const metrics = pgTable("metrics", {
 	metric: varchar("metric").notNull(),
 	category: varchar("category").notNull(),
 	value: varchar("value").notNull(),
-	additionalData: jsonb("additional_data"),
+	additionalData: jsonb("additional_data").$type<object>(),
 });
 
 export type Metric = InferSelectModel<typeof metrics>;

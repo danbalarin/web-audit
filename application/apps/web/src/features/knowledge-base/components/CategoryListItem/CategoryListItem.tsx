@@ -1,4 +1,5 @@
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
 import SpeedIcon from "@mui/icons-material/Speed";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
@@ -16,6 +17,7 @@ type CategoryListItemProps = {
 const ICONS: Record<CategoryKeys, React.ReactNode> = {
 	performance: <SpeedIcon />,
 	accessibility: <AccessibilityNewIcon />,
+	security: <LockOpenIcon />,
 };
 
 export const CategoryListItem = ({
@@ -30,7 +32,9 @@ export const CategoryListItem = ({
 			href={KNOWLEDGE_BASE_ROUTES.CATEGORY(category.id)}
 			selected={selected}
 		>
-			<ListItemIcon>{icon}</ListItemIcon>
+			<ListItemIcon sx={{ marginRight: "1em", minWidth: 0 }}>
+				{icon}
+			</ListItemIcon>
 			<ListItemText primary={category.name} />
 		</ListItemButton>
 	);
