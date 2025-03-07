@@ -1,0 +1,29 @@
+{
+	"name": "@repo/module-security-zap",
+	"version": "1.0.0",
+	"private": true,
+	"sideEffects": false,
+	"description": "Module for security checks",
+	"exports": {
+		".": {
+			"import": "./src/index.ts",
+			"require": "./src/index.ts"
+		},
+		"./metrics": {
+			"import": "./src/metrics/index.ts",
+			"require": "./src/metrics/index.ts"
+		}
+	},
+	"scripts": {
+		"lint": "biome lint --error-on-warnings"
+	},
+	"dependencies": {
+		"@repo/api": "*",
+		"ky": "^1.7.5",
+		"ky-universal": "^0.12.0",
+		"typescript": "5.2.2"
+	},
+	"devDependencies": {
+		"@repo/typescript-config": "*"
+	}
+}
