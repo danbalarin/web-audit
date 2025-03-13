@@ -93,6 +93,8 @@
   show: codly-init.with()
   init-code()
 
+  show figure: set block(inset: (y: 0.25em, x: 0.5em))
+
   title-page(
     title: title,
     date: date,
@@ -134,6 +136,8 @@
     separated-abstracts: separated-abstracts,
   )  
 
+  set pagebreak(weak: true)
+  
   custom-outline()
   
   

@@ -10,7 +10,7 @@ Therefore, auditing usability and UX is essential to identify areas for improvem
 Numerous existing solutions facilitate such audits without requiring access to source code, allowing evaluators to assess and enhance the user interface, navigation, content presentation, and overall interaction design from an external perspective.
 
 One fundamental approach to auditing usability and UX is through heuristic evaluation, a method where experts review the website against established usability principles. 
-These principles, such as Nielsen's Ten Usability Heuristics or the ISO 9241 standards, provide a framework for systematically identifying usability issues. 
+These principles, such as 10 Usability Heuristics for User Interface Design #cite(<nielsen_10_2024>, form: "normal") or the ISO 9241 #cite(<noauthor_iso_2019>, form: "prose") standards, provide a framework for systematically identifying usability issues. 
 Tools like the Heuristics Evaluator assist auditors in applying these principles by guiding them through key aspects such as consistency, error prevention, and user control. 
 By analysing how the website aligns with these heuristics, auditors can uncover problems like confusing navigation structures, inconsistent design elements, or inadequate feedback mechanisms. 
 This method does not require source code access, as it focuses on the user interface and interaction patterns observable during typical use.

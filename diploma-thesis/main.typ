@@ -25,3 +25,6 @@
 #include "chapters/2-Existing-Solutions/main.typ"
 
 #include "chapters/3-Metrics/main.typ"
+
+#include "chapters/4-Implementation/main.typ"
+
