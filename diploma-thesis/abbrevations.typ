@@ -83,6 +83,9 @@
   ("XML", "eXtensible Markup Language"),
   ("XSS", "Cross Site Scripting"),
   ("ZAP", "Zed Attack Proxy"),
+  ("HSTS", "HTTP Strict Transport Security"),
+  ("CSP", "Content Security Policy"),
+  ("MITM", "Man-in-the-Middle")
 )
 
 // const abbrs = `

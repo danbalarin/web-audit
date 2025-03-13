@@ -1,6 +1,6 @@
 #import "../../template/lib.typ": abbr
 
-== Security
+== Security <security>
 
 Conducting security audits without access to source code is essential for evaluating the resilience of web applications as perceived by external attackers. 
 This approach simulates real-world attack scenarios, providing valuable insights into potential weaknesses. 

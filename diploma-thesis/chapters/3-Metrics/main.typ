@@ -19,14 +19,16 @@ This approach ensures that our auditing process is both thorough and strategical
 
 #include "2-Performance.typ"
 
-// #pagebreak()
+#pagebreak()
 
-// #include "/chapters/metrics/security.typ"
+#include "3-Security.typ"
 
-// #pagebreak()
+#pagebreak()
 
-// #include "/chapters/metrics/stability.typ"
+#include "4-Search-Engine-Optimisation.typ"
 
-// #pagebreak()
+#pagebreak()
+
+#include "5-Usability-and-User-Experience.typ"
 
 // #include "/chapters/metrics/ui-ux.typ"
