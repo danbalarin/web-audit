@@ -115,7 +115,7 @@
 			"linter": { "enabled": false }
 		},
 		{
-			"include": ["**/types/*.d.ts"],
+			"include": ["**/typings/*.d.ts"],
 			"linter": {
 				"rules": {
 					"correctness": { "noUnusedVariables": "off" },

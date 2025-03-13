@@ -1,0 +1,31 @@
+{
+	"name": "@repo/module-security",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Module for security metrics",
+	"exports": {
+		".": {
+			"import": "./src/index.ts",
+			"require": "./src/index.ts"
+		},
+		"./metrics": {
+			"import": "./src/metrics/index.ts",
+			"require": "./src/metrics/index.ts"
+		}
+	},
+	"scripts": {
+		"prepare-retire": "node ./scripts/fetch-retire-repo.mjs",
+		"lint": "biome lint --error-on-warnings"
+	},
+	"dependencies": {
+		"@repo/api": "*",
+		"semver": "^7.7.1",
+		"typescript": "5.2.2",
+		"wappalyzer": "6.10.66",
+		"wappalyzer-core": "6.10.66"
+	},
+	"devDependencies": {
+		"@repo/typescript-config": "*",
+		"@types/semver": "^7.5.8"
+	}
+}
