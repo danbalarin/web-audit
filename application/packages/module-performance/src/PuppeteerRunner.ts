@@ -1,5 +1,6 @@
 import { BaseRunner } from "@repo/api";
 import { type BaseContext, type MetricResult } from "@repo/api/types";
+import { TotalRequests } from "./metrics/total-requests";
 
 // biome-ignore lint/complexity/noBannedTypes: placeholder
 export type PuppeteerRunnerOptions = {};
@@ -12,7 +13,7 @@ export class PuppeteerRunner extends BaseRunner<Result> {
 	private readonly _options: Required<PuppeteerRunnerOptions>;
 
 	constructor(_options: PuppeteerRunnerOptions) {
-		super();
+		super("PuppeteerRunner");
 
 		this._options = Object.assign({}, _options);
 	}
@@ -20,7 +21,7 @@ export class PuppeteerRunner extends BaseRunner<Result> {
 	async transform(result: Result): Promise<MetricResult[]> {
 		return [
 			{
-				id: "total-requests",
+				id: TotalRequests.id,
 				value: result.requests.length,
 			},
 		];

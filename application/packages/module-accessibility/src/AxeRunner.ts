@@ -2,6 +2,14 @@ import { AxePuppeteer } from "@axe-core/puppeteer";
 import { BaseRunner } from "@repo/api";
 import { type BaseContext, type MetricResult } from "@repo/api/types";
 import type { Result as AxeAuditResult } from "axe-core";
+import { ACT } from "./metrics/act";
+import { BEST_PRACTICE } from "./metrics/best-practice";
+import { WCAG2A } from "./metrics/wcag2a";
+import { WCAG2AA } from "./metrics/wcag2aa";
+import { WCAG2AAA } from "./metrics/wcag2aaa";
+import { WCAG21A } from "./metrics/wcag21a";
+import { WCAG21AA } from "./metrics/wcag21aa";
+import { WCAG22AA } from "./metrics/wcag22aa";
 import { AxeResult } from "./types/AxeResult";
 
 // biome-ignore lint/complexity/noBannedTypes: placeholder
@@ -18,7 +26,7 @@ export class AxeRunner extends BaseRunner<Result> {
 	private readonly _options: Required<AxeRunnerOptions>;
 
 	constructor(_options: AxeRunnerOptions) {
-		super();
+		super("AxeRunner");
 
 		this._options = Object.assign({}, _options);
 	}
@@ -63,14 +71,14 @@ export class AxeRunner extends BaseRunner<Result> {
 		});
 
 		return [
-			composeMetric("wcag2a"),
-			composeMetric("wcag2aa"),
-			composeMetric("wcag2aaa"),
-			composeMetric("wcag21a"),
-			composeMetric("wcag21aa"),
-			composeMetric("wcag22aa"),
-			composeMetric("best-practice"),
-			composeMetric("ACT"),
+			composeMetric(WCAG2A.id),
+			composeMetric(WCAG2AA.id),
+			composeMetric(WCAG2AAA.id),
+			composeMetric(WCAG21A.id),
+			composeMetric(WCAG21AA.id),
+			composeMetric(WCAG22AA.id),
+			composeMetric(BEST_PRACTICE.id),
+			composeMetric(ACT.id),
 		];
 	}
 

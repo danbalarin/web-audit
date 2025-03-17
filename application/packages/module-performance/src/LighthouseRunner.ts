@@ -3,6 +3,14 @@ import { type BaseContext, type MetricResult } from "@repo/api/types";
 import { Result } from "lighthouse";
 // @ts-ignore
 import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
+import { CumulativeLayoutShift } from "./metrics/cumulative-layout-shift";
+import { FirstContentfulPaint } from "./metrics/first-contentful-paint";
+import { LargestContentfulPaint } from "./metrics/largest-contentful-paint";
+import { MaxPotentialFID } from "./metrics/max-potential-fid";
+import { SpeedIndex } from "./metrics/speed-index";
+import { TimeToFirstByte } from "./metrics/time-to-first-byte";
+import { TotalBlockingTime } from "./metrics/total-blocking-time";
+import { TransferSize } from "./metrics/transfer-size";
 
 export type LighthouseRunnerOptions = {
 	/**
@@ -16,7 +24,7 @@ export class LighthouseRunner extends BaseRunner<Result> {
 	private readonly _options: Required<LighthouseRunnerOptions>;
 
 	constructor(_options: LighthouseRunnerOptions) {
-		super();
+		super("LighthouseRunner");
 
 		this._options = Object.assign(
 			{
@@ -34,35 +42,35 @@ export class LighthouseRunner extends BaseRunner<Result> {
 
 		return [
 			{
-				id: "time-to-first-byte",
+				id: TimeToFirstByte.id,
 				value: audits["server-response-time"].numericValue ?? -1,
 			},
 			{
-				id: "first-contentful-paint",
+				id: FirstContentfulPaint.id,
 				value: audits["first-contentful-paint"].numericValue ?? -1,
 			},
 			{
-				id: "largest-contentful-paint",
+				id: LargestContentfulPaint.id,
 				value: audits["largest-contentful-paint"].numericValue ?? -1,
 			},
 			{
-				id: "transfer-size",
+				id: TransferSize.id,
 				value: audits["total-byte-weight"].numericValue ?? -1,
 			},
 			{
-				id: "total-blocking-time",
+				id: TotalBlockingTime.id,
 				value: audits["total-blocking-time"].numericValue ?? -1,
 			},
 			{
-				id: "cumulative-layout-shift",
+				id: CumulativeLayoutShift.id,
 				value: audits["cumulative-layout-shift"].numericValue ?? -1,
 			},
 			{
-				id: "speed-index",
+				id: SpeedIndex.id,
 				value: audits["speed-index"].numericValue ?? -1,
 			},
 			{
-				id: "max-potential-fid",
+				id: MaxPotentialFID.id,
 				value: audits["max-potential-fid"].numericValue ?? -1,
 			},
 		];
