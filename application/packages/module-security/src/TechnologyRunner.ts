@@ -7,6 +7,8 @@ import Wappalyzer from "wappalyzer-core";
 import repo from "../assets/retire-repo.json";
 import Driver from "./lib/wappalyzer/driver";
 import { categories, technologies } from "./lib/wappalyzer/technologies";
+import { DetectedTechnologies } from "./metrics/detected-technologies";
+import { VulnerableDependencies } from "./metrics/vulnerable-dependencies";
 
 // biome-ignore lint/complexity/noBannedTypes: placeholder
 export type TechnologyRunnerOptions = {};
@@ -51,7 +53,7 @@ export class TechnologyRunner extends BaseRunner {
 	private readonly _options: Required<TechnologyRunnerOptions>;
 
 	constructor(_options: TechnologyRunnerOptions) {
-		super();
+		super("TechnologyRunner");
 
 		this._options = Object.assign({}, _options);
 	}
@@ -63,12 +65,12 @@ export class TechnologyRunner extends BaseRunner {
 
 		return [
 			{
-				id: "vulnerable-dependencies",
+				id: VulnerableDependencies.id,
 				value: vulnerableComponents.length,
 				additionalData: vulnerableComponents,
 			},
 			{
-				id: "detected-technologies",
+				id: DetectedTechnologies.id,
 				value: result.length,
 				additionalData: result.map((c) => c.technology),
 			},

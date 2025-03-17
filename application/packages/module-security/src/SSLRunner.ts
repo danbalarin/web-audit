@@ -1,6 +1,7 @@
 import { BaseRunner } from "@repo/api";
 import { BaseContext, MetricResult } from "@repo/api/types";
 import sslChecker from "ssl-checker";
+import { SSLCert } from "./metrics/ssl-cert";
 
 // biome-ignore lint/complexity/noBannedTypes: placeholder
 export type SSLRunnerOptions = {};
@@ -11,14 +12,14 @@ export class SSLRunner extends BaseRunner {
 	private readonly _options: Required<SSLRunnerOptions>;
 
 	constructor(_options: SSLRunnerOptions) {
-		super();
+		super("SSLRunner");
 
 		this._options = Object.assign({}, _options);
 	}
 	async transform(result: Result): Promise<MetricResult[]> {
 		return [
 			{
-				id: "ssl-cert",
+				id: SSLCert.id,
 				value: result.valid ? 1 : 0,
 				additionalData: result,
 			},

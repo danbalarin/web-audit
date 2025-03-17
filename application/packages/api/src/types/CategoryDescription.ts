@@ -1,6 +1,7 @@
 import { Metric } from "@repo/db";
 import { MetricUnit } from "../metrics";
 import { MetricDescription } from "./MetricDescription";
+import { MetricRank } from "./MetricRank";
 
 export type CategoryDescription<
 	TId extends string = string,
@@ -36,7 +37,7 @@ export type CategoryDescription<
 	 *
 	 * @returns "fail" if the value is bad, "average" if the value is average, "good" if the value is good
 	 */
-	rank: (value: string | number) => "fail" | "average" | "good";
+	rank: (value: string | number) => MetricRank;
 
 	score: (metrics: Metric[]) => string | number;
 

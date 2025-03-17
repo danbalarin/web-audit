@@ -1,4 +1,5 @@
 import type { MetricUnit } from "../metrics";
+import { MetricRank } from "./MetricRank";
 
 export type MetricDescription<
 	TVal extends number | string = number | string,
@@ -44,7 +45,7 @@ export type MetricDescription<
 	 *
 	 * @returns "fail" if the value is bad, "average" if the value is average, "good" if the value is good
 	 */
-	rank(a: TVal): "fail" | "average" | "good";
+	rank(a: TVal): MetricRank;
 
 	/**
 	 * Scores the value of the metric

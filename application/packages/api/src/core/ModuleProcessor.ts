@@ -103,7 +103,7 @@ export class ModuleProcessor {
 			throw new Error("Job not found");
 		}
 
-		this._logger.trace("processing modules");
+		this._logger.debug("processing modules");
 		this._currentStep = "processing";
 
 		await this.progress(0);
@@ -119,8 +119,10 @@ export class ModuleProcessor {
 			const moduleLogger = this._logger.child({
 				moduleId: module.id,
 			});
+			module.logger = moduleLogger;
+
 			module.on("progress", (payload) => {
-				moduleLogger.trace({ progress: payload.progress }, "progress");
+				moduleLogger.debug({ progress: payload.progress }, "progress");
 				this.progress(
 					completed / this._modules.length +
 						payload.progress / this._modules.length,
@@ -132,7 +134,7 @@ export class ModuleProcessor {
 			});
 
 			module.on("complete", (payload) => {
-				moduleLogger.trace("complete");
+				moduleLogger.debug("complete");
 				completed++;
 				this.progress(completed / this._modules.length);
 				result.categories.push(payload.data);

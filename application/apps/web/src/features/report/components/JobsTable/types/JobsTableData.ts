@@ -1,11 +1,12 @@
 import { MetricUnit } from "@repo/api/metrics";
+import { MetricRank } from "@repo/api/types";
 import { CategoryKeys } from "~/features/report/config/metrics";
 
 export type JobsTableData = {
 	[key in CategoryKeys]: {
 		score: string | number;
 		scoreUnit: MetricUnit;
-		rank: "good" | "average" | "fail";
+		rank: MetricRank;
 	};
 } & {
 	createdAt: Date;

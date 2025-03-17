@@ -1,9 +1,10 @@
 import { type CategoryDescription } from "@repo/api/types";
 
 import { Arbitrary } from "@repo/api/metrics";
+import { SSLCert } from "./ssl-cert";
 import { VulnerableDependencies } from "./vulnerable-dependencies";
 
-const metrics = [VulnerableDependencies];
+const metrics = [VulnerableDependencies, SSLCert];
 
 export const SecurityCategory: CategoryDescription<"security"> = {
 	id: "security",

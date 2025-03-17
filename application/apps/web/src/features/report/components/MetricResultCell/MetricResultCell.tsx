@@ -1,10 +1,11 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
+import InfoIcon from "@mui/icons-material/Info";
 import WarningIcon from "@mui/icons-material/Warning";
 import { Tooltip, Typography } from "@mui/material";
 
 import { Arbitrary, Memory, MetricUnit, Time } from "@repo/api/metrics";
-import { CalculatedScore } from "@repo/api/types";
+import { CalculatedScore, MetricRank } from "@repo/api/types";
 import { Metric } from "@repo/db";
 import { MemoryMetricResultCell } from "./parts/MemoryMetricResultCell";
 import { TimeMetricResultCell } from "./parts/TimeMetricResultCell";
@@ -14,6 +15,13 @@ type MetricResultCellProps = {
 	score?: CalculatedScore<Metric>["score"];
 	rank: CalculatedScore<Metric>["rank"];
 	value: number | string;
+};
+
+const rankIconMap: Record<MetricRank, JSX.Element> = {
+	good: <CheckCircleIcon fontSize="small" color="success" />,
+	fail: <DangerousIcon fontSize="small" color="error" />,
+	average: <WarningIcon fontSize="small" color="warning" />,
+	informational: <InfoIcon fontSize="small" color="info" />,
 };
 
 export const MetricResultCell = ({
@@ -62,8 +70,6 @@ export const MetricResultCell = ({
 			break;
 	}
 
-	const color =
-		rank === "good" ? "success" : rank === "fail" ? "error" : "warning";
 	return (
 		<Tooltip
 			title={score ? Math.round(+score) + "%" : undefined}
@@ -78,13 +84,7 @@ export const MetricResultCell = ({
 					gap: 1,
 				}}
 			>
-				{rank === "good" ? (
-					<CheckCircleIcon fontSize="small" color={color} />
-				) : rank === "fail" ? (
-					<DangerousIcon fontSize="small" color={color} />
-				) : (
-					<WarningIcon fontSize="small" color={color} />
-				)}
+				{rankIconMap[rank]}
 				{component}
 			</Typography>
 		</Tooltip>
