@@ -20,6 +20,7 @@
 	"dependencies": {
 		"@repo/api": "*",
 		"semver": "^7.7.1",
+		"ssl-checker": "^2.0.10",
 		"typescript": "5.2.2",
 		"wappalyzer": "6.10.66",
 		"wappalyzer-core": "6.10.66"
