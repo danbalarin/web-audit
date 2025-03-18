@@ -38,13 +38,18 @@ export const PerformanceCategory: CategoryDescription<"performance"> = {
 	scoreUnit: Arbitrary.PERCENTAGE,
 	score: (metricsData) => {
 		let score = 0;
+		let foundMetrics = false;
 		for (const metricName in weights) {
 			const metric = metricsData.find((m) => m.metric === metricName);
 			const metricDescription = metrics.find((m) => m.id === metric?.metric);
 			if (!metric || !metricDescription) {
 				continue;
 			}
+			foundMetrics = true;
 			score += metricDescription.score(+metric.value) * weights[metricName]!;
+		}
+		if (!foundMetrics) {
+			return -1;
 		}
 
 		return score / 100;

@@ -1,6 +1,6 @@
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
-import InfoIcon from "@mui/icons-material/Info";
+import InfoIconOutlined from "@mui/icons-material/InfoOutlined";
 import WarningIcon from "@mui/icons-material/Warning";
 import { Tooltip, Typography } from "@mui/material";
 
@@ -21,7 +21,7 @@ const rankIconMap: Record<MetricRank, JSX.Element> = {
 	good: <CheckCircleIcon fontSize="small" color="success" />,
 	fail: <DangerousIcon fontSize="small" color="error" />,
 	average: <WarningIcon fontSize="small" color="warning" />,
-	informational: <InfoIcon fontSize="small" color="info" />,
+	informational: <InfoIconOutlined fontSize="small" color="info" />,
 };
 
 export const MetricResultCell = ({
@@ -30,13 +30,24 @@ export const MetricResultCell = ({
 	value,
 	unit,
 }: MetricResultCellProps) => {
-	if (value === "-1") {
+	if (+value === -1) {
 		return (
 			<Tooltip
 				title="No data were retrieved for this metric"
 				placement="bottom-start"
 			>
-				<Typography>Not scored</Typography>
+				<Typography
+					component={"span"}
+					variant="body1"
+					sx={{
+						display: "flex",
+						alignItems: "center",
+						gap: 1,
+					}}
+				>
+					{rankIconMap.informational}
+					<Typography>Not scored</Typography>
+				</Typography>
 			</Tooltip>
 		);
 	}

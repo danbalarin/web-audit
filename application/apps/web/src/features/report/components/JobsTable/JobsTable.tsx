@@ -1,4 +1,3 @@
-import { PerformanceCategory } from "@repo/module-performance/metrics";
 import {
 	getCoreRowModel,
 	getExpandedRowModel,
@@ -8,10 +7,12 @@ import {
 } from "@tanstack/react-table";
 import { Dispatch, useMemo } from "react";
 
+import { AccessibilityCategory } from "@repo/module-accessibility/metrics";
+import { PerformanceCategory } from "@repo/module-performance/metrics";
+import { SecurityCategory } from "@repo/module-security/metrics";
 import { Table } from "~/features/ui/components/Table";
 import { RouterOutputs } from "~/server/query/client";
 
-import { AccessibilityCategory } from "@repo/module-accessibility/metrics";
 import { categoriesMap, scoreCategory } from "../../config/metrics";
 import { columns } from "./columns";
 import { JobsTableData } from "./types/JobsTableData";
@@ -29,6 +30,7 @@ const transformData = (
 				url: audit.url,
 				performance: scoreCategory(audit.metrics, PerformanceCategory.id),
 				accessibility: scoreCategory(audit.metrics, AccessibilityCategory.id),
+				security: scoreCategory(audit.metrics, SecurityCategory.id),
 				...Object.values(categoriesMap).reduce(
 					(acc, cat) => ({
 						...acc,

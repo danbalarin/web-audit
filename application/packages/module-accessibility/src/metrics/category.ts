@@ -35,7 +35,7 @@ export const AccessibilityCategory: CategoryDescription<"accessibility"> = {
 		const metricDescription = metrics.find((m) => m.id === bestResult?.metric);
 		return bestResult
 			? `${metricDescription?.name} (${Math.round(+bestResult.value * 100)}%)`
-			: "N/A";
+			: -1;
 	},
 	rank: (value) => {
 		const score = +(value.toString().match(/(\d+)(?!.*\d)/)?.[0] ?? -1);

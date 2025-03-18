@@ -86,7 +86,7 @@ const score = (value: number): number => {
 	const flags = getFlagsFromValue(value);
 
 	if (!flags.includes(CookiesFlags.PRESENT)) {
-		return 0;
+		return 100;
 	}
 
 	const allFlags = Object.values(CookiesFlags).filter(
