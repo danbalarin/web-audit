@@ -1,0 +1,28 @@
+{
+	"name": "@repo/module-seo",
+	"version": "1.0.0",
+	"private": true,
+	"sideEffects": false,
+	"description": "Module for SEO metrics",
+	"exports": {
+		".": {
+			"import": "./src/index.ts",
+			"require": "./src/index.ts"
+		},
+		"./metrics": {
+			"import": "./src/metrics/index.ts",
+			"require": "./src/metrics/index.ts"
+		}
+	},
+	"scripts": {
+		"lint": "biome lint --error-on-warnings"
+	},
+	"dependencies": {
+		"@axe-core/puppeteer": "^4.10.1",
+		"@repo/api": "*",
+		"typescript": "5.8.2"
+	},
+	"devDependencies": {
+		"@repo/typescript-config": "*"
+	}
+}
