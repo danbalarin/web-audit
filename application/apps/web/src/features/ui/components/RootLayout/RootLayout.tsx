@@ -11,6 +11,11 @@ import { ToolpadProviders } from "../ToolpadProviders";
 export function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
+			<head>
+				{env.NEXT_PUBLIC_DEBUG && (
+					<script src="https://unpkg.com/react-scan/dist/auto.global.js" />
+				)}
+			</head>
 			<body className={font.variable} suppressHydrationWarning>
 				<ThemeRegistry />
 				<TRPCProvider>

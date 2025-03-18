@@ -1,5 +1,6 @@
 import { MetricUnit } from "@repo/api/metrics";
 import { MetricRank } from "@repo/api/types";
+import { MouseEventHandler } from "react";
 import { CategoryKeys } from "~/features/report/config/metrics";
 
 export type JobsTableData = {
@@ -13,5 +14,5 @@ export type JobsTableData = {
 	jobId: string;
 	auditId: string;
 	url: string;
-	onDelete?: () => void;
+	onDelete?: MouseEventHandler;
 };

@@ -3,6 +3,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import { useQueryState } from "nuqs";
 
+import { useCallback } from "react";
 import { JobsTable } from "~/features/report/components/JobsTable";
 import { useDeleteAudit } from "~/features/report/hooks/useDeleteAudit";
 import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
@@ -22,6 +23,22 @@ export const RunsCard = ({ projectId }: RunsCardProps) => {
 	);
 	const { mutateAsync: deleteAudit } = useDeleteAudit();
 	const { confirm } = useDialogContext();
+
+	const onDelete = useCallback(
+		(id: string) =>
+			confirm("Are you sure you want to delete this audit?", {
+				cancelText: "Cancel",
+				okText: "Delete",
+				severity: "error",
+				title: "Delete audit",
+				onClose: (result) => {
+					if (result === "ok") {
+						deleteAudit({ id });
+					}
+				},
+			}),
+		[confirm, deleteAudit],
+	);
 
 	return (
 		<RoundedAccordion defaultExpanded>
@@ -50,19 +67,7 @@ export const RunsCard = ({ projectId }: RunsCardProps) => {
 					jobs={project.jobs}
 					selected={selectedAudits}
 					onSelectedChange={setSelectedAudits}
-					onDelete={(id) =>
-						confirm("Are you sure you want to delete this audit?", {
-							cancelText: "Cancel",
-							okText: "Delete",
-							severity: "error",
-							title: "Delete audit",
-							onClose: (result) => {
-								if (result === "ok") {
-									deleteAudit({ id });
-								}
-							},
-						})
-					}
+					onDelete={onDelete}
 				/>
 			</AccordionDetails>
 		</RoundedAccordion>
