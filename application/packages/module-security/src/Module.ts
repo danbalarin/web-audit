@@ -1,6 +1,7 @@
 import { BaseModule } from "@repo/api";
 
 import pkg from "../package.json";
+import { ObservatoryRunner } from "./ObservatoryRunner";
 import { SSLRunner } from "./SSLRunner";
 import { TechnologyRunner } from "./TechnologyRunner";
 
@@ -15,6 +16,10 @@ export class SecurityModule extends BaseModule {
 			id: "security",
 		});
 
-		this._runners = [new SSLRunner({}), new TechnologyRunner({})];
+		this._runners = [
+			new SSLRunner({}),
+			new TechnologyRunner({}),
+			new ObservatoryRunner({}),
+		];
 	}
 }
