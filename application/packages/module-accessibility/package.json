@@ -20,7 +20,7 @@
 	"dependencies": {
 		"@axe-core/puppeteer": "^4.10.1",
 		"@repo/api": "*",
-		"typescript": "5.2.2"
+		"typescript": "5.8.2"
 	},
 	"devDependencies": {
 		"@repo/typescript-config": "*"

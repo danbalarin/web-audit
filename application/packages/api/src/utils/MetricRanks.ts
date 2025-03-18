@@ -1,4 +1,4 @@
-import { MetricRank } from "~/types";
+import { MetricRank } from "../types";
 
 export const rankBoolean = (
 	val: number | string,

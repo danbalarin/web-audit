@@ -8,6 +8,11 @@ import {
 	PerformanceCategoryDocuments,
 	PerformanceDocument,
 } from "@repo/module-performance/metrics";
+import {
+	SecurityCategory,
+	SecurityCategoryDocuments,
+	SecurityDocument,
+} from "@repo/module-security/metrics";
 import type { MDXContent } from "mdx/types";
 import { CategoryKeys } from "~/features/report/config/metrics";
 
@@ -22,5 +27,9 @@ export const categoryDocuments: Record<
 	[AccessibilityCategory.id]: {
 		document: AccessibilityDocument,
 		metrics: AccessibilityCategoryDocuments,
+	},
+	[SecurityCategory.id]: {
+		document: SecurityDocument,
+		metrics: SecurityCategoryDocuments,
 	},
 };
