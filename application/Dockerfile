@@ -30,7 +30,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
  
 COPY --from=builder /app/out/json/ .
-RUN yarn install
+RUN --mount=type=cache,target=/root/.yarn YARN_CACHE_FOLDER=/root/.yarn yarn --frozen-lockfile --prefer-offline
  
 # Build the project
 COPY --from=builder /app/out/full/ .
@@ -39,6 +39,7 @@ RUN export NODE_OPTIONS=--max_old_space_size=4096 && yarn turbo run build --filt
 FROM base AS runner
 RUN apk add chromium
 ENV CHROMIUM_PATH /usr/bin/chromium
+RUN yarn global add lighthouse@12.4.0
 
 WORKDIR /app
  
