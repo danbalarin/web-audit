@@ -11,17 +11,28 @@ import { theme } from "./src/features/ui/components/ThemeRegistry/theme.mjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig = async () => {
-	const mdnFiles = [
-		(await import.meta.resolve("@mdn/mdn-http-observatory"))
-			.replace("file://", "")
-			.replace("src/index.js", "conf/hsts-preload.json"),
+	const securityFiles = [
+		(await import.meta.resolve("@mdn/mdn-http-observatory")).replace(
+			"src/index.js",
+			"conf/hsts-preload.json",
+		),
 	];
-	const { fileList: additionalTracedFiles } = await nodeFileTrace(mdnFiles, {
-		// ignore unnecesary files if nft includes too many
-		ignore: (file) => {
-			return file.replace(/\\/g, "/").startsWith("node_modules/.bin/");
+	const accessibilityFiles = [
+		await import.meta.resolve("@axe-core/puppeteer"),
+		await import.meta.resolve("axe-core"),
+	];
+
+	const { fileList: additionalTracedFiles } = await nodeFileTrace(
+		[...securityFiles, ...accessibilityFiles].map((f) =>
+			f.replace("file://", ""),
+		),
+		{
+			// ignore unnecesary files if nft includes too many
+			ignore: (file) => {
+				return file.replace(/\\/g, "/").startsWith("node_modules/.bin/");
+			},
 		},
-	});
+	);
 
 	/** @type {import('next').NextConfig} */
 	return {
@@ -35,6 +46,7 @@ const nextConfig = async () => {
 		// 	path.dirname(fileURLToPath(import.meta.url)),
 		// 	"../../",
 		// ),
+		// outputFileTracingRoot: path.join(__dirname, "../../"),
 		outputFileTracingIncludes: {
 			"**": [...additionalTracedFiles],
 		},
