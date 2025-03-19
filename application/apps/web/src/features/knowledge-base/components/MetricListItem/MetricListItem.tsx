@@ -18,7 +18,7 @@ export const MetricListItem = ({
 			component="a"
 			href={KNOWLEDGE_BASE_ROUTES.METRIC(categoryId, metric.id)}
 			selected={selected}
-			sx={{ pl: 4 }}
+			sx={{ pl: 6 }}
 		>
 			<ListItemText primary={metric.name} />
 		</ListItemButton>

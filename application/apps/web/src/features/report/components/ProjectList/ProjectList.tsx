@@ -1,30 +1,34 @@
 "use client";
-
-import { Box, ListItemButton, ListItemText } from "@mui/material";
+import { List, ListItemButton, ListItemText } from "@mui/material";
 import { usePathname } from "next/navigation";
-import { trpc } from "~/server/query/client";
+
+import { Suspense, lazy } from "react";
 import { REPORT_ROUTES } from "../../config/routes";
+import { ProjectListItemsSkeleton } from "./parts/ProjectListItems";
+
+const ProjectListItems = lazy(() =>
+	import("./parts/ProjectListItems").then((mod) => ({
+		default: mod.ProjectListItems,
+	})),
+);
 
 export const ProjectList = () => {
 	const pathname = usePathname();
-	const [projects] = trpc.projects.findAll.useSuspenseQuery();
 
-	if (projects.length === 0) {
-		return (
-			<Box sx={{ display: "flex", justifyContent: "center" }}>No Projects</Box>
-		);
-	}
-
-	return projects.map((p) => (
-		<ListItemButton
-			key={p.id}
-			component="a"
-			href={REPORT_ROUTES.PROJECT(p.id)}
-			selected={pathname.includes(p.id)}
-		>
-			<ListItemText primary={p.name} secondary={p.homeUrl} />
-		</ListItemButton>
-	));
+	return (
+		<List dense disablePadding>
+			<ListItemButton
+				component="a"
+				href={REPORT_ROUTES.NEW_PROJECT}
+				selected={pathname.includes(REPORT_ROUTES.NEW_PROJECT)}
+			>
+				<ListItemText primary={"Create New"} sx={{ textAlign: "center" }} />
+			</ListItemButton>
+			<Suspense fallback={<ProjectListItemsSkeleton />}>
+				<ProjectListItems />
+			</Suspense>
+		</List>
+	);
 };
 
 ProjectList.displayName = "ProjectList";

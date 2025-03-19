@@ -1,28 +1,26 @@
 "use client";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InfoIcon from "@mui/icons-material/Info";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import NoteIcon from "@mui/icons-material/Note";
 import {
 	Box,
+	Collapse,
 	Divider,
 	Drawer,
 	List,
 	ListItemButton,
 	ListItemIcon,
 	ListItemText,
-	ListSubheader,
 } from "@mui/material";
 import { usePathname } from "next/navigation";
-import React, { lazy, Suspense } from "react";
+import React from "react";
 
+import { KnowledgeBaseSidebarList } from "~/features/knowledge-base/components/KnowledgeBaseSidebarList";
 import { KNOWLEDGE_BASE_ROUTES } from "~/features/knowledge-base/config/routes";
 import { REPORT_ROUTES } from "../../config/routes";
-// import { ProjectList } from "../ProjectList";
-import { ProjectListSkeleton } from "../ProjectList/ProjectList.Skeleton";
-
-const ProjectList = lazy(() =>
-	import("../ProjectList").then((mod) => ({ default: mod.ProjectList })),
-);
+import { ProjectList } from "../ProjectList";
 
 type SidebarLayoutProps = {
 	children: React.ReactNode;
@@ -30,6 +28,9 @@ type SidebarLayoutProps = {
 
 export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 	const pathname = usePathname();
+
+	const selectedProject = pathname.includes(REPORT_ROUTES.BASE);
+	const selectedKnowledgeBase = pathname.includes(KNOWLEDGE_BASE_ROUTES.BASE);
 
 	return (
 		<Box sx={{ display: "flex" }}>
@@ -51,37 +52,36 @@ export const SidebarLayout = ({ children }: SidebarLayoutProps) => {
 				}}
 			>
 				<List disablePadding>
-					<ListItemButton
-						component="a"
-						href={REPORT_ROUTES.NEW_PROJECT}
-						selected={pathname.includes(REPORT_ROUTES.NEW_PROJECT)}
-					>
+					<ListItemButton href={REPORT_ROUTES.BASE} selected={selectedProject}>
 						<ListItemIcon>
-							<NoteAddIcon />
+							<NoteIcon />
 						</ListItemIcon>
-						<ListItemText primary={"Create New"} />
+						<ListItemText primary="Projects" />
+						{selectedProject ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 					</ListItemButton>
-				</List>
-				<Divider />
-				<ListSubheader>Projects</ListSubheader>
-				<List disablePadding>
-					<Suspense fallback={<ProjectListSkeleton />}>
+					<Collapse in={selectedProject} timeout="auto" unmountOnExit>
 						<ProjectList />
-					</Suspense>
+					</Collapse>
 				</List>
-				<Box sx={{ flexGrow: 1 }} />
 				<Divider />
-				<List disablePadding sx={{ justifySelf: "flex-end" }}>
+				<List disablePadding>
 					<ListItemButton
-						component="a"
 						href={KNOWLEDGE_BASE_ROUTES.BASE}
-						selected={pathname.includes(KNOWLEDGE_BASE_ROUTES.BASE)}
+						selected={selectedKnowledgeBase}
 					>
 						<ListItemIcon>
 							<MenuBookIcon />
 						</ListItemIcon>
-						<ListItemText primary={"Knowledge Base"} />
+						<ListItemText primary="Knowledge Base" />
+						{selectedKnowledgeBase ? <ExpandLessIcon /> : <ExpandMoreIcon />}
 					</ListItemButton>
+					<Collapse in={selectedKnowledgeBase} timeout="auto" unmountOnExit>
+						<KnowledgeBaseSidebarList />
+					</Collapse>
+				</List>
+				<Box sx={{ flexGrow: 1 }} />
+				<Divider />
+				<List disablePadding sx={{ justifySelf: "flex-end" }}>
 					<ListItemButton>
 						<ListItemIcon>
 							<InfoIcon />

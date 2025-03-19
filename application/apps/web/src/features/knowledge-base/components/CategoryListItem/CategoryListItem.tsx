@@ -28,6 +28,7 @@ export const CategoryListItem = ({
 
 	return (
 		<ListItemButton
+			sx={{ pl: 4 }}
 			component="a"
 			href={KNOWLEDGE_BASE_ROUTES.CATEGORY(category.id)}
 			selected={selected}
