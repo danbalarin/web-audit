@@ -1,0 +1,30 @@
+{
+	"$schema": "./node_modules/syncpack/dist/schema.json",
+	"semverGroups": [
+		{
+			"label": "Ignore workspace versions",
+			"packages": ["**"],
+			"dependencies": ["@repo/*"],
+			"range": "*"
+		}
+	],
+	"versionGroups": [
+		{
+			"label": "Prohibit react in workspace packages",
+			"dependencies": [
+				"react",
+				"react-dom",
+				"@types/react",
+				"@types/react-dom"
+			],
+			"packages": ["@repo/module-*", "@repo/db", "@repo/api"],
+			"isBanned": true
+		},
+		{
+			"dependencies": ["@types/**"],
+			"dependencyTypes": ["!dev"],
+			"isBanned": true,
+			"label": "@types packages should only be under devDependencies"
+		}
+	]
+}

@@ -1,13 +1,6 @@
 {
 	"name": "web",
 	"version": "1.0.0",
-	"private": true,
-	"scripts": {
-		"dev": "FORCE_COLOR=true next dev | pino-pretty",
-		"build": "next build",
-		"start": "next start",
-		"lint": "biome lint --error-on-warnings"
-	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.3.2",
 		"@mdx-js/loader": "^3.1.0",
@@ -18,8 +11,8 @@
 		"@mui/material-pigment-css": "^6.4.2",
 		"@next/bundle-analyzer": "^15.1.6",
 		"@next/mdx": "^15.1.6",
-		"@repo/db": "*",
 		"@repo/api": "*",
+		"@repo/db": "*",
 		"@repo/module-accessibility": "*",
 		"@repo/module-performance": "*",
 		"@repo/module-security": "*",
@@ -39,7 +32,7 @@
 		"next": "^15.1.6",
 		"nuqs": "^2.3.2",
 		"pino": "^9.6.0",
-		"puppeteer": "^21.5.2",
+		"puppeteer": "^24.4.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-gauge-chart": "^0.4.1",
@@ -58,11 +51,18 @@
 		"@trpc-playground/types": "^1.0.0",
 		"@types/lodash": "^4.17.12",
 		"@types/mdx": "^2.0.13",
-		"@types/node": "^17.0.12",
+		"@types/node": "^22.7.4",
 		"@types/react": "^18.0.22",
 		"@types/react-dom": "^18.0.7",
 		"@types/react-gauge-chart": "^0.4.3",
 		"pino-pretty": "^13.0.0",
 		"typescript": "5.8.2"
+	},
+	"private": true,
+	"scripts": {
+		"build": "next build",
+		"dev": "FORCE_COLOR=true next dev | pino-pretty",
+		"lint": "biome lint --error-on-warnings",
+		"start": "next start"
 	}
 }

@@ -1,9 +1,16 @@
 {
 	"name": "@repo/module-accessibility",
-	"version": "1.0.0",
-	"private": true,
-	"sideEffects": false,
 	"description": "Module for accessibility metrics",
+	"version": "1.0.0",
+	"dependencies": {
+		"@axe-core/puppeteer": "^4.10.1",
+		"@repo/api": "*",
+		"axe-core": "^4.10.3",
+		"typescript": "5.8.2"
+	},
+	"devDependencies": {
+		"@repo/typescript-config": "*"
+	},
 	"exports": {
 		".": {
 			"import": "./src/index.ts",
@@ -14,16 +21,9 @@
 			"require": "./src/metrics/index.ts"
 		}
 	},
+	"private": true,
 	"scripts": {
 		"lint": "biome lint --error-on-warnings"
 	},
-	"dependencies": {
-		"@axe-core/puppeteer": "^4.10.1",
-		"@repo/api": "*",
-		"axe-core": "^4.10.3",
-		"typescript": "5.8.2"
-	},
-	"devDependencies": {
-		"@repo/typescript-config": "*"
-	}
+	"sideEffects": false
 }

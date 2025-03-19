@@ -1,19 +1,6 @@
 {
 	"name": "@repo/db",
 	"version": "0.0.0",
-	"private": true,
-	"sideEffects": false,
-	"exports": {
-		".": {
-			"import": "./src/index.ts",
-			"require": "./src/index.ts"
-		}
-	},
-	"scripts": {
-		"lint": "biome lint --error-on-warnings",
-		"db:generate": "drizzle-kit generate && node ./tools/compile-migrations.mjs",
-		"db:migrate": "drizzle-kit migrate"
-	},
 	"dependencies": {
 		"deepmerge": "^4.3.1",
 		"drizzle-kit": "^0.24.2",
@@ -25,5 +12,18 @@
 		"@types/node": "^22.7.4",
 		"@types/pg": "^8.11.11",
 		"typescript": "5.8.2"
-	}
+	},
+	"exports": {
+		".": {
+			"import": "./src/index.ts",
+			"require": "./src/index.ts"
+		}
+	},
+	"private": true,
+	"scripts": {
+		"db:generate": "drizzle-kit generate && node ./tools/compile-migrations.mjs",
+		"db:migrate": "drizzle-kit migrate",
+		"lint": "biome lint --error-on-warnings"
+	},
+	"sideEffects": false
 }

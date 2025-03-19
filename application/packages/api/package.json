@@ -1,8 +1,18 @@
 {
 	"name": "@repo/api",
 	"version": "0.0.0",
-	"private": true,
-	"sideEffects": false,
+	"dependencies": {
+		"@repo/db": "*",
+		"puppeteer": "^24.4.0"
+	},
+	"devDependencies": {
+		"@jest/globals": "^29.7.0",
+		"@repo/typescript-config": "*",
+		"@types/jest": "^29.5.14",
+		"jest": "^29.7.0",
+		"ts-jest": "^29.2.5",
+		"typescript": "5.8.2"
+	},
 	"exports": {
 		".": {
 			"import": "./src/core/index.ts",
@@ -21,21 +31,10 @@
 			"require": "./src/utils/index.ts"
 		}
 	},
+	"private": true,
 	"scripts": {
 		"lint": "biome lint --error-on-warnings",
 		"test": "jest"
 	},
-	"devDependencies": {
-		"@jest/globals": "^29.7.0",
-		"@repo/typescript-config": "*",
-		"@types/jest": "^29.5.14",
-		"@types/react": "^18.0.22",
-		"jest": "^29.7.0",
-		"ts-jest": "^29.2.5",
-		"typescript": "5.8.2"
-	},
-	"dependencies": {
-		"@repo/db": "*",
-		"puppeteer": "^24.4.0"
-	}
+	"sideEffects": false
 }

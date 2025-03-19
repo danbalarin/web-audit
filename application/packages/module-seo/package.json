@@ -1,9 +1,14 @@
 {
 	"name": "@repo/module-seo",
-	"version": "1.0.0",
-	"private": true,
-	"sideEffects": false,
 	"description": "Module for SEO metrics",
+	"version": "1.0.0",
+	"dependencies": {
+		"@repo/api": "*",
+		"typescript": "5.8.2"
+	},
+	"devDependencies": {
+		"@repo/typescript-config": "*"
+	},
 	"exports": {
 		".": {
 			"import": "./src/index.ts",
@@ -14,14 +19,9 @@
 			"require": "./src/metrics/index.ts"
 		}
 	},
+	"private": true,
 	"scripts": {
 		"lint": "biome lint --error-on-warnings"
 	},
-	"dependencies": {
-		"@repo/api": "*",
-		"typescript": "5.8.2"
-	},
-	"devDependencies": {
-		"@repo/typescript-config": "*"
-	}
+	"sideEffects": false
 }

@@ -1,17 +1,5 @@
 {
 	"name": "web-audit-monorepo",
-	"private": true,
-	"scripts": {
-		"build": "export NODE_OPTIONS=--max_old_space_size=8192 && turbo build",
-		"docker:build-and-publish": "./scripts/build-and-publish.sh",
-		"dev": "export NODE_OPTIONS=--max_old_space_size=8192 && turbo dev",
-		"start": "turbo start",
-		"lint": "biome lint",
-		"test": "turbo test --parallel",
-		"test:coverage": "turbo test --parallel -- --coverage",
-		"prepare": "cd .. && husky ./application/.husky",
-		"lint-staged": "lint-staged"
-	},
 	"devDependencies": {
 		"@commitlint/cli": "^19.5.0",
 		"@commitlint/config-conventional": "^19.5.0",
@@ -20,17 +8,32 @@
 		"husky": "^9.1.6",
 		"lint-staged": "^15.2.10",
 		"prettier": "^3.1.0",
+		"syncpack": "^13.0.3",
 		"turbo": "^2.2.3",
 		"typescript": "5.8.2"
 	},
 	"engines": {
 		"node": "^20.15.0"
 	},
-	"packageManager": "yarn@1.22.10",
-	"workspaces": ["apps/*", "packages/*"],
 	"lint-staged": {
 		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
 			"biome check --write --no-errors-on-unmatched"
 		]
-	}
+	},
+	"packageManager": "yarn@1.22.10",
+	"private": true,
+	"scripts": {
+		"build": "export NODE_OPTIONS=--max_old_space_size=8192 && turbo build",
+		"deps:check": "syncpack list",
+		"deps:sync": "syncpack format",
+		"dev": "export NODE_OPTIONS=--max_old_space_size=8192 && turbo dev",
+		"docker:build-and-publish": "./scripts/build-and-publish.sh",
+		"lint": "biome lint",
+		"lint-staged": "lint-staged",
+		"prepare": "cd .. && husky ./application/.husky",
+		"start": "turbo start",
+		"test": "turbo test --parallel",
+		"test:coverage": "turbo test --parallel -- --coverage"
+	},
+	"workspaces": ["apps/*", "packages/*"]
 }
