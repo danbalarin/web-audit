@@ -13,21 +13,14 @@ export const env = createEnv({
 			.enum(["development", "test", "production"])
 			.default("development"),
 
-		/**
-		 * Absolute URL to exposed website.
-		 */
-		SITE_URL: z
-			.string()
-			.regex(/^[.a-z\d-]*[a-z\d-]+((:[\d]+)|(\.[a-z]{2,}))$/i, "Invalid domain")
-			.nullish()
-			.transform((url) => (url ? `https://${url}` : "http://localhost:3000")),
-
 		CHROMIUM_PATH: z.string().optional(),
 		DB_USER: z.string(),
 		DB_PASSWORD: z.string(),
 		DB_NAME: z.string(),
 		DB_HOST: z.string().optional().default("localhost"),
 		DB_PORT: z.coerce.number().optional().default(5432),
+
+		BASE_URL: z.string().default("http://localhost:3000"),
 	},
 
 	client: {
@@ -44,7 +37,6 @@ export const env = createEnv({
 	runtimeEnv: {
 		CI: process.env.CI,
 		NODE_ENV: process.env.NODE_ENV,
-		SITE_URL: process.env.VERCEL_URL,
 		CHROMIUM_PATH: process.env.CHROMIUM_PATH,
 		NEXT_PUBLIC_LOG_LEVEL: process.env.NEXT_PUBLIC_LOG_LEVEL,
 		NEXT_PUBLIC_DEBUG: process.env.NEXT_PUBLIC_DEBUG,
@@ -53,5 +45,7 @@ export const env = createEnv({
 		DB_NAME: process.env.DB_NAME,
 		DB_HOST: process.env.DB_HOST,
 		DB_PORT: process.env.DB_PORT,
+
+		BASE_URL: process.env.BASE_URL,
 	},
 });

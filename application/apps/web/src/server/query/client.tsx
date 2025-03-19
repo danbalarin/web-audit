@@ -6,6 +6,7 @@ import { createTRPCReact } from "@trpc/react-query";
 import { inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
 import superjson from "superjson";
+import { env } from "~/env.mjs";
 import { trpcLogger } from "~/lib/logger";
 import type { AppRouter } from "../router";
 import { makeQueryClient } from "./makeQueryClient";
@@ -32,6 +33,10 @@ function getUrl() {
 		}
 		if (process.env.VERCEL_URL) {
 			return `https://${process.env.VERCEL_URL}`;
+		}
+
+		if (env.BASE_URL) {
+			return env.BASE_URL;
 		}
 
 		return "http://localhost:3000";
