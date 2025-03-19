@@ -27,7 +27,7 @@ export const env = createEnv({
 		DB_PASSWORD: z.string(),
 		DB_NAME: z.string(),
 		DB_HOST: z.string().optional().default("localhost"),
-		DB_PORT: z.number().optional().default(5432),
+		DB_PORT: z.coerce.number().optional().default(5432),
 	},
 
 	client: {
@@ -35,7 +35,6 @@ export const env = createEnv({
 		NEXT_PUBLIC_LOG_LEVEL: z
 			.enum(["trace", "debug", "info", "warn", "error", "fatal"])
 			.default("info"),
-		NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL: z.string(),
 	},
 
 	/**
@@ -48,8 +47,6 @@ export const env = createEnv({
 		SITE_URL: process.env.VERCEL_URL,
 		CHROMIUM_PATH: process.env.CHROMIUM_PATH,
 		NEXT_PUBLIC_LOG_LEVEL: process.env.NEXT_PUBLIC_LOG_LEVEL,
-		NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL:
-			process.env.NEXT_PUBLIC_ELECTRIC_SQL_BASE_URL,
 		NEXT_PUBLIC_DEBUG: process.env.NEXT_PUBLIC_DEBUG,
 		DB_USER: process.env.DB_USER,
 		DB_PASSWORD: process.env.DB_PASSWORD,

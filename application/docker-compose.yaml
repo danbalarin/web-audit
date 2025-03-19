@@ -4,10 +4,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        - DB_NAME=${DB_NAME}
-        - DB_USER=${DB_USER}
-        - DB_PASSWORD=${DB_PASSWORD}
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: postgres
     restart: always
     ports:
       - 3000:3000
@@ -34,15 +35,6 @@ services:
       - wal_level=logical
     networks:
       - audit_network
-
-  # zaproxy:
-  #   image: zaproxy/zap-stable
-  #   container_name: zaproxy
-  #   command: zap-x.sh -daemon -host 0.0.0.0 -port 8080 -config database.recoverylog=false -config api.addrs.addr.name=.* -config api.addrs.addr.regex=true -config api.disablekey=true
-  #   ports:
-  #     - 8080:8080
-  #   networks:
-  #     - audit_network
 
 volumes:
   audit_data:
