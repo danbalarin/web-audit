@@ -29,6 +29,7 @@
 	},
 	"devDependencies": {
 		"@repo/typescript-config": "*",
-		"@types/semver": "^7.5.8"
+		"@types/semver": "^7.5.8",
+		"node-fetch": "^3.3.2"
 	}
 }

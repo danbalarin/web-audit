@@ -18,7 +18,6 @@
 		"lint": "biome lint --error-on-warnings"
 	},
 	"dependencies": {
-		"@axe-core/puppeteer": "^4.10.1",
 		"@repo/api": "*",
 		"typescript": "5.8.2"
 	},
