@@ -11,7 +11,7 @@ export const ProjectListItems = () => {
 
 	if (projects.length === 0) {
 		return (
-			<Box sx={{ pl: 4, display: "flex", justifyContent: "center" }}>
+			<Box sx={{ p: 2, display: "flex", justifyContent: "center" }}>
 				No Projects
 			</Box>
 		);
