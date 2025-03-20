@@ -1,6 +1,7 @@
 import { type CategoryDescription, MetricDescription } from "@repo/api/types";
 
 import { Arbitrary } from "@repo/api/metrics";
+import { FacebookPreview } from "./facebook-preview";
 import { OpenGraphMetaTags } from "./open-graph-meta-tags";
 import { SEOMetaTags } from "./seo-meta-tags";
 import { TwitterMetaTags } from "./twitter-meta-tags";
@@ -15,6 +16,7 @@ const metrics: MetricDescription[] = [
 	SEOMetaTags,
 	TwitterMetaTags,
 	OpenGraphMetaTags,
+	FacebookPreview,
 ];
 
 export const SEOCategory: CategoryDescription<"seo"> = {

@@ -2,7 +2,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import InfoIconOutlined from "@mui/icons-material/InfoOutlined";
 import WarningIcon from "@mui/icons-material/Warning";
-import { Tooltip, Typography } from "@mui/material";
+import { Box, Tooltip, Typography } from "@mui/material";
 
 import { Arbitrary, Memory, MetricUnit, Time } from "@repo/api/metrics";
 import { CalculatedScore, MetricRank } from "@repo/api/types";
@@ -56,6 +56,7 @@ export const MetricResultCell = ({
 		);
 	}
 	let component;
+	let hideIcon = false;
 	if (renderValue) {
 		component = <Typography>{renderValue(value)}</Typography>;
 	} else {
@@ -86,6 +87,18 @@ export const MetricResultCell = ({
 					</Typography>
 				);
 				break;
+			case Arbitrary.IMAGE:
+				hideIcon = true;
+				component = (
+					<Box height="20rem">
+						<img
+							src={value.toString()}
+							alt="Preview"
+							style={{ height: "100%" }}
+						/>
+					</Box>
+				);
+				break;
 			default:
 				component = <Typography>{value}</Typography>;
 				break;
@@ -109,7 +122,7 @@ export const MetricResultCell = ({
 					gap: 1,
 				}}
 			>
-				{rankIconMap[rank]}
+				{!hideIcon && rankIconMap[rank]}
 				{component}
 			</Typography>
 		</Tooltip>

@@ -2,6 +2,7 @@ import { BaseRunner } from "@repo/api";
 import { type BaseContext, type MetricResult } from "@repo/api/types";
 import { Page } from "puppeteer";
 
+import { FacebookPreview } from "./metrics/facebook-preview";
 import {
 	OpenGraphMetaTags,
 	OpenGraphMetaTagsFlags,
@@ -74,6 +75,7 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 		basic,
 		twitter,
 		openGraph,
+		facebookImage,
 	}: Result): Promise<MetricResult[]> {
 		const seoTags = [
 			basic.title && SEOMetaTagsFlags.TITLE,
@@ -124,6 +126,10 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 				id: OpenGraphMetaTags.id,
 				value: getOpenGraphValueFromFlags(openGraphTags),
 				additionalData: openGraph,
+			},
+			{
+				id: FacebookPreview.id,
+				value: facebookImage,
 			},
 		];
 	}

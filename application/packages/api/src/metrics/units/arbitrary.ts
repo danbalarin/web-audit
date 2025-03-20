@@ -2,6 +2,7 @@ export enum Arbitrary {
 	PERCENTAGE,
 	NUMBER,
 	STRING,
+	IMAGE,
 	BOOLEAN, // True is success, false is fail
 }
 
