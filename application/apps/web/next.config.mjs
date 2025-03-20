@@ -62,6 +62,15 @@ const nextConfig = async () => {
 				permanent: true,
 			},
 		],
+		webpack: (config) => {
+			config.resolve.alias = {
+				...config.resolve.alias,
+				"handlebars/runtime": "handlebars/dist/handlebars.js",
+				handlebars: "handlebars/dist/handlebars.js",
+			};
+
+			return config;
+		},
 	};
 };
 

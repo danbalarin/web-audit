@@ -18,7 +18,6 @@
 	},
 	"exports": {
 		".": {
-			"types": ["./src/typings/wappalyzer-core.d.ts"],
 			"import": "./src/index.ts",
 			"require": "./src/index.ts"
 		},

@@ -4,6 +4,8 @@
 	"version": "1.0.0",
 	"dependencies": {
 		"@repo/api": "*",
+		"handlebars": "^4.7.8",
+		"puppeteer": "^24.4.0",
 		"typescript": "5.8.2"
 	},
 	"devDependencies": {
