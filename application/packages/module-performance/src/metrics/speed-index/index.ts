@@ -9,7 +9,7 @@ const MEDIAN = 3800;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const SpeedIndex: MetricDescription<number> = {
+export const SpeedIndex: MetricDescription = {
 	id: "speed-index",
 	name: "Speed Index",
 	description:

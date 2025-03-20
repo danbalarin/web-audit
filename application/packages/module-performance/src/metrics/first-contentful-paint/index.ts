@@ -9,7 +9,7 @@ const MEDIAN = 2100;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const FirstContentfulPaint: MetricDescription<number> = {
+export const FirstContentfulPaint: MetricDescription = {
 	id: "first-contentful-paint",
 	name: "First Contentful Paint",
 	description:

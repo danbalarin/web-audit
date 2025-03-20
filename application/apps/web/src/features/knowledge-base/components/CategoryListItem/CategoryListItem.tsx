@@ -1,6 +1,7 @@
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import SpeedIcon from "@mui/icons-material/Speed";
+import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
 import { CategoryDescription } from "@repo/api/types";
@@ -18,6 +19,7 @@ const ICONS: Record<CategoryKeys, React.ReactNode> = {
 	performance: <SpeedIcon />,
 	accessibility: <AccessibilityNewIcon />,
 	security: <LockOpenIcon />,
+	seo: <TroubleshootIcon />,
 };
 
 export const CategoryListItem = ({

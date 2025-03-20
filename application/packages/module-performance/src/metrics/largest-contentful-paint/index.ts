@@ -8,7 +8,7 @@ const MEDIAN = 4000;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const LargestContentfulPaint: MetricDescription<number> = {
+export const LargestContentfulPaint: MetricDescription = {
 	id: "largest-contentful-paint",
 	name: "Largest Contentful Paint",
 	description:

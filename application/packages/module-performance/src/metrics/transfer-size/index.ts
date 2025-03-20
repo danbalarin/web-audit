@@ -9,7 +9,7 @@ const P10 = 600 * 1024;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const TransferSize: MetricDescription<number> = {
+export const TransferSize: MetricDescription = {
 	id: "transfer-size",
 	name: "Transfer Size",
 	description:

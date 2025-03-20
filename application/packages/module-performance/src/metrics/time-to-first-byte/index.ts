@@ -8,7 +8,7 @@ const MEDIAN = 600;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const TimeToFirstByte: MetricDescription<number> = {
+export const TimeToFirstByte: MetricDescription = {
 	id: "time-to-first-byte",
 	name: "Time to First Byte",
 	description:

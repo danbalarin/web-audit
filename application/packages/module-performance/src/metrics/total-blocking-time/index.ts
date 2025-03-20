@@ -8,7 +8,7 @@ const P10 = 200;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const TotalBlockingTime: MetricDescription<number> = {
+export const TotalBlockingTime: MetricDescription = {
 	id: "total-blocking-time",
 	name: "Total Blocking Time",
 	description:

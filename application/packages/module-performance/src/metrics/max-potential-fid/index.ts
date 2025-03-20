@@ -8,7 +8,7 @@ const MEDIAN = 250;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const MaxPotentialFID: MetricDescription<number> = {
+export const MaxPotentialFID: MetricDescription = {
 	id: "max-potential-fid",
 	name: "Max Potential First Input Delay",
 	description:

@@ -8,7 +8,7 @@ const MEDIAN = 75;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const TotalRequests: MetricDescription<number> = {
+export const TotalRequests: MetricDescription = {
 	id: "total-requests",
 	name: "Total Requests",
 	description:

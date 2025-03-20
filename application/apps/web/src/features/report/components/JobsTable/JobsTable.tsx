@@ -7,9 +7,6 @@ import {
 } from "@tanstack/react-table";
 import { Dispatch, useMemo } from "react";
 
-import { AccessibilityCategory } from "@repo/module-accessibility/metrics";
-import { PerformanceCategory } from "@repo/module-performance/metrics";
-import { SecurityCategory } from "@repo/module-security/metrics";
 import { Table } from "~/features/ui/components/Table";
 import { RouterOutputs } from "~/server/query/client";
 
@@ -28,16 +25,16 @@ const transformData = (
 				jobId: job.id,
 				auditId: audit.id,
 				url: audit.url,
-				performance: scoreCategory(audit.metrics, PerformanceCategory.id),
-				accessibility: scoreCategory(audit.metrics, AccessibilityCategory.id),
-				security: scoreCategory(audit.metrics, SecurityCategory.id),
-				...Object.values(categoriesMap).reduce(
+				...(Object.values(categoriesMap).reduce(
 					(acc, cat) => ({
 						...acc,
 						[cat.id]: scoreCategory(audit.metrics, cat.id),
 					}),
 					{},
-				),
+				) as Record<
+					keyof typeof categoriesMap,
+					ReturnType<typeof scoreCategory>
+				>),
 				onDelete: onDelete ? () => onDelete(audit.id) : undefined,
 			})),
 		)

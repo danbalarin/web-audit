@@ -8,7 +8,7 @@ const MEDIAN = 0.25;
 
 const lighthouseScoring = getLighthouseScoring(MEDIAN, P10);
 
-export const CumulativeLayoutShift: MetricDescription<number> = {
+export const CumulativeLayoutShift: MetricDescription = {
 	id: "cumulative-layout-shift",
 	name: "Cumulative Layout Shift",
 	description:
