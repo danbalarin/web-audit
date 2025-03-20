@@ -50,7 +50,13 @@
 ) = {
   set document(title: title, author: author)
 
-  set text(size: 11pt, lang: lang, font: "Latin Modern", region: "GB")
+  set text(
+    size: 11pt, 
+    lang: lang, 
+    font: "Latin Modern Roman", 
+    region: "GB", 
+    costs: (runt: 1000%, widow: 1000%, orphan: 1000%)
+  )
 
   set page(
     paper: "a4",

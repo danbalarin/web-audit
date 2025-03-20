@@ -2,7 +2,7 @@
 
 #let make-abbrevations() = context {
   let custom-style(short) = {
-  	strong[#short]
+  	short
   }
 
   abbr.style(custom-style)
