@@ -1,5 +1,5 @@
-export { AccessibilityCategory } from "./category";
+export { SEOCategory } from "./category";
 export {
-	AccessibilityCategoryDocuments,
-	AccessibilityDocument,
+	SEOCategoryDocuments,
+	SEODocument,
 } from "./documents";
