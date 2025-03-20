@@ -1,5 +1,9 @@
 import { Arbitrary } from "@repo/api/metrics";
-import { type MetricDescription, MetricRank } from "@repo/api/types";
+import {
+	type MetricDescription,
+	MetricRank,
+	MetricResult,
+} from "@repo/api/types";
 
 export enum OpenGraphMetaTagsFlags {
 	TITLE = 0x01,
@@ -94,7 +98,7 @@ const rank = (value: number | string): MetricRank => {
 	return "fail";
 };
 
-const renderValue = (value: number | string): string => {
+const renderValue = ({ value }: Omit<MetricResult, "id">): string => {
 	const castedValue = +value;
 	const missingFlags = Object.values(OpenGraphMetaTagsFlags).filter(
 		(flag) => typeof flag !== "string" && !(castedValue & flag),
@@ -118,7 +122,7 @@ const flagTranslations = {
 	[OpenGraphMetaTagsFlags.LOCALE_FALLBACK]: "Locale fallback",
 } as const;
 
-const renderTooltip = (value: number | string): string => {
+const renderTooltip = ({ value }: Omit<MetricResult, "id">): string => {
 	const flags = getFlagsFromValue(+value);
 	const missingFlags = Object.values(OpenGraphMetaTagsFlags).filter(
 		(flag) => typeof flag !== "string" && !flags.includes(flag),

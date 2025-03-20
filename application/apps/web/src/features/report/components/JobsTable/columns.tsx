@@ -33,7 +33,9 @@ export const columns = [
 					<MetricResultCell
 						unit={data.scoreUnit}
 						rank={data.rank}
-						value={data.score}
+						result={{
+							value: data.score,
+						}}
 					/>
 				);
 			},

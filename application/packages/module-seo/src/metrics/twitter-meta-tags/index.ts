@@ -1,5 +1,9 @@
 import { Arbitrary } from "@repo/api/metrics";
-import { type MetricDescription, MetricRank } from "@repo/api/types";
+import {
+	type MetricDescription,
+	MetricRank,
+	MetricResult,
+} from "@repo/api/types";
 
 export enum TwitterMetaTagsFlags {
 	CARD = 0x01,
@@ -96,7 +100,7 @@ const rank = (value: number | string): MetricRank => {
 	return "fail";
 };
 
-const renderValue = (value: number | string): string => {
+const renderValue = ({ value }: Omit<MetricResult, "id">): string => {
 	const castedValue = +value;
 	const missingFlags = Object.values(TwitterMetaTagsFlags).filter(
 		(flag) => typeof flag !== "string" && !(castedValue & flag),
@@ -121,7 +125,7 @@ const flagTranslations = {
 	[TwitterMetaTagsFlags.TITLE_FALLBACK]: "Title fallback",
 };
 
-const renderTooltip = (value: number | string): string => {
+const renderTooltip = ({ value }: Omit<MetricResult, "id">): string => {
 	const flags = getFlagsFromValue(+value);
 	const missingFlags = Object.values(TwitterMetaTagsFlags).filter(
 		(flag) => typeof flag !== "string" && !flags.includes(flag),

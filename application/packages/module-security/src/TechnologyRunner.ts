@@ -13,7 +13,7 @@ import { VulnerableDependencies } from "./metrics/vulnerable-dependencies";
 // biome-ignore lint/complexity/noBannedTypes: placeholder
 export type TechnologyRunnerOptions = {};
 
-type Result = {
+export type TechnologyRunnerResult = {
 	technology: Technology;
 	vulnerabilities: Vulnerability[];
 }[];
@@ -57,7 +57,7 @@ export class TechnologyRunner extends BaseRunner {
 
 		this._options = Object.assign({}, _options);
 	}
-	async transform(result: Result): Promise<MetricResult[]> {
+	async transform(result: TechnologyRunnerResult): Promise<MetricResult[]> {
 		// await writeFile("retire-results.json", JSON.stringify(result, null, 2));
 		const vulnerableComponents = result.filter(
 			(c) => c.vulnerabilities?.length && c.vulnerabilities?.length > 0,
@@ -104,7 +104,9 @@ export class TechnologyRunner extends BaseRunner {
 		return results.technologies;
 	}
 
-	async checkForVulnerabilities(technologies: Technology[]): Promise<Result> {
+	async checkForVulnerabilities(
+		technologies: Technology[],
+	): Promise<TechnologyRunnerResult> {
 		const repository = repo as SimpleRepo;
 		const components = [];
 
@@ -148,7 +150,7 @@ export class TechnologyRunner extends BaseRunner {
 		return components;
 	}
 
-	async runRaw(context: BaseContext): Promise<Result> {
+	async runRaw(context: BaseContext): Promise<TechnologyRunnerResult> {
 		const foundTechs = await this.getTechnologies(context);
 		const vulnerableComponents = await this.checkForVulnerabilities(foundTechs);
 		return vulnerableComponents;

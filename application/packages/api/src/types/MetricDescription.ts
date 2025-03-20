@@ -1,5 +1,6 @@
 import type { MetricUnit } from "../metrics";
 import { MetricRank } from "./MetricRank";
+import { MetricResult } from "./MetricResult";
 
 export type MetricDescription<
 	TVal extends number | string = number | string,
@@ -36,12 +37,12 @@ export type MetricDescription<
 	/**
 	 * Optional function to render the value of the metric, overrides the default
 	 */
-	renderValue?: (value: TVal) => string;
+	renderValue?: (result: Omit<MetricResult<TVal>, "id">) => string;
 
 	/**
 	 * Optional function to render the tooltip of the metric, overrides the default
 	 */
-	renderTooltip?: (value: TVal) => string;
+	renderTooltip?: (result: Omit<MetricResult<TVal>, "id">) => string;
 
 	/**
 	 * Compares two values of the metric

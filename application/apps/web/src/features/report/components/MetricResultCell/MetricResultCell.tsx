@@ -5,7 +5,7 @@ import WarningIcon from "@mui/icons-material/Warning";
 import { Tooltip, Typography } from "@mui/material";
 
 import { Arbitrary, Memory, MetricUnit, Time } from "@repo/api/metrics";
-import { CalculatedScore, MetricRank } from "@repo/api/types";
+import { CalculatedScore, MetricRank, MetricResult } from "@repo/api/types";
 import { Metric } from "@repo/db";
 import { Fragment } from "react";
 import { ImageMetricResultCell } from "./parts/ImageMetricResultCell";
@@ -16,9 +16,9 @@ type MetricResultCellProps = {
 	unit: MetricUnit;
 	score?: CalculatedScore<Metric>["score"];
 	rank: CalculatedScore<Metric>["rank"];
-	value: number | string;
-	renderValue?: (value: number | string) => string;
-	renderTooltip?: (value: number | string) => string;
+	result: Omit<MetricResult, "id">;
+	renderValue?: (value: Omit<MetricResult, "id">) => string;
+	renderTooltip?: (value: Omit<MetricResult, "id">) => string;
 };
 
 const rankIconMap: Record<MetricRank, JSX.Element> = {
@@ -31,11 +31,12 @@ const rankIconMap: Record<MetricRank, JSX.Element> = {
 export const MetricResultCell = ({
 	score,
 	rank,
-	value,
+	result,
 	unit,
 	renderValue,
 	renderTooltip,
 }: MetricResultCellProps) => {
+	const { value } = result;
 	if (+value === -1) {
 		return (
 			<Tooltip
@@ -61,7 +62,7 @@ export const MetricResultCell = ({
 	let hideIcon = false;
 	let hideTooltip = false;
 	if (renderValue) {
-		component = <Typography>{renderValue(value)}</Typography>;
+		component = <Typography>{renderValue(result)}</Typography>;
 	} else {
 		switch (unit) {
 			case Time.MILLISECOND:
@@ -104,7 +105,7 @@ export const MetricResultCell = ({
 	}
 
 	const tooltip = renderTooltip
-		? renderTooltip(value)
+		? renderTooltip(result)
 		: score
 			? `${score}%`
 			: undefined;

@@ -32,7 +32,10 @@ export const createColumns = (
 							unit={info.row.original.unit}
 							rank={data?.rank ?? -1}
 							score={data?.score}
-							value={data?.value ?? "-1"}
+							result={{
+								value: data?.value ?? "-1",
+								additionalData: data.additionalData ?? undefined,
+							}}
 							renderValue={info.row.original.renderValue}
 							renderTooltip={info.row.original.renderTooltip}
 						/>
