@@ -10,31 +10,17 @@ Further sections examine the importance of #abbr.l("SEO") in increasing a websit
 The chapter concludes with an exploration of the limitations and challenges inherent in existing solutions, identifying gaps where current tools may fall short. 
 This gap analysis is instrumental in setting the stage for developing a more integrated auditing approach that combines automated and manual techniques.
 
-#pagebreak()
-
 #include "1-Black-Box-Auditing.typ"
-
-#pagebreak()
 
 #include "2-Web-Accessibility.typ"
 
-#pagebreak()
-
 #include "3-Performance.typ"
-
-#pagebreak()
 
 #include "4-Security.typ"
 
-#pagebreak()
-
 #include "5-Search-Engine-Optimisation.typ"
 
-#pagebreak()
-
 #include "6-Usability-and-User-Experience.typ"
-
-#pagebreak()
 
 #include "7-Limitations-and-Challenges-of-Existing-Solutions.typ"
 

@@ -11,23 +11,13 @@ This involves a careful analysis of each metric's influence on factors such as u
 By stating how impactful they are, we can prioritise our focus on the metrics that will drive the most meaningful improvements. 
 This approach ensures that our auditing process is both thorough and strategically targeted, ultimately enhancing the quality and performance of the websites we evaluate.
 
-#pagebreak()
-
 #include "1-Accessibility.typ"
-
-#pagebreak()
 
 #include "2-Performance.typ"
 
-#pagebreak()
-
 #include "3-Security.typ"
 
-#pagebreak()
-
 #include "4-Search-Engine-Optimisation.typ"
-
-#pagebreak()
 
 #include "5-Usability-and-User-Experience.typ"
 

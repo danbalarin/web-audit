@@ -22,20 +22,22 @@
   set align(center)
 
   set block(spacing: .6em)
+
+  set text(font: "Latin Modern Sans")
   
   text(20pt, university)
   v(4pt)
   text(20pt, faculty) 
   
   block(above: 1fr, below: 2fr, width: 100%, [
-    #image("FIS_2_logo_2_rgb_EN.svg", width: 50%)
+    #image("images/FIS_2_logo_2_rgb_EN.svg", width: 50%)
   ])
   
-  text(24pt, weight: "bold", title)
+  text(24pt, weight: "extrabold", title, font: "Latin Modern Sans")
   
   v(8mm)
   
-  text(24pt, "MASTER THESIS")
+  text(24pt, "MASTER THESIS", font: "Latin Modern Sans")
   
   v(8mm)
   
