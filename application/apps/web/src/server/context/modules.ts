@@ -4,21 +4,21 @@ import { SecurityModule } from "@repo/module-security";
 import { SEOModule } from "@repo/module-seo";
 
 export const createModulesContext = async () => {
-	const _PerformanceModuleInstance = new PerformanceModule({
+	const PerformanceModuleInstance = new PerformanceModule({
 		lighthouseRunnerOptions: { numberOfRuns: 1 },
 	});
 
-	const _AccessibilityModuleInstance = new AccessibilityModule({});
+	const AccessibilityModuleInstance = new AccessibilityModule({});
 
-	const _SecurityModuleInstance = new SecurityModule({});
+	const SecurityModuleInstance = new SecurityModule({});
 
 	const SEOModuleInstance = new SEOModule({});
 
 	return {
 		modules: [
-			// _PerformanceModuleInstance,
-			// _AccessibilityModuleInstance,
-			// _SecurityModuleInstance,
+			PerformanceModuleInstance,
+			AccessibilityModuleInstance,
+			SecurityModuleInstance,
 			SEOModuleInstance,
 		],
 	};
