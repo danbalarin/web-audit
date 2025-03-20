@@ -2,6 +2,11 @@ import { BaseRunner } from "@repo/api";
 import { type BaseContext, type MetricResult } from "@repo/api/types";
 import { Page } from "puppeteer";
 
+import {
+	SEOMetaTags,
+	SEOMetaTagsFlags,
+	getValueFromFlags,
+} from "./metrics/seo-meta-tags";
 import { template as facebookTemplate } from "./templates/facebook";
 
 // biome-ignore lint/complexity/noBannedTypes: placeholder
@@ -55,9 +60,19 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 	}
 
 	async transform(result: Result): Promise<MetricResult[]> {
-		console.log(result);
+		const seoTags = [
+			result.basic.title && SEOMetaTagsFlags.TITLE,
+			result.basic.description && SEOMetaTagsFlags.DESCRIPTION,
+			result.basic.keywords && SEOMetaTagsFlags.KEYWORDS,
+			result.basic.author && SEOMetaTagsFlags.AUTHOR,
+		].filter(Boolean) as SEOMetaTagsFlags[];
 
-		return [];
+		return [
+			{
+				id: SEOMetaTags.id,
+				value: getValueFromFlags(seoTags),
+			},
+		];
 	}
 
 	async run(context: BaseContext): Promise<MetricResult[]> {
