@@ -67,6 +67,9 @@ export const MetricResultCell = ({
 		case Arbitrary.PERCENTAGE:
 			component = <Typography>{Math.round(+value * 100) + "%"}</Typography>;
 			break;
+		case Arbitrary.BOOLEAN:
+			component = <Typography>{+value === 1 ? "Yes" : "No"}</Typography>;
+			break;
 		case Arbitrary.NUMBER:
 			component = (
 				<Typography>
