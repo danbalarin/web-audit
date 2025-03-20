@@ -75,7 +75,7 @@ const rank = (value: number | string): MetricRank => {
 
 export const SEOMetaTags: MetricDescription = {
 	id: "seoMetaTags",
-	name: "SEOMetaTags",
+	name: "SEO Meta Tags",
 	description: "",
 	unit: Arbitrary.NUMBER,
 	compare,

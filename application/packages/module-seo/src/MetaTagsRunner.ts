@@ -5,8 +5,13 @@ import { Page } from "puppeteer";
 import {
 	SEOMetaTags,
 	SEOMetaTagsFlags,
-	getValueFromFlags,
+	getValueFromFlags as getSeoValueFromFlags,
 } from "./metrics/seo-meta-tags";
+import {
+	TwitterMetaTags,
+	TwitterMetaTagsFlags,
+	getValueFromFlags as getTwitterValueFromFlags,
+} from "./metrics/twitter-meta-tags";
 import { template as facebookTemplate } from "./templates/facebook";
 
 // biome-ignore lint/complexity/noBannedTypes: placeholder
@@ -59,18 +64,42 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 		this._options = Object.assign({}, _options);
 	}
 
-	async transform(result: Result): Promise<MetricResult[]> {
+	async transform({
+		basic,
+		twitter,
+		openGraph,
+	}: Result): Promise<MetricResult[]> {
 		const seoTags = [
-			result.basic.title && SEOMetaTagsFlags.TITLE,
-			result.basic.description && SEOMetaTagsFlags.DESCRIPTION,
-			result.basic.keywords && SEOMetaTagsFlags.KEYWORDS,
-			result.basic.author && SEOMetaTagsFlags.AUTHOR,
+			basic.title && SEOMetaTagsFlags.TITLE,
+			basic.description && SEOMetaTagsFlags.DESCRIPTION,
+			basic.keywords && SEOMetaTagsFlags.KEYWORDS,
+			basic.author && SEOMetaTagsFlags.AUTHOR,
 		].filter(Boolean) as SEOMetaTagsFlags[];
+
+		const twitterTags = [
+			twitter.card && TwitterMetaTagsFlags.CARD,
+			openGraph.type && TwitterMetaTagsFlags.CARD_FALLBACK,
+			twitter.site && TwitterMetaTagsFlags.SITE,
+			twitter.creator && TwitterMetaTagsFlags.CREATOR,
+			twitter.title && TwitterMetaTagsFlags.TITLE,
+			(openGraph.title || basic.title) && TwitterMetaTagsFlags.TITLE_FALLBACK,
+			twitter.description && TwitterMetaTagsFlags.DESCRIPTION,
+			(openGraph.description || basic.description) &&
+				TwitterMetaTagsFlags.DESCRIPTION_FALLBACK,
+			twitter.image && TwitterMetaTagsFlags.IMAGE,
+			openGraph.image && TwitterMetaTagsFlags.IMAGE_FALLBACK,
+		].filter(Boolean) as TwitterMetaTagsFlags[];
 
 		return [
 			{
 				id: SEOMetaTags.id,
-				value: getValueFromFlags(seoTags),
+				value: getSeoValueFromFlags(seoTags),
+				additionalData: basic,
+			},
+			{
+				id: TwitterMetaTags.id,
+				value: getTwitterValueFromFlags(twitterTags),
+				additionalData: twitter,
 			},
 		];
 	}
