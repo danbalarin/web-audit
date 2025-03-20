@@ -12,7 +12,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
-				{env.NEXT_PUBLIC_DEBUG && (
+				{env.NEXT_PUBLIC_DEBUG && env.NODE_ENV !== "production" && (
 					<script src="https://unpkg.com/react-scan/dist/auto.global.js" />
 				)}
 			</head>

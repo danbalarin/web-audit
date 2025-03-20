@@ -18,7 +18,9 @@ import {
 	TwitterMetaTagsFlags,
 	getValueFromFlags as getTwitterValueFromFlags,
 } from "./metrics/twitter-meta-tags";
+import { TwitterPreview } from "./metrics/twitter-preview";
 import { template as facebookTemplate } from "./templates/facebook";
+import { template as twitterTemplate } from "./templates/twitter";
 
 // biome-ignore lint/complexity/noBannedTypes: placeholder
 export type MetaTagsRunnerOptions = {};
@@ -76,6 +78,7 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 		twitter,
 		openGraph,
 		facebookImage,
+		twitterImage,
 	}: Result): Promise<MetricResult[]> {
 		const seoTags = [
 			basic.title && SEOMetaTagsFlags.TITLE,
@@ -130,6 +133,10 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 			{
 				id: FacebookPreview.id,
 				value: facebookImage,
+			},
+			{
+				id: TwitterPreview.id,
+				value: twitterImage,
 			},
 		];
 	}
@@ -212,14 +219,45 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 		return res;
 	}
 
+	private async renderContent(page: Page, content: string) {
+		await page.setContent(content);
+		await page.waitForNetworkIdle({ idleTime: 1000 });
+		const image = await (await page.waitForSelector("#root"))?.screenshot({
+			encoding: "base64",
+		});
+		if (!image) {
+			throw new Error("Failed to render preview");
+		}
+
+		return `data:image/png;base64,${image}`;
+	}
+
+	private async renderTwitterPreview(
+		createPage: () => Promise<Page>,
+		{ openGraph, basic, twitter, url }: { url: string } & Tags,
+	) {
+		const page = await createPage();
+		const twitterCard = twitterTemplate({
+			title: twitter?.title ?? openGraph?.title ?? basic?.title,
+			description:
+				twitter?.description ?? openGraph?.description ?? basic?.description,
+			url_short: url.replace(/https?:\/\//, "").replace(/\/.*/, ""),
+			image: twitter.image ?? openGraph?.image,
+		});
+		const content = await this.renderContent(page, twitterCard);
+		await page.close();
+		return content;
+	}
+
 	private async renderFacebookPreview(
-		page: Page,
+		createPage: () => Promise<Page>,
 		{
 			openGraph,
 			basic,
 			url,
 		}: { url: string } & Pick<Tags, "openGraph" | "basic">,
 	) {
+		const page = await createPage();
 		const facebook = facebookTemplate({
 			title: openGraph?.title ?? basic?.title,
 			description: openGraph?.description ?? basic?.description,
@@ -227,17 +265,9 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 			url_short: url.replace(/https?:\/\//, "").replace(/\/.*/, ""),
 			image: openGraph?.image,
 		});
-		await page.setContent(facebook);
-		await page.waitForNetworkIdle({ idleTime: 1000 });
-		const image = await (await page.waitForSelector(".card"))?.screenshot({
-			encoding: "base64",
-		});
-
-		if (!image) {
-			throw new Error("Failed to render Facebook preview");
-		}
-
-		return `data:image/png;base64,${image}`;
+		const content = await this.renderContent(page, facebook);
+		await page.close();
+		return content;
 	}
 
 	async runRaw(context: BaseContext): Promise<Result> {
@@ -255,17 +285,23 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 
 		const [basic, openGraph, twitter] = await Promise.all(promises);
 
-		let facebookImage = "";
-		try {
-			facebookImage = await this.renderFacebookPreview(page, {
+		const facebookImage = await this.renderFacebookPreview(
+			() => browser.newPage(),
+			{
 				basic,
 				openGraph,
 				url: context.url,
-			});
-		} catch (error) {
-			// TODO: Handle error
-			console.error(error);
-		}
+			},
+		);
+		const twitterImage = await this.renderTwitterPreview(
+			() => browser.newPage(),
+			{
+				basic,
+				openGraph,
+				twitter,
+				url: context.url,
+			},
+		);
 
 		try {
 			return {
@@ -273,7 +309,7 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 				openGraph: openGraph ?? {},
 				twitter: twitter ?? {},
 				facebookImage,
-				twitterImage: "",
+				twitterImage,
 			};
 		} catch (error) {
 			console.error(error);

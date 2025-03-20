@@ -86,6 +86,7 @@ export const JobsTable = ({
 		getGroupedRowModel: getGroupedRowModel(),
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
+		onPaginationChange: () => undefined,
 		getRowId: (row) => row.auditId,
 	});
 

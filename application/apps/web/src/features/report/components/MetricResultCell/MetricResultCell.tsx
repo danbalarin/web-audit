@@ -94,7 +94,7 @@ export const MetricResultCell = ({
 						<img
 							src={value.toString()}
 							alt="Preview"
-							style={{ height: "100%" }}
+							style={{ maxHeight: "100%" }}
 						/>
 					</Box>
 				);

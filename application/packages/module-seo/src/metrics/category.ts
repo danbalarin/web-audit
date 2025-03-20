@@ -5,6 +5,7 @@ import { FacebookPreview } from "./facebook-preview";
 import { OpenGraphMetaTags } from "./open-graph-meta-tags";
 import { SEOMetaTags } from "./seo-meta-tags";
 import { TwitterMetaTags } from "./twitter-meta-tags";
+import { TwitterPreview } from "./twitter-preview";
 
 const weights = {
 	[SEOMetaTags.id]: 1,
@@ -17,6 +18,7 @@ const metrics: MetricDescription[] = [
 	TwitterMetaTags,
 	OpenGraphMetaTags,
 	FacebookPreview,
+	TwitterPreview,
 ];
 
 export const SEOCategory: CategoryDescription<"seo"> = {
