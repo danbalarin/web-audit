@@ -34,6 +34,11 @@ export type MetricDescription<
 	unit: MetricUnit;
 
 	/**
+	 * Optional function to render the value of the metric, overrides the default rendering
+	 */
+	renderValue?: (value: TVal) => string;
+
+	/**
 	 * Compares two values of the metric
 	 *
 	 * @returns -1 if a is worse than b, 0 if a roughly equals b, 1 if a is better than b

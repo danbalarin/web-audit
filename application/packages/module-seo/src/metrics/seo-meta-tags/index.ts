@@ -68,6 +68,18 @@ const rank = (value: number | string): MetricRank => {
 	return "fail";
 };
 
+const renderValue = (value: number | string): string => {
+	const castedValue = +value;
+	const missingFlags = Object.values(SEOMetaTagsFlags).filter(
+		(flag) => typeof flag !== "string" && !(castedValue & flag),
+	);
+	if (missingFlags.length === 0) {
+		return "Ok";
+	} else {
+		return `Missing ${missingFlags.length} tags`;
+	}
+};
+
 export const SEOMetaTags: MetricDescription = {
 	id: "seoMetaTags",
 	name: "SEO Meta Tags",
@@ -76,4 +88,5 @@ export const SEOMetaTags: MetricDescription = {
 	compare,
 	rank,
 	score,
+	renderValue,
 };

@@ -94,6 +94,19 @@ const rank = (value: number | string): MetricRank => {
 	return "fail";
 };
 
+const renderValue = (value: number | string): string => {
+	const castedValue = +value;
+	const missingFlags = Object.values(OpenGraphMetaTagsFlags).filter(
+		(flag) => typeof flag !== "string" && !(castedValue & flag),
+	);
+	console.log(missingFlags);
+	if (missingFlags.length === 0) {
+		return "Ok";
+	} else {
+		return `Missing ${missingFlags.length} tags`;
+	}
+};
+
 export const OpenGraphMetaTags: MetricDescription = {
 	id: "openGraphMetaTags",
 	name: "Open Graph Meta Tags",
@@ -102,4 +115,5 @@ export const OpenGraphMetaTags: MetricDescription = {
 	compare,
 	rank,
 	score,
+	renderValue,
 };

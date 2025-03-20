@@ -96,6 +96,18 @@ const rank = (value: number | string): MetricRank => {
 	return "fail";
 };
 
+const renderValue = (value: number | string): string => {
+	const castedValue = +value;
+	const missingFlags = Object.values(TwitterMetaTagsFlags).filter(
+		(flag) => typeof flag !== "string" && !(castedValue & flag),
+	);
+	if (missingFlags.length === 0) {
+		return "Ok";
+	} else {
+		return `Missing ${missingFlags.length} tags`;
+	}
+};
+
 export const TwitterMetaTags: MetricDescription = {
 	id: "twitterMetaTags",
 	name: "Twitter Meta Tags",
@@ -104,4 +116,5 @@ export const TwitterMetaTags: MetricDescription = {
 	compare,
 	rank,
 	score,
+	renderValue,
 };

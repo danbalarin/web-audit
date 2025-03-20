@@ -33,6 +33,7 @@ export const createColumns = (
 							rank={data?.rank ?? -1}
 							score={data?.score}
 							value={data?.value ?? "-1"}
+							renderValue={info.row.original.renderValue}
 						/>
 					);
 				},

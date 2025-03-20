@@ -15,6 +15,7 @@ type MetricResultCellProps = {
 	score?: CalculatedScore<Metric>["score"];
 	rank: CalculatedScore<Metric>["rank"];
 	value: number | string;
+	renderValue?: (value: number | string) => string;
 };
 
 const rankIconMap: Record<MetricRank, JSX.Element> = {
@@ -29,6 +30,7 @@ export const MetricResultCell = ({
 	rank,
 	value,
 	unit,
+	renderValue,
 }: MetricResultCellProps) => {
 	if (+value === -1) {
 		return (
@@ -52,36 +54,40 @@ export const MetricResultCell = ({
 		);
 	}
 	let component;
-	switch (unit) {
-		case Time.MILLISECOND:
-		case Time.SECOND:
-		case Time.MINUTE:
-			component = <TimeMetricResultCell value={+value} />;
-			break;
-		case Memory.BYTE:
-		case Memory.KILOBYTE:
-		case Memory.MEGABYTE:
-		case Memory.GIGABYTE:
-			component = <MemoryMetricResultCell value={+value} />;
-			break;
-		case Arbitrary.PERCENTAGE:
-			component = <Typography>{Math.round(+value * 100) + "%"}</Typography>;
-			break;
-		case Arbitrary.BOOLEAN:
-			component = <Typography>{+value === 1 ? "Yes" : "No"}</Typography>;
-			break;
-		case Arbitrary.NUMBER:
-			component = (
-				<Typography>
-					{+value === 0
-						? +value
-						: Math.max(Math.round(+value * 100) / 100, 0.01)}
-				</Typography>
-			);
-			break;
-		default:
-			component = <Typography>{value}</Typography>;
-			break;
+	if (renderValue) {
+		component = <Typography>{renderValue(value)}</Typography>;
+	} else {
+		switch (unit) {
+			case Time.MILLISECOND:
+			case Time.SECOND:
+			case Time.MINUTE:
+				component = <TimeMetricResultCell value={+value} />;
+				break;
+			case Memory.BYTE:
+			case Memory.KILOBYTE:
+			case Memory.MEGABYTE:
+			case Memory.GIGABYTE:
+				component = <MemoryMetricResultCell value={+value} />;
+				break;
+			case Arbitrary.PERCENTAGE:
+				component = <Typography>{Math.round(+value * 100) + "%"}</Typography>;
+				break;
+			case Arbitrary.BOOLEAN:
+				component = <Typography>{+value === 1 ? "Yes" : "No"}</Typography>;
+				break;
+			case Arbitrary.NUMBER:
+				component = (
+					<Typography>
+						{+value === 0
+							? +value
+							: Math.max(Math.round(+value * 100) / 100, 0.01)}
+					</Typography>
+				);
+				break;
+			default:
+				component = <Typography>{value}</Typography>;
+				break;
+		}
 	}
 
 	return (
