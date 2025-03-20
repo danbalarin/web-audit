@@ -13,10 +13,12 @@ const preview = `
 <html>
     <body>
         <style>
+            html, body {
+                background: transparent
+            }
             body {
                 max-width: 40rem;
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
             }
 
             .card {

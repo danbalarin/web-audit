@@ -12,6 +12,10 @@ const preview = `
 <html lang="en">
   <body>
     <style>
+      html, body {
+        background: transparent
+      }
+
       .card {
         font-size: 15px;
         line-height: 20px;

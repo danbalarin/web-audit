@@ -2,11 +2,13 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DangerousIcon from "@mui/icons-material/Dangerous";
 import InfoIconOutlined from "@mui/icons-material/InfoOutlined";
 import WarningIcon from "@mui/icons-material/Warning";
-import { Box, Tooltip, Typography } from "@mui/material";
+import { Tooltip, Typography } from "@mui/material";
 
 import { Arbitrary, Memory, MetricUnit, Time } from "@repo/api/metrics";
 import { CalculatedScore, MetricRank } from "@repo/api/types";
 import { Metric } from "@repo/db";
+import { Fragment } from "react";
+import { ImageMetricResultCell } from "./parts/ImageMetricResultCell";
 import { MemoryMetricResultCell } from "./parts/MemoryMetricResultCell";
 import { TimeMetricResultCell } from "./parts/TimeMetricResultCell";
 
@@ -57,6 +59,7 @@ export const MetricResultCell = ({
 	}
 	let component;
 	let hideIcon = false;
+	let hideTooltip = false;
 	if (renderValue) {
 		component = <Typography>{renderValue(value)}</Typography>;
 	} else {
@@ -89,14 +92,9 @@ export const MetricResultCell = ({
 				break;
 			case Arbitrary.IMAGE:
 				hideIcon = true;
+				hideTooltip = true;
 				component = (
-					<Box height="20rem">
-						<img
-							src={value.toString()}
-							alt="Preview"
-							style={{ maxHeight: "100%" }}
-						/>
-					</Box>
+					<ImageMetricResultCell title="Preview" image={value.toString()} />
 				);
 				break;
 			default:
@@ -111,8 +109,10 @@ export const MetricResultCell = ({
 			? `${score}%`
 			: undefined;
 
+	const TooltipComponent = hideTooltip ? Fragment : Tooltip;
+
 	return (
-		<Tooltip title={tooltip} placement="bottom-start">
+		<TooltipComponent title={tooltip} placement="bottom-start">
 			<Typography
 				component={"span"}
 				variant="body1"
@@ -125,7 +125,7 @@ export const MetricResultCell = ({
 				{!hideIcon && rankIconMap[rank]}
 				{component}
 			</Typography>
-		</Tooltip>
+		</TooltipComponent>
 	);
 };
 

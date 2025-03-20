@@ -224,6 +224,7 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 		await page.waitForNetworkIdle({ idleTime: 1000 });
 		const image = await (await page.waitForSelector("#root"))?.screenshot({
 			encoding: "base64",
+			omitBackground: true,
 		});
 		if (!image) {
 			throw new Error("Failed to render preview");
