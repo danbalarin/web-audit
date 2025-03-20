@@ -34,6 +34,7 @@ export const createColumns = (
 							score={data?.score}
 							value={data?.value ?? "-1"}
 							renderValue={info.row.original.renderValue}
+							renderTooltip={info.row.original.renderTooltip}
 						/>
 					);
 				},

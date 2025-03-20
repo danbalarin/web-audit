@@ -34,9 +34,14 @@ export type MetricDescription<
 	unit: MetricUnit;
 
 	/**
-	 * Optional function to render the value of the metric, overrides the default rendering
+	 * Optional function to render the value of the metric, overrides the default
 	 */
 	renderValue?: (value: TVal) => string;
+
+	/**
+	 * Optional function to render the tooltip of the metric, overrides the default
+	 */
+	renderTooltip?: (value: TVal) => string;
 
 	/**
 	 * Compares two values of the metric

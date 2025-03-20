@@ -99,12 +99,36 @@ const renderValue = (value: number | string): string => {
 	const missingFlags = Object.values(OpenGraphMetaTagsFlags).filter(
 		(flag) => typeof flag !== "string" && !(castedValue & flag),
 	);
-	console.log(missingFlags);
 	if (missingFlags.length === 0) {
 		return "Ok";
 	} else {
 		return `Missing ${missingFlags.length} tags`;
 	}
+};
+
+const flagTranslations = {
+	[OpenGraphMetaTagsFlags.TITLE]: "Title",
+	[OpenGraphMetaTagsFlags.TITLE_FALLBACK]: "Title fallback",
+	[OpenGraphMetaTagsFlags.DESCRIPTION]: "Description",
+	[OpenGraphMetaTagsFlags.IMAGE]: "Image",
+	[OpenGraphMetaTagsFlags.URL]: "URL",
+	[OpenGraphMetaTagsFlags.TYPE]: "Type",
+	[OpenGraphMetaTagsFlags.SITE_NAME]: "Site name",
+	[OpenGraphMetaTagsFlags.LOCALE]: "Locale",
+	[OpenGraphMetaTagsFlags.LOCALE_FALLBACK]: "Locale fallback",
+} as const;
+
+const renderTooltip = (value: number | string): string => {
+	const flags = getFlagsFromValue(+value);
+	const missingFlags = Object.values(OpenGraphMetaTagsFlags).filter(
+		(flag) => typeof flag !== "string" && !flags.includes(flag),
+	) as OpenGraphMetaTagsFlags[];
+
+	if (missingFlags.length === 0) {
+		return "All required Open Graph meta tags are present";
+	}
+
+	return `Missing tags ${missingFlags.map((f) => flagTranslations[f]).join(", ")}`;
 };
 
 export const OpenGraphMetaTags: MetricDescription = {
@@ -116,4 +140,5 @@ export const OpenGraphMetaTags: MetricDescription = {
 	rank,
 	score,
 	renderValue,
+	renderTooltip,
 };

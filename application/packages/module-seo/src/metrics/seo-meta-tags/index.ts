@@ -80,6 +80,27 @@ const renderValue = (value: number | string): string => {
 	}
 };
 
+const flagTranslations = {
+	[SEOMetaTagsFlags.TITLE]: "Title",
+	[SEOMetaTagsFlags.DESCRIPTION]: "Description",
+	[SEOMetaTagsFlags.KEYWORDS]: "Keywords",
+	[SEOMetaTagsFlags.AUTHOR]: "Author",
+	[SEOMetaTagsFlags.LANGUAGE]: "Language",
+};
+
+const renderTooltip = (value: number | string): string => {
+	const flags = getFlagsFromValue(+value);
+	const missingFlags = Object.values(SEOMetaTagsFlags).filter(
+		(flag) => typeof flag !== "string" && !flags.includes(flag),
+	) as SEOMetaTagsFlags[];
+
+	if (missingFlags.length === 0) {
+		return "All required tags are present";
+	}
+
+	return `Missing tags ${missingFlags.map((f) => flagTranslations[f]).join(", ")}`;
+};
+
 export const SEOMetaTags: MetricDescription = {
 	id: "seoMetaTags",
 	name: "SEO Meta Tags",
@@ -89,4 +110,5 @@ export const SEOMetaTags: MetricDescription = {
 	rank,
 	score,
 	renderValue,
+	renderTooltip,
 };

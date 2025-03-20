@@ -108,6 +108,32 @@ const renderValue = (value: number | string): string => {
 	}
 };
 
+const flagTranslations = {
+	[TwitterMetaTagsFlags.CARD]: "Card",
+	[TwitterMetaTagsFlags.CARD_FALLBACK]: "Card fallback",
+	[TwitterMetaTagsFlags.SITE]: "Site",
+	[TwitterMetaTagsFlags.CREATOR]: "Creator",
+	[TwitterMetaTagsFlags.DESCRIPTION]: "Description",
+	[TwitterMetaTagsFlags.DESCRIPTION_FALLBACK]: "Description fallback",
+	[TwitterMetaTagsFlags.IMAGE]: "Image",
+	[TwitterMetaTagsFlags.IMAGE_FALLBACK]: "Image fallback",
+	[TwitterMetaTagsFlags.TITLE]: "Title",
+	[TwitterMetaTagsFlags.TITLE_FALLBACK]: "Title fallback",
+};
+
+const renderTooltip = (value: number | string): string => {
+	const flags = getFlagsFromValue(+value);
+	const missingFlags = Object.values(TwitterMetaTagsFlags).filter(
+		(flag) => typeof flag !== "string" && !flags.includes(flag),
+	) as TwitterMetaTagsFlags[];
+
+	if (missingFlags.length === 0) {
+		return "All required Twitter meta tags are present";
+	}
+
+	return `Missing tags ${missingFlags.map((f) => flagTranslations[f]).join(", ")}`;
+};
+
 export const TwitterMetaTags: MetricDescription = {
 	id: "twitterMetaTags",
 	name: "Twitter Meta Tags",
@@ -117,4 +143,5 @@ export const TwitterMetaTags: MetricDescription = {
 	rank,
 	score,
 	renderValue,
+	renderTooltip,
 };

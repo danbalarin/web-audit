@@ -16,6 +16,7 @@ type MetricResultCellProps = {
 	rank: CalculatedScore<Metric>["rank"];
 	value: number | string;
 	renderValue?: (value: number | string) => string;
+	renderTooltip?: (value: number | string) => string;
 };
 
 const rankIconMap: Record<MetricRank, JSX.Element> = {
@@ -31,6 +32,7 @@ export const MetricResultCell = ({
 	value,
 	unit,
 	renderValue,
+	renderTooltip,
 }: MetricResultCellProps) => {
 	if (+value === -1) {
 		return (
@@ -90,11 +92,14 @@ export const MetricResultCell = ({
 		}
 	}
 
+	const tooltip = renderTooltip
+		? renderTooltip(value)
+		: score
+			? `${score}%`
+			: undefined;
+
 	return (
-		<Tooltip
-			title={score ? Math.round(+score) + "%" : undefined}
-			placement="bottom-start"
-		>
+		<Tooltip title={tooltip} placement="bottom-start">
 			<Typography
 				component={"span"}
 				variant="body1"
