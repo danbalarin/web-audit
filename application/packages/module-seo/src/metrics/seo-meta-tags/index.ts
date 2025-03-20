@@ -6,23 +6,17 @@ export enum SEOMetaTagsFlags {
 	DESCRIPTION = 0x02,
 	KEYWORDS = 0x04,
 	AUTHOR = 0x08,
+	LANGUAGE = 0x10,
 }
 
 export const getFlagsFromValue = (value: number): SEOMetaTagsFlags[] => {
 	const flags: SEOMetaTagsFlags[] = [];
 
-	if (value & SEOMetaTagsFlags.TITLE) {
-		flags.push(SEOMetaTagsFlags.TITLE);
-	}
-	if (value & SEOMetaTagsFlags.DESCRIPTION) {
-		flags.push(SEOMetaTagsFlags.DESCRIPTION);
-	}
-	if (value & SEOMetaTagsFlags.KEYWORDS) {
-		flags.push(SEOMetaTagsFlags.KEYWORDS);
-	}
-	if (value & SEOMetaTagsFlags.AUTHOR) {
-		flags.push(SEOMetaTagsFlags.AUTHOR);
-	}
+	Object.values(SEOMetaTagsFlags).forEach((flag) => {
+		if (typeof flag !== "string" && value & flag) {
+			flags.push(flag);
+		}
+	});
 
 	return flags;
 };
@@ -42,6 +36,7 @@ const weights = {
 	[SEOMetaTagsFlags.DESCRIPTION]: 1,
 	[SEOMetaTagsFlags.KEYWORDS]: 1,
 	[SEOMetaTagsFlags.AUTHOR]: 1,
+	[SEOMetaTagsFlags.LANGUAGE]: 1,
 };
 
 const weightSum = Object.values(weights).reduce(

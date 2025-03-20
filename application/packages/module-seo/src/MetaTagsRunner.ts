@@ -3,6 +3,11 @@ import { type BaseContext, type MetricResult } from "@repo/api/types";
 import { Page } from "puppeteer";
 
 import {
+	OpenGraphMetaTags,
+	OpenGraphMetaTagsFlags,
+	getValueFromFlags as getOpenGraphValueFromFlags,
+} from "./metrics/open-graph-meta-tags";
+import {
 	SEOMetaTags,
 	SEOMetaTagsFlags,
 	getValueFromFlags as getSeoValueFromFlags,
@@ -19,6 +24,7 @@ export type MetaTagsRunnerOptions = {};
 
 type BasicTags = {
 	title?: string | null;
+	language?: string | null;
 	description?: string | null;
 	keywords?: string | null;
 	author?: string | null;
@@ -74,6 +80,7 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 			basic.description && SEOMetaTagsFlags.DESCRIPTION,
 			basic.keywords && SEOMetaTagsFlags.KEYWORDS,
 			basic.author && SEOMetaTagsFlags.AUTHOR,
+			basic.language && SEOMetaTagsFlags.LANGUAGE,
 		].filter(Boolean) as SEOMetaTagsFlags[];
 
 		const twitterTags = [
@@ -90,6 +97,18 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 			openGraph.image && TwitterMetaTagsFlags.IMAGE_FALLBACK,
 		].filter(Boolean) as TwitterMetaTagsFlags[];
 
+		const openGraphTags = [
+			openGraph.title && OpenGraphMetaTagsFlags.TITLE,
+			basic.title && OpenGraphMetaTagsFlags.TITLE_FALLBACK,
+			openGraph.description && OpenGraphMetaTagsFlags.DESCRIPTION,
+			openGraph.image && OpenGraphMetaTagsFlags.IMAGE,
+			openGraph.url && OpenGraphMetaTagsFlags.URL,
+			openGraph.type && OpenGraphMetaTagsFlags.TYPE,
+			openGraph.siteName && OpenGraphMetaTagsFlags.SITE_NAME,
+			openGraph.locale && OpenGraphMetaTagsFlags.LOCALE,
+			basic.language && OpenGraphMetaTagsFlags.LOCALE_FALLBACK,
+		].filter(Boolean) as OpenGraphMetaTagsFlags[];
+
 		return [
 			{
 				id: SEOMetaTags.id,
@@ -100,6 +119,11 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 				id: TwitterMetaTags.id,
 				value: getTwitterValueFromFlags(twitterTags),
 				additionalData: twitter,
+			},
+			{
+				id: OpenGraphMetaTags.id,
+				value: getOpenGraphValueFromFlags(openGraphTags),
+				additionalData: openGraph,
 			},
 		];
 	}
@@ -113,6 +137,7 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 	private async getBasicMetaTags(page: Page) {
 		const res = await page.evaluate(() => {
 			const title = document.title;
+			const language = document.documentElement.lang;
 			const description = document.querySelector("meta[name='description']");
 			const keywords = document.querySelector("meta[name='keywords']");
 			const author = document.querySelector("meta[name='author']");
@@ -120,6 +145,7 @@ export class MetaTagsRunner extends BaseRunner<Result> {
 
 			return {
 				title,
+				language,
 				description: description?.getAttribute("content"),
 				keywords: keywords?.getAttribute("content"),
 				author: author?.getAttribute("content"),
