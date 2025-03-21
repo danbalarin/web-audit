@@ -21,7 +21,7 @@
 	},
 	"private": true,
 	"scripts": {
-		"db:generate": "drizzle-kit generate && node ./tools/compile-migrations.mjs",
+		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"lint": "biome lint --error-on-warnings"
 	},
