@@ -2,6 +2,12 @@ import type { MetricUnit } from "../metrics";
 import type { MetricRank } from "./MetricRank";
 import type { MetricResult } from "./MetricResult";
 
+type RowDefinition = {
+	type: "text";
+	label: string;
+	value: string[];
+};
+
 export type MetricDescription<
 	TVal extends number | string = number | string,
 	TMeta extends object = object,
@@ -44,6 +50,10 @@ export type MetricDescription<
 	 */
 	renderTooltip?: (result: Omit<MetricResult<TVal>, "id">) => string;
 
+	getDetailRows?: (
+		result: (Omit<MetricResult<TVal>, "id"> | null)[],
+	) => RowDefinition[];
+
 	/**
 	 * Compares two values of the metric
 	 *
@@ -67,6 +77,8 @@ export type MetricDescription<
 
 	/**
 	 * The meta data of the metric
+	 *
+	 * @deprecated
 	 */
 	meta?: TMeta;
 };

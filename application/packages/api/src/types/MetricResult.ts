@@ -14,5 +14,5 @@ export type MetricResult<
 	 */
 	value: TVal;
 
-	additionalData?: TAdditionalData;
+	additionalData?: TAdditionalData | null;
 };

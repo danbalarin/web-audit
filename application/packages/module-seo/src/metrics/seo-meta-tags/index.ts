@@ -105,6 +105,17 @@ const renderTooltip = ({ value }: Omit<MetricResult, "id">): string => {
 	return `Missing tags ${missingFlags.map((f) => flagTranslations[f]).join(", ")}`;
 };
 
+const getMissingTags = ({
+	value,
+}: Omit<MetricResult, "id">): SEOMetaTagsFlags[] => {
+	const flags = getFlagsFromValue(+value);
+	const missingFlags = Object.values(SEOMetaTagsFlags).filter(
+		(flag) => typeof flag !== "string" && !flags.includes(flag),
+	) as SEOMetaTagsFlags[];
+
+	return missingFlags;
+};
+
 export const SEOMetaTags: MetricDescription = {
 	id: "seoMetaTags",
 	name: "SEO Meta Tags",
@@ -113,6 +124,19 @@ export const SEOMetaTags: MetricDescription = {
 	compare,
 	rank,
 	score,
+	getDetailRows: (res) => [
+		{
+			type: "text",
+			label: "Missing tags",
+			value: res.map((v) =>
+				v
+					? getMissingTags(v)
+							.map((f) => flagTranslations[f])
+							.join(", ")
+					: "",
+			),
+		},
+	],
 	renderValue,
 	renderTooltip,
 };

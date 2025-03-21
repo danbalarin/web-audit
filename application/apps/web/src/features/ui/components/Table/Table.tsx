@@ -6,14 +6,27 @@ import {
 	TableHead,
 	TableRow,
 } from "@mui/material";
-import { type Table as TableType, flexRender } from "@tanstack/react-table";
+import {
+	type Row,
+	type Table as TableType,
+	flexRender,
+} from "@tanstack/react-table";
 import { useMemo } from "react";
 
 type TableProps<TData> = {
 	table: TableType<TData>;
+	renderExpandedRow?: (row: Row<TData>) => React.ReactNode;
+	expandedSpan?: {
+		left: number;
+		right: number;
+	};
 };
 
-export function Table<TData>({ table }: TableProps<TData>) {
+export function Table<TData>({
+	table,
+	renderExpandedRow,
+	expandedSpan,
+}: TableProps<TData>) {
 	const columnSizeVars = useMemo(() => {
 		const headers = table.getFlatHeaders();
 		const colSizes: { [key: string]: number } = {};
@@ -63,44 +76,63 @@ export function Table<TData>({ table }: TableProps<TData>) {
 					{table.getRowModel().rows.map(
 						(row) =>
 							!row.getIsGrouped() && (
-								<TableRow key={row.id}>
-									{row.getVisibleCells().map((cell, i) => {
-										const parentCell = cell.getIsPlaceholder()
-											? row.getParentRow()?.getAllCells()[i]
-											: undefined;
-										const isFirst = parentCell?.row.subRows[0]?.id === row.id;
+								<>
+									<TableRow key={row.id}>
+										{row.getVisibleCells().map((cell, i) => {
+											const parentCell = cell.getIsPlaceholder()
+												? row.getParentRow()?.getAllCells()[i]
+												: undefined;
+											const isFirst = parentCell?.row.subRows[0]?.id === row.id;
 
-										if (cell.getIsPlaceholder() && !isFirst) {
-											return null;
-										}
-										const content = cell.getIsPlaceholder()
-											? flexRender(
-													parentCell?.column.columnDef.cell,
-													cell.getContext(),
-												)
-											: flexRender(
-													cell.column.columnDef.cell,
-													cell.getContext(),
-												);
-										return (
-											<TableCell
-												key={cell.id}
-												style={{
-													width: `calc(var(--col-${cell.column.id}-size) * 1px)`,
-												}}
-												align={cell.column.columnDef.meta?.style?.textAlign}
-												rowSpan={
-													cell.getIsPlaceholder() &&
-													cell.row.getParentRow()?.subRows.length
-														? cell.row.getParentRow()?.subRows.length
-														: undefined
-												}
-											>
-												{content}
-											</TableCell>
-										);
-									})}
-								</TableRow>
+											if (cell.getIsPlaceholder() && !isFirst) {
+												return null;
+											}
+											const content = cell.getIsPlaceholder()
+												? flexRender(
+														parentCell?.column.columnDef.cell,
+														cell.getContext(),
+													)
+												: flexRender(
+														cell.column.columnDef.cell,
+														cell.getContext(),
+													);
+
+											const placeholderRowSpan =
+												cell.getIsPlaceholder() &&
+												cell.row.getParentRow()?.subRows.length
+													? cell.row.getParentRow()?.subRows.length
+													: undefined;
+
+											const expandedRowSpan =
+												row.getIsExpanded() &&
+												(i < (expandedSpan?.left ?? 0) ||
+													i >
+														row.getAllCells().length -
+															(expandedSpan?.right ?? 0) -
+															1)
+													? 2
+													: undefined;
+											return (
+												<TableCell
+													key={cell.id}
+													sx={{ verticalAlign: "baseline" }}
+													style={{
+														width: `calc(var(--col-${cell.column.id}-size) * 1px)`,
+													}}
+													align={cell.column.columnDef.meta?.style?.textAlign}
+													rowSpan={
+														placeholderRowSpan ?? expandedRowSpan ?? undefined
+													}
+												>
+													{content}
+												</TableCell>
+											);
+										})}
+									</TableRow>
+									{row.getIsExpanded() &&
+										renderExpandedRow &&
+										renderExpandedRow(row)}
+								</>
 							),
 					)}
 				</TableBody>

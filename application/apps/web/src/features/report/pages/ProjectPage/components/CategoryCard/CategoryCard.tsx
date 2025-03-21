@@ -1,8 +1,18 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { AccordionDetails, AccordionSummary, Typography } from "@mui/material";
+import {
+	AccordionDetails,
+	AccordionSummary,
+	TableCell,
+	TableRow,
+	Typography,
+} from "@mui/material";
 import type { CalculatedScore, CategoryDescription } from "@repo/api/types";
 import type { Audit, Metric } from "@repo/db";
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import {
+	getCoreRowModel,
+	getExpandedRowModel,
+	useReactTable,
+} from "@tanstack/react-table";
 import { useMemo } from "react";
 import {
 	type CategoryKeys,
@@ -75,7 +85,20 @@ export const CategoryCard = ({
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getRowId: (row) => row.id,
+		getRowCanExpand: (row) => !!row.original.getDetailRows,
+		getExpandedRowModel: getExpandedRowModel(),
+		enableExpanding: true,
+		state: {
+			columnPinning: {
+				left: ["expander", "id"],
+				right: ["comparison"],
+			},
+		},
 	});
+
+	const skipLeft = 1;
+	const skipRight =
+		Object.keys(table.getState().rowSelection).length > 1 ? 1 : 0;
 
 	return (
 		<RoundedAccordion defaultExpanded>
@@ -86,7 +109,22 @@ export const CategoryCard = ({
 				<Typography>{category.name}</Typography>
 			</AccordionSummary>
 			<AccordionDetails>
-				<Table table={table} />
+				<Table
+					table={table}
+					expandedSpan={{ left: skipLeft, right: skipRight }}
+					renderExpandedRow={(row) =>
+						row.original
+							.getDetailRows?.(Object.values(row.original.data))
+							.map((row) => (
+								<TableRow key={row.label}>
+									<TableCell>{row.label}</TableCell>
+									{row.value.map((value, i) => (
+										<TableCell key={i}>{value}</TableCell>
+									))}
+								</TableRow>
+							))
+					}
+				/>
 			</AccordionDetails>
 		</RoundedAccordion>
 	);
