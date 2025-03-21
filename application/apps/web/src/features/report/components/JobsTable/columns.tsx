@@ -2,31 +2,30 @@ import CompareArrowsIcon from "@mui/icons-material/CompareArrows";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Checkbox, Icon, IconButton } from "@mui/material";
 import { createColumnHelper } from "@tanstack/react-table";
+import { SIZE_AUTO, SIZE_FR } from "~/features/ui/components/Table/Table";
 import { categoriesMap } from "../../config/metrics";
 import { AuditDateCell } from "../AuditDateCell";
 import { MetricResultCell } from "../MetricResultCell";
 import type { JobsTableData } from "./types/JobsTableData";
-
-const COLUMN_SIZE = 128;
 
 const columnHelper = createColumnHelper<JobsTableData>();
 
 export const columns = [
 	columnHelper.accessor("createdAt", {
 		header: "Date",
-		size: COLUMN_SIZE,
+		size: SIZE_AUTO,
 		cell: (info) => <AuditDateCell value={info.getValue()} />,
 	}),
 	columnHelper.accessor("url", {
 		header: "URL",
-		size: COLUMN_SIZE,
+		size: SIZE_AUTO,
 		cell: (info) => info.getValue(),
 	}),
 	...Object.values(categoriesMap).map((category) =>
 		columnHelper.accessor(category.id, {
 			id: category.id,
 			header: category.name,
-			size: COLUMN_SIZE,
+			size: SIZE_FR,
 			cell: (info) => {
 				const data = info.getValue();
 				return (
@@ -43,9 +42,7 @@ export const columns = [
 	),
 	columnHelper.display({
 		id: "selection",
-		size: 42,
-		maxSize: 42,
-		minSize: 42,
+		size: SIZE_AUTO,
 		meta: {
 			style: {
 				textAlign: "center",
@@ -68,9 +65,7 @@ export const columns = [
 	}),
 	columnHelper.display({
 		id: "delete",
-		size: 42,
-		maxSize: 42,
-		minSize: 42,
+		size: SIZE_AUTO,
 		meta: {
 			style: {
 				textAlign: "center",

@@ -22,6 +22,19 @@ type TableProps<TData> = {
 	};
 };
 
+export const SIZE_AUTO = 9000;
+export const SIZE_FR = 8000;
+
+const mapSize = (size: number) => {
+	if (size === SIZE_AUTO) {
+		return "auto";
+	}
+	if (size === SIZE_FR) {
+		return "1fr";
+	}
+	return `${size}px`;
+};
+
 export function Table<TData>({
 	table,
 	renderExpandedRow,
@@ -32,7 +45,7 @@ export function Table<TData>({
 		const colSizes: { [key: string]: number } = {};
 		for (let i = 0; i < headers.length; i++) {
 			const header = headers[i]!;
-			colSizes[`--header-${header.id}-size`] = header.getSize();
+			// colSizes[`--header-${header.id}-size`] = header.getSize();
 			colSizes[`--col-${header.column.id}-size`] = header.column.getSize();
 		}
 		return colSizes;
@@ -45,20 +58,25 @@ export function Table<TData>({
 	return (
 		<TableContainer>
 			<MuiTable
-				style={{ ...columnSizeVars }}
+				style={{
+					gridTemplateColumns: Object.values(columnSizeVars)
+						.map(mapSize)
+						.join(" "),
+				}}
 				size="small"
-				sx={{ "& .MuiTableRow-root:last-child > td": { borderBottom: 0 } }}
+				sx={{
+					"& .MuiTableRow-root:last-child > td": { borderBottom: 0 },
+					display: "grid",
+				}}
 			>
-				<TableHead>
+				<TableHead sx={{ display: "contents" }}>
 					{table.getHeaderGroups().map((headerGroup) => (
-						<TableRow key={headerGroup.id}>
+						<TableRow sx={{ display: "contents" }} key={headerGroup.id}>
 							{headerGroup.headers.map((header) => (
 								<TableCell
 									component="th"
 									key={header.id}
-									style={{
-										width: `calc(var(--header-${header?.id}-size) * 1px)`,
-									}}
+									sx={{ boxSizing: "content-box" }}
 									align={header.column.columnDef.meta?.style?.textAlign}
 								>
 									{header.isPlaceholder
@@ -72,21 +90,21 @@ export function Table<TData>({
 						</TableRow>
 					))}
 				</TableHead>
-				<TableBody>
+				<TableBody sx={{ display: "contents" }}>
 					{table.getRowModel().rows.map(
 						(row) =>
 							!row.getIsGrouped() && (
 								<>
-									<TableRow key={row.id}>
+									<TableRow sx={{ display: "contents" }} key={row.id}>
 										{row.getVisibleCells().map((cell, i) => {
 											const parentCell = cell.getIsPlaceholder()
 												? row.getParentRow()?.getAllCells()[i]
 												: undefined;
-											const isFirst = parentCell?.row.subRows[0]?.id === row.id;
+											// const isFirst = parentCell?.row.subRows[0]?.id === row.id;
 
-											if (cell.getIsPlaceholder() && !isFirst) {
-												return null;
-											}
+											// if (cell.getIsPlaceholder() && !isFirst) {
+											// 	return null;
+											// }
 											const content = cell.getIsPlaceholder()
 												? flexRender(
 														parentCell?.column.columnDef.cell,
@@ -97,11 +115,11 @@ export function Table<TData>({
 														cell.getContext(),
 													);
 
-											const placeholderRowSpan =
-												cell.getIsPlaceholder() &&
-												cell.row.getParentRow()?.subRows.length
-													? cell.row.getParentRow()?.subRows.length
-													: undefined;
+											// const placeholderRowSpan =
+											// 	cell.getIsPlaceholder() &&
+											// 	cell.row.getParentRow()?.subRows.length
+											// 		? cell.row.getParentRow()?.subRows.length
+											// 		: undefined;
 
 											const expandedRowSpan =
 												row.getIsExpanded() &&
@@ -110,19 +128,24 @@ export function Table<TData>({
 														row.getAllCells().length -
 															(expandedSpan?.right ?? 0) -
 															1)
-													? 2
+													? row.getLeafRows().length + 1
 													: undefined;
 											return (
 												<TableCell
 													key={cell.id}
-													sx={{ verticalAlign: "baseline" }}
+													sx={{
+														alignContent: "center",
+														boxSizing: "content-box",
+													}}
 													style={{
-														width: `calc(var(--col-${cell.column.id}-size) * 1px)`,
+														borderBottomColor: expandedRowSpan
+															? "transparent"
+															: undefined,
+														gridRow: expandedRowSpan
+															? `span ${expandedRowSpan}`
+															: undefined,
 													}}
 													align={cell.column.columnDef.meta?.style?.textAlign}
-													rowSpan={
-														placeholderRowSpan ?? expandedRowSpan ?? undefined
-													}
 												>
 													{content}
 												</TableCell>

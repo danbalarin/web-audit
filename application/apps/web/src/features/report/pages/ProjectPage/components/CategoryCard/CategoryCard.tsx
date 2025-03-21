@@ -98,7 +98,7 @@ export const CategoryCard = ({
 
 	const skipLeft = 1;
 	const skipRight =
-		Object.keys(table.getState().rowSelection).length > 1 ? 1 : 0;
+		Object.keys(transformedData[0]?.data ?? {}).length > 1 ? 1 : 0;
 
 	return (
 		<RoundedAccordion defaultExpanded>
@@ -116,10 +116,16 @@ export const CategoryCard = ({
 						row.original
 							.getDetailRows?.(Object.values(row.original.data))
 							.map((row) => (
-								<TableRow key={row.label}>
+								<TableRow sx={{ display: "contents" }} key={row.label}>
+									{Array.from({ length: skipLeft }).map(() => (
+										<TableCell key={-1} />
+									))}
 									<TableCell>{row.label}</TableCell>
 									{row.value.map((value, i) => (
 										<TableCell key={i}>{value}</TableCell>
+									))}
+									{Array.from({ length: skipRight }).map(() => (
+										<TableCell key={-1} />
 									))}
 								</TableRow>
 							))

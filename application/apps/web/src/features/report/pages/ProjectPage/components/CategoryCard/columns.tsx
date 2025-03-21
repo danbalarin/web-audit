@@ -9,6 +9,7 @@ import type { Audit, Metric } from "@repo/db";
 import { MetricDifferenceCell } from "~/features/report/components/MetricDifferenceCell";
 import { MetricNameCell } from "~/features/report/components/MetricNameCell";
 import { MetricResultCell } from "~/features/report/components/MetricResultCell";
+import { SIZE_FR } from "~/features/ui/components/Table/Table";
 
 export type CategoryDetailTableData = MetricDescription & {
 	data: Record<string, CalculatedScore<Metric> | null>;
@@ -23,8 +24,7 @@ export const createColumns = (
 		columnHelper.display({
 			id: "expander",
 			header: "",
-			size: 32,
-			maxSize: 32,
+			size: 64,
 			cell: ({ row }) => {
 				return row.getCanExpand() ? (
 					<IconButton onClick={row.getToggleExpandedHandler()} size="small">
@@ -35,13 +35,14 @@ export const createColumns = (
 		}),
 		columnHelper.accessor("id", {
 			header: "Metric",
-			size: 128,
+			size: SIZE_FR,
 			cell: (info) => <MetricNameCell id={info.getValue()} />,
 		}),
 		...audits.map((audit) =>
 			columnHelper.accessor(`data.${audit.id}`, {
 				id: audit.id,
 				header: audit.url,
+				size: SIZE_FR,
 				cell: (info) => {
 					const data = info.getValue();
 					return (
@@ -64,7 +65,7 @@ export const createColumns = (
 			columnHelper.display({
 				id: "comparison",
 				header: "Diff",
-				size: 128,
+				size: 64,
 				cell: (info) => {
 					const metrics = Object.values(info.row.original.data).sort(
 						(a, b) =>
