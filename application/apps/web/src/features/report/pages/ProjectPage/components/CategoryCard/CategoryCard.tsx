@@ -112,24 +112,46 @@ export const CategoryCard = ({
 				<Table
 					table={table}
 					expandedSpan={{ left: skipLeft, right: skipRight }}
-					renderExpandedRow={(row) =>
-						row.original
-							.getDetailRows?.(Object.values(row.original.data))
-							.map((row) => (
-								<TableRow sx={{ display: "contents" }} key={row.label}>
+					renderExpandedRow={(row) => {
+						const detailRows = row.original.getDetailRows?.(
+							Object.values(row.original.data),
+						);
+						if (!detailRows) {
+							return null;
+						}
+						return detailRows.map((row, i) => {
+							const isLast = i === detailRows.length - 1;
+							return (
+								<TableRow
+									sx={{
+										display: "contents",
+									}}
+									key={row.label}
+								>
 									{Array.from({ length: skipLeft }).map(() => (
-										<TableCell key={-1} />
+										<TableCell
+											key={-1}
+											style={{
+												borderColor: !isLast ? "transparent" : undefined,
+											}}
+										/>
 									))}
 									<TableCell>{row.label}</TableCell>
 									{row.value.map((value, i) => (
 										<TableCell key={i}>{value}</TableCell>
 									))}
 									{Array.from({ length: skipRight }).map(() => (
-										<TableCell key={-1} />
+										<TableCell
+											key={-1}
+											style={{
+												borderColor: !isLast ? "transparent" : undefined,
+											}}
+										/>
 									))}
 								</TableRow>
-							))
-					}
+							);
+						});
+					}}
 				/>
 			</AccordionDetails>
 		</RoundedAccordion>

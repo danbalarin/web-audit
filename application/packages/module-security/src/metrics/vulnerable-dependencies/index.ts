@@ -30,4 +30,40 @@ export const VulnerableDependencies: MetricDescription = {
 
 		return `Found vulnerabilities in dependencies ${additionalData.map((data) => data.technology.name).join(", ")}`;
 	},
+	getDetailRows: (data) => {
+		const dependencies = data.reduce(
+			(acc, col) => {
+				if (!isAdditionalData(col?.additionalData)) {
+					return acc;
+				}
+				col.additionalData.forEach((data) => {
+					acc.add(data.technology.name);
+				});
+				return acc;
+			},
+
+			new Set<string>(),
+		);
+
+		return Array.from(dependencies).map((dependency) => ({
+			type: "text",
+			label: dependency,
+			value: data.map((col) => {
+				if (!isAdditionalData(col?.additionalData)) {
+					return "-";
+				}
+				const found = col.additionalData.find(
+					(data) => data.technology.name === dependency,
+				);
+				const cwes = found
+					? found.vulnerabilities.reduce((acc, v) => {
+							v.cwe.forEach((cwe) => acc.add(cwe));
+							return acc;
+						}, new Set<string>())
+					: [];
+				const arr = [...cwes];
+				return arr.length ? arr.join(", ") : "-";
+			}),
+		}));
+	},
 };
