@@ -1,24 +1,23 @@
 import { BaseRunner } from "@repo/api";
-import { type BaseContext, type MetricResult } from "@repo/api/types";
+import {
+	type BaseContext,
+	BaseRunnerOptions,
+	type MetricResult,
+} from "@repo/api/types";
 import { TotalRequests } from "./metrics/total-requests";
 
-// biome-ignore lint/complexity/noBannedTypes: placeholder
-export type PuppeteerRunnerOptions = {};
+export type PuppeteerRunnerOptions = BaseRunnerOptions;
 
 type Result = {
 	requests: string[];
 };
 
 export class PuppeteerRunner extends BaseRunner<Result> {
-	private readonly _options: Required<PuppeteerRunnerOptions>;
-
-	constructor(_options: PuppeteerRunnerOptions) {
-		super("PuppeteerRunner");
-
-		this._options = Object.assign({}, _options);
+	constructor(options: PuppeteerRunnerOptions) {
+		super("PuppeteerRunner", options);
 	}
 
-	async transform(result: Result): Promise<MetricResult[]> {
+	protected async transform(result: Result): Promise<MetricResult[]> {
 		return [
 			{
 				id: TotalRequests.id,
@@ -33,7 +32,7 @@ export class PuppeteerRunner extends BaseRunner<Result> {
 		return this.transform(res);
 	}
 
-	async runRaw(context: BaseContext): Promise<Result> {
+	protected async runRaw(context: BaseContext): Promise<Result> {
 		const requests = [] as string[];
 
 		const browser = await context.createBrowser();

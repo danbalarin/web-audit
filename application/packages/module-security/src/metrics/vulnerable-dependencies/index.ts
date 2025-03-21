@@ -1,7 +1,7 @@
 import { Arbitrary } from "@repo/api/metrics";
 import { type MetricDescription } from "@repo/api/types";
 import { createMetricCompareLowerIsBetter } from "@repo/api/utils";
-import { TechnologyRunnerResult } from "~/TechnologyRunner";
+import type { TechnologyRunnerResult } from "../../TechnologyRunner";
 
 const isAdditionalData = (
 	additionalData?: unknown,

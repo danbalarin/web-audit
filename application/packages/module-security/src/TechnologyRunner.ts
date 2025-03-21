@@ -1,5 +1,5 @@
 import { BaseRunner } from "@repo/api";
-import { BaseContext, MetricResult } from "@repo/api/types";
+import { BaseContext, BaseRunnerOptions, MetricResult } from "@repo/api/types";
 import { clean, gte, lt } from "semver";
 /// <reference path="../../types/wappalyzer-core.d.ts" />
 import Wappalyzer from "wappalyzer-core";
@@ -10,8 +10,7 @@ import { categories, technologies } from "./lib/wappalyzer/technologies";
 import { DetectedTechnologies } from "./metrics/detected-technologies";
 import { VulnerableDependencies } from "./metrics/vulnerable-dependencies";
 
-// biome-ignore lint/complexity/noBannedTypes: placeholder
-export type TechnologyRunnerOptions = {};
+export type TechnologyRunnerOptions = BaseRunnerOptions;
 
 export type TechnologyRunnerResult = {
 	technology: Technology;
@@ -49,14 +48,11 @@ type SimpleRepo = {
 	};
 };
 
-export class TechnologyRunner extends BaseRunner {
-	private readonly _options: Required<TechnologyRunnerOptions>;
-
-	constructor(_options: TechnologyRunnerOptions) {
-		super("TechnologyRunner");
-
-		this._options = Object.assign({}, _options);
+export class TechnologyRunner extends BaseRunner<TechnologyRunnerResult> {
+	constructor(options: TechnologyRunnerOptions) {
+		super("TechnologyRunner", options);
 	}
+
 	async transform(result: TechnologyRunnerResult): Promise<MetricResult[]> {
 		// await writeFile("retire-results.json", JSON.stringify(result, null, 2));
 		const vulnerableComponents = result.filter(
@@ -83,7 +79,7 @@ export class TechnologyRunner extends BaseRunner {
 		return this.transform(res);
 	}
 
-	async getTechnologies(context: BaseContext): Promise<Technology[]> {
+	private async getTechnologies(context: BaseContext): Promise<Technology[]> {
 		Wappalyzer.setCategories(categories);
 		Wappalyzer.setTechnologies(technologies);
 
@@ -104,7 +100,7 @@ export class TechnologyRunner extends BaseRunner {
 		return results.technologies;
 	}
 
-	async checkForVulnerabilities(
+	private async checkForVulnerabilities(
 		technologies: Technology[],
 	): Promise<TechnologyRunnerResult> {
 		const repository = repo as SimpleRepo;
@@ -150,7 +146,9 @@ export class TechnologyRunner extends BaseRunner {
 		return components;
 	}
 
-	async runRaw(context: BaseContext): Promise<TechnologyRunnerResult> {
+	protected async runRaw(
+		context: BaseContext,
+	): Promise<TechnologyRunnerResult> {
 		const foundTechs = await this.getTechnologies(context);
 		const vulnerableComponents = await this.checkForVulnerabilities(foundTechs);
 		return vulnerableComponents;

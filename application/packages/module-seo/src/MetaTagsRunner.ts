@@ -1,5 +1,9 @@
 import { BaseRunner } from "@repo/api";
-import { type BaseContext, type MetricResult } from "@repo/api/types";
+import {
+	type BaseContext,
+	BaseRunnerOptions,
+	type MetricResult,
+} from "@repo/api/types";
 import { Page } from "puppeteer";
 
 import { FacebookPreview } from "./metrics/facebook-preview";
@@ -22,8 +26,7 @@ import { TwitterPreview } from "./metrics/twitter-preview";
 import { template as facebookTemplate } from "./templates/facebook";
 import { template as twitterTemplate } from "./templates/twitter";
 
-// biome-ignore lint/complexity/noBannedTypes: placeholder
-export type MetaTagsRunnerOptions = {};
+export type MetaTagsRunnerOptions = BaseRunnerOptions;
 
 type BasicTags = {
 	title?: string | null;
@@ -64,13 +67,13 @@ type Result = Tags & {
 	twitterImage: string;
 };
 
-export class MetaTagsRunner extends BaseRunner<Result> {
-	private readonly _options: Required<MetaTagsRunnerOptions>;
-
-	constructor(_options: MetaTagsRunnerOptions) {
-		super("MetaTagsRunner");
-
-		this._options = Object.assign({}, _options);
+export class MetaTagsRunner extends BaseRunner<
+	Result,
+	BaseContext,
+	MetaTagsRunnerOptions
+> {
+	constructor(options: MetaTagsRunnerOptions) {
+		super("MetaTagsRunner", options);
 	}
 
 	async transform({

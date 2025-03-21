@@ -1,22 +1,18 @@
 import { BaseRunner } from "@repo/api";
-import { BaseContext, MetricResult } from "@repo/api/types";
+import { BaseContext, BaseRunnerOptions, MetricResult } from "@repo/api/types";
 import sslChecker from "ssl-checker";
 import { SSLCert } from "./metrics/ssl-cert";
 
-// biome-ignore lint/complexity/noBannedTypes: placeholder
-export type SSLRunnerOptions = {};
+export type SSLRunnerOptions = BaseRunnerOptions;
 
 type Result = Awaited<ReturnType<typeof sslChecker>>;
 
-export class SSLRunner extends BaseRunner {
-	private readonly _options: Required<SSLRunnerOptions>;
-
-	constructor(_options: SSLRunnerOptions) {
-		super("SSLRunner");
-
-		this._options = Object.assign({}, _options);
+export class SSLRunner extends BaseRunner<Result> {
+	constructor(options: SSLRunnerOptions) {
+		super("SSLRunner", options);
 	}
-	async transform(result: Result): Promise<MetricResult[]> {
+
+	protected async transform(result: Result): Promise<MetricResult[]> {
 		return [
 			{
 				id: SSLCert.id,
@@ -32,7 +28,7 @@ export class SSLRunner extends BaseRunner {
 		return this.transform(res);
 	}
 
-	async runRaw(context: BaseContext): Promise<Result> {
+	protected async runRaw(context: BaseContext): Promise<Result> {
 		const { hostname } = new URL(context.url);
 		return sslChecker(hostname);
 	}

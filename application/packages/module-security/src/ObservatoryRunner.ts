@@ -1,5 +1,5 @@
 import { BaseRunner } from "@repo/api";
-import { BaseContext, MetricResult } from "@repo/api/types";
+import { BaseContext, BaseRunnerOptions, MetricResult } from "@repo/api/types";
 
 import { type ObservatoryResult, scan } from "@mdn/mdn-http-observatory";
 import { ContentSecurityPolicy } from "./metrics/content-security-policy";
@@ -8,18 +8,13 @@ import { CrossOriginResourceSharing } from "./metrics/cross-origin-resource-shar
 import { StrictTransportSecurity } from "./metrics/strict-transport-security";
 import { XFrameOptions, XFrameOptionsValue } from "./metrics/x-frame-options";
 
-// biome-ignore lint/complexity/noBannedTypes: placeholder
-export type ObservatoryRunnerOptions = {};
+export type ObservatoryRunnerOptions = BaseRunnerOptions;
 
 type Result = ObservatoryResult;
 
 export class ObservatoryRunner extends BaseRunner {
-	private readonly _options: Required<ObservatoryRunnerOptions>;
-
-	constructor(_options: ObservatoryRunnerOptions) {
-		super("ObservatoryRunner");
-
-		this._options = Object.assign({}, _options);
+	constructor(options: ObservatoryRunnerOptions) {
+		super("ObservatoryRunner", options);
 	}
 	async transform(result: Result): Promise<MetricResult[]> {
 		const { tests } = result;

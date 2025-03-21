@@ -1,5 +1,9 @@
 import { BaseRunner, spawnChild } from "@repo/api";
-import { type BaseContext, type MetricResult } from "@repo/api/types";
+import {
+	type BaseContext,
+	type BaseRunnerOptions,
+	type MetricResult,
+} from "@repo/api/types";
 import { Result } from "lighthouse";
 // @ts-ignore
 import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
@@ -12,7 +16,7 @@ import { TimeToFirstByte } from "./metrics/time-to-first-byte";
 import { TotalBlockingTime } from "./metrics/total-blocking-time";
 import { TransferSize } from "./metrics/transfer-size";
 
-export type LighthouseRunnerOptions = {
+export type LighthouseRunnerOptions = BaseRunnerOptions & {
 	/**
 	 * Number of runs to perform, results will be averaged
 	 *
@@ -20,18 +24,19 @@ export type LighthouseRunnerOptions = {
 	 */
 	numberOfRuns?: number;
 };
-export class LighthouseRunner extends BaseRunner<Result> {
-	private readonly _options: Required<LighthouseRunnerOptions>;
-
+export class LighthouseRunner extends BaseRunner<
+	Result,
+	BaseContext,
+	Required<LighthouseRunnerOptions>
+> {
 	constructor(_options: LighthouseRunnerOptions) {
-		super("LighthouseRunner");
-
-		this._options = Object.assign(
+		const options = Object.assign(
 			{
 				numberOfRuns: 1,
 			},
 			_options,
 		);
+		super("LighthouseRunner", options);
 	}
 
 	async transform(result: Result): Promise<MetricResult[]> {

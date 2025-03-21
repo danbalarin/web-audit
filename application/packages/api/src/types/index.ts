@@ -1,3 +1,5 @@
+export * from "./BaseModuleOptions";
+export * from "./BaseRunnerOptions";
 export * from "./CalculatedScore";
 export * from "./CategoryDescription";
 export * from "./CombineUnion";

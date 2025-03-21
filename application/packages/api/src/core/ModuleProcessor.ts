@@ -116,25 +116,18 @@ export class ModuleProcessor {
 		let completed = 0;
 		const promises = [];
 		for (const module of Object.values(this._modules)) {
-			const moduleLogger = this._logger.child({
-				moduleId: module.id,
-			});
-			module.logger = moduleLogger;
-
 			module.on("progress", (payload) => {
-				moduleLogger.debug({ progress: payload.progress }, "progress");
 				this.progress(
 					completed / this._modules.length +
 						payload.progress / this._modules.length,
 				);
 			});
 
-			module.on("error", (payload) => {
-				moduleLogger.error({ error: payload.error }, "error");
-			});
+			// TODO: handle errors
+			// module.on("error", (payload) => {
+			// });
 
 			module.on("complete", (payload) => {
-				moduleLogger.debug("complete");
 				completed++;
 				this.progress(completed / this._modules.length);
 				result.categories.push(payload.data);

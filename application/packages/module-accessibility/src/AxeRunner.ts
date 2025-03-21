@@ -1,6 +1,10 @@
 import { AxePuppeteer } from "@axe-core/puppeteer";
 import { BaseRunner } from "@repo/api";
-import { type BaseContext, type MetricResult } from "@repo/api/types";
+import {
+	type BaseContext,
+	BaseRunnerOptions,
+	type MetricResult,
+} from "@repo/api/types";
 import type { Result as AxeAuditResult } from "axe-core";
 import { ACT } from "./metrics/act";
 import { BEST_PRACTICE } from "./metrics/best-practice";
@@ -12,8 +16,7 @@ import { WCAG21AA } from "./metrics/wcag21aa";
 import { WCAG22AA } from "./metrics/wcag22aa";
 import { AxeResult } from "./types/AxeResult";
 
-// biome-ignore lint/complexity/noBannedTypes: placeholder
-export type AxeRunnerOptions = {};
+export type AxeRunnerOptions = BaseRunnerOptions;
 
 type Result = Awaited<ReturnType<AxePuppeteer["analyze"]>>;
 
@@ -23,16 +26,11 @@ type AdditionalData = Record<
 >;
 
 export class AxeRunner extends BaseRunner<Result> {
-	private readonly _options: Required<AxeRunnerOptions>;
-
-	constructor(_options: AxeRunnerOptions) {
-		super("AxeRunner");
-
-		this._options = Object.assign({}, _options);
+	constructor(options: AxeRunnerOptions) {
+		super("AxeRunner", options);
 	}
 
-	async transform(result: Result): Promise<MetricResult[]> {
-		// await writeFile("axe-results.json", JSON.stringify(result, null, 2));
+	protected async transform(result: Result): Promise<MetricResult[]> {
 		const tags = {} as Record<string, AdditionalData>;
 
 		const process = (arr: AxeAuditResult[], type: AxeResult) => {
@@ -88,7 +86,7 @@ export class AxeRunner extends BaseRunner<Result> {
 		return this.transform(res);
 	}
 
-	async runRaw(context: BaseContext): Promise<Result> {
+	protected async runRaw(context: BaseContext): Promise<Result> {
 		const browser = await context.createBrowser();
 		const page = await browser.newPage();
 		await page.setBypassCSP(true);

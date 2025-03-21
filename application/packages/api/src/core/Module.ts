@@ -7,6 +7,7 @@ export type ModuleOptions = {
 	name: string;
 	description: string;
 	version: string;
+	logger: Logger;
 };
 
 export type ModuleResult = {
@@ -40,11 +41,13 @@ export abstract class BaseModule<
 > extends EventEmitter<ModuleEvents> {
 	private _progress = 0;
 	protected _runners: BaseRunner[] = [];
-	protected _logger: Logger | null;
+	protected _logger: Logger;
+	protected readonly _options: Omit<ModuleOptions, "logger">;
 
-	constructor(private readonly _options: ModuleOptions) {
+	constructor(_options: ModuleOptions) {
 		super();
-		this._logger = null;
+		this._options = _options;
+		this._logger = _options.logger;
 	}
 
 	protected async _execute(context: TContext): Promise<ModuleResult> {
@@ -67,11 +70,13 @@ export abstract class BaseModule<
 	}
 
 	async execute(context: TContext) {
+		this.logger.debug("executing");
 		this.emit("progress", {
 			progress: this._progress,
 		});
 		try {
 			const result = await this._execute(context);
+			this.logger.debug("complete");
 			this.emit("complete", {
 				data: result,
 			});
@@ -81,6 +86,7 @@ export abstract class BaseModule<
 				error instanceof Error
 					? error
 					: new Error("Unknown error", { cause: error });
+			this.logger.error({ error: sentError }, "error");
 			this.emit("error", {
 				error: sentError,
 			});
@@ -90,6 +96,7 @@ export abstract class BaseModule<
 
 	set progress(progress: number) {
 		this._progress = progress;
+		this.logger.debug({ progress }, "progress");
 		this.emit("progress", {
 			progress,
 		});
