@@ -117,7 +117,10 @@ export const MetricResultCell = ({
 	const TooltipComponent = hideTooltip ? Fragment : Tooltip;
 
 	return (
-		<TooltipComponent title={tooltip} placement="bottom-start">
+		<TooltipComponent
+			title={!hideTooltip ? tooltip : undefined}
+			placement={!hideTooltip ? "bottom-start" : undefined}
+		>
 			<Typography
 				component={"span"}
 				variant="body1"
