@@ -27,7 +27,11 @@ type CategoryCardProps = {
 	metricScores: AuditWithScores[];
 };
 
-const transformData = (data: AuditWithScores[], category: CategoryKeys) => {
+const transformData = (
+	data: AuditWithScores[],
+	category: CategoryKeys,
+	order?: string[],
+) => {
 	const res = [] as CategoryDetailTableData[];
 
 	for (const audit of data) {
@@ -50,6 +54,10 @@ const transformData = (data: AuditWithScores[], category: CategoryKeys) => {
 		}
 	}
 
+	if (order) {
+		return res.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+	}
+
 	return res.sort((a, b) => a.id.localeCompare(b.id));
 };
 
@@ -60,7 +68,7 @@ export const CategoryCard = ({
 }: CategoryCardProps) => {
 	const columns = useMemo(() => createColumns(audits), [metricScores]);
 	const transformedData = useMemo(
-		() => transformData(metricScores, category.id),
+		() => transformData(metricScores, category.id, category.metricsOrder),
 		[metricScores],
 	);
 	const table = useReactTable({

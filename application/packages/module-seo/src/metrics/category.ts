@@ -13,6 +13,14 @@ const weights = {
 	[OpenGraphMetaTags.id]: 0.5,
 };
 
+const metricsOrder = [
+	SEOMetaTags.id,
+	TwitterMetaTags.id,
+	OpenGraphMetaTags.id,
+	FacebookPreview.id,
+	TwitterPreview.id,
+];
+
 const metrics: MetricDescription[] = [
 	SEOMetaTags,
 	TwitterMetaTags,
@@ -27,6 +35,7 @@ export const SEOCategory: CategoryDescription<"seo"> = {
 	description: "Search Engine and Social Media Optimization",
 	metrics,
 	scoreUnit: Arbitrary.PERCENTAGE,
+	metricsOrder,
 	score: (metricsData) => {
 		let score = 0;
 		let foundMetrics = false;

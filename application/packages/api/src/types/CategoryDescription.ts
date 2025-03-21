@@ -42,4 +42,6 @@ export type CategoryDescription<
 	score: (metrics: Metric[]) => string | number;
 
 	scoreUnit: MetricUnit;
+
+	metricsOrder?: string[];
 };
