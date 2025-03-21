@@ -1,4 +1,4 @@
-import { Arbitrary } from "@repo/api/metrics";
+import { Arbitrary, createFlagMetric } from "@repo/api/metrics";
 import type {
 	MetricDescription,
 	MetricRank,
@@ -12,29 +12,6 @@ export enum SEOMetaTagsFlags {
 	AUTHOR = 0x08,
 	LANGUAGE = 0x10,
 }
-
-export const getFlagsFromValue = (value: number): SEOMetaTagsFlags[] => {
-	const flags: SEOMetaTagsFlags[] = [];
-
-	Object.values(SEOMetaTagsFlags).forEach((flag) => {
-		if (typeof flag !== "string" && value & flag) {
-			flags.push(flag);
-		}
-	});
-
-	return flags;
-};
-
-export const getValueFromFlags = (flags: SEOMetaTagsFlags[]): number => {
-	let value = 0;
-
-	for (const flag of flags) {
-		value |= flag;
-	}
-
-	return value;
-};
-
 const weights = {
 	[SEOMetaTagsFlags.TITLE]: 1,
 	[SEOMetaTagsFlags.DESCRIPTION]: 1,
@@ -43,23 +20,12 @@ const weights = {
 	[SEOMetaTagsFlags.LANGUAGE]: 1,
 };
 
-const weightSum = Object.values(weights).reduce(
-	(acc, weight) => acc + weight,
-	0,
+const { getValueFromFlags, score, compare, getMissingTags } = createFlagMetric(
+	SEOMetaTagsFlags,
+	weights,
 );
 
-const score = (value: number | string): number => {
-	const flags = getFlagsFromValue(+value);
-	const total = flags.reduce((acc, flag) => acc + weights[flag], 0);
-	return total / weightSum;
-};
-
-const compare = (a: number | string, b: number | string): number => {
-	const scoreA = score(+a);
-	const scoreB = score(+b);
-
-	return scoreA - scoreB;
-};
+export { getValueFromFlags };
 
 const rank = (value: number | string): MetricRank => {
 	const calculated = score(+value);
@@ -73,10 +39,7 @@ const rank = (value: number | string): MetricRank => {
 };
 
 const renderValue = ({ value }: Omit<MetricResult, "id">): string => {
-	const castedValue = +value;
-	const missingFlags = Object.values(SEOMetaTagsFlags).filter(
-		(flag) => typeof flag !== "string" && !(castedValue & flag),
-	);
+	const missingFlags = getMissingTags({ value: +value });
 	if (missingFlags.length === 0) {
 		return "Ok";
 	} else {
@@ -93,27 +56,34 @@ const flagTranslations = {
 };
 
 const renderTooltip = ({ value }: Omit<MetricResult, "id">): string => {
-	const flags = getFlagsFromValue(+value);
-	const missingFlags = Object.values(SEOMetaTagsFlags).filter(
-		(flag) => typeof flag !== "string" && !flags.includes(flag),
-	) as SEOMetaTagsFlags[];
+	const missingFlags = getMissingTags({ value: +value });
 
 	if (missingFlags.length === 0) {
 		return "All required tags are present";
 	}
 
-	return `Missing tags ${missingFlags.map((f) => flagTranslations[f]).join(", ")}`;
+	return `Missing tags ${missingFlags.map((f) => flagTranslations[f as unknown as keyof typeof flagTranslations]).join(", ")}`;
 };
 
-const getMissingTags = ({
-	value,
-}: Omit<MetricResult, "id">): SEOMetaTagsFlags[] => {
-	const flags = getFlagsFromValue(+value);
-	const missingFlags = Object.values(SEOMetaTagsFlags).filter(
-		(flag) => typeof flag !== "string" && !flags.includes(flag),
-	) as SEOMetaTagsFlags[];
-
-	return missingFlags;
+const getDetailRows = (res: (Omit<MetricResult, "id"> | null)[]) => {
+	return [
+		{
+			type: "text" as const,
+			label: "Missing tags",
+			value: res.map((v) =>
+				v
+					? getMissingTags(v)
+							.map(
+								(f) =>
+									flagTranslations[
+										f as unknown as keyof typeof flagTranslations
+									],
+							)
+							.join(", ")
+					: "",
+			),
+		},
+	];
 };
 
 export const SEOMetaTags: MetricDescription = {
@@ -124,19 +94,7 @@ export const SEOMetaTags: MetricDescription = {
 	compare,
 	rank,
 	score,
-	getDetailRows: (res) => [
-		{
-			type: "text",
-			label: "Missing tags",
-			value: res.map((v) =>
-				v
-					? getMissingTags(v)
-							.map((f) => flagTranslations[f])
-							.join(", ")
-					: "",
-			),
-		},
-	],
+	getDetailRows,
 	renderValue,
 	renderTooltip,
 };
