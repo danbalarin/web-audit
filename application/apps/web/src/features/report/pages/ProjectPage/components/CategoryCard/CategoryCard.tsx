@@ -7,7 +7,7 @@ import { useMemo } from "react";
 import {
 	type CategoryKeys,
 	type MetricKeys,
-	metricsMap,
+	categoriesMap,
 } from "~/features/report/config/metrics";
 import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { Table } from "~/features/ui/components/Table";
@@ -27,38 +27,36 @@ type CategoryCardProps = {
 	metricScores: AuditWithScores[];
 };
 
-const transformData = (
-	data: AuditWithScores[],
-	category: CategoryKeys,
-	order?: string[],
-) => {
+const transformData = (data: AuditWithScores[], categoryId: CategoryKeys) => {
+	const category = categoriesMap[categoryId];
+	if (!category) {
+		throw new Error(`Category with id ${categoryId} not found`);
+	}
+
 	const res = [] as CategoryDetailTableData[];
-
-	for (const audit of data) {
-		for (const metric in audit.metricScores[category]) {
-			const existing = res.find((r) => r.id === metric);
-			if (!existing) {
-				const metricDescription = metricsMap[metric];
-				if (!metricDescription) {
-					continue;
-				}
-				res.push({
-					...metricDescription,
-					data: {
-						[audit.auditId]: audit.metricScores[category][metric]!,
-					},
-				});
-			} else {
-				existing.data[audit.auditId] = audit.metricScores[category][metric]!;
-			}
-		}
+	for (const metric of category.metrics) {
+		res.push({
+			...metric,
+			data: data.reduce(
+				(acc, audit) => {
+					const metricScore = audit.metricScores[categoryId]?.[metric.id];
+					acc[audit.auditId] = metricScore ?? null;
+					return acc;
+				},
+				{} as CategoryDetailTableData["data"],
+			),
+		});
 	}
 
+	return res;
+};
+
+const sortData = (data: CategoryDetailTableData[], order?: string[]) => {
 	if (order) {
-		return res.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+		return data.sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
 	}
 
-	return res.sort((a, b) => a.id.localeCompare(b.id));
+	return data.sort((a, b) => a.id.localeCompare(b.id));
 };
 
 export const CategoryCard = ({
@@ -68,7 +66,8 @@ export const CategoryCard = ({
 }: CategoryCardProps) => {
 	const columns = useMemo(() => createColumns(audits), [metricScores]);
 	const transformedData = useMemo(
-		() => transformData(metricScores, category.id, category.metricsOrder),
+		() =>
+			sortData(transformData(metricScores, category.id), category.metricsOrder),
 		[metricScores],
 	);
 	const table = useReactTable({
