@@ -103,7 +103,7 @@ export class ModuleProcessor {
 			throw new Error("Job not found");
 		}
 
-		this._logger.debug("processing modules");
+		this.logger.debug("processing modules");
 		this._currentStep = "processing";
 
 		await this.progress(0);
@@ -133,17 +133,29 @@ export class ModuleProcessor {
 				result.categories.push(payload.data);
 			});
 
-			promises.push(module.execute(context));
+			// TODO: handle errors
+			promises.push(
+				module.execute(context).catch((e) => {
+					this.logger.error("Error executing module", e);
+				}),
+			);
 		}
 
 		await Promise.all(promises);
 
 		const auditId = await this.saveAuditResult(result);
 
+		// Await for the result to be retrievable, prevents race conditions
+		await new Promise<void>((resolve) => setTimeout(resolve, 1000));
+
 		this._currentStep = "done";
 
 		this.progress(1);
 
 		return auditId;
+	}
+
+	protected get logger() {
+		return this._logger;
 	}
 }

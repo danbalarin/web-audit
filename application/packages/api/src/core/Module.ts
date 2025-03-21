@@ -53,12 +53,9 @@ export abstract class BaseModule<
 	protected async _execute(context: TContext): Promise<ModuleResult> {
 		const metrics: MetricResult[] = [];
 		const promises = this._runners.map(async (runner) => {
-			if (!this._logger) {
-				throw new Error("Logger not set");
-			}
-			this._logger.debug(`${runner.name}: running`);
+			this.logger.debug(`${runner.name}: running`);
 			const res = await runner.run(context);
-			this._logger.debug(`${runner.name}: finished`);
+			this.logger.debug(`${runner.name}: finished`);
 			metrics.push(...res);
 			this.progress = this._progress + 1 / this._runners.length;
 		});
@@ -102,8 +99,8 @@ export abstract class BaseModule<
 		});
 	}
 
-	set logger(logger: Logger) {
-		this._logger = logger;
+	protected get logger() {
+		return this._logger;
 	}
 
 	// GETTERS
