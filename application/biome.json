@@ -54,7 +54,8 @@
 				"noDefaultExport": "error",
 				"noNamespace": "error",
 				"useAsConstAssertion": "error",
-				"useBlockStatements": "off"
+				"useBlockStatements": "off",
+				"useImportType": "error"
 			},
 			"suspicious": {
 				"noAssignInExpressions": "error",
@@ -96,6 +97,14 @@
 		"globals": ["React", "JSX"]
 	},
 	"overrides": [
+		{
+			"include": ["erf.ts"],
+			"linter": {
+				"rules": {
+					"correctness": { "noPrecisionLoss": "off" }
+				}
+			}
+		},
 		{
 			"include": [
 				"next.config.mjs",

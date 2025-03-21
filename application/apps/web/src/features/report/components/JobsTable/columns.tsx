@@ -5,7 +5,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { categoriesMap } from "../../config/metrics";
 import { AuditDateCell } from "../AuditDateCell";
 import { MetricResultCell } from "../MetricResultCell";
-import { JobsTableData } from "./types/JobsTableData";
+import type { JobsTableData } from "./types/JobsTableData";
 
 const COLUMN_SIZE = 128;
 

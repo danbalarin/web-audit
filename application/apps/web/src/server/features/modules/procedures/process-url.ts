@@ -1,6 +1,6 @@
-import { BaseModule, ModuleProcessor } from "@repo/api";
-import { AuditService, JobService, MetricService } from "@repo/db";
-import { Browser } from "puppeteer";
+import { type BaseModule, ModuleProcessor } from "@repo/api";
+import type { AuditService, JobService, MetricService } from "@repo/db";
+import type { Browser } from "puppeteer";
 import z from "zod";
 import { moduleLogger } from "~/lib/logger";
 import { dbMiddleware } from "~/server/middlewares/database";

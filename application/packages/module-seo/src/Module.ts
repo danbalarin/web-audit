@@ -1,7 +1,7 @@
 import { BaseModule } from "@repo/api";
 import { MetaTagsRunner } from "./MetaTagsRunner";
 
-import { BaseModuleOptions } from "@repo/api/types";
+import type { BaseModuleOptions } from "@repo/api/types";
 import pkg from "../package.json";
 
 export type SEOModuleOptions = BaseModuleOptions;

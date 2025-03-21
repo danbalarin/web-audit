@@ -1,4 +1,4 @@
-import { Accordion, AccordionProps } from "@mui/material";
+import { Accordion, type AccordionProps } from "@mui/material";
 
 type RoundedAccordionProps = Omit<AccordionProps, "sx">;
 

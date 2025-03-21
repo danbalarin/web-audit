@@ -1,6 +1,6 @@
 import type { MetricUnit } from "../metrics";
-import { MetricRank } from "./MetricRank";
-import { MetricResult } from "./MetricResult";
+import type { MetricRank } from "./MetricRank";
+import type { MetricResult } from "./MetricResult";
 
 export type MetricDescription<
 	TVal extends number | string = number | string,

@@ -5,14 +5,14 @@ import {
 	getGroupedRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import { Dispatch, useMemo } from "react";
+import { type Dispatch, useMemo } from "react";
 
 import { Table } from "~/features/ui/components/Table";
-import { RouterOutputs } from "~/server/query/client";
+import type { RouterOutputs } from "~/server/query/client";
 
 import { categoriesMap, scoreCategory } from "../../config/metrics";
 import { columns } from "./columns";
-import { JobsTableData } from "./types/JobsTableData";
+import type { JobsTableData } from "./types/JobsTableData";
 
 const transformData = (
 	jobs: RouterOutputs["projects"]["findById"]["jobs"],

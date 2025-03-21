@@ -1,4 +1,4 @@
-import { AuditService } from "@repo/db";
+import type { AuditService } from "@repo/db";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { dbProcedure } from "~/server/trpc/procedure";

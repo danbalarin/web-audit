@@ -1,7 +1,7 @@
 "use client";
 import {
 	AccordionDetails,
-	AccordionProps,
+	type AccordionProps,
 	AccordionSummary,
 	Alert,
 	Stack,

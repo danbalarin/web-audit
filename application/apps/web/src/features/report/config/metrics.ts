@@ -1,10 +1,10 @@
-import { MetricUnit } from "@repo/api/metrics";
-import {
+import type { MetricUnit } from "@repo/api/metrics";
+import type {
 	CalculatedScore,
 	CategoryDescription,
 	MetricDescription,
 } from "@repo/api/types";
-import { Metric } from "@repo/db";
+import type { Metric } from "@repo/db";
 import { AccessibilityCategory } from "@repo/module-accessibility/metrics";
 import { PerformanceCategory } from "@repo/module-performance/metrics";
 import { SecurityCategory } from "@repo/module-security/metrics";

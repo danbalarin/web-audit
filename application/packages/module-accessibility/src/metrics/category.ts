@@ -1,4 +1,4 @@
-import { type CategoryDescription } from "@repo/api/types";
+import type { CategoryDescription } from "@repo/api/types";
 
 import { Arbitrary } from "@repo/api/metrics";
 import { ACT } from "./act";

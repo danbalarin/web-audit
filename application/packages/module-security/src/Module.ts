@@ -1,6 +1,6 @@
 import { BaseModule } from "@repo/api";
 
-import { BaseModuleOptions } from "@repo/api/types";
+import type { BaseModuleOptions } from "@repo/api/types";
 import pkg from "../package.json";
 import { ObservatoryRunner } from "./ObservatoryRunner";
 import { SSLRunner } from "./SSLRunner";

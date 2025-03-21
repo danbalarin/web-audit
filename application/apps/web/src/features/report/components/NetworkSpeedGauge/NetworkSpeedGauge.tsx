@@ -1,6 +1,6 @@
 import { SpeedGauge } from "~/features/ui/components/SpeedGauge";
 
-import { UseSpeedTestStatus } from "../../hooks/useSpeedTest";
+import type { UseSpeedTestStatus } from "../../hooks/useSpeedTest";
 
 import { MESSAGE_CONFIGS } from "./constants";
 

@@ -4,9 +4,13 @@ import InfoIconOutlined from "@mui/icons-material/InfoOutlined";
 import WarningIcon from "@mui/icons-material/Warning";
 import { Tooltip, Typography } from "@mui/material";
 
-import { Arbitrary, Memory, MetricUnit, Time } from "@repo/api/metrics";
-import { CalculatedScore, MetricRank, MetricResult } from "@repo/api/types";
-import { Metric } from "@repo/db";
+import { Arbitrary, Memory, type MetricUnit, Time } from "@repo/api/metrics";
+import type {
+	CalculatedScore,
+	MetricRank,
+	MetricResult,
+} from "@repo/api/types";
+import type { Metric } from "@repo/db";
 import { Fragment } from "react";
 import { ImageMetricResultCell } from "./parts/ImageMetricResultCell";
 import { MemoryMetricResultCell } from "./parts/MemoryMetricResultCell";

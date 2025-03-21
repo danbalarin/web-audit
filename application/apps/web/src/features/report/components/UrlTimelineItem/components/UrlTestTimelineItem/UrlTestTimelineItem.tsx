@@ -1,7 +1,7 @@
 import React from "react";
 
 import { URL_TEST_TIMELINE_ITEM_STATES } from "../../constants";
-import { UrlTimelineItem, UrlTimelineItemProps } from "../UrlTimelineItem";
+import { UrlTimelineItem, type UrlTimelineItemProps } from "../UrlTimelineItem";
 
 type Props = Omit<UrlTimelineItemProps, "config">;
 

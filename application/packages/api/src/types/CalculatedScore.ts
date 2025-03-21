@@ -1,4 +1,4 @@
-import { MetricRank } from "./MetricRank";
+import type { MetricRank } from "./MetricRank";
 
 export type CalculatedScore<T> = T & {
 	score: string | number;

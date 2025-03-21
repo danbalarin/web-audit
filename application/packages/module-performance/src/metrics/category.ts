@@ -1,5 +1,5 @@
 import { Arbitrary } from "@repo/api/metrics";
-import { type CategoryDescription } from "@repo/api/types";
+import type { CategoryDescription } from "@repo/api/types";
 import { CumulativeLayoutShift } from "./cumulative-layout-shift";
 import { FirstContentfulPaint } from "./first-contentful-paint";
 import { LargestContentfulPaint } from "./largest-contentful-paint";

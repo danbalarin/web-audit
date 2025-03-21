@@ -6,7 +6,7 @@ import {
 	IconButton,
 	InputAdornment,
 	Stack,
-	StackProps,
+	type StackProps,
 } from "@mui/material";
 import { useFieldArray } from "react-hook-form";
 

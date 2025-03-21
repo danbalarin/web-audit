@@ -1,5 +1,9 @@
 import { BaseRunner } from "@repo/api";
-import { BaseContext, BaseRunnerOptions, MetricResult } from "@repo/api/types";
+import type {
+	BaseContext,
+	BaseRunnerOptions,
+	MetricResult,
+} from "@repo/api/types";
 import sslChecker from "ssl-checker";
 import { SSLCert } from "./metrics/ssl-cert";
 

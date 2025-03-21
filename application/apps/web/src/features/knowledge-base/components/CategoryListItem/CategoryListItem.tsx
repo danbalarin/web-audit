@@ -4,8 +4,8 @@ import SpeedIcon from "@mui/icons-material/Speed";
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 
-import { CategoryDescription } from "@repo/api/types";
-import React from "react";
+import type { CategoryDescription } from "@repo/api/types";
+import type React from "react";
 
 import type { CategoryKeys } from "~/features/report/config/metrics";
 import { KNOWLEDGE_BASE_ROUTES } from "../../config/routes";

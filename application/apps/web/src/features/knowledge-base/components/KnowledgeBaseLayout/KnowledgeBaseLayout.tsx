@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 
 import { PaddedLayout } from "~/features/ui/components/PaddedLayout";
 

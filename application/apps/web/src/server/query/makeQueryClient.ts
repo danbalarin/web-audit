@@ -2,10 +2,10 @@ import {
 	QueryClient,
 	defaultShouldDehydrateQuery,
 } from "@tanstack/react-query";
-import { TRPCClientError } from "@trpc/client";
-import { TRPCError } from "@trpc/server";
+import type { TRPCClientError } from "@trpc/client";
+import type { TRPCError } from "@trpc/server";
 import { deserialize, serialize } from "superjson";
-import { appRouter } from "../router";
+import type { appRouter } from "../router";
 
 export function makeQueryClient() {
 	return new QueryClient({

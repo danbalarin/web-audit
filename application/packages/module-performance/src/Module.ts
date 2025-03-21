@@ -1,8 +1,11 @@
 import { BaseModule } from "@repo/api";
-import { LighthouseRunner, LighthouseRunnerOptions } from "./LighthouseRunner";
+import {
+	LighthouseRunner,
+	type LighthouseRunnerOptions,
+} from "./LighthouseRunner";
 import { PuppeteerRunner } from "./PuppeteerRunner";
 
-import { BaseModuleOptions } from "@repo/api/types";
+import type { BaseModuleOptions } from "@repo/api/types";
 import pkg from "../package.json";
 
 export type PerformanceModuleOptions = BaseModuleOptions & {

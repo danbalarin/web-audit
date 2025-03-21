@@ -1,6 +1,6 @@
-import { InferInsertModel, eq } from "drizzle-orm";
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
-import { schema } from "../../schema";
+import { type InferInsertModel, eq } from "drizzle-orm";
+import type { NodePgDatabase } from "drizzle-orm/node-postgres";
+import type { schema } from "../../schema";
 import { metrics } from "./schema";
 
 export class MetricRepository {

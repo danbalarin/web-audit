@@ -6,7 +6,8 @@ import {
 	TimelineSeparator,
 } from "@mui/lab";
 import { useTheme } from "@mui/material-pigment-css";
-import React, { useMemo } from "react";
+import type React from "react";
+import { useMemo } from "react";
 
 export type StatusTimelineItemProps = {
 	status: "ok" | "error" | "loading" | "waiting";

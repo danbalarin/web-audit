@@ -1,7 +1,7 @@
 import { createColumnHelper } from "@tanstack/react-table";
 
-import { CalculatedScore, MetricDescription } from "@repo/api/types";
-import { Audit, Metric } from "@repo/db";
+import type { CalculatedScore, MetricDescription } from "@repo/api/types";
+import type { Audit, Metric } from "@repo/db";
 import { MetricDifferenceCell } from "~/features/report/components/MetricDifferenceCell";
 import { MetricNameCell } from "~/features/report/components/MetricNameCell";
 import { MetricResultCell } from "~/features/report/components/MetricResultCell";

@@ -1,14 +1,14 @@
 import {
 	AccordionActions,
 	AccordionDetails,
-	AccordionProps,
+	type AccordionProps,
 	AccordionSummary,
 	Button,
 	Typography,
 } from "@mui/material";
 import {
 	ProjectDetailsForm,
-	ProjectDetailsFormValues,
+	type ProjectDetailsFormValues,
 } from "~/features/report/components/ProjectDetailsForm";
 import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { useNewProjectState } from "../../states/useNewProjectState";

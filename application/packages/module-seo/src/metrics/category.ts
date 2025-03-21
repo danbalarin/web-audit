@@ -1,4 +1,4 @@
-import { type CategoryDescription, MetricDescription } from "@repo/api/types";
+import type { CategoryDescription, MetricDescription } from "@repo/api/types";
 
 import { Arbitrary } from "@repo/api/metrics";
 import { FacebookPreview } from "./facebook-preview";

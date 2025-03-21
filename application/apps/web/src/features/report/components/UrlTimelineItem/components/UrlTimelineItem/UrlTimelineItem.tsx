@@ -2,7 +2,7 @@ import { CircularProgress, Stack } from "@mui/material";
 
 import { StatusTimelineItem } from "~/features/ui/components/StatusTimelineItem";
 
-import { UrlTimelineState } from "../../constants";
+import type { UrlTimelineState } from "../../constants";
 
 export type UrlTimelineItemProps = {
 	status: UrlTimelineState;

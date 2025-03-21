@@ -7,7 +7,7 @@ import { FormTextField } from "~/features/ui/components/FormTextField";
 import { FormTextList } from "~/features/ui/components/FormTextList";
 
 import { FORM_NAME } from "./constants";
-import { ProjectDetailsFormValues, schema } from "./schema";
+import { type ProjectDetailsFormValues, schema } from "./schema";
 
 export type { ProjectDetailsFormValues };
 

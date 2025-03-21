@@ -1,4 +1,4 @@
-import { Timeline, TimelineProps } from "@mui/lab";
+import { Timeline, type TimelineProps } from "@mui/lab";
 
 type Props = TimelineProps;
 

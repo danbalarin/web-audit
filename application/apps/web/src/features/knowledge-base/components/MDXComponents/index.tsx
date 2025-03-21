@@ -1,4 +1,4 @@
-import { Typography, TypographyProps } from "@mui/material";
+import { Typography, type TypographyProps } from "@mui/material";
 import type { MDXComponents } from "mdx/types";
 import { MDXLink } from "./MDXLink";
 

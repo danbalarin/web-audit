@@ -1,10 +1,10 @@
 import { BaseRunner } from "@repo/api";
-import {
-	type BaseContext,
+import type {
+	BaseContext,
 	BaseRunnerOptions,
-	type MetricResult,
+	MetricResult,
 } from "@repo/api/types";
-import { Page } from "puppeteer";
+import type { Page } from "puppeteer";
 
 import { FacebookPreview } from "./metrics/facebook-preview";
 import {

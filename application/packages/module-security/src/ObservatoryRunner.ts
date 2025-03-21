@@ -1,5 +1,9 @@
 import { BaseRunner } from "@repo/api";
-import { BaseContext, BaseRunnerOptions, MetricResult } from "@repo/api/types";
+import type {
+	BaseContext,
+	BaseRunnerOptions,
+	MetricResult,
+} from "@repo/api/types";
 
 import { type ObservatoryResult, scan } from "@mdn/mdn-http-observatory";
 import { ContentSecurityPolicy } from "./metrics/content-security-policy";

@@ -1,7 +1,10 @@
-import React from "react";
+import type React from "react";
 
 import { Link } from "@mui/material";
-import { CategoryKeys, categoriesMap } from "~/features/report/config/metrics";
+import {
+	type CategoryKeys,
+	categoriesMap,
+} from "~/features/report/config/metrics";
 import { KnowledgeLink } from "../KnowledgeLink";
 
 type LinkProps = {

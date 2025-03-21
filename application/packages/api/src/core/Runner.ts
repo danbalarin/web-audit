@@ -1,5 +1,5 @@
-import { BaseRunnerOptions, Logger } from "../types";
-import { BaseContext } from "../types/Context";
+import type { BaseRunnerOptions, Logger } from "../types";
+import type { BaseContext } from "../types/Context";
 import type { MetricResult } from "../types/MetricResult";
 
 export abstract class BaseRunner<

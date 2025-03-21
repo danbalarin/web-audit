@@ -1,4 +1,4 @@
-import { BaseModule, ModuleOptions } from "../..";
+import { BaseModule, type ModuleOptions } from "../..";
 
 export class TestModule extends BaseModule {
 	constructor(options: Partial<ModuleOptions> = {}) {

@@ -1,6 +1,6 @@
-import { BaseContext, Logger, MetricResult } from "../types";
+import type { BaseContext, Logger, MetricResult } from "../types";
 import { EventEmitter } from "../utils/EventEmitter";
-import { BaseRunner } from "./Runner";
+import type { BaseRunner } from "./Runner";
 
 export type ModuleOptions = {
 	id: string;

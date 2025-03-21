@@ -1,7 +1,7 @@
-import { AuditService, Job, JobService, MetricService } from "@repo/db";
+import type { AuditService, Job, JobService, MetricService } from "@repo/db";
 
 import type { BaseContext } from "../types/Context";
-import { Logger } from "../types/Logger";
+import type { Logger } from "../types/Logger";
 import type { BaseModule, ModuleResult } from "./Module";
 
 type Step = "ready" | "processing" | "saving" | "done";

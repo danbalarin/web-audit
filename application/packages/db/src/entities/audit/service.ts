@@ -1,5 +1,5 @@
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
-import { schema } from "../../schema";
+import type { NodePgDatabase } from "drizzle-orm/node-postgres";
+import type { schema } from "../../schema";
 import { JobRepository } from "../job/repository";
 import { ProjectRepository } from "../project/repository";
 import { AuditRepository } from "./repository";

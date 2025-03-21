@@ -1,5 +1,5 @@
 import { ListItemButton, ListItemText } from "@mui/material";
-import { type MetricDescription } from "@repo/api/types";
+import type { MetricDescription } from "@repo/api/types";
 import { KNOWLEDGE_BASE_ROUTES } from "../../config/routes";
 
 type MetricListItemProps = {

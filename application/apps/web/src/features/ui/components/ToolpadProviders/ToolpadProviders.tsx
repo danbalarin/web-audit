@@ -1,6 +1,6 @@
 "use client";
 import { NotificationsProvider } from "@toolpad/core/useNotifications";
-import React from "react";
+import type React from "react";
 
 type ToolpadProvidersProps = {
 	children: React.ReactNode;

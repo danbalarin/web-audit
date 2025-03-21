@@ -1,4 +1,9 @@
-import { Box, BoxProps, CircularProgress, Typography } from "@mui/material";
+import {
+	Box,
+	type BoxProps,
+	CircularProgress,
+	Typography,
+} from "@mui/material";
 
 type LoadingProps = Omit<BoxProps, "children" | "sx"> & {
 	text?: string;

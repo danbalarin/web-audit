@@ -1,4 +1,4 @@
-import { InferSelectModel } from "drizzle-orm";
+import type { InferSelectModel } from "drizzle-orm";
 import { jsonb, pgTable, uuid, varchar } from "drizzle-orm/pg-core";
 import { audits } from "../audit/schema";
 import { id } from "../utils/id";

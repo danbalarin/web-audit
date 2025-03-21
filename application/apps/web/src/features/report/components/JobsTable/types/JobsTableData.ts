@@ -1,7 +1,7 @@
-import { MetricUnit } from "@repo/api/metrics";
-import { MetricRank } from "@repo/api/types";
-import { MouseEventHandler } from "react";
-import { CategoryKeys } from "~/features/report/config/metrics";
+import type { MetricUnit } from "@repo/api/metrics";
+import type { MetricRank } from "@repo/api/types";
+import type { MouseEventHandler } from "react";
+import type { CategoryKeys } from "~/features/report/config/metrics";
 
 export type JobsTableData = {
 	[key in CategoryKeys]: {

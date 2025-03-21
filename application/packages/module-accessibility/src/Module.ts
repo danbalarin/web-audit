@@ -1,7 +1,7 @@
 import { BaseModule } from "@repo/api";
 import { AxeRunner } from "./AxeRunner";
 
-import { BaseModuleOptions } from "@repo/api/types";
+import type { BaseModuleOptions } from "@repo/api/types";
 import pkg from "../package.json";
 
 export type AccessibilityModuleOptions = BaseModuleOptions;

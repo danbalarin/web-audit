@@ -2,8 +2,8 @@ import HorizontalRuleIcon from "@mui/icons-material/HorizontalRule";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 
-import { CalculatedScore } from "@repo/api/types";
-import { Metric } from "@repo/db";
+import type { CalculatedScore } from "@repo/api/types";
+import type { Metric } from "@repo/db";
 
 import { Stat0Icon } from "~/features/ui/components/Stat0Icon";
 import { metricsMap } from "../../config/metrics";

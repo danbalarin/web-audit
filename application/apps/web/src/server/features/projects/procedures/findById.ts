@@ -1,4 +1,4 @@
-import { ProjectService } from "@repo/db";
+import type { ProjectService } from "@repo/db";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { errorHandler } from "~/server/error/errorHandler";

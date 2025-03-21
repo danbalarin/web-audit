@@ -1,4 +1,4 @@
-import { MetricDescription } from "@repo/api/types";
+import type { MetricDescription } from "@repo/api/types";
 
 export const axeScoring = {
 	score: (value: number) => {

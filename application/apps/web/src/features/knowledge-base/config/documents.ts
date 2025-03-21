@@ -19,7 +19,7 @@ import {
 	SEODocument,
 } from "@repo/module-seo/metrics";
 import type { MDXContent } from "mdx/types";
-import { CategoryKeys } from "~/features/report/config/metrics";
+import type { CategoryKeys } from "~/features/report/config/metrics";
 
 export const categoryDocuments: Record<
 	CategoryKeys,

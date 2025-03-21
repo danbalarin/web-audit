@@ -1,6 +1,6 @@
-import { InferInsertModel, and, eq } from "drizzle-orm";
-import { NodePgDatabase } from "drizzle-orm/node-postgres";
-import { schema } from "../../schema";
+import { type InferInsertModel, and, eq } from "drizzle-orm";
+import type { NodePgDatabase } from "drizzle-orm/node-postgres";
+import type { schema } from "../../schema";
 import { whereSoftDelete } from "../utils/whereSoftDelete";
 import { audits } from "./schema";
 

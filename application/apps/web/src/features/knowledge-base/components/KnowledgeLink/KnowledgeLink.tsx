@@ -1,5 +1,8 @@
 import { Link, Tooltip } from "@mui/material";
-import { CategoryKeys, categoriesMap } from "~/features/report/config/metrics";
+import {
+	type CategoryKeys,
+	categoriesMap,
+} from "~/features/report/config/metrics";
 import { KNOWLEDGE_BASE_ROUTES } from "../../config/routes";
 
 type KnowledgeLinkProps = {

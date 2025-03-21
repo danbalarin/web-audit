@@ -1,17 +1,17 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import type { CalculatedScore, CategoryDescription } from "@repo/api/types";
-import { Audit, Metric } from "@repo/db";
+import type { Audit, Metric } from "@repo/db";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useMemo } from "react";
 import {
-	CategoryKeys,
-	MetricKeys,
+	type CategoryKeys,
+	type MetricKeys,
 	metricsMap,
 } from "~/features/report/config/metrics";
 import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { Table } from "~/features/ui/components/Table";
-import { CategoryDetailTableData, createColumns } from "./columns";
+import { type CategoryDetailTableData, createColumns } from "./columns";
 
 type AuditWithScores = {
 	auditId: Audit["id"];

@@ -1,5 +1,9 @@
 import { BaseRunner } from "@repo/api";
-import { BaseContext, BaseRunnerOptions, MetricResult } from "@repo/api/types";
+import type {
+	BaseContext,
+	BaseRunnerOptions,
+	MetricResult,
+} from "@repo/api/types";
 import { clean, gte, lt } from "semver";
 /// <reference path="../../types/wappalyzer-core.d.ts" />
 import Wappalyzer from "wappalyzer-core";

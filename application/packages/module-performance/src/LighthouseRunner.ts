@@ -1,10 +1,10 @@
 import { BaseRunner, spawnChild } from "@repo/api";
-import {
-	type BaseContext,
-	type BaseRunnerOptions,
-	type MetricResult,
+import type {
+	BaseContext,
+	BaseRunnerOptions,
+	MetricResult,
 } from "@repo/api/types";
-import { Result } from "lighthouse";
+import type { Result } from "lighthouse";
 // @ts-ignore
 import { computeMedianRun } from "lighthouse/core/lib/median-run.js";
 import { CumulativeLayoutShift } from "./metrics/cumulative-layout-shift";

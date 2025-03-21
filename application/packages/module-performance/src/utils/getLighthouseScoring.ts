@@ -1,4 +1,4 @@
-import { MetricDescription } from "@repo/api/types";
+import type { MetricDescription } from "@repo/api/types";
 import { erf } from "./erf";
 
 const getLogNormal = (median: number, p10: number) => {

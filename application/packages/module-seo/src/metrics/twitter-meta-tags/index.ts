@@ -1,6 +1,6 @@
 import { Arbitrary } from "@repo/api/metrics";
-import {
-	type MetricDescription,
+import type {
+	MetricDescription,
 	MetricRank,
 	MetricResult,
 } from "@repo/api/types";

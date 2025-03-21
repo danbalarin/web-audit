@@ -1,5 +1,5 @@
 import { Arbitrary } from "@repo/api/metrics";
-import { type MetricDescription } from "@repo/api/types";
+import type { MetricDescription } from "@repo/api/types";
 
 export const TwitterPreview: MetricDescription = {
 	id: "twitterPreview",

@@ -15,7 +15,7 @@ import {
 	ListItemText,
 } from "@mui/material";
 import { usePathname } from "next/navigation";
-import React from "react";
+import type React from "react";
 
 import { KnowledgeBaseSidebarList } from "~/features/knowledge-base/components/KnowledgeBaseSidebarList";
 import { KNOWLEDGE_BASE_ROUTES } from "~/features/knowledge-base/config/routes";

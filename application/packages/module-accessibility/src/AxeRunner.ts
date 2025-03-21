@@ -1,9 +1,9 @@
 import { AxePuppeteer } from "@axe-core/puppeteer";
 import { BaseRunner } from "@repo/api";
-import {
-	type BaseContext,
+import type {
+	BaseContext,
 	BaseRunnerOptions,
-	type MetricResult,
+	MetricResult,
 } from "@repo/api/types";
 import type { Result as AxeAuditResult } from "axe-core";
 import { ACT } from "./metrics/act";

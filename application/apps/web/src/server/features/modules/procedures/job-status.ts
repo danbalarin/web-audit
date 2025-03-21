@@ -1,4 +1,4 @@
-import { JobService } from "@repo/db";
+import type { JobService } from "@repo/db";
 import { TRPCError } from "@trpc/server";
 import z from "zod";
 import { dbProcedure } from "~/server/trpc/procedure";

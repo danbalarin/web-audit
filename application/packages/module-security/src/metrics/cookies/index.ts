@@ -1,5 +1,5 @@
 import { Arbitrary } from "@repo/api/metrics";
-import { type MetricDescription, MetricRank } from "@repo/api/types";
+import type { MetricDescription, MetricRank } from "@repo/api/types";
 
 export enum CookiesFlags {
 	PRESENT = 0x01,

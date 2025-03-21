@@ -1,7 +1,7 @@
-import { Metric } from "@repo/db";
-import { MetricUnit } from "../metrics";
-import { MetricDescription } from "./MetricDescription";
-import { MetricRank } from "./MetricRank";
+import type { Metric } from "@repo/db";
+import type { MetricUnit } from "../metrics";
+import type { MetricDescription } from "./MetricDescription";
+import type { MetricRank } from "./MetricRank";
 
 export type CategoryDescription<
 	TId extends string = string,
