@@ -13,22 +13,21 @@ export type PerformanceModuleOptions = BaseModuleOptions & {
 };
 
 export class PerformanceModule extends BaseModule {
-	constructor(readonly performanceModuleOptions: PerformanceModuleOptions) {
+	constructor(readonly options: PerformanceModuleOptions) {
 		super({
 			description: pkg.description,
 			name: "Performance",
 			version: pkg.version,
 			id: "performance",
-			logger: performanceModuleOptions.logger,
+			logger: options.logger,
 		});
-
 		this._runners = [
 			new LighthouseRunner({
-				...performanceModuleOptions.lighthouseRunnerOptions,
-				logger: this.logger,
+				...options.lighthouseRunnerOptions,
+				logger: options.logger,
 			}),
 			new PuppeteerRunner({
-				logger: this.logger,
+				logger: options.logger,
 			}),
 		];
 	}

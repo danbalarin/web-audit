@@ -7,18 +7,18 @@ import pkg from "../package.json";
 export type AccessibilityModuleOptions = BaseModuleOptions;
 
 export class AccessibilityModule extends BaseModule {
-	constructor(accessibilityModuleOptions: AccessibilityModuleOptions) {
+	constructor(options: AccessibilityModuleOptions) {
 		super({
 			description: pkg.description,
 			name: "Accessibility",
 			version: pkg.version,
 			id: "accessibility",
-			logger: accessibilityModuleOptions.logger,
+			logger: options.logger,
 		});
 
 		this._runners = [
 			new AxeRunner({
-				logger: this.logger,
+				logger: options.logger,
 			}),
 		];
 	}

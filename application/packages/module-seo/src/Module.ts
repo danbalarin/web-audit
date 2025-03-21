@@ -7,18 +7,18 @@ import pkg from "../package.json";
 export type SEOModuleOptions = BaseModuleOptions;
 
 export class SEOModule extends BaseModule {
-	constructor(seoModuleOptions: SEOModuleOptions) {
+	constructor(options: SEOModuleOptions) {
 		super({
 			description: pkg.description,
 			name: "SEO",
 			version: pkg.version,
 			id: "seo",
-			logger: seoModuleOptions.logger,
+			logger: options.logger,
 		});
 
 		this._runners = [
 			new MetaTagsRunner({
-				logger: this.logger,
+				logger: options.logger,
 			}),
 		];
 	}
