@@ -103,7 +103,10 @@
   show: codly-init.with()
   init-code()
 
-  show figure: set block(inset: (y: 0.25em, x: 0.5em))
+  // show figure: set block(inset: (y: 0.25em, x: 0.5em))
+  show figure: it => {
+    block(inset: (y: 0.25em, x: 0.5em))[#it]
+  }
 
   title-page(
     title: title,
