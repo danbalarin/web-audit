@@ -13,6 +13,8 @@ const weights = {
 	[OpenGraphMetaTags.id]: 0.5,
 };
 
+const sumWeights = Object.values(weights).reduce((a, b) => a + b, 0);
+
 const metricsOrder = [
 	SEOMetaTags.id,
 	TwitterMetaTags.id,
@@ -52,7 +54,7 @@ export const SEOCategory: CategoryDescription<"seo"> = {
 			return -1;
 		}
 
-		return score;
+		return score / sumWeights;
 	},
 	rank: (value) => {
 		if (+value > 0.8) {

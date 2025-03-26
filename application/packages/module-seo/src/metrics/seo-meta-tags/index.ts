@@ -16,7 +16,7 @@ const weights = {
 	[SEOMetaTagsFlags.TITLE]: 1,
 	[SEOMetaTagsFlags.DESCRIPTION]: 1,
 	[SEOMetaTagsFlags.KEYWORDS]: 1,
-	[SEOMetaTagsFlags.AUTHOR]: 1,
+	[SEOMetaTagsFlags.AUTHOR]: 0,
 	[SEOMetaTagsFlags.LANGUAGE]: 1,
 };
 

@@ -1,8 +1,13 @@
 import type { MetricResult } from "../../types";
 
+type StandardEnum<T> = {
+	[id: string]: T | string;
+	[nu: number]: string;
+};
+
 export const createFlagMetric = <TEnum>(
-	enumVal: TEnum,
-	weights: Partial<{ [K in keyof TEnum | number]: number }>,
+	enumVal: StandardEnum<TEnum>,
+	weights: Partial<{ [K in keyof StandardEnum<TEnum>]: number }>,
 ) => {
 	const getFlagsFromValue = (value: number): TEnum[] => {
 		const flags: TEnum[] = [];
@@ -33,7 +38,7 @@ export const createFlagMetric = <TEnum>(
 	const score = (value: number | string): number => {
 		const flags = getFlagsFromValue(+value);
 		const total = flags.reduce(
-			(acc, flag) => acc + (weights[flag as keyof TEnum] ?? 0),
+			(acc, flag) => acc + (weights[flag as string | number] ?? 0),
 			0,
 		);
 		return total / weightSum;
