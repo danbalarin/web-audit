@@ -38,3 +38,10 @@
 
 #include "chapters/4-Implementation/main.typ"
 
+#pagebreak(weak: true)
+
+#include "chapters/5-Evaluation-and-Future-Development/main.typ"
+
+#pagebreak(weak: true)
+
+#include "chapters/6-Conclusion/main.typ"

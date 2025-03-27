@@ -1,20 +1,12 @@
-#import "/template/macros.typ": revisit, custom-lorem
 
 = Implementation
 
-== Analysis
+In the previous chapters, we have outlined crucial metrics that need to be evaluated and existing tools that can evaluate some of those metrics. 
+The primary output of this thesis is an application that evaluates as many of these metrics as possible and supports the user in filling in manual evaluations.
 
-=== Use cases
+#include "1-Analysis.typ"
 
-=== Wireframes
+#include "2-Architecture.typ"
 
-== Architecture
-
-=== Platform
-
-=== Modularity
-
-=== Data storage?
-
-== Technologies
+#include "3-Technical-Realization.typ"
 
