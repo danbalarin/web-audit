@@ -1,4 +1,4 @@
-#import "@preview/codly:1.0.0": *
+#import "@preview/codly:1.2.0": *
 
 #let init-code() = {  
   let icon(codepoint) = {
@@ -17,6 +17,11 @@
         icon: icon("images/brand-typescript.svg"),
         // icon: text(font: "tabler-icons", "\u{f5f1}"),
         color: rgb("#3178C6")
+      ),
+      html: (
+        name: "HTML",
+        icon: icon("images/brand-html.svg"),
+        color: rgb("#F26529")
       )
     )
   )

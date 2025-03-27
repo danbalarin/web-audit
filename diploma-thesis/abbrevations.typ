@@ -85,7 +85,11 @@
   ("ZAP", "Zed Attack Proxy"),
   ("HSTS", "HTTP Strict Transport Security"),
   ("CSP", "Content Security Policy"),
-  ("MITM", "Man-in-the-Middle")
+  ("MITM", "Man-in-the-Middle"),
+  ("SOAP", "Simple Object Access Protocol"),
+  ("REST", "Representational State Transfer"),
+  ("RPC", "Remote Procedure Call"),
+  ("SQL", "Structured Query Language")
 )
 
 // const abbrs = `
