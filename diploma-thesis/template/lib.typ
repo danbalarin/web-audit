@@ -165,7 +165,14 @@
   set pagebreak(weak: true)
   
   custom-outline()
-  
+
+  outline(title: "Figures", target: figure.where(kind: image))
+
+  pagebreak()
+
+  abbr.abbr.list()
+
+  pagebreak(weak: true)
   
   set par(leading: 1.2em, spacing: 2em, justify: true)
   set block(spacing: 1.2em)
@@ -177,12 +184,28 @@
   set par(leading: 0.8em, first-line-indent: 0em, justify: false)
 
   pagebreak(weak: true)
-
-  abbr.abbr.list()
-
-  pagebreak(weak: true)
   
   if bibliography-file != none [
     #bibliography(bibliography-file, style: "american-psychological-association", )
   ]
+  
+  show-header.update(false)
+  
+  pagebreak()
+  
+  align(
+    center + horizon, 
+    text(
+      24pt, 
+      weight: "extrabold", 
+      font: "Latin Modern Sans", 
+      "Appendices"
+    )
+  )
+
+  pagebreak()
+  
+
+  heading(numbering: none, "A. Application Source Code")
+  "Todo add link to github"
 }

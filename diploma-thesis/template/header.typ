@@ -13,17 +13,26 @@
   if(chapter != none) {
     last-chapter.update(chapter)
   }
+
+  
   if(not has-heading and show-header.get() and last-chapter.get() != none) {
+    let has-numbering = last-chapter.get().numbering != none
     [
+      
       #pad(bottom: -8pt)[
         #h(1fr)
         #upper()[
-          #last-chapter.get().supplement
-          #counter(heading.where(level: 1)).get().at(0).
+          #if(has-numbering) {
+            [
+              #last-chapter.get().supplement
+              #counter(heading.where(level: 1)).get().at(0).
+            ]
+          }
           #last-chapter.get().body        
         ]
         
       ]
+      
       #line(length: 100%)
     ]
   }

@@ -7,7 +7,7 @@
 
 - screens of the final application
 
-- performance (speed, consistency, comparison with other tools)
+- usage on two versions of the same app
 
 == Limitations
 

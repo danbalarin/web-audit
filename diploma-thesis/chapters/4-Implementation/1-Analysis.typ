@@ -30,14 +30,6 @@ These wireframes address all primary and secondary functional requirements.
 All wireframes share the same layout, with the main navigation on the left side and content in the centre.
 This enables the users to quickly change pages without going through many links.
 
-#figure(
-  supplement: "Wireframe",
-  kind: "Wireframe",
-  caption: "Create project page",
-  image("images/wireframe-create.png"),
-) <wireframe-create>
-
-
 In @wireframe-create we see a page for creating projects.
 Projects will group audit runs for a specific website.
 Users can specify multiple URLs that will be assigned to this specific website.
@@ -45,21 +37,26 @@ The URLs are then tested for connection, and if the URL is reachable, the check 
 
 
 #figure(
-  supplement: "Wireframe",
-  kind: "Wireframe",
-  caption: "Audit page",
+  caption: "Wireframe of create project page",
+  placement: auto,
+  image("images/wireframe-create.png"),
+) <wireframe-create>
+
+#figure(
+  caption: "Wireframe of audit page",
+  placement: auto,
   image("images/wireframe-run.png"),
 ) <wireframe-run>
 
-@wireframe-run shows the project detail page, where users can view all previously conducted audits, compare them, or run another one.
-This page also offers options to delete audits or the entire project.
-
 #figure(
-  supplement: "Wireframe",
-  kind: "Wireframe",
-  caption: "Knowledge base",
+  caption: "Wireframe of knowledge base",
+  placement: auto,
   image("images/wireframe-kb.png"),
 ) <wireframe-kb>
+
+
+@wireframe-run shows the project detail page, where users can view all previously conducted audits, compare them, or run another one.
+This page also offers options to delete audits or the entire project.
 
 The last wireframe, @wireframe-kb, shows the knowledge base layout.
 This page contains descriptions of metrics, along with links to related metrics, sources, and further information. 

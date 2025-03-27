@@ -52,7 +52,6 @@ RPC offers many benefits, including strong type safety with validation on both b
 The main advantage of RPC for applications like this thesis is its different paradigm. 
 While REST and GraphQL primarily focus on resources, RPC focuses on remote procedures. 
 For this application, it means we can directly call procedures that start audits rather than creating resources that would trigger audits as side effects.
-
 For this reason, we will use the tRPC package, an RPC implementation in TypeScript that offers type safety in a Node.js environment.
 
 === Database Schema
@@ -69,6 +68,7 @@ This approach allows metrics and jobs to store arbitrary data, making the system
 
 #figure(
   caption: "Database schema",
+  placement: auto,
   image("images/db-schema.png"),
 ) <db-schema>
 
