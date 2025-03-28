@@ -1,4 +1,5 @@
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import AddReactionIcon from "@mui/icons-material/AddReaction";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import SpeedIcon from "@mui/icons-material/Speed";
 import TroubleshootIcon from "@mui/icons-material/Troubleshoot";
@@ -20,6 +21,7 @@ const ICONS: Record<CategoryKeys, React.ReactNode> = {
 	accessibility: <AccessibilityNewIcon />,
 	security: <LockOpenIcon />,
 	seo: <TroubleshootIcon />,
+	usability: <AddReactionIcon />,
 };
 
 export const CategoryListItem = ({

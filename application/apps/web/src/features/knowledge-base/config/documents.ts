@@ -18,6 +18,11 @@ import {
 	SEOCategoryDocuments,
 	SEODocument,
 } from "@repo/module-seo/metrics";
+import {
+	UsabilityCategory,
+	UsabilityCategoryDocuments,
+	UsabilityDocument,
+} from "@repo/module-usability/metrics";
 import type { MDXContent } from "mdx/types";
 import type { CategoryKeys } from "~/features/report/config/metrics";
 
@@ -40,5 +45,9 @@ export const categoryDocuments: Record<
 	[SEOCategory.id]: {
 		document: SEODocument,
 		metrics: SEOCategoryDocuments,
+	},
+	[UsabilityCategory.id]: {
+		document: UsabilityDocument,
+		metrics: UsabilityCategoryDocuments,
 	},
 };

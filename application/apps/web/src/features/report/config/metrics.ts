@@ -9,12 +9,14 @@ import { AccessibilityCategory } from "@repo/module-accessibility/metrics";
 import { PerformanceCategory } from "@repo/module-performance/metrics";
 import { SecurityCategory } from "@repo/module-security/metrics";
 import { SEOCategory } from "@repo/module-seo/metrics";
+import { UsabilityCategory } from "@repo/module-usability/metrics";
 
 export const categoriesMap = {
 	[PerformanceCategory.id]: PerformanceCategory,
 	[AccessibilityCategory.id]: AccessibilityCategory,
 	[SecurityCategory.id]: SecurityCategory,
 	[SEOCategory.id]: SEOCategory,
+	[UsabilityCategory.id]: UsabilityCategory,
 } as const;
 
 export type CategoryKeys = keyof typeof categoriesMap;

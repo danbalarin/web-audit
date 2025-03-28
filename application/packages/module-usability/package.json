@@ -1,0 +1,29 @@
+{
+	"name": "@repo/module-usability",
+	"description": "Module for usability metrics",
+	"version": "1.0.0",
+	"dependencies": {
+		"@repo/api": "*",
+		"handlebars": "^4.7.8",
+		"puppeteer": "^24.4.0",
+		"typescript": "5.8.2"
+	},
+	"devDependencies": {
+		"@repo/typescript-config": "*"
+	},
+	"exports": {
+		".": {
+			"import": "./src/index.ts",
+			"require": "./src/index.ts"
+		},
+		"./metrics": {
+			"import": "./src/metrics/index.ts",
+			"require": "./src/metrics/index.ts"
+		}
+	},
+	"private": true,
+	"scripts": {
+		"lint": "biome lint --error-on-warnings"
+	},
+	"sideEffects": false
+}
