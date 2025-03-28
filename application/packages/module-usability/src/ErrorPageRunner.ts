@@ -62,8 +62,12 @@ export class ErrorPageRunner extends BaseRunner<
 		let status = -1;
 		try {
 			page.setRequestInterception(true);
+			page.on("request", (request) => {
+				request.continue();
+			});
 			page.on("response", (response) => {
 				status = response.status();
+				return response;
 			});
 			await page.goto(url);
 			await page.waitForNetworkIdle({ idleTime: 1000 });
@@ -99,9 +103,6 @@ export class ErrorPageRunner extends BaseRunner<
 
 	async runRaw(context: BaseContext): Promise<Result> {
 		const browser = await context.createBrowser();
-		const page = await browser.newPage();
-		await page.goto(context.url);
-		await page.waitForNetworkIdle({ idleTime: 1000 });
 
 		const promises = [
 			this.checkNotFound(context.url, await browser.newPage()),
