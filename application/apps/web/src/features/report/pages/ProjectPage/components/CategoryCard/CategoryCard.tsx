@@ -85,7 +85,8 @@ export const CategoryCard = ({
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getRowId: (row) => row.id,
-		getRowCanExpand: (row) => !!row.original.getDetailRows,
+		getRowCanExpand: (row) =>
+			!!row.original.getDetailRows?.(Object.values(row.original.data))?.length,
 		getExpandedRowModel: getExpandedRowModel(),
 		enableExpanding: true,
 		state: {
