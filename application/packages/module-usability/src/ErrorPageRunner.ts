@@ -58,7 +58,7 @@ export class ErrorPageRunner extends BaseRunner<
 	async checkNotFound(baseUrl: string, page: Page) {
 		const salt = Math.floor(Math.random() * 1000);
 		const url = join(baseUrl, "nonexistent", "page", salt.toString());
-		this._logger?.debug("Checking URL:", url);
+		this._logger?.debug(`Checking for 404 at ${url}`);
 		let status = -1;
 		try {
 			page.setRequestInterception(true);
@@ -68,7 +68,7 @@ export class ErrorPageRunner extends BaseRunner<
 			await page.goto(url);
 			await page.waitForNetworkIdle({ idleTime: 1000 });
 		} catch (error) {
-			this._logger?.debug("Error navigating to nonexistent URL:", error);
+			this._logger?.error(error, "Error navigating to nonexistent URL:");
 		}
 
 		const notFound = await page.evaluate(() => {

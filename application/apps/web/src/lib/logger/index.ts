@@ -6,9 +6,21 @@ const pino = Pino({
 	timestamp: Pino.stdTimeFunctions.isoTime,
 });
 
-export const trpcLogger = pino.child({ module: "trpc" });
-export const procedureLogger = trpcLogger.child({ module: "trpc/procedure" });
-export const moduleLogger = pino.child({ module: "module" });
+export const trpcLogger = pino.child(
+	{ module: "trpc" },
+	{ msgPrefix: "[trpc] " },
+);
+export const procedureLogger = trpcLogger.child(
+	{ module: "trpc/procedure" },
+	{ msgPrefix: "[procedure] " },
+);
+export const moduleProcessorLogger = pino.child(
+	{ module: "module" },
+	{ msgPrefix: "[module-processor] " },
+);
 export const createModuleLogger = (module: string) =>
-	pino.child({ module: `module/${module}` });
-export const reactLogger = pino.child({ module: "react" });
+	pino.child({ module: `module/${module}` }, { msgPrefix: `[${module}] ` });
+export const reactLogger = pino.child(
+	{ module: "react" },
+	{ msgPrefix: "[react] " },
+);

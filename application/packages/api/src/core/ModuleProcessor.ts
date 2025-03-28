@@ -142,7 +142,7 @@ export class ModuleProcessor {
 			});
 
 			const unsubscribeError = module.on("error", (payload) => {
-				this.logger.error("Error executing module", payload.error);
+				this.logger.error(payload.error, "Error while executing module");
 				this.updateModuleStatus(module.id, {
 					progress: 1,
 					status: "error",
@@ -166,7 +166,7 @@ export class ModuleProcessor {
 					unsubscribeComplete();
 				})
 				.catch((e) => {
-					this.logger.error("Error executing module", e);
+					this.logger.error(e, "Error while executing module");
 					this.updateModuleStatus(module.id, {
 						progress: 1,
 						status: "error",

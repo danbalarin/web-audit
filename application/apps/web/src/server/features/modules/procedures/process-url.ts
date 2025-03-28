@@ -2,7 +2,7 @@ import { type BaseModule, ModuleProcessor } from "@repo/api";
 import type { AuditService, JobService, MetricService } from "@repo/db";
 import type { Browser } from "puppeteer";
 import z from "zod";
-import { moduleLogger } from "~/lib/logger";
+import { moduleProcessorLogger } from "~/lib/logger";
 import { dbMiddleware } from "~/server/middlewares/database";
 
 import { browserProcedure } from "~/server/trpc";
@@ -34,7 +34,7 @@ const processUrl = async ({
 	const { url } = input;
 	const processor = new ModuleProcessor({
 		modules,
-		logger: moduleLogger,
+		logger: moduleProcessorLogger,
 		jobService,
 		metricService,
 		auditService,

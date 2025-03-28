@@ -53,9 +53,9 @@ export abstract class BaseModule<
 	protected async _execute(context: TContext): Promise<ModuleResult> {
 		const metrics: MetricResult[] = [];
 		const promises = this._runners.map(async (runner) => {
-			this.logger.debug(`${runner.name}: running`);
+			this.logger.debug(`${runner.name}: start`);
 			const res = await runner.run(context);
-			this.logger.debug(`${runner.name}: finished`);
+			this.logger.debug(`${runner.name}: complete`);
 			metrics.push(...res);
 			this.progress = this._progress + 1 / this._runners.length;
 		});
@@ -67,7 +67,7 @@ export abstract class BaseModule<
 	}
 
 	async execute(context: TContext) {
-		this.logger.debug("executing");
+		this.logger.debug("start");
 		this.emit("progress", {
 			progress: this._progress,
 		});
@@ -83,7 +83,7 @@ export abstract class BaseModule<
 				error instanceof Error
 					? error
 					: new Error("Unknown error", { cause: error });
-			this.logger.error({ error: sentError }, "error");
+			this.logger.error(sentError, "Error while executing module");
 			this.emit("error", {
 				error: sentError,
 			});

@@ -97,7 +97,7 @@ export class AxeRunner extends BaseRunner<Result> {
 			const results = await new AxePuppeteer(page).analyze();
 			return results;
 		} catch (error) {
-			console.error(error);
+			this._logger?.error(error, "Error while running Axe");
 			throw error;
 		}
 	}
