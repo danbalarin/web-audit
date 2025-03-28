@@ -1,12 +1,7 @@
 import type { MetricUnit } from "../metrics";
 import type { MetricRank } from "./MetricRank";
 import type { MetricResult } from "./MetricResult";
-
-export type MetricRowDefinition = {
-	type: "text" | "input";
-	label: string;
-	value: string[];
-};
+import type { MetricRowDefinition } from "./MetricRowDefinition";
 
 export type MetricDescription<
 	TVal extends number | string = number | string,

@@ -126,14 +126,14 @@ export const CategoryCard = ({
 						if (!detailRows) {
 							return null;
 						}
-						return detailRows.map((row, i) => {
+						return detailRows.map((detailRow, i) => {
 							const isLast = i === detailRows.length - 1;
 							return (
 								<TableRow
 									sx={{
 										display: "contents",
 									}}
-									key={row.label}
+									key={detailRow.label}
 								>
 									{Array.from({ length: skipLeft }).map(() => (
 										<TableCell
@@ -143,12 +143,13 @@ export const CategoryCard = ({
 											}}
 										/>
 									))}
-									<TableCell>{row.label}</TableCell>
-									{row.value.map((value, i) => (
+									<TableCell>{detailRow.label}</TableCell>
+									{detailRow.value.map((_value, i) => (
 										<DetailTableCell
-											type={row.type}
-											label={row.label}
-											value={value}
+											rowDefinition={detailRow}
+											index={i}
+											metricId={Object.values(row.original.data)[i]?.id}
+											projectId={projectId}
 											key={i}
 										/>
 									))}

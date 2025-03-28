@@ -1,32 +1,77 @@
-import { TableCell, TextField } from "@mui/material";
+import { Box, Button, TableCell, TextField } from "@mui/material";
 import type { MetricRowDefinition } from "@repo/api/types";
+import { useEffect, useState } from "react";
+import { useUpdateMetric } from "~/features/report/hooks/useUpdateMetric";
 
 type DetailTableCellProps = {
-	type: MetricRowDefinition["type"];
-	label: MetricRowDefinition["label"];
-	value: MetricRowDefinition["value"][number];
+	rowDefinition: MetricRowDefinition;
+	index: number;
+	metricId?: string;
+	projectId?: string;
 };
 
 export const DetailTableCell = ({
-	type,
-	label,
-	value,
+	rowDefinition,
+	index,
+	metricId,
+	projectId,
 }: DetailTableCellProps) => {
+	const [text, setText] = useState<string>("");
+	useEffect(() => {
+		setText(rowDefinition.value[index] ?? "");
+	}, [rowDefinition.value, index]);
+
+	const { mutate, isPending } = useUpdateMetric({
+		projectId,
+	});
+
 	let component;
-	switch (type) {
+	switch (rowDefinition.type) {
 		case "text":
-			component = value;
+			component = rowDefinition.value[index];
 			break;
 		case "input":
 			component = (
-				<TextField
-					sx={{ width: "100%", marginRight: 2 }}
-					label={label}
-					multiline
-					minRows={2}
-					maxRows={4}
-					value={value}
-				/>
+				<Box sx={{ width: "100%", position: "relative" }}>
+					<TextField
+						sx={{ marginRight: 2 }}
+						label={rowDefinition.label}
+						multiline
+						fullWidth
+						minRows={2}
+						maxRows={4}
+						value={text}
+						onChange={(e) => {
+							setText(e.target.value);
+						}}
+						disabled={isPending}
+					/>
+					<Button
+						variant="contained"
+						size="small"
+						loading={isPending}
+						disabled={text === rowDefinition.value[index]}
+						onClick={() => {
+							if (!metricId) {
+								throw new Error("Metric ID is required");
+							}
+
+							mutate({
+								id: metricId,
+								additionalData: {
+									[rowDefinition.dataKey]: text,
+								},
+							});
+						}}
+						sx={{
+							position: "absolute",
+							right: "8px",
+							bottom: "8px",
+						}}
+					>
+						Save
+					</Button>
+				</Box>
 			);
 			break;
 	}

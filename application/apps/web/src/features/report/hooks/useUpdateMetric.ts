@@ -40,14 +40,20 @@ export const useUpdateMetric = (
 				return;
 			}
 			const newData = JSON.parse(JSON.stringify(oldData)) as typeof oldData; // Deep clone
+
+			const overrideData = {} as { value?: string; additionalData?: object };
+			if (additionalData) {
+				overrideData.additionalData = additionalData;
+			}
+			if (value) {
+				overrideData.value = value;
+			}
+
 			newData.jobs[jobIndex]!.audits[auditIndex]!.metrics[metricIndex] =
 				deepmerge(
 					// @ts-ignore
 					newData.jobs[jobIndex]!.audits[auditIndex]!.metrics[metricIndex],
-					{
-						value: value?.toString(),
-						additionalData: additionalData,
-					},
+					overrideData,
 				);
 
 			if (oldData) {

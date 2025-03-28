@@ -17,7 +17,6 @@ import type {
 	MetricResult,
 } from "@repo/api/types";
 import type { Metric } from "@repo/db";
-import { Fragment } from "react";
 import { ImageMetricResultCell } from "./parts/ImageMetricResultCell";
 import { MemoryMetricResultCell } from "./parts/MemoryMetricResultCell";
 import { SwitchMetricResultCell } from "./parts/SwitchMetricResultCell";
@@ -130,18 +129,17 @@ export const MetricResultCell = ({
 		}
 	}
 
-	const tooltip = renderTooltip
-		? renderTooltip(result)
-		: score
-			? `${score}%`
-			: undefined;
-
-	const TooltipComponent = hideTooltip ? Fragment : Tooltip;
+	let tooltipContent = undefined;
+	if (renderTooltip) {
+		tooltipContent = renderTooltip(result);
+	} else if (score) {
+		tooltipContent = `${score}%`;
+	}
 
 	return (
-		<TooltipComponent
-			title={!hideTooltip ? tooltip : undefined}
-			placement={!hideTooltip ? "bottom-start" : undefined}
+		<Tooltip
+			title={!hideTooltip ? tooltipContent : undefined}
+			placement="bottom-start"
 		>
 			<Typography
 				component={"span"}
@@ -155,7 +153,7 @@ export const MetricResultCell = ({
 				{!hideIcon && rankIconMap[rank]}
 				{component}
 			</Typography>
-		</TooltipComponent>
+		</Tooltip>
 	);
 };
 

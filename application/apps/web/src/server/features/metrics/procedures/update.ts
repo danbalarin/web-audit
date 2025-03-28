@@ -31,9 +31,10 @@ const update = async ({
 
 		const newValue = input.value ?? data.value;
 		const newAdditionalData = deepmerge(
-			input.additionalData ?? {},
 			data.additionalData ?? {},
+			input.additionalData ?? {},
 		);
+
 		const updatedData = await metricService.update(input.id, {
 			value: newValue,
 			additionalData: newAdditionalData,
