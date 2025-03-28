@@ -24,6 +24,7 @@ import { SwitchMetricResultCell } from "./parts/SwitchMetricResultCell";
 import { TimeMetricResultCell } from "./parts/TimeMetricResultCell";
 
 type MetricResultCellProps = {
+	projectId?: string;
 	metricId?: string;
 	unit: MetricUnit;
 	score?: CalculatedScore<Metric>["score"];
@@ -41,6 +42,7 @@ const rankIconMap: Record<MetricRank, JSX.Element> = {
 };
 
 export const MetricResultCell = ({
+	projectId,
 	metricId,
 	score,
 	rank,
@@ -115,7 +117,11 @@ export const MetricResultCell = ({
 				hideIcon = true;
 				hideTooltip = true;
 				component = (
-					<SwitchMetricResultCell value={+value} metricId={metricId} />
+					<SwitchMetricResultCell
+						value={+value}
+						metricId={metricId}
+						projectId={projectId}
+					/>
 				);
 				break;
 			default:

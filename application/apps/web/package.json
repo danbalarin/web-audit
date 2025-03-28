@@ -29,6 +29,7 @@
 		"@vercel/nft": "^0.29.2",
 		"any-signal": "^4.1.1",
 		"date-fns": "^4.1.0",
+		"deepmerge": "^4.3.1",
 		"lodash": "^4.17.21",
 		"mdx": "^0.3.1",
 		"next": "^15.1.6",

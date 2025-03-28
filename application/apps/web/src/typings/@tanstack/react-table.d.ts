@@ -6,4 +6,8 @@ declare module "@tanstack/table-core" {
 			textAlign?: "left" | "center" | "right";
 		};
 	}
+
+	export interface TableMeta<TData extends RowData> {
+		projectId?: string;
+	}
 }

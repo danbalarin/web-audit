@@ -59,6 +59,7 @@ export const CategoryList = ({ projectId }: CategoryListProps) => {
 
 	return Object.values(categoriesMap).map((cat) => (
 		<CategoryCard
+			projectId={projectId}
 			category={cat}
 			key={cat.id}
 			metricScores={data}

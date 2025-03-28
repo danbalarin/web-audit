@@ -33,6 +33,7 @@ type AuditWithScores = {
 };
 
 type CategoryCardProps = {
+	projectId: string;
 	category: CategoryDescription<CategoryKeys>;
 	audits: Audit[];
 	metricScores: AuditWithScores[];
@@ -71,6 +72,7 @@ const sortData = (data: CategoryDetailTableData[], order?: string[]) => {
 };
 
 export const CategoryCard = ({
+	projectId,
 	metricScores,
 	audits,
 	category,
@@ -95,6 +97,9 @@ export const CategoryCard = ({
 				left: ["expander", "id"],
 				right: ["comparison"],
 			},
+		},
+		meta: {
+			projectId,
 		},
 	});
 

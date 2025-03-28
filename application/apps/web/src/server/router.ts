@@ -1,3 +1,4 @@
+import { router as metrics } from "./features/metrics";
 import { router as modules } from "./features/modules";
 import { router as networkTest } from "./features/network-test";
 import { router as projects } from "./features/projects";
@@ -8,6 +9,7 @@ const appRouter = createTRPCRouter({
 	networkTest,
 	scraper,
 	modules,
+	metrics,
 	projects,
 });
 
