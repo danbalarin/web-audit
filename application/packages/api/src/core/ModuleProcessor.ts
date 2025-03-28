@@ -1,7 +1,7 @@
 import type { AuditService, Job, JobService, MetricService } from "@repo/db";
 
+import type { Logger, ModuleStatus } from "../types";
 import type { BaseContext } from "../types/Context";
-import type { Logger } from "../types/Logger";
 import type { BaseModule, ModuleResult } from "./Module";
 
 type Step = "ready" | "processing" | "saving" | "done";
@@ -44,6 +44,18 @@ export class ModuleProcessor {
 			return;
 		}
 		await this._jobService.setProgress(this._job.id, progress);
+	}
+
+	private async updateModuleStatus(
+		moduleId: string,
+		status: Partial<ModuleStatus>,
+	) {
+		if (!this._job) {
+			return;
+		}
+		await this._jobService.updateModuleStatuses(this._job.id, {
+			[moduleId]: status,
+		});
 	}
 
 	public async process<TContext extends BaseContext = BaseContext>(
@@ -116,28 +128,52 @@ export class ModuleProcessor {
 		let completed = 0;
 		const promises = [];
 		for (const module of Object.values(this._modules)) {
-			module.on("progress", (payload) => {
+			this.updateModuleStatus(module.id, {
+				progress: 0.01,
+				status: "processing",
+			});
+
+			const unsubscribeProgress = module.on("progress", (payload) => {
 				this.progress(
 					completed / this._modules.length +
 						payload.progress / this._modules.length,
 				);
+				this.updateModuleStatus(module.id, { progress: payload.progress });
 			});
 
-			// TODO: handle errors
-			// module.on("error", (payload) => {
-			// });
+			const unsubscribeError = module.on("error", (payload) => {
+				this.logger.error("Error executing module", payload.error);
+				this.updateModuleStatus(module.id, {
+					progress: 1,
+					status: "error",
+					additionalData: payload.error,
+				});
+			});
 
-			module.on("complete", (payload) => {
+			const unsubscribeComplete = module.on("complete", (payload) => {
 				completed++;
 				this.progress(completed / this._modules.length);
+				this.updateModuleStatus(module.id, { progress: 1, status: "complete" });
+
 				result.categories.push(payload.data);
 			});
 
-			// TODO: handle errors
 			promises.push(
-				module.execute(context).catch((e) => {
-					this.logger.error("Error executing module", e);
-				}),
+				module
+					.execute(context)
+					.finally(() => {
+						unsubscribeProgress();
+						unsubscribeError();
+						unsubscribeComplete();
+					})
+					.catch((e) => {
+						this.logger.error("Error executing module", e);
+						this.updateModuleStatus(module.id, {
+							progress: 1,
+							status: "error",
+							additionalData: e,
+						});
+					}),
 			);
 		}
 

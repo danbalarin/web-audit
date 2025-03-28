@@ -12,7 +12,7 @@ export const jobs = pgTable("jobs", {
 		.notNull(),
 	progress: real("progress").default(0).notNull(),
 	error: json("error"),
-	moduleStatuses: json("module_statuses").default({}).notNull(),
+	moduleStatuses: json("module_statuses").default({}).notNull().$type<object>(),
 });
 
 export type Job = Omit<InferSelectModel<typeof jobs>, "deletedAt">;

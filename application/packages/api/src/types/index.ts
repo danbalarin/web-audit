@@ -10,4 +10,5 @@ export * from "./Logger";
 export * from "./MetricDescription";
 export * from "./MetricRank";
 export * from "./MetricResult";
+export * from "./ModuleStatus";
 export * from "./UnionToIntersection";
