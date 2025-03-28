@@ -307,17 +307,12 @@ export class MetaTagsRunner extends BaseRunner<
 			},
 		);
 
-		try {
-			return {
-				basic: basic ?? {},
-				openGraph: openGraph ?? {},
-				twitter: twitter ?? {},
-				facebookImage,
-				twitterImage,
-			};
-		} catch (error) {
-			console.error(error);
-			throw error;
-		}
+		return {
+			basic: basic ?? {},
+			openGraph: openGraph ?? {},
+			twitter: twitter ?? {},
+			facebookImage,
+			twitterImage,
+		};
 	}
 }
