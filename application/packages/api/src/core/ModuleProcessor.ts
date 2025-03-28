@@ -126,7 +126,7 @@ export class ModuleProcessor {
 		};
 
 		let completed = 0;
-		const promises = [];
+
 		for (const module of Object.values(this._modules)) {
 			this.updateModuleStatus(module.id, {
 				progress: 0.01,
@@ -158,26 +158,22 @@ export class ModuleProcessor {
 				result.categories.push(payload.data);
 			});
 
-			promises.push(
-				module
-					.execute(context)
-					.finally(() => {
-						unsubscribeProgress();
-						unsubscribeError();
-						unsubscribeComplete();
-					})
-					.catch((e) => {
-						this.logger.error("Error executing module", e);
-						this.updateModuleStatus(module.id, {
-							progress: 1,
-							status: "error",
-							additionalData: e,
-						});
-					}),
-			);
+			await module
+				.execute(context)
+				.finally(() => {
+					unsubscribeProgress();
+					unsubscribeError();
+					unsubscribeComplete();
+				})
+				.catch((e) => {
+					this.logger.error("Error executing module", e);
+					this.updateModuleStatus(module.id, {
+						progress: 1,
+						status: "error",
+						additionalData: e,
+					});
+				});
 		}
-
-		await Promise.all(promises);
 
 		const auditId = await this.saveAuditResult(result);
 
