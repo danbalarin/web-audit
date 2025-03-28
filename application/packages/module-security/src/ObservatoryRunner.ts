@@ -56,12 +56,6 @@ export class ObservatoryRunner extends BaseRunner {
 		];
 	}
 
-	async run(context: BaseContext): Promise<MetricResult[]> {
-		const res = await this.runRaw(context);
-
-		return this.transform(res);
-	}
-
 	async runRaw(context: BaseContext): Promise<Result> {
 		const { hostname } = new URL(context.url);
 		return scan(hostname);

@@ -81,12 +81,6 @@ export class LighthouseRunner extends BaseRunner<
 		];
 	}
 
-	async run(context: BaseContext): Promise<MetricResult[]> {
-		const res = await this.runRaw(context);
-
-		return this.transform(res);
-	}
-
 	async runRaw(context: BaseContext): Promise<Result> {
 		const runs = { lhr: [] as Result[], requests: [] as string[][] };
 		for (let i = 0; i < this._options.numberOfRuns; i++) {

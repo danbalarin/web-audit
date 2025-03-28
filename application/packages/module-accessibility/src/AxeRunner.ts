@@ -80,12 +80,6 @@ export class AxeRunner extends BaseRunner<Result> {
 		];
 	}
 
-	async run(context: BaseContext): Promise<MetricResult[]> {
-		const res = await this.runRaw(context);
-
-		return this.transform(res);
-	}
-
 	protected async runRaw(context: BaseContext): Promise<Result> {
 		const browser = await context.createBrowser();
 		const page = await browser.newPage();
@@ -93,13 +87,21 @@ export class AxeRunner extends BaseRunner<Result> {
 		await page.goto(context.url);
 		await page.waitForNetworkIdle({ idleTime: 1000 });
 
+		let results: Result;
 		try {
-			const results = await new AxePuppeteer(page).analyze();
-			return results;
+			results = await new AxePuppeteer(page).analyze();
 		} catch (error) {
 			this._logger?.error(error, "Error while running Axe");
 			throw error;
 		}
+
+		try {
+			await browser.close();
+		} catch (_e) {
+			void 0;
+		}
+
+		return results;
 	}
 }
 

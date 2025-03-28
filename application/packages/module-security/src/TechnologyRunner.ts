@@ -77,12 +77,6 @@ export class TechnologyRunner extends BaseRunner<TechnologyRunnerResult> {
 		];
 	}
 
-	async run(context: BaseContext): Promise<MetricResult[]> {
-		const res = await this.runRaw(context);
-
-		return this.transform(res);
-	}
-
 	private async getTechnologies(context: BaseContext): Promise<Technology[]> {
 		Wappalyzer.setCategories(categories);
 		Wappalyzer.setTechnologies(technologies);
@@ -99,6 +93,12 @@ export class TechnologyRunner extends BaseRunner<TechnologyRunnerResult> {
 
 		if (error) {
 			throw error;
+		}
+
+		try {
+			await browser.close();
+		} catch (_e) {
+			void _e;
 		}
 
 		return results.technologies;

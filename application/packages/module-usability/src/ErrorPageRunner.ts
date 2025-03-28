@@ -49,12 +49,6 @@ export class ErrorPageRunner extends BaseRunner<
 		];
 	}
 
-	async run(context: BaseContext): Promise<MetricResult[]> {
-		const res = await this.runRaw(context);
-
-		return this.transform(res);
-	}
-
 	async checkNotFound(baseUrl: string, page: Page) {
 		const salt = Math.floor(Math.random() * 1000);
 		const url = join(baseUrl, "nonexistent", "page", salt.toString());
@@ -109,6 +103,12 @@ export class ErrorPageRunner extends BaseRunner<
 		] as const;
 
 		const [notFound] = await Promise.all(promises);
+
+		try {
+			await browser.close();
+		} catch (_e) {
+			void _e;
+		}
 
 		try {
 			return {

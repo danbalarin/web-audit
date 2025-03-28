@@ -8,5 +8,8 @@ export type Logger = {
 	info: LogFn;
 	trace: LogFn;
 	debug: LogFn;
-	child: (options: Record<string, unknown>) => Logger;
+	child: (
+		bindings: Record<string, unknown>,
+		options?: { msgPrefix?: string },
+	) => Logger;
 };

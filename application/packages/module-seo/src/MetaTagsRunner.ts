@@ -144,12 +144,6 @@ export class MetaTagsRunner extends BaseRunner<
 		];
 	}
 
-	async run(context: BaseContext): Promise<MetricResult[]> {
-		const res = await this.runRaw(context);
-
-		return this.transform(res);
-	}
-
 	private async getBasicMetaTags(page: Page) {
 		const res = await page.evaluate(() => {
 			const title = document.title;
@@ -306,6 +300,12 @@ export class MetaTagsRunner extends BaseRunner<
 				url: context.url,
 			},
 		);
+
+		try {
+			await browser.close();
+		} catch (_e) {
+			void _e;
+		}
 
 		return {
 			basic: basic ?? {},

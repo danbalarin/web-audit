@@ -13,11 +13,23 @@ export abstract class BaseRunner<
 
 	constructor(name: string, { logger, ...options }: TOptions) {
 		this.name = name;
-		this._logger = logger.child({ runner: name });
+		this._logger = logger.child({ runner: name }, { msgPrefix: `[${name}] ` });
 		this._options = Object.assign({}, options);
 	}
 
-	abstract run(context: TContext): Promise<MetricResult[]>;
+	async run(context: TContext): Promise<MetricResult[]> {
+		const start = Date.now();
+		const data = await this.runRaw(context);
+		const runEnd = Date.now();
+		const runDuration = runEnd - start;
+		this._logger?.info(`run finished in ${runDuration}ms`);
+
+		const transformedData = this.transform(data);
+		const transformEnd = Date.now();
+		const transformDuration = transformEnd - runEnd;
+		this._logger?.info(`transform finished in ${transformDuration}ms`);
+		return transformedData;
+	}
 
 	protected abstract runRaw(context: TContext): Promise<TResult>;
 

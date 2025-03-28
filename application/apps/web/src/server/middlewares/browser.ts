@@ -4,8 +4,8 @@ import { middleware } from "../trpc/init";
 
 export const browserMiddleware = middleware(async ({ next, ctx }) => {
 	try {
-		const createBrowser = async () =>
-			await puppeteer.launch({
+		const createBrowser = async () => {
+			const browser = await puppeteer.launch({
 				headless: true,
 				executablePath: env.CHROMIUM_PATH,
 				defaultViewport: null,
@@ -22,6 +22,9 @@ export const browserMiddleware = middleware(async ({ next, ctx }) => {
 				],
 				ignoreDefaultArgs: ["--enable-automation"],
 			});
+
+			return browser;
+		};
 
 		const response = await next({
 			ctx: {

@@ -26,12 +26,6 @@ export class SSLRunner extends BaseRunner<Result> {
 		];
 	}
 
-	async run(context: BaseContext): Promise<MetricResult[]> {
-		const res = await this.runRaw(context);
-
-		return this.transform(res);
-	}
-
 	protected async runRaw(context: BaseContext): Promise<Result> {
 		const { hostname } = new URL(context.url);
 		return sslChecker(hostname);
