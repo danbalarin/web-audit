@@ -6,20 +6,20 @@ import { UsabilityModule } from "@repo/module-usability";
 import { createModuleLogger } from "~/lib/logger";
 
 export const createModulesContext = async () => {
-	const PerformanceModuleInstance = new PerformanceModule({
+	const _PerformanceModuleInstance = new PerformanceModule({
 		lighthouseRunnerOptions: { numberOfRuns: 1 },
 		logger: createModuleLogger("performance"),
 	});
 
-	const AccessibilityModuleInstance = new AccessibilityModule({
+	const _AccessibilityModuleInstance = new AccessibilityModule({
 		logger: createModuleLogger("accessibility"),
 	});
 
-	const SecurityModuleInstance = new SecurityModule({
+	const _SecurityModuleInstance = new SecurityModule({
 		logger: createModuleLogger("security"),
 	});
 
-	const SEOModuleInstance = new SEOModule({
+	const _SEOModuleInstance = new SEOModule({
 		logger: createModuleLogger("seo"),
 	});
 
@@ -29,10 +29,10 @@ export const createModulesContext = async () => {
 
 	return {
 		modules: [
-			PerformanceModuleInstance,
-			AccessibilityModuleInstance,
-			SecurityModuleInstance,
-			SEOModuleInstance,
+			_PerformanceModuleInstance,
+			_AccessibilityModuleInstance,
+			_SecurityModuleInstance,
+			_SEOModuleInstance,
 			UsabilityModuleInstance,
 		],
 	};

@@ -1,6 +1,7 @@
 import type { CategoryDescription, MetricDescription } from "@repo/api/types";
 
 import { Arbitrary } from "@repo/api/metrics";
+import { ImmediateFeedback } from "./immediate-feedback";
 import { NotFoundPage } from "./not-found-page";
 
 const weights = {
@@ -9,9 +10,9 @@ const weights = {
 
 const sumWeights = Object.values(weights).reduce((a, b) => a + b, 0);
 
-const metricsOrder = [NotFoundPage.id];
+const metricsOrder = [NotFoundPage.id, ImmediateFeedback.id];
 
-const metrics: MetricDescription[] = [NotFoundPage];
+const metrics: MetricDescription[] = [NotFoundPage, ImmediateFeedback];
 
 export const UsabilityCategory: CategoryDescription<"usability"> = {
 	id: "usability",

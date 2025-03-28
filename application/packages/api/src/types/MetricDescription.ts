@@ -2,8 +2,8 @@ import type { MetricUnit } from "../metrics";
 import type { MetricRank } from "./MetricRank";
 import type { MetricResult } from "./MetricResult";
 
-type RowDefinition = {
-	type: "text";
+export type MetricRowDefinition = {
+	type: "text" | "input";
 	label: string;
 	value: string[];
 };
@@ -52,7 +52,7 @@ export type MetricDescription<
 
 	getDetailRows?: (
 		result: (Omit<MetricResult<TVal>, "id"> | null)[],
-	) => RowDefinition[];
+	) => MetricRowDefinition[];
 
 	/**
 	 * Compares two values of the metric

@@ -1,0 +1,1 @@
+export { DetailTableCell } from "./DetailTableCell";

@@ -3,6 +3,7 @@ import type { BaseModuleOptions } from "@repo/api/types";
 
 import pkg from "../package.json";
 import { ErrorPageRunner } from "./ErrorPageRunner";
+import { UserInterfaceHeuristicsRunner } from "./UserInterfaceHeuristicsRunner";
 
 export type UsabilityModuleOptions = BaseModuleOptions;
 
@@ -18,6 +19,9 @@ export class UsabilityModule extends BaseModule {
 
 		this._runners = [
 			new ErrorPageRunner({
+				logger: options.logger,
+			}),
+			new UserInterfaceHeuristicsRunner({
 				logger: options.logger,
 			}),
 		];

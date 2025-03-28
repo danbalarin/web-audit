@@ -22,6 +22,7 @@ import {
 import { RoundedAccordion } from "~/features/ui/components/RoundedAccordion";
 import { Table } from "~/features/ui/components/Table";
 import { type CategoryDetailTableData, createColumns } from "./columns";
+import { DetailTableCell } from "./parts/DetailTableCell";
 
 type AuditWithScores = {
 	auditId: Audit["id"];
@@ -139,7 +140,12 @@ export const CategoryCard = ({
 									))}
 									<TableCell>{row.label}</TableCell>
 									{row.value.map((value, i) => (
-										<TableCell key={i}>{value}</TableCell>
+										<DetailTableCell
+											type={row.type}
+											label={row.label}
+											value={value}
+											key={i}
+										/>
 									))}
 									{Array.from({ length: skipRight }).map(() => (
 										<TableCell

@@ -4,7 +4,13 @@ import InfoIconOutlined from "@mui/icons-material/InfoOutlined";
 import WarningIcon from "@mui/icons-material/Warning";
 import { Tooltip, Typography } from "@mui/material";
 
-import { Arbitrary, Memory, type MetricUnit, Time } from "@repo/api/metrics";
+import {
+	Arbitrary,
+	Input,
+	Memory,
+	type MetricUnit,
+	Time,
+} from "@repo/api/metrics";
 import type {
 	CalculatedScore,
 	MetricRank,
@@ -14,9 +20,11 @@ import type { Metric } from "@repo/db";
 import { Fragment } from "react";
 import { ImageMetricResultCell } from "./parts/ImageMetricResultCell";
 import { MemoryMetricResultCell } from "./parts/MemoryMetricResultCell";
+import { SwitchMetricResultCell } from "./parts/SwitchMetricResultCell";
 import { TimeMetricResultCell } from "./parts/TimeMetricResultCell";
 
 type MetricResultCellProps = {
+	metricId?: string;
 	unit: MetricUnit;
 	score?: CalculatedScore<Metric>["score"];
 	rank: CalculatedScore<Metric>["rank"];
@@ -33,6 +41,7 @@ const rankIconMap: Record<MetricRank, JSX.Element> = {
 };
 
 export const MetricResultCell = ({
+	metricId,
 	score,
 	rank,
 	result,
@@ -100,6 +109,13 @@ export const MetricResultCell = ({
 				hideTooltip = true;
 				component = (
 					<ImageMetricResultCell title="Preview" image={value.toString()} />
+				);
+				break;
+			case Input.BOOLEAN:
+				hideIcon = true;
+				hideTooltip = true;
+				component = (
+					<SwitchMetricResultCell value={+value} metricId={metricId} />
 				);
 				break;
 			default:

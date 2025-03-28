@@ -47,6 +47,7 @@ export const createColumns = (
 					const data = info.getValue();
 					return (
 						<MetricResultCell
+							metricId={data?.id}
 							unit={info.row.original.unit}
 							rank={data?.rank ?? "informational"}
 							score={data?.score}
