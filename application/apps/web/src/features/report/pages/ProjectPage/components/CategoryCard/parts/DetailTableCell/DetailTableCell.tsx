@@ -2,6 +2,7 @@ import { Box, Button, TableCell, TextField } from "@mui/material";
 import type { MetricRowDefinition } from "@repo/api/types";
 import { useEffect, useState } from "react";
 import { useUpdateMetric } from "~/features/report/hooks/useUpdateMetric";
+import { useUnsavedChanges } from "~/features/ui/hooks/useUnsavedChanges/useUnsavedChanges";
 
 type DetailTableCellProps = {
 	rowDefinition: MetricRowDefinition;
@@ -17,6 +18,7 @@ export const DetailTableCell = ({
 	projectId,
 }: DetailTableCellProps) => {
 	const [text, setText] = useState<string>("");
+	useUnsavedChanges(text !== rowDefinition.value[index]);
 	useEffect(() => {
 		setText(rowDefinition.value[index] ?? "");
 	}, [rowDefinition.value, index]);
