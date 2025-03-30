@@ -72,7 +72,6 @@ export class ErrorPageRunner extends BaseRunner<
 		const notFound = await page.evaluate(() => {
 			const title = document.querySelector("title");
 			const result = {
-				status,
 				title: title?.innerText,
 				headings: {
 					h1: document.querySelector("h1")?.innerText,
@@ -92,7 +91,7 @@ export class ErrorPageRunner extends BaseRunner<
 			void 0;
 		}
 
-		return notFound;
+		return { ...notFound, status };
 	}
 
 	async runRaw(context: BaseContext): Promise<Result> {

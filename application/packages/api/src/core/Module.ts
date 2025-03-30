@@ -53,11 +53,19 @@ export abstract class BaseModule<
 	protected async _execute(context: TContext): Promise<ModuleResult> {
 		const metrics: MetricResult[] = [];
 		const promises = this._runners.map(async (runner) => {
-			this.logger.debug(`${runner.name}: start`);
-			const res = await runner.run(context);
-			this.logger.debug(`${runner.name}: complete`);
-			metrics.push(...res);
-			this.progress = this._progress + 1 / this._runners.length;
+			try {
+				this.logger.debug(`${runner.name}: start`);
+				const res = await runner.run(context);
+				this.logger.debug(`${runner.name}: complete`);
+				metrics.push(...res);
+			} catch (e) {
+				this.logger.error(e, `${runner.name}: error`);
+				this.emit("error", {
+					error: e as Error,
+				});
+			} finally {
+				this.progress = this._progress + 1 / this._runners.length;
+			}
 		});
 		await Promise.all(promises);
 		return {
