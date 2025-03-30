@@ -24,6 +24,27 @@ export type LighthouseRunnerOptions = BaseRunnerOptions & {
 	 */
 	numberOfRuns?: number;
 };
+
+const CHROME_FLAGS = [
+	"--headless",
+	"--disable-gpu",
+	"--disable-dev-shm-usage",
+	"--disable-setuid-sandbox",
+	"--no-first-run",
+	"--no-sandbox",
+	"--no-zygote",
+	"--deterministic-fetch",
+	"--disable-features=IsolateOrigins",
+	"--disable-site-isolation-trials",
+];
+
+const LIGHTHOUSE_FLAGS = [
+	"--preset=desktop",
+	"--quiet",
+	"--output=json",
+	"--only-categories=performance",
+	"--only-audits=server-response-time,first-contentful-paint,total-byte-weight,total-blocking-time,cumulative-layout-shift,speed-index,max-potential-fid",
+];
 export class LighthouseRunner extends BaseRunner<
 	Result,
 	BaseContext,
@@ -87,12 +108,8 @@ export class LighthouseRunner extends BaseRunner<
 			const requests = [] as string[];
 			const result = await spawnChild<Result>("lighthouse", [
 				context.url,
-				"--preset=desktop",
-				"--quiet",
-				"--output=json",
-				'--chrome-flags="--headless"',
-				"--only-categories=performance",
-				"--only-audits=server-response-time,first-contentful-paint,total-byte-weight,total-blocking-time,cumulative-layout-shift,speed-index,max-potential-fid",
+				...LIGHTHOUSE_FLAGS,
+				`--chrome-flags="${CHROME_FLAGS.join(" ")}"`,
 			]);
 
 			runs.lhr.push(result);

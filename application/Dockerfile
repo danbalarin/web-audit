@@ -6,11 +6,11 @@ ENV TURBO_TEAM=$TURBO_TEAM
  
 ARG TURBO_TOKEN
 ENV TURBO_TOKEN=$TURBO_TOKEN
- 
-FROM base AS builder
+
 RUN apk update
 RUN apk add --no-cache libc6-compat
-# Set working directory
+
+FROM base AS builder
 WORKDIR /app
 RUN yarn global add turbo@^2.2.3
 COPY . .
@@ -18,8 +18,6 @@ COPY . .
 RUN turbo prune web --docker
  
 FROM base AS installer
-RUN apk update
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
  
 COPY --from=builder /app/out/json/ .
@@ -30,7 +28,11 @@ COPY --from=builder /app/out/full/ .
 RUN export NODE_OPTIONS=--max_old_space_size=4096 && yarn turbo run build --filter=web
  
 FROM base AS runner
-RUN apk add chromium
+RUN apk add --no-cache \
+    udev \
+    ttf-freefont \
+    chromium
+    
 ENV CHROMIUM_PATH /usr/bin/chromium
 RUN yarn global add lighthouse@12.4.0
 
