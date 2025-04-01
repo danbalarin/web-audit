@@ -1,4 +1,4 @@
-import { BaseRunner } from "@repo/api";
+import { BaseRunner, safeWaitForLoad } from "@repo/api";
 import type {
 	BaseContext,
 	BaseRunnerOptions,
@@ -37,8 +37,7 @@ export class PuppeteerRunner extends BaseRunner<Result> {
 		});
 
 		page.goto(context.url);
-		await page.waitForNavigation();
-		await page.waitForNetworkIdle({ idleTime: 1000 });
+		await safeWaitForLoad(page);
 
 		try {
 			await browser.close();

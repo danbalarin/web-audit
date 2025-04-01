@@ -3,7 +3,7 @@ import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { join } from "path";
 import { AxePuppeteer } from "@axe-core/puppeteer";
-import { BaseRunner } from "@repo/api";
+import { BaseRunner, safeWaitForLoad } from "@repo/api";
 import type {
 	BaseContext,
 	BaseRunnerOptions,
@@ -96,7 +96,7 @@ export class AxeRunner extends BaseRunner<Result> {
 		const page = await browser.newPage();
 		await page.setBypassCSP(true);
 		await page.goto(context.url);
-		await page.waitForNetworkIdle({ idleTime: 1000 });
+		await safeWaitForLoad(page);
 
 		let results: Result;
 		const axeSource = loadAxe();

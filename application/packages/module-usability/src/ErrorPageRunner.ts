@@ -1,5 +1,5 @@
 import { join } from "path";
-import { BaseRunner } from "@repo/api";
+import { BaseRunner, safeWaitForLoad } from "@repo/api";
 import type {
 	BaseContext,
 	BaseRunnerOptions,
@@ -64,7 +64,7 @@ export class ErrorPageRunner extends BaseRunner<
 				return response;
 			});
 			await page.goto(url);
-			await page.waitForNetworkIdle({ idleTime: 1000 });
+			await safeWaitForLoad(page);
 		} catch (error) {
 			this._logger?.error(error, "Error navigating to nonexistent URL:");
 		}

@@ -1,4 +1,4 @@
-import { BaseRunner } from "@repo/api";
+import { BaseRunner, safeWaitForLoad } from "@repo/api";
 import type {
 	BaseContext,
 	BaseRunnerOptions,
@@ -218,7 +218,7 @@ export class MetaTagsRunner extends BaseRunner<
 
 	private async renderContent(page: Page, content: string) {
 		await page.setContent(content);
-		await page.waitForNetworkIdle({ idleTime: 1000 });
+		await safeWaitForLoad(page);
 		const image = await (await page.waitForSelector("#root"))?.screenshot({
 			encoding: "base64",
 			omitBackground: true,
@@ -273,7 +273,7 @@ export class MetaTagsRunner extends BaseRunner<
 		const page = await browser.newPage();
 		await page.setBypassCSP(true);
 		await page.goto(context.url);
-		await page.waitForNetworkIdle({ idleTime: 1000 });
+		await safeWaitForLoad(page);
 
 		const promises = [
 			this.getBasicMetaTags(page),
