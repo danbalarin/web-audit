@@ -48,6 +48,7 @@ USER nextjs
 COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
 COPY --from=installer --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=installer --chown=nextjs:nodejs /app/packages/db ./packages/db
+COPY --from=installer --chown=nextjs:nodejs /app/packages/module-accessibility/assets ./packages/module-accessibility/assets
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/run.sh .
 RUN chmod +x run.sh
 # COPY --from=installer --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public

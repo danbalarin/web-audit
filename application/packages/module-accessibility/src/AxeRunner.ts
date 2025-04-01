@@ -1,3 +1,7 @@
+import { readFileSync } from "fs";
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { join } from "path";
 import { AxePuppeteer } from "@axe-core/puppeteer";
 import { BaseRunner } from "@repo/api";
 import type {
@@ -6,6 +10,7 @@ import type {
 	MetricResult,
 } from "@repo/api/types";
 import type { Result as AxeAuditResult } from "axe-core";
+
 import { ACT } from "./metrics/act";
 import { BEST_PRACTICE } from "./metrics/best-practice";
 import { WCAG2A } from "./metrics/wcag2a";
@@ -24,6 +29,12 @@ type AdditionalData = Record<
 	AxeResult,
 	Pick<AxeAuditResult, "id" | "impact">[]
 >;
+
+const loadAxe = () => {
+	const __dirname = dirname(fileURLToPath(import.meta.url));
+	const source = readFileSync(join(__dirname, "../assets/axe.min.js"), "utf8");
+	return source;
+};
 
 export class AxeRunner extends BaseRunner<Result> {
 	constructor(options: AxeRunnerOptions) {
@@ -88,8 +99,9 @@ export class AxeRunner extends BaseRunner<Result> {
 		await page.waitForNetworkIdle({ idleTime: 1000 });
 
 		let results: Result;
+		const axeSource = loadAxe();
 		try {
-			results = await new AxePuppeteer(page).analyze();
+			results = await new AxePuppeteer(page, axeSource).analyze();
 		} catch (error) {
 			this._logger?.error(error, "Error while running Axe");
 			throw error;
