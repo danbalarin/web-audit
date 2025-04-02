@@ -1,2 +1,22 @@
 ## Content Security Policy
 
+Content Security Policy (CSP) is a security mechanism that helps prevent cross-site scripting (XSS), clickjacking, and other code injection attacks resulting from execution of malicious content in the context of a trusted web page. This metric evaluates whether a website properly implements CSP through HTTP headers.
+
+CSP works by defining a whitelist of trusted sources from which browsers are allowed to load resources such as scripts, stylesheets, images, fonts, and other content. By specifying these trusted sources, CSP effectively blocks malicious scripts from being executed, even if an attacker manages to inject them into the page.
+
+A typical Content Security Policy can control:
+- Which JavaScript can execute
+- Which stylesheets can be applied
+- Which images can be displayed
+- Which fonts can be loaded
+- Which media (audio/video) can be played
+- Which sources can provide embedded content (iframes)
+- Which form endpoints can be used for submissions
+
+The CSP header allows site administrators to create policies that are as strict or as permissive as needed for their specific application. Stricter policies provide better security but may require more maintenance to ensure legitimate functionality isn't blocked.
+
+When implemented correctly, CSP can significantly reduce the risk of XSS attacks, which remain one of the most common web vulnerabilities. It provides an additional layer of security beyond proper input validation and output encoding by enforcing restrictions on what content can run.
+
+A positive result in this metric means that the site has implemented a Content Security Policy, providing enhanced protection against content injection attacks. However, the mere presence of a CSP header doesn't guarantee complete protection; the policy must be properly configured with appropriate directives and values to be effective.
+
+By implementing CSP, websites demonstrate a proactive approach to security that goes beyond minimal requirements, helping to protect both the site's data and its users from malicious attacks that exploit trust relationships between websites and browsers.

@@ -1,2 +1,27 @@
 ## Vulnerable Dependencies
 
+Vulnerable Dependencies is a security metric that evaluates whether a website is using JavaScript libraries, frameworks, or other third-party components with known security vulnerabilities. This metric examines client-side code to identify outdated or insecure dependencies that could potentially expose the website to security risks.
+
+Modern websites typically rely on numerous third-party libraries and frameworks to provide functionality. While these dependencies accelerate development, they can also introduce security vulnerabilities if they contain flaws or aren't kept updated. These vulnerabilities might allow attackers to execute malicious code, steal sensitive information, or compromise website functionality.
+
+This metric works by:
+- Detecting JavaScript libraries and other dependencies loaded by the website
+- Identifying specific versions of these dependencies
+- Cross-referencing these versions against databases of known vulnerabilities
+- Calculating a risk score based on the severity and quantity of vulnerabilities found
+
+Common types of vulnerabilities in dependencies include:
+- Cross-site scripting (XSS) vulnerabilities
+- Prototype pollution
+- Regular expression denial of service (ReDoS)
+- Information disclosure issues
+- Insecure randomness
+- Path traversal vulnerabilities
+- Code execution vulnerabilities
+
+The consequences of using vulnerable dependencies can be severe, potentially leading to data breaches, session hijacking, or complete website compromise. Many high-profile security incidents have originated from exploitation of vulnerabilities in outdated dependencies.
+
+A good score in this metric indicates that a website is using up-to-date, secure versions of dependencies, demonstrating a commitment to security maintenance. A poor score suggests that the website may be at risk due to unpatched vulnerabilities in its dependencies.
+
+By regularly updating dependencies and removing unnecessary ones, website owners can significantly reduce their attack surface and protect against known vulnerabilities, ensuring a more secure experience for their users. This metric helps identify when such updates are needed.
+

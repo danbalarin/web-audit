@@ -1,2 +1,22 @@
 ## Strict Transport Security
 
+HTTP Strict Transport Security (HSTS) is a web security policy mechanism that helps protect websites against protocol downgrade attacks and cookie hijacking. This metric evaluates whether a website properly implements HSTS headers to enhance connection security by forcing secure communications.
+
+HSTS works by instructing browsers to only interact with a website using secure HTTPS connections, never via insecure HTTP, for a specified period. Once a browser receives an HSTS header from a website, it will automatically convert all attempts to access the site using HTTP to HTTPS, even if the user explicitly types "http://" in the address bar.
+
+The HSTS header includes several important directives:
+- max-age: Specifies how long (in seconds) browsers should remember to use HTTPS
+- includeSubDomains: Extends the policy to all subdomains (optional)
+- preload: Indicates the site can be included in browsers' built-in HSTS preload lists (optional)
+
+HSTS addresses several security vulnerabilities:
+- SSL stripping attacks: Where attackers downgrade connections from HTTPS to HTTP
+- Mixed content issues: Preventing unintentional loading of insecure resources
+- Initial connection security: Protecting the first connection attempt before a secure connection is established
+
+For maximum effectiveness, HSTS should be configured with appropriate values. The max-age should be set to a sufficiently long period (typically at least 6 months or 15768000 seconds), and for comprehensive protection, the includeSubDomains directive should be included. Sites requiring the highest security can also use the preload directive to be added to browser preload lists.
+
+A positive result in this metric indicates that a website enforces secure connections, significantly reducing the risk of various man-in-the-middle attacks. This demonstrates a commitment to transport layer security beyond basic HTTPS implementation.
+
+By implementing HSTS, websites protect users from many connection-based attacks and ensure that all communications remain encrypted, even when users try to access the site through insecure means or when redirects might otherwise create security vulnerabilities.
+

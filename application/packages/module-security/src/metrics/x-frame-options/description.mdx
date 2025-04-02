@@ -1,2 +1,19 @@
 ## X-Frame Options
 
+The X-Frame-Options HTTP response header is a security feature that helps prevent clickjacking attacks by controlling whether a browser should be allowed to render a page in a frame or iframe. This metric evaluates whether a website properly implements this header to protect against interface-based attacks.
+
+Clickjacking is a malicious technique where an attacker tricks users into clicking something different from what they perceive, potentially leading to unauthorized actions. This is typically accomplished by loading a transparent or disguised webpage into an iframe and overlaying it on a decoy page. Users believe they are interacting with the visible page, but they're actually clicking on elements of the hidden page.
+
+The X-Frame-Options header can have three possible values:
+- DENY: The page cannot be displayed in a frame, regardless of the site attempting to do so
+- SAMEORIGIN: The page can only be displayed in a frame on the same origin as the page itself
+- ALLOW-FROM uri: The page can only be displayed in a frame on the specified origin
+
+By implementing the X-Frame-Options header, websites can prevent their content from being embedded in frames on potentially malicious sites, thus mitigating the risk of clickjacking attacks. This protection is particularly important for pages involving sensitive actions such as financial transactions, account management, or data submission.
+
+While newer web security features like Content Security Policy (CSP) with the frame-ancestors directive provide more flexible and powerful frame control, X-Frame-Options remains widely used due to its simplicity and broad browser support. For comprehensive protection, many sites implement both mechanisms.
+
+A positive result in this metric indicates that a website has taken steps to protect against clickjacking attacks by controlling how its pages can be framed. This demonstrates awareness of common web security vulnerabilities and a commitment to protecting users from UI redress attacks.
+
+By properly configuring the X-Frame-Options header, websites can significantly reduce the risk of clickjacking attacks, helping to ensure that users interact only with legitimate interfaces and aren't tricked into performing unintended actions.
+

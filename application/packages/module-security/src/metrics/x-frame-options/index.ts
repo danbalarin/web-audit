@@ -51,7 +51,8 @@ const score = (value: string | number): number => {
 export const XFrameOptions: MetricDescription = {
 	id: "x-frame-options",
 	name: "X-Frame Options",
-	description: "",
+	description:
+		"Checks if the website implements X-Frame-Options headers to prevent clickjacking attacks by controlling iframe embedding permissions.",
 	unit: Arbitrary.NUMBER,
 	compare,
 	rank,

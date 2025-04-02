@@ -99,7 +99,8 @@ const score = (value: number): number => {
 export const Cookies: MetricDescription = {
 	id: "cookies",
 	name: "Cookies",
-	description: "",
+	description:
+		"Evaluates cookie security configuration including HttpOnly, Secure, and SameSite flags to protect against session-based attacks.",
 	unit: Arbitrary.NUMBER,
 	compare,
 	rank,

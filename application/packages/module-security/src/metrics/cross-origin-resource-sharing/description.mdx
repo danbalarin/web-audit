@@ -1,2 +1,26 @@
 ## Cross Origin Resource Sharing
 
+Cross-Origin Resource Sharing (CORS) is a security feature implemented by browsers that controls how web pages in one domain can request and interact with resources from another domain. This metric evaluates whether a website properly configures CORS headers to maintain security while enabling necessary cross-origin functionality.
+
+CORS extends the same-origin policy, which is a fundamental security concept that restricts how documents or scripts loaded from one origin can interact with resources from another origin. Without CORS, browsers prohibit web applications from making cross-origin requests, which can prevent many legitimate interactions between services.
+
+The CORS mechanism works through a set of HTTP headers that define which origins are permitted to access resources:
+
+- Access-Control-Allow-Origin: Specifies which origins can access the resource
+- Access-Control-Allow-Methods: Indicates the allowed HTTP methods
+- Access-Control-Allow-Headers: Lists the headers that can be used in the request
+- Access-Control-Max-Age: Defines how long the preflight response can be cached
+- Access-Control-Allow-Credentials: Indicates whether the request can include credentials
+
+When properly configured, CORS allows websites to:
+- Securely access APIs and services hosted on different domains
+- Share resources across subdomains or partner services
+- Enable third-party integrations while maintaining security boundaries
+- Support modern web architecture patterns like microservices
+
+However, overly permissive CORS configurations (such as using wildcard "*" origins) can create security vulnerabilities by allowing unauthorized domains to access sensitive data or functionality. Conversely, overly restrictive CORS settings can prevent legitimate functionality from working properly.
+
+A positive score in this metric indicates that the website implements CORS policies that balance security with necessary functionality. This demonstrates awareness of cross-origin security considerations and proper implementation of access controls.
+
+By correctly configuring CORS, websites can maintain strong security boundaries while enabling the integrations and resource sharing needed for modern web applications to function effectively.
+

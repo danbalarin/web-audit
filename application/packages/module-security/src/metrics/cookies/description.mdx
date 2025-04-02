@@ -1,2 +1,21 @@
-## SSL Certificate
+## Cookies Security
+
+Cookie security is a critical aspect of web application security that focuses on protecting data stored in browser cookies from unauthorized access or manipulation. This metric evaluates whether a website properly configures security attributes for its cookies to protect user sessions and sensitive information.
+
+Cookies are small pieces of data stored by browsers that websites use to maintain state information, remember user preferences, track sessions, and identify authenticated users. Because cookies often contain sensitive information, including authentication tokens, they are common targets for various attacks such as cross-site scripting (XSS), cross-site request forgery (CSRF), and session hijacking.
+
+Several key security attributes can be set on cookies to enhance their security:
+
+- Secure flag: Ensures cookies are only sent over HTTPS connections, preventing exposure over insecure HTTP
+- HttpOnly flag: Prevents JavaScript from accessing cookies, mitigating the risk of XSS attacks
+- SameSite attribute: Controls when cookies are sent with cross-site requests, helping to prevent CSRF attacks
+- Path attribute: Limits cookie scope to specific paths on the server
+- Domain attribute: Controls which domains can receive the cookie
+- Expires/Max-Age attributes: Define when cookies should expire, limiting the window of vulnerability
+
+Properly secured cookies help protect user sessions from being stolen or hijacked, preserve user privacy, and prevent unauthorized actions from being performed on behalf of authenticated users. Without these protections, attackers could potentially capture or manipulate cookies to impersonate users or access sensitive information.
+
+A high score in this metric indicates that the website implements appropriate security attributes for its cookies, demonstrating awareness of common web security vulnerabilities and a commitment to protecting user data and sessions.
+
+By configuring cookies with security in mind, websites reduce the risk of session-based attacks and enhance their overall security posture, helping to maintain user trust and comply with security best practices and privacy regulations.
 

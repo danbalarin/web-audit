@@ -18,7 +18,8 @@ const isAdditionalData = (
 export const VulnerableDependencies: MetricDescription = {
 	id: "vulnerable-dependencies",
 	name: "Vulnerable Dependencies",
-	description: "",
+	description:
+		"Detects JavaScript libraries and third-party components with known security vulnerabilities that could expose the website to attacks.",
 	unit: Arbitrary.NUMBER,
 	compare: createMetricCompareLowerIsBetter(0),
 	rank: (val) => (+val > 0 ? "fail" : "good"),
