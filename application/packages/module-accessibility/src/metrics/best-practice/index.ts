@@ -6,7 +6,8 @@ import { axeScoring } from "../../utils/axeScoring";
 export const BEST_PRACTICE: MetricDescription = {
 	id: "best-practice",
 	name: "Common accessibility best practices",
-	description: "",
+	description:
+		"Measures adherence to widely accepted accessibility recommendations that enhance usability for people with disabilities beyond formal guidelines.",
 	unit: Arbitrary.PERCENTAGE,
 	compare: createMetricCompareHigherIsBetter(0),
 	...axeScoring,
