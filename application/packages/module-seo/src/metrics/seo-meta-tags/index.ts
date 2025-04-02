@@ -89,7 +89,8 @@ const getDetailRows = (res: (Omit<MetricResult, "id"> | null)[]) => {
 export const SEOMetaTags: MetricDescription = {
 	id: "seoMetaTags",
 	name: "SEO Meta Tags",
-	description: "",
+	description:
+		"Evaluates the presence of essential HTML meta tags that help search engines understand, index, and display a website in search results.",
 	unit: Arbitrary.NUMBER,
 	compare,
 	rank,

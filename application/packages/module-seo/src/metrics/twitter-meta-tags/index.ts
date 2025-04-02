@@ -141,7 +141,8 @@ const renderTooltip = ({ value }: Omit<MetricResult, "id">): string => {
 export const TwitterMetaTags: MetricDescription = {
 	id: "twitterMetaTags",
 	name: "Twitter Meta Tags",
-	description: "",
+	description:
+		"Assesses the implementation of Twitter Card tags that enable rich media experiences when content is shared on Twitter.",
 	unit: Arbitrary.NUMBER,
 	compare,
 	rank,

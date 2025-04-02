@@ -138,7 +138,8 @@ const renderTooltip = ({ value }: Omit<MetricResult, "id">): string => {
 export const OpenGraphMetaTags: MetricDescription = {
 	id: "openGraphMetaTags",
 	name: "Open Graph Meta Tags",
-	description: "",
+	description:
+		"Measures the implementation of Open Graph protocol tags that control how content appears when shared on Facebook and other social platforms.",
 	unit: Arbitrary.NUMBER,
 	compare,
 	rank,
