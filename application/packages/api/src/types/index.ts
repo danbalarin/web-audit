@@ -12,4 +12,5 @@ export * from "./MetricRank";
 export * from "./MetricResult";
 export * from "./MetricRowDefinition";
 export * from "./ModuleStatus";
+export * from "./Ranges";
 export * from "./UnionToIntersection";

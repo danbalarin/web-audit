@@ -7,7 +7,6 @@ type SwitchMetricResultCellProps = {
 	value: number;
 	metricId?: string;
 	projectId?: string;
-	// todo audit id for invalidation
 };
 
 export const SwitchMetricResultCell = ({

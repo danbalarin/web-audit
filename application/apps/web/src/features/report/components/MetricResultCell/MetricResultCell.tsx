@@ -19,6 +19,7 @@ import type {
 import type { Metric } from "@repo/db";
 import { ImageMetricResultCell } from "./parts/ImageMetricResultCell";
 import { MemoryMetricResultCell } from "./parts/MemoryMetricResultCell";
+import { NumberInputMetricResultCell } from "./parts/NumberInputMetricResultCell";
 import { SwitchMetricResultCell } from "./parts/SwitchMetricResultCell";
 import { TimeMetricResultCell } from "./parts/TimeMetricResultCell";
 
@@ -117,6 +118,17 @@ export const MetricResultCell = ({
 				hideTooltip = true;
 				component = (
 					<SwitchMetricResultCell
+						value={+value}
+						metricId={metricId}
+						projectId={projectId}
+					/>
+				);
+				break;
+			case Input.NUMBER:
+				hideIcon = true;
+				hideTooltip = true;
+				component = (
+					<NumberInputMetricResultCell
 						value={+value}
 						metricId={metricId}
 						projectId={projectId}

@@ -1,7 +1,7 @@
 "use client";
 import type { QueryClient } from "@tanstack/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { httpBatchLink, loggerLink } from "@trpc/client";
+import { httpBatchLink, httpLink, loggerLink, splitLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import type { inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
@@ -67,9 +67,10 @@ export function TRPCProvider(
 					},
 					colorMode: "none",
 				}),
-				httpBatchLink({
-					transformer: superjson,
-					url: getUrl(),
+				splitLink({
+					condition: (op) => op.context.skipBatch === true,
+					true: httpLink({ transformer: superjson, url: getUrl() }),
+					false: httpBatchLink({ transformer: superjson, url: getUrl() }),
 				}),
 			],
 		}),

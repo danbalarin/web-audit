@@ -6,6 +6,7 @@ import type {
 } from "@repo/api/types";
 
 import { EMPTY_INPUT } from "@repo/api/metrics";
+import { ClearFeedback } from "./metrics/clear-feedback";
 import { ImmediateFeedback } from "./metrics/immediate-feedback";
 
 export type UserInterfaceHeuristicsRunnerOptions = BaseRunnerOptions;
@@ -25,6 +26,10 @@ export class UserInterfaceHeuristicsRunner extends BaseRunner<
 		return [
 			{
 				id: ImmediateFeedback.id,
+				value: EMPTY_INPUT,
+			},
+			{
+				id: ClearFeedback.id,
 				value: EMPTY_INPUT,
 			},
 		];
