@@ -6,6 +6,7 @@ import { FlexibleNavigation } from "./flexible-navigation";
 import { IconMetaphors } from "./icon-metaphors";
 import { ImmediateFeedback } from "./immediate-feedback";
 import { NotFoundPage } from "./not-found-page";
+import { VisualConsistency } from "./visual-consistency";
 
 const weights = {
 	[NotFoundPage.id]: 1,
@@ -19,6 +20,7 @@ const metricsOrder = [
 	ClearFeedback.id,
 	IconMetaphors.id,
 	FlexibleNavigation.id,
+	VisualConsistency.id,
 ];
 
 const metrics: MetricDescription[] = [
@@ -27,6 +29,7 @@ const metrics: MetricDescription[] = [
 	ClearFeedback,
 	IconMetaphors,
 	FlexibleNavigation,
+	VisualConsistency,
 ];
 
 export const UsabilityCategory: CategoryDescription<"usability"> = {

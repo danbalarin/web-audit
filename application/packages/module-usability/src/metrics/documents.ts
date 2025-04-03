@@ -9,6 +9,8 @@ import { ImmediateFeedback } from "./immediate-feedback";
 import ImmediateFeedbackDocument from "./immediate-feedback/description.mdx";
 import { NotFoundPage } from "./not-found-page";
 import NotFoundPageDocument from "./not-found-page/description.mdx";
+import { VisualConsistency } from "./visual-consistency";
+import VisualConsistencyDocument from "./visual-consistency/description.mdx";
 
 export { UsabilityDocument };
 
@@ -18,4 +20,5 @@ export const UsabilityCategoryDocuments = {
 	[ClearFeedback.id]: ClearFeedbackDocument,
 	[IconMetaphors.id]: IconMetaphorsDocument,
 	[FlexibleNavigation.id]: FlexibleNavigationDocument,
+	[VisualConsistency.id]: VisualConsistencyDocument,
 };
