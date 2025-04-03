@@ -1,3 +1,5 @@
+import { ActionConsistency } from "./action-consistency";
+import ActionConsistencyDocument from "./action-consistency/description.mdx";
 import { ClearFeedback } from "./clear-feedback";
 import ClearFeedbackDocument from "./clear-feedback/description.mdx";
 import UsabilityDocument from "./description.mdx";
@@ -21,4 +23,5 @@ export const UsabilityCategoryDocuments = {
 	[IconMetaphors.id]: IconMetaphorsDocument,
 	[FlexibleNavigation.id]: FlexibleNavigationDocument,
 	[VisualConsistency.id]: VisualConsistencyDocument,
+	[ActionConsistency.id]: ActionConsistencyDocument,
 };
