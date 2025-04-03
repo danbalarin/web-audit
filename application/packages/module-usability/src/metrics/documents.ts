@@ -2,6 +2,8 @@ import { ActionConsistency } from "./action-consistency";
 import ActionConsistencyDocument from "./action-consistency/description.mdx";
 import { ClearFeedback } from "./clear-feedback";
 import ClearFeedbackDocument from "./clear-feedback/description.mdx";
+import { ContextualCues } from "./contextual-cues";
+import ContextualCuesDocument from "./contextual-cues/description.mdx";
 import UsabilityDocument from "./description.mdx";
 import { FlexibleNavigation } from "./flexible-navigation";
 import FlexibleNavigationDocument from "./flexible-navigation/description.mdx";
@@ -24,4 +26,5 @@ export const UsabilityCategoryDocuments = {
 	[FlexibleNavigation.id]: FlexibleNavigationDocument,
 	[VisualConsistency.id]: VisualConsistencyDocument,
 	[ActionConsistency.id]: ActionConsistencyDocument,
+	[ContextualCues.id]: ContextualCuesDocument,
 };
