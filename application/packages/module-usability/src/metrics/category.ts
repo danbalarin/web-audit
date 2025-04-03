@@ -2,6 +2,7 @@ import type { CategoryDescription, MetricDescription } from "@repo/api/types";
 
 import { Arbitrary } from "@repo/api/metrics";
 import { ClearFeedback } from "./clear-feedback";
+import { FlexibleNavigation } from "./flexible-navigation";
 import { IconMetaphors } from "./icon-metaphors";
 import { ImmediateFeedback } from "./immediate-feedback";
 import { NotFoundPage } from "./not-found-page";
@@ -17,6 +18,7 @@ const metricsOrder = [
 	ImmediateFeedback.id,
 	ClearFeedback.id,
 	IconMetaphors.id,
+	FlexibleNavigation.id,
 ];
 
 const metrics: MetricDescription[] = [
@@ -24,6 +26,7 @@ const metrics: MetricDescription[] = [
 	ImmediateFeedback,
 	ClearFeedback,
 	IconMetaphors,
+	FlexibleNavigation,
 ];
 
 export const UsabilityCategory: CategoryDescription<"usability"> = {
