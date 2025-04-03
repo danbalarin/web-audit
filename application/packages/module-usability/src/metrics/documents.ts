@@ -1,5 +1,7 @@
 import { ActionConsistency } from "./action-consistency";
 import ActionConsistencyDocument from "./action-consistency/description.mdx";
+import { Aesthetics } from "./aesthetics";
+import AestheticsDocument from "./aesthetics/description.mdx";
 import { ClearFeedback } from "./clear-feedback";
 import ClearFeedbackDocument from "./clear-feedback/description.mdx";
 import { ContextualCues } from "./contextual-cues";
@@ -27,4 +29,5 @@ export const UsabilityCategoryDocuments = {
 	[VisualConsistency.id]: VisualConsistencyDocument,
 	[ActionConsistency.id]: ActionConsistencyDocument,
 	[ContextualCues.id]: ContextualCuesDocument,
+	[Aesthetics.id]: AestheticsDocument,
 };
