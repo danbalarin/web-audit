@@ -3,6 +3,7 @@ import type { CategoryDescription, MetricDescription } from "@repo/api/types";
 import { Arbitrary } from "@repo/api/metrics";
 import { ActionConsistency } from "./action-consistency";
 import { Aesthetics } from "./aesthetics";
+import { BrandCompliance } from "./brand-compliance";
 import { ClearFeedback } from "./clear-feedback";
 import { ContextualCues } from "./contextual-cues";
 import { FlexibleNavigation } from "./flexible-navigation";
@@ -27,6 +28,7 @@ const metricsOrder = [
 	ActionConsistency.id,
 	ContextualCues.id,
 	Aesthetics.id,
+	BrandCompliance.id,
 ];
 
 const metrics: MetricDescription[] = [
@@ -39,6 +41,7 @@ const metrics: MetricDescription[] = [
 	ActionConsistency,
 	ContextualCues,
 	Aesthetics,
+	BrandCompliance,
 ];
 
 export const UsabilityCategory: CategoryDescription<"usability"> = {
