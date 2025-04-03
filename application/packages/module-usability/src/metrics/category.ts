@@ -2,6 +2,7 @@ import type { CategoryDescription, MetricDescription } from "@repo/api/types";
 
 import { Arbitrary } from "@repo/api/metrics";
 import { ClearFeedback } from "./clear-feedback";
+import { IconMetaphors } from "./icon-metaphors";
 import { ImmediateFeedback } from "./immediate-feedback";
 import { NotFoundPage } from "./not-found-page";
 
@@ -11,12 +12,18 @@ const weights = {
 
 const sumWeights = Object.values(weights).reduce((a, b) => a + b, 0);
 
-const metricsOrder = [NotFoundPage.id, ImmediateFeedback.id, ClearFeedback.id];
+const metricsOrder = [
+	NotFoundPage.id,
+	ImmediateFeedback.id,
+	ClearFeedback.id,
+	IconMetaphors.id,
+];
 
 const metrics: MetricDescription[] = [
 	NotFoundPage,
 	ImmediateFeedback,
 	ClearFeedback,
+	IconMetaphors,
 ];
 
 export const UsabilityCategory: CategoryDescription<"usability"> = {
