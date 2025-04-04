@@ -1,11 +1,12 @@
 #import "template/lib.typ": template, revisit, init-code
 
+#import "declaration.typ": declaration
 
 #show: template.with(
   title: "Website Quality Assurance through Combined Automated and Manual Auditing",
   author: "Bc. Dan Balarin",
   supervisor: "Ing. Jiří Kosek",
-  declaration: [Declaration],
+  declaration: declaration,
   acknowledgements: [Thanks],
   abstract-en: [Abstract],
   keywords-en: [keywords],
