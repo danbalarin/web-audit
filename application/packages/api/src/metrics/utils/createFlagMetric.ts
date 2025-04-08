@@ -6,7 +6,17 @@ type StandardEnum<T> = {
 export const createFlagMetric = <TEnum>(
 	enumVal: StandardEnum<TEnum>,
 	weights: Partial<{ [K in keyof StandardEnum<TEnum>]: number }>,
+	fallbacks?: Partial<{
+		[K in keyof StandardEnum<TEnum>]: keyof StandardEnum<TEnum>;
+	}>,
+	fallbackPenalty?: number,
 ) => {
+	if (fallbacks && !fallbackPenalty) {
+		throw new Error(
+			"Fallbacks are provided but no fallback penalty is set. Please provide a fallback penalty.",
+		);
+	}
+
 	const getFlagsFromValue = (value: number): TEnum[] => {
 		const flags: TEnum[] = [];
 
@@ -43,20 +53,36 @@ export const createFlagMetric = <TEnum>(
 	).reduce((acc, weight) => acc + weight, 0);
 
 	const score = (value: number | string): number => {
-		const flags = getMissingTags(+value);
-		const total = flags.reduce(
-			(acc, flag) => acc + (weights[flag as string | number] ?? 0),
-			0,
-		);
-		console.log(total, weightSum);
-		return total / weightSum;
+		const flags = getFlagsFromValue(+value);
+
+		let actualScore = 0;
+
+		Object.entries(weights).forEach(([flagStr, weight]) => {
+			if (!weight) {
+				return;
+			}
+			const flag = Number(flagStr) as TEnum;
+
+			if (flags.includes(flag)) {
+				actualScore += weight;
+			} else if (
+				fallbacks &&
+				fallbackPenalty &&
+				fallbacks[flag as keyof typeof fallbacks] &&
+				flags.includes(fallbacks[flag as keyof typeof fallbacks] as TEnum)
+			) {
+				actualScore += weight * fallbackPenalty;
+			}
+		});
+
+		return weightSum > 0 ? actualScore / weightSum : 0;
 	};
 
 	const compare = (a: number | string, b: number | string): number => {
 		const scoreA = score(+a);
 		const scoreB = score(+b);
 
-		return scoreA - scoreB;
+		return scoreA < scoreB ? 1 : scoreA > scoreB ? -1 : 0;
 	};
 
 	return {
