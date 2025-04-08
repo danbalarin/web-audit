@@ -55,12 +55,8 @@ const flagTranslations = {
 	[SEOMetaTagsFlags.LANGUAGE]: "Language",
 };
 
-const renderTooltip = ({
-	value,
-	additionalData,
-}: Omit<MetricResult, "id">): string => {
+const renderTooltip = ({ value }: Omit<MetricResult, "id">): string => {
 	const missingFlags = getMissingTags(+value);
-	console.log(missingFlags, additionalData);
 
 	if (missingFlags.length === 0) {
 		return "All required tags are present";

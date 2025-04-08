@@ -1,4 +1,4 @@
-import { Arbitrary } from "@repo/api/metrics";
+import { Arbitrary, createFlagMetric } from "@repo/api/metrics";
 import type {
 	MetricDescription,
 	MetricRank,
@@ -17,28 +17,6 @@ export enum OpenGraphMetaTagsFlags {
 	LOCALE_FALLBACK = 0x100,
 }
 
-export const getFlagsFromValue = (value: number): OpenGraphMetaTagsFlags[] => {
-	const flags: OpenGraphMetaTagsFlags[] = [];
-
-	Object.values(OpenGraphMetaTagsFlags).forEach((flag) => {
-		if (typeof flag !== "string" && value & flag) {
-			flags.push(flag);
-		}
-	});
-
-	return flags;
-};
-
-export const getValueFromFlags = (flags: OpenGraphMetaTagsFlags[]): number => {
-	let value = 0;
-
-	for (const flag of flags) {
-		value |= flag;
-	}
-
-	return value;
-};
-
 const weights = {
 	[OpenGraphMetaTagsFlags.TITLE]: 1,
 	[OpenGraphMetaTagsFlags.DESCRIPTION]: 1,
@@ -56,36 +34,12 @@ const fallbacks = {
 
 const fallbackPenalty = 0.9;
 
-const weightSum = Object.values(weights).reduce(
-	(acc, weight) => acc + weight,
-	0,
+const { score, compare, getFlagsFromValue } = createFlagMetric(
+	OpenGraphMetaTagsFlags,
+	weights,
+	fallbacks,
+	fallbackPenalty,
 );
-
-const score = (value: number | string): number => {
-	const flags = getFlagsFromValue(+value);
-	const total = flags.reduce((acc, flag) => {
-		const weight = weights[flag as keyof typeof weights] ?? 0;
-		const fallback = fallbacks[flag as keyof typeof fallbacks] ?? 0;
-		const fallbackFlag = fallback && flags.includes(fallback);
-
-		if (weight) {
-			return acc + weight;
-		}
-		if (weight && fallbackFlag) {
-			return acc + weight * fallbackPenalty;
-		}
-		return acc;
-	}, 0);
-
-	return total / weightSum;
-};
-
-const compare = (a: number | string, b: number | string): number => {
-	const scoreA = score(+a);
-	const scoreB = score(+b);
-
-	return scoreA - scoreB;
-};
 
 const rank = (value: number | string): MetricRank => {
 	const calculated = score(+value);
