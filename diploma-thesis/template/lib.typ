@@ -68,7 +68,7 @@
 
   set heading(numbering: "1.1.1", supplement: [Chapter], )
 
-  show link: underline
+  // show link: underline
 
   show heading.where(level: 1): it => {
     heading-blocks.at(1)(it)

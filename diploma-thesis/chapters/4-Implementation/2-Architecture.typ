@@ -29,11 +29,16 @@ According to a Stack Overflow survey (#cite(<stack_overflow_technology_2024>, fo
 As this application will be open-sourced, it would benefit greatly from a larger community that can extend it beyond this thesis. 
 Another reason to choose Node.js over alternatives like Flask or Spring Boot is the ecosystem of existing solutions for some metrics. 
 Although these solutions could be used within other environments, it would add unnecessary complexity.
- 
-Therefore, we will use Next.js, the top-rated framework in the Node.js environment. 
-It offers front-end and back-end capabilities within a single application, making it easier to share data types between them. 
-It also provides features like routing, optimisations, static asset creation, and development environment setup out of the box, without additional configuration. 
-Other popular solutions in the React ecosystem offer some of these features but not all.
+
+The application can either be split into back-end and front-end or be a monolithic one.
+The benefit of a monolithic app is the ability to share data types, making the app end-to-end type-safe easily.
+
+In the Node.js ecosystem there is several solutions that offer monolithic app capabilities, with the most used Next.js and Remix.
+Both are backed by big companies used in applications from small to corporate-size.
+
+We will use Next.js because it has a bigger community.
+It uses React.js, the leading library for front-end development, and offers backend capabilities, making it easier to share data types between them. 
+It also provides features like routing, optimisations, static asset creation, and development environment setup out of the box without additional configuration. 
 
 === API Protocol
 
@@ -44,7 +49,7 @@ REST was originally a solution for transporting states between systems.
 It defines how resources can be created, updated, deleted, and read, as a list or in detail.
 Compared to the other solutions, it is difficult to ensure type safety, which can lead to unexpected runtime errors.
 
-GraphQL, unlike REST, is not a paradigm for resource manipulation but a query language, comparable to #abbr.a("SQL").
+GraphQL, unlike REST, is not a paradigm for resource manipulation but a query language comparable to #abbr.a("SQL").
 It improves type safety compared to REST. 
 However, developers still need to rely on additional type generation scripts, and data is not validated by default on either the back-end or front-end.
 
