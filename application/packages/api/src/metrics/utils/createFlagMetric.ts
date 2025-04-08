@@ -1,5 +1,3 @@
-import type { MetricResult } from "../../types";
-
 type StandardEnum<T> = {
 	[id: string]: T | string;
 	[nu: number]: string;
@@ -31,16 +29,26 @@ export const createFlagMetric = <TEnum>(
 		return value;
 	};
 
+	const getMissingTags = (value: number): TEnum[] => {
+		const flags = getFlagsFromValue(+value);
+		const missingFlags = Object.values(enumVal as object).filter(
+			(flag) => typeof flag !== "string" && !flags.includes(flag),
+		) as TEnum[];
+
+		return missingFlags;
+	};
+
 	const weightSum = Object.values<number>(
 		weights as Record<string, number>,
 	).reduce((acc, weight) => acc + weight, 0);
 
 	const score = (value: number | string): number => {
-		const flags = getFlagsFromValue(+value);
+		const flags = getMissingTags(+value);
 		const total = flags.reduce(
 			(acc, flag) => acc + (weights[flag as string | number] ?? 0),
 			0,
 		);
+		console.log(total, weightSum);
 		return total / weightSum;
 	};
 
@@ -49,15 +57,6 @@ export const createFlagMetric = <TEnum>(
 		const scoreB = score(+b);
 
 		return scoreA - scoreB;
-	};
-
-	const getMissingTags = ({ value }: Omit<MetricResult, "id">): TEnum[] => {
-		const flags = getFlagsFromValue(+value);
-		const missingFlags = Object.values(enumVal as object).filter(
-			(flag) => typeof flag !== "string" && !flags.includes(flag),
-		) as TEnum[];
-
-		return missingFlags;
 	};
 
 	return {

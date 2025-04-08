@@ -39,7 +39,7 @@ const rank = (value: number | string): MetricRank => {
 };
 
 const renderValue = ({ value }: Omit<MetricResult, "id">): string => {
-	const missingFlags = getMissingTags({ value: +value });
+	const missingFlags = getMissingTags(+value);
 	if (missingFlags.length === 0) {
 		return "Ok";
 	} else {
@@ -55,8 +55,12 @@ const flagTranslations = {
 	[SEOMetaTagsFlags.LANGUAGE]: "Language",
 };
 
-const renderTooltip = ({ value }: Omit<MetricResult, "id">): string => {
-	const missingFlags = getMissingTags({ value: +value });
+const renderTooltip = ({
+	value,
+	additionalData,
+}: Omit<MetricResult, "id">): string => {
+	const missingFlags = getMissingTags(+value);
+	console.log(missingFlags, additionalData);
 
 	if (missingFlags.length === 0) {
 		return "All required tags are present";
@@ -72,7 +76,7 @@ const getDetailRows = (res: (Omit<MetricResult, "id"> | null)[]) => {
 			label: "Missing tags",
 			value: res.map((v) =>
 				v
-					? getMissingTags(v)
+					? getMissingTags(+v.value)
 							.map(
 								(f) =>
 									flagTranslations[

@@ -1,5 +1,5 @@
 import { Tooltip, Typography } from "@mui/material";
-import { formatDate, formatDateTime } from "~/features/ui/utils/date";
+import { formatDateTime } from "~/features/ui/utils/date";
 
 type AuditDateCellProps = {
 	value: Date;
@@ -8,7 +8,7 @@ type AuditDateCellProps = {
 export const AuditDateCell = ({ value }: AuditDateCellProps) => {
 	return (
 		<Tooltip title={formatDateTime(value)} suppressHydrationWarning>
-			<Typography>{formatDate(value)}</Typography>
+			<Typography>{formatDateTime(value)}</Typography>
 		</Tooltip>
 	);
 };
