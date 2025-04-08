@@ -21,7 +21,7 @@ export type TechnologyRunnerResult = {
 	vulnerabilities: Vulnerability[];
 }[];
 
-type Technology = {
+export type Technology = {
 	slug: string;
 	name: string;
 	description: string;
