@@ -33,8 +33,13 @@ export const columns = [
 						unit={data.scoreUnit}
 						rank={data.rank}
 						result={{
-							value: data.score,
+							value: data.score.value,
 						}}
+						renderValue={
+							data.score.status === "incomplete"
+								? () => "Not all fields are filled"
+								: undefined
+						}
 					/>
 				);
 			},

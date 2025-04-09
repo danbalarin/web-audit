@@ -57,8 +57,9 @@ export class ObservatoryRunner extends BaseRunner {
 	}
 
 	async runRaw(context: BaseContext): Promise<Result> {
-		const { hostname } = new URL(context.url);
-		return scan(hostname);
+		const { host } = new URL(context.url);
+		// const module = scan(host);
+		return scan(host);
 	}
 }
 

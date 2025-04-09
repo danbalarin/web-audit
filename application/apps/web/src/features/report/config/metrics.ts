@@ -55,14 +55,17 @@ export const metricsMap = Object.values(categoriesMap)
 		{} as Record<string, MetricDescription>,
 	);
 
-export const scoreMetric = (value: Metric): CalculatedScore<object> => {
-	const metricDescription = metricsMap[value.metric];
+export const scoreMetric = ({
+	value,
+	metric,
+}: Metric): CalculatedScore<object> => {
+	const metricDescription = metricsMap[metric];
 	if (!metricDescription) {
-		return { score: -1, rank: "fail" };
+		return { score: { status: "not-scored", value: 0 }, rank: "fail" };
 	}
 	return {
-		score: metricDescription.score(value.value),
-		rank: metricDescription.rank(value.value),
+		score: { value: metricDescription.score(value), status: "scored" },
+		rank: metricDescription.rank(value),
 	};
 };
 

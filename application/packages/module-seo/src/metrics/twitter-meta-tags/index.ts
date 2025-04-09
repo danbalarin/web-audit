@@ -36,12 +36,10 @@ const fallbacks = {
 
 const fallbackPenalty = 0.9;
 
-const { score, compare, getFlagsFromValue } = createFlagMetric(
-	TwitterMetaTagsFlags,
-	weights,
-	fallbacks,
-	fallbackPenalty,
-);
+const { score, compare, getFlagsFromValue, getValueFromFlags } =
+	createFlagMetric(TwitterMetaTagsFlags, weights, fallbacks, fallbackPenalty);
+
+export { getValueFromFlags };
 
 const rank = (value: number | string): MetricRank => {
 	const calculated = score(+value);

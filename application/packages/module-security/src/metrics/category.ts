@@ -55,11 +55,11 @@ export const SecurityCategory: CategoryDescription<"security"> = {
 		}, 0);
 		if (totalWeight > 0 && foundMetrics) {
 			const score = totalScore / totalWeight;
-			return score / 100;
+			return { value: score / 100, status: "scored" };
 		}
-		return -1;
+		return { value: 0, status: "not-scored" };
 	},
-	rank: (value) => {
+	rank: ({ value }) => {
 		if (+value > 0.9) {
 			return "good";
 		}

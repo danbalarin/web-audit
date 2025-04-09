@@ -49,12 +49,12 @@ export const PerformanceCategory: CategoryDescription<"performance"> = {
 			score += metricDescription.score(+metric.value) * weights[metricName]!;
 		}
 		if (!foundMetrics) {
-			return -1;
+			return { value: -1, status: "not-scored" };
 		}
 
-		return score / 100;
+		return { value: score / 100, status: "scored" };
 	},
-	rank: (value) => {
+	rank: ({ value }) => {
 		if (+value > 0.9) {
 			return "good";
 		}

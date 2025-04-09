@@ -51,12 +51,15 @@ export const SEOCategory: CategoryDescription<"seo"> = {
 			score += metricDescription.score(+metric.value) * weights[metricName]!;
 		}
 		if (!foundMetrics) {
-			return -1;
+			return { value: 0, status: "not-scored" };
 		}
 
-		return score / sumWeights;
+		return {
+			value: score / sumWeights,
+			status: "scored",
+		};
 	},
-	rank: (value) => {
+	rank: ({ value }) => {
 		if (+value > 0.8) {
 			return "good";
 		}

@@ -5,7 +5,7 @@ import {
 	rankInformational,
 	scoreInformational,
 } from "@repo/api/utils";
-import type { Technology } from "~/TechnologyRunner";
+import type { Technology } from "../../TechnologyRunner";
 
 const isAdditionalData = (
 	additionalData?: unknown,

@@ -48,6 +48,16 @@ const score = (value: string | number): number => {
 	return SCORE[castedValue];
 };
 
+const renderTranslation: Record<XFrameOptionsValue, string> = {
+	[XFrameOptionsValue.DENY]: "Deny",
+	[XFrameOptionsValue.SAMEORIGIN]: "Same origin",
+	[XFrameOptionsValue.ALLOW_FROM]: "Allow from",
+	[XFrameOptionsValue.NOT_SET]: "Not set",
+};
+
+const renderValue: MetricDescription["renderValue"] = ({ value }) =>
+	renderTranslation[value as XFrameOptionsValue] ?? "Unknown";
+
 export const XFrameOptions: MetricDescription = {
 	id: "x-frame-options",
 	name: "X-Frame Options",
@@ -57,4 +67,5 @@ export const XFrameOptions: MetricDescription = {
 	compare,
 	rank,
 	score,
+	renderValue,
 };

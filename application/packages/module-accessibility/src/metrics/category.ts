@@ -33,11 +33,17 @@ export const AccessibilityCategory: CategoryDescription<"accessibility"> = {
 			.sort((a, b) => +b.value - +a.value);
 		const bestResult = data[0];
 		const metricDescription = metrics.find((m) => m.id === bestResult?.metric);
-		return bestResult
-			? `${metricDescription?.name} (${Math.round(+bestResult.value * 100)}%)`
-			: -1;
+
+		if (!bestResult) {
+			return { value: 0, status: "not-scored" };
+		}
+
+		return {
+			value: `${metricDescription?.name} (${Math.round(+bestResult.value * 100)}%)`,
+			status: "scored",
+		};
 	},
-	rank: (value) => {
+	rank: ({ value }) => {
 		const score = +(value.toString().match(/(\d+)(?!.*\d)/)?.[0] ?? -1);
 		if (score > 90) {
 			return "good";
