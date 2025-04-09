@@ -1,17 +1,20 @@
 #import "template/lib.typ": template, revisit, init-code
 
 #import "declaration.typ": declaration
+#import "acknowledgements.typ": acknowledgements
+#import "abstract.typ": abstract-cs, abstract-en
+#import "keywords.typ": keywords-cs, keywords-en
 
 #show: template.with(
   title: "Website Quality Assurance through Combined Automated and Manual Auditing",
   author: "Bc. Dan Balarin",
   supervisor: "Ing. Jiří Kosek",
   declaration: declaration,
-  acknowledgements: [Thanks],
-  abstract-en: [Abstract],
-  keywords-en: [keywords],
-  abstract-cs: [Abstrakt],
-  keywords-cs: [keywords],
+  acknowledgements: acknowledgements,
+  abstract-en: abstract-en,
+  keywords-en: keywords-en,
+  abstract-cs: abstract-cs,
+  keywords-cs: keywords-cs,
   bibliography-file: "/bibliography.bib",
   study-program: "Knowledge and Web Technologies",
   separated-abstracts: true

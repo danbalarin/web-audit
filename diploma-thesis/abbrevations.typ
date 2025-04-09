@@ -1,6 +1,7 @@
 #import "template/lib.typ": abbr
 
 #abbr.add-many(
+  ("AI", "Artificial Intelligence"),
   ("ADA", "Americans with Disabilities Act"),
   ("AJAX", "Asynchronous JavaScript and XML"),
   ("AMP", "Accelerated Mobile Pages"),

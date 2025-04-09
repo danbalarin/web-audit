@@ -22,6 +22,11 @@
         name: "HTML",
         icon: icon("images/brand-html.svg"),
         color: rgb("#F26529")
+      ),
+      yaml: (
+        name: "YAML",
+        icon: icon("images/brand-yaml.svg"),
+        color: rgb("#CA181D")
       )
     )
   )
