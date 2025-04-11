@@ -37,7 +37,7 @@ It can also be extended for tables or other types of content.
 
 Beyond standard Markdown features, we implemented one extension: internal links. This addition allows metrics to reference other metrics, providing users with easy navigation without searching through the knowledge base menu.
 
-We implemented this feature by extending the link component with a custom rule. 
+Implementation of this feature was done by extending the link component with a custom rule. 
 The application evaluates each link target, and if it matches the pattern `category:<category_name>,metric:<metric_name>`, it generates a valid URL link. 
 The metric portion is optional, allowing references to entire categories rather than specific metrics when needed.
 

@@ -5,10 +5,10 @@
 The application, in its current state, is useable, although it has some limitations.
 There is room for improvement, as mentioned in the previous section, but there are also features that could be added.
 
-With the #abbr.a("AI") on it's rise, there is also a great potential to use the AI in this application.
+With the #abbr.a("AI"), specifically the #abbr.pla("LLM"), on its rise, there is also a great potential to use AI in this application.
 One example would be the implementation of the not found page detection.
 As the application needs to support websites in all languages and custom phrasings, simple translation would not suffice.
-For example, the Netflix error page (@netflix) doesn't contain the text _"not found"_ or any of that matter, so simple translation would fail.
+For example, the Netflix error page (@netflix) doesn't contain the text _"not found"_ or any of that matter, so a simple translation would fail.
 
 #figure(image("images/netflix.png"), caption: [Netflix not found page]) <netflix>
 

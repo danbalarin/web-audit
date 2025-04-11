@@ -66,7 +66,7 @@
     margin: (right: 20mm, left: 2cm, top: 25mm, bottom: 25mm)
   )
 
-  set heading(numbering: "1.1.1", supplement: [Chapter], )
+  set heading(numbering: "1.1.1.", supplement: [Chapter], )
 
   // show link: underline
 
@@ -205,7 +205,7 @@
 
   pagebreak()
   
-
-  heading(numbering: none, "A. Application Source Code")
-  "Todo add link to github"
+  counter(heading).update(0)
+  set heading(numbering: "A.1.1.")
+  heading("Application Source Code")
 }

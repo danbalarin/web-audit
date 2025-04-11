@@ -6,7 +6,8 @@
     block(below: 40pt)[
       #set align(left + horizon)
       #set text(25pt, weight: "black", font: "Latin Modern Sans") 
-      #smallcaps([#if(it.numbering != none) {[#counter(heading.where(level: 1)).get().at(0).]} #it.body])
+      #smallcaps(it)
+      // #smallcaps([#if(it.numbering != none) {[#counter(heading.where(level: 1)).get().at(0).]} #it.body])
     ]
   },
   (it) => {

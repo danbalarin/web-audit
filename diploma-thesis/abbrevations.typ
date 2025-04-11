@@ -90,7 +90,8 @@
   ("SOAP", "Simple Object Access Protocol"),
   ("REST", "Representational State Transfer"),
   ("RPC", "Remote Procedure Call"),
-  ("SQL", "Structured Query Language")
+  ("SQL", "Structured Query Language"),
+  ("LLM", "Large Language Model")
 )
 
 // const abbrs = `
