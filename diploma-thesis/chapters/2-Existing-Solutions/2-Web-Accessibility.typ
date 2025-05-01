@@ -32,7 +32,7 @@ By highlighting specific elements that violate accessibility principles, these t
 // Such integrations foster an environment where accessibility is a continuous consideration rather than an afterthought.
 
 Assistive technologies themselves are integral to the landscape of existing solutions. 
-Screen readers like #abbr.s("JAWS"), #abbr.s("NVDA"), and VoiceOver enable users with visual impairments to interact with web content through auditory feedback or braille displays. 
+Screen readers like Job Access With Speech, NonVisual Desktop Access, and VoiceOver enable users with visual impairments to interact with web content through auditory feedback or braille displays. 
 Testing with screen readers can reveal issues not detectable by automated tools, such as reading order inconsistencies, unclear link text, and mislabelled form controls.
 
 

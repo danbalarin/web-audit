@@ -42,6 +42,8 @@
 
   keywords-en: none,
 
+  appendices: none,
+
   separated-abstracts: false,
 
   bibliography-file: none,
@@ -193,19 +195,23 @@
   
   pagebreak()
   
-  align(
-    center + horizon, 
-    text(
-      24pt, 
-      weight: "extrabold", 
-      font: "Latin Modern Sans", 
-      "Appendices"
+  if(appendices != none) {
+    align(
+      center + horizon, 
+      text(
+        24pt, 
+        weight: "extrabold", 
+        font: "Latin Modern Sans", 
+        "Appendices"
+      )
     )
-  )
-
-  pagebreak()
   
-  counter(heading).update(0)
-  set heading(numbering: "A.1.1.")
-  heading("Application Source Code")
+    pagebreak()
+
+    counter(heading).update(0)
+    set heading(numbering: "A.1.1.", supplement: "Appendice")
+
+    appendices    
+  }
+
 }

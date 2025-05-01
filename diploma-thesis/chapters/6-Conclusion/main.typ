@@ -7,7 +7,7 @@ This simplifies evaluation of website quality, as there are no other tools that 
 We began by identifying the key bodies and metrics involved in website quality assurance, focusing on aspects such as usability, accessibility standards, performance, and security protocols. 
 These insights helped shape the requirements for a robust website auditing application that operates without needing access to the website's internal code or systems.
 
-The development and implementation phase of the thesis culminated in an application capable of delivering comprehensive audits. 
+The development and implementation phase of the thesis culminated in an application capable of conducting comprehensive audits. 
 This tool, distinguished by its ability to automate many audit aspects while also supporting manual evaluations where necessary, effectively bridges the gap left by existing solutions. 
 Key features include the ability to conduct audits, compare findings, and assist users in interpreting the results through a user-friendly interface.
 

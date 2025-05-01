@@ -7,11 +7,11 @@ According to #cite(<w3c_our_2024>, form: "prose"), "W3C brings together global s
 They achieve this through three pillars: Web for All (Accessibility and Internationalisation), Web of Trust (Security and Privacy) and Web on Everything (Interoperability and Device independence).
 
 The W3C has developed numerous standards that form the core technologies of the Web.
-Some of the most significant include #abbr.a("HTML"), #abbr.a("CSS"), #abbr.a("XML"), #abbr.a("SVG"), #abbr.a("WAI-ARIA"), and #abbr.a("WebRTC").
+Some of the most significant include #abbr.a("HTML"), #abbr.a("CSS"), #abbr.a("XML"), #abbr.a("SVG"), #abbr.a("ARIA"), and #abbr.a("WebRTC").
 
-In context of this thesis the most important one is WAI-ARIA, or Accessible Rich Internet Applications.
+In the context of this thesis the most important one is #abbr.a("ARIA").
 It is a set of attributes that define ways to make web content and web applications more accessible to people with disabilities. 
-By enhancing the semantics of web content, ARIA improves usability for assistive technologies, such as screen readers, thereby improving the user experience for individuals with impairments. @nurthen_wai-aria_2006
+By enhancing the semantics of web content, #abbr.a("ARIA") improves usability for assistive technologies, such as screen readers, thereby improving the user experience for individuals with impairments. @nurthen_wai-aria_2006
 
 === Web Accessibility Initiative <WAI>
 

@@ -5,6 +5,8 @@
 #import "abstract.typ": abstract-cs, abstract-en
 #import "keywords.typ": keywords-cs, keywords-en
 
+#import "appendices.typ": appendices
+
 #show: template.with(
   title: "Website Quality Assurance through Combined Automated and Manual Auditing",
   author: "Bc. Dan Balarin",
@@ -17,8 +19,10 @@
   keywords-cs: keywords-cs,
   bibliography-file: "/bibliography.bib",
   study-program: "Knowledge and Web Technologies",
+  appendices: appendices,
   separated-abstracts: true
 )
+
 
 #init-code()
 

@@ -20,6 +20,20 @@ Several factors cause that; firstly, there is a big improvement in #abbr.a("CLS"
 Other marquee changes are in metrics #abbr.a("TTFB"), total requests and transfer size, but these metrics are not included in the final score, as they are only indications of a potential problem and do not pose a problem for the user on their own.
 The rest of the changes in metrics are so minimal that it's not noticeable in the final score.
 
+The score is calculated in the same way that Lighthouse calculates it.
+Each metric has their own weight, median and 90th percentile provided by the HTTP Archive.
+For each metric the score is calculated using the log-normal distribution.
+The parameters $mu$ and $sigma$ are calculated as shown in @performance-scoring for $m$ being the median and $p_90$ the 90th percentile.
+
+#figure([
+  $$$
+  mu=log(m)\
+  sigma=abs(log(p_90)-mu)/1.28155
+  $$$
+], caption: [Performance scoring parameters]) <performance-scoring>
+
+When scores for the metrics is calculated, they are then added together with according weight and final score is calculated. The weights, medians and 90th percentiles are omitted from the thesis, as they are to be changed according to the HTTP Archive statistics in the future.
+
 #figure(image("images/accessibility.png"), caption: [Accessibility result]) <accessibility-screen>
 
 In the @accessibility-screen we can see that there was no change at all between old and new, but there is a big change in upgraded.

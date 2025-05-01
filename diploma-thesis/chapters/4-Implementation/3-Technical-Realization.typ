@@ -53,3 +53,9 @@ According to a survey by #cite(<6sense_best_2025>, form: "prose"), Docker has an
 The Docker image is constructed through multiple phases in what is known as a multi-stage build process @jones_mastering_2024. 
 This approach significantly enhances build efficiency, as the Docker engine can more effectively cache layers and parallelise workloads. 
 Additionally, it substantially reduces the final image size by excluding build-only dependencies from the runtime environment, ensuring only necessary components are included in the final container.
+
+In order to build the app locally, the user has to first download the application source code listed in @source_code.
+After the code has been fetched, the environment variables needs to be provided.
+Those can be provided by creating `.env` file, that provides information for database connection.
+The structure can be found int the `.env.sample` file located in the repository. When the variables are provided, the `docker-compose up` command can be run.
+This builds the application, creates the container and runs it together with PostgreSQL database with provided credentials in the `.env` file.

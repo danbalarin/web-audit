@@ -6,7 +6,7 @@ In the dynamic and ever-evolving field of web development, standardisation plays
 Standardisation bodies establish guidelines and protocols that developers and organisations can follow to create a cohesive and user-friendly web experience.
 This is particularly important in the context of website auditing, where compliance with these standards is essential for evaluating the quality and performance of web applications.
 
-The #abbr.a("W3C"), founded by Tim Berners-Lee, the inventor of the World Wide Web, is at the forefront of developing open standards that ensure the long-term growth and accessibility of the web.
+#abbr.a("W3C"), founded by Tim Berners-Lee, the inventor of the World Wide Web, is at the forefront of developing open standards that ensure the long-term growth and accessibility of the web.
 #abbr.a("IETF") focuses on the technical aspects of internet architecture, promoting standards that facilitate smooth and reliable network operations and #abbr.a("ISO") provides comprehensive frameworks across various industries, including crucial standards for information security in web applications.
 
 In addition to these traditional standardisation bodies, influential technology companies like Google and Mozilla contribute significantly to web standards.

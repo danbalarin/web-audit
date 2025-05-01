@@ -28,7 +28,7 @@
 
   if keywords-en != none [
       #heading-like([Keywords], level: 2)
-      #keywords-cs
+      #keywords-en
   ]
 
   pagebreak()

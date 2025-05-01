@@ -34,7 +34,7 @@ The application can either be split into back-end and front-end or be a monolith
 The benefit of a monolithic app is the ability to share data types, making the app end-to-end type-safe easily.
 
 In the Node.js ecosystem there is several solutions that offer monolithic app capabilities, with the most used Next.js and Remix.
-Both are backed by big companies used in applications from small to corporate-size.
+Both are backed by big companies used and in applications from small to corporate-size.
 
 We will use Next.js because it has a bigger community.
 It uses React.js, the leading library for front-end development, and offers backend capabilities, making it easier to share data types between them. 
